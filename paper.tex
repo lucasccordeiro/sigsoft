@@ -26,7 +26,7 @@ Federal University of Amazonas, Brazil\\
 Email: lucascordeiro@ufam.edu.br
 \and
 Eddie B. de Lima Filho \\
-Center for Science, Technology, and Innovation \\ for the Industrial Pole of Manaus, Brazil \\
+Center of Science, Technology, and Innovation \\ for the Industrial Pole of Manaus, Brazil \\
 Email: eddie@ctpim.org.br}
 %\IEEEauthorblockN{Homer Simpson}
 %\IEEEauthorblockA{Twentieth Century Fox\\
@@ -98,24 +98,30 @@ State-of-the-art verification methodologies for embedded systems generate test v
 \section{Research Problem (RP)}
 %--------------------------------------
 
-This position paper tackles three major problems in computer-aided verification for embedded systems: (RP1) providing suitable encodings into the Satisfiability Modulo Theories (SMT) \textcolor{red}{achar outra palavra aqui?:}theories to reason accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, and (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware\textcolor{green}{and incorporating knowledge about system purpose and associated features}.
+This position paper tackles three major problems in computer-aided verification for embedded systems: (RP1) providing suitable encodings into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09} \textcolor{red}{achar outra palavra aqui?:}theories to reason accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, and (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware \textcolor{green}{and incorporating knowledge about system purpose and associated features}.
 
 %--------------------------------------
 \section{Bounded Model Checking of Embedded Systems}
 %--------------------------------------
 
-Bounded Model Checking (BMC) techniques based on Boolean Satisfiability (SAT)~\cite{handbook09} or Satisfiability Modulo Theories (SMT)~\cite{BarrettSST09} have been successfully applied to verify single- and multi-threaded programs and to find subtle bugs in real programs~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. The idea behind the BMC techniques is to check for the violation of a given property at a given depth, {\it i.e.}, given a transition system \textit{M}, a property $ \phi $, and a limit of iterations \textit{k}, BMC unfolds the system \textit{k} times and converts it into a Verification Condition (VC) $ \psi $ such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth
+Bounded Model Checking (BMC) techniques based on Boolean Satisfiability (SAT)~\cite{handbook09} or SMT~\cite{BarrettSST09} have been successfully applied to verify single- and multi-threaded programs and find subtle bugs in real programs~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. The idea behind the BMC techniques is to check the violation of a given property at a predetermined depth, {\it i.e.}, given a transition system \textit{M}, a property $ \phi $, and a limit of iterations \textit{k}, BMC unfolds the system \textit{k} times and converts it into a Verification Condition (VC) $ \psi $, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth
 less than or equal to \textit{k}.
 
-In order to reason about embedded software accurately, an SMT-based BMC must consider a number of issues that are not easily mapped into the theories supported by SMT solvers ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency). Moreover, BMC techniques are only able to falsify properties up to the given depth \textit{k}; they are not able to prove the correctness of the system, unless an upper bound of \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. In particular, BMC techniques limit the visited regions of data structures ({\it e.g.}, arrays) and the number of loop iterations to a given bound $k$. This limits the state space that needs to be explored during verification, leaving enough that real errors in applications \cite{Clarke04,MerzFS12,Ivancic05,Cordeiro12} can be found; BMC tools are, however, susceptible to exhaustion of time or memory limits for programs with loops whose bounds are too large or cannot be determined statically.  
+In order to reason about embedded software accurately, an SMT-based BMC must consider a number of issues that are not easily mapped into the theories supported by SMT solvers ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency). Moreover, BMC techniques are able to falsify properties up to a depth \textit{k}, {\it i.e.}. Consequently, they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. In particular, BMC techniques limit the addressed regions of data structures ({\it e.g.}, arrays) and the number of loop iterations to a given bound $k$, which then restricts the state space that must be explored during verification, in such a way that real errors in applications \cite{Clarke04,MerzFS12,Ivancic05,Cordeiro12} can be found. Nonetheless, BMC tools are susceptible to exhaustion of time or memory limits, when checking programs with loops whose bounds are too large or cannot be statically determined.  
 
 %--------------------------------------
 \subsection{Induction-based Verification of C/C++ Programs}
 %--------------------------------------
 
-One technique typically used to prove properties, for any given depth, is mathematical induction. In particular, the algorithm called \textit{k}-induction was successfully applied to ensure that (restricted) C programs do not contain data races~\cite{Donaldson10,Kinductor} and to respect time constraints specified during the design phase of a system~\cite{EenS03}. Additionally, the \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied due to the monolithic transition relation present 
-in hardware designs~\cite{EenS03,GrosseLD09,Sheera00}. Recently, Gadelha {\it et al.} and Beyer {\it et al.} contribute a new algorithm to prove correctness of (a large set of) C programs by mathematical induction in a completely automatic way ({\it i.e.}, the user does not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence in the literature that model checking embedded software using \textit{k}-induction (and invariants) can be exploited efficiently in embedded systems verification~\cite{Rocha15}.
+One technique typically used to prove properties, for any given depth, is mathematical induction. In particular, the algorithm called \textit{k}-induction was successfully applied to ensure that (restricted) C programs do not contain data races~\cite{Donaldson10,Kinductor} and do respect time constraints specified during the system design phase~\cite{EenS03}. Additionally, the \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented a new algorithm for proving correctness of (a large set of) C programs by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence in the associated literature that model checking embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15}.
 
+%--------------------------------------
+\subsection{Incorporating System Knowledge to Verification}
+%--------------------------------------
+
+\textcolor{green}{It is worth noticing that, currently, SMT-based BMC approaches check code properties in real programs, which basically addresses programing language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then claims for schemes that not only check if source code is correct written, but also if it will respond properly in real environments or under external problems. For instance, the anti-lock braking system software of a car model can be bug free, but it may not work properly if a sensor is damaged.}
+
+\textcolor{green}{Indeed, research in software verification is now taking such considerations into account and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, Husamma {\it et al.} proposed a verification tool for digital systems...}
 
 %--------------------------------------
 \section{Achievements}
@@ -149,16 +155,17 @@ H.~Kopetz.
 \newblock {\em Real-Time Systems - Design Principles for Distributed Embedded Applications}.
 \newblock Real-Time Systems Series, Springer, ISBN 978-1-4419-8236-0, pp. 1--376, 2011.
 
-\bibitem{handbook09}
-Biere A., Heule M., van Maaren H., Walsh T., eds.:
-\newblock Handbook of Satisfiability.
-\newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
-
 \bibitem{BarrettSST09}
 Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
 \newblock 26.
 \newblock In: Satisfiability Modulo Theories. Volume 185 of Frontiers in
   Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
+
+\bibitem{handbook09}
+Biere A., Heule M., van Maaren H., Walsh T., eds.:
+\newblock Handbook of Satisfiability.
+\newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
+
 
 \bibitem{Clarke04}
 Clarke E., Kroening D., Lerda F.:
