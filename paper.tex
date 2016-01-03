@@ -1,0 +1,272 @@
+\documentclass{acm_sen_article}
+
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+%\renewcommand{\baselinestretch}{0.93}
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+\title{Software Model Checking in Embedded Systems}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{Lucas C. Cordeiro \\
+Electronic and Information Research Center\\
+Federal University of Amazonas, Brazil\\
+Email: lucascordeiro@ufam.edu.br
+\and
+Eddie B. de Lima Filho \\
+Center for Science, Technology, and Innovation \\ for the Industrial Pole of Manaus, Brazil \\
+Email: eddie@ctpim.org.br}
+%\IEEEauthorblockN{Homer Simpson}
+%\IEEEauthorblockA{Twentieth Century Fox\\
+%Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\and
+%\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
+%\IEEEauthorblockA{Starfleet Academy\\
+%San Francisco, California 96678--2391\\
+%Telephone: (800) 555--1212\\
+%Fax: (888) 555--1212}}
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract
+\begin{abstract}
+Our reliance on the correct functioning of embedded systems is growing rapidly. Such systems are used in a wide range of applications such as micro-grids, airbag control systems, mobile phones, and high-end television sets. These systems are becoming more and more complex and require multi-core processors with scalable shared memory to meet the increasing computational power demands. The reliability of the embedded (distributed) software is thus a key issue in the system development. State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification and high-level processor model during simulation. However, verification of embedded systems raises additional challenges: meet time and energy constraints, handle concurrent software, platform-dependent software, and legacy designs (usually written in low-level languages). This paper describes challenges, problems, and recent advances to ensure the correctness and the timeliness of embedded systems. Reliability issues in the development of modern micro-grids are considered as a prominent model checking application.
+\end{abstract}
+
+%\IEEEpeerreviewmaketitle
+
+
+%--------------------------------------
+\section{Introduction}
+%--------------------------------------
+
+Embedded computer systems are used in a variety of sophisticated applications, which range from safety-critical systems such as nuclear reactors and automotive controllers, to entertainment software such as games and graphics animation~\cite{Kopetz11}. Embedded systems are ubiquitous in modern day information systems and are becoming increasingly important in our society, especially in micro-grids, where reliability and carbon emission reduction are of paramount importance. As a consequence, human life has also become more and more dependent on the services provided by this type of system; in particular, success of such system depends on the relevance and quality of service it can provide. 
+
+A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost of processors is enabling system designers to move more functionalities to software. This leads to difficulties in verifying design correctness since stringent constraints imposed by the hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency) must be considered.
+
+%--------------------------------------
+\section{Verification Challenges}
+%--------------------------------------
+
+State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification, and high-level processor models during simulation. However, verification of embedded systems raises additional challenges, which include: meet time and energy constraints, handle concurrent software, platform-dependent software, and legacy designs (usually written in low-level languages). Thus, the main challenge for verifying embedded systems relies on improving coverage, where more system's functions are verified, and reducing verification time, {\it i.e.}, pruning the state-space exploration during verification. These aspects are of extreme relevance in micro-grids to ensure reliability, which is a key issue for (smart) cities and consumers.
+
+%--------------------------------------
+\section{Research Problem (RP)}
+%--------------------------------------
+
+This position paper tackles three major problems in computer-aided verification for embedded systems: (RP1) providing suitable encodings into the Satisfiability Modulo Theories (SMT) theories to reason accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, and (RP3) proving the correctness and the timeliness of embedded systems, by taking into account stringent constraints imposed by the hardware.
+
+%--------------------------------------
+\section{Bounded Model Checking of Embedded Systems}
+%--------------------------------------
+
+Bounded Model Checking (BMC) techniques based on Boolean Satisfiability (SAT)~\cite{handbook09} or Satisfiability Modulo Theories (SMT)~\cite{BarrettSST09} have been successfully applied to verify single- and multi-threaded programs and to find subtle bugs in real programs~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. The idea behind the BMC techniques is to check for the violation of a given property at a given depth, {\it i.e.}, given a transition system \textit{M}, a property $ \phi $, and a limit of iterations \textit{k}, BMC unfolds the system \textit{k} times and converts it into a Verification Condition (VC) $ \psi $ such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth
+less than or equal to \textit{k}.
+
+In order to reason about embedded software accurately, an SMT-based BMC must consider a number of issues that are not easily mapped into the theories supported by SMT solvers ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency). Moreover, BMC techniques are only able to falsify properties up to the given depth \textit{k}; they are not able to prove the correctness of the system, unless an upper bound of \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. In particular, BMC techniques limit the visited regions of data structures ({\it e.g.}, arrays) and the number of loop iterations to a given bound $k$. This limits the state space that needs to be explored during verification, leaving enough that real errors in applications \cite{Clarke04,MerzFS12,Ivancic05,Cordeiro12} can be found; BMC tools are, however, susceptible to exhaustion of time or memory limits for programs with loops whose bounds are too large or cannot be determined statically.  
+
+%--------------------------------------
+\subsection{Induction-based Verification of C/C++ Programs}
+%--------------------------------------
+
+One technique typically used to prove properties, for any given depth, is mathematical induction. In particular, the algorithm called \textit{k}-induction was successfully applied to ensure that (restricted) C programs do not contain data races~\cite{Donaldson10,Kinductor} and to respect time constraints specified during the design phase of a system~\cite{EenS03}. Additionally, the \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied due to the monolithic transition relation present 
+in hardware designs~\cite{EenS03,GrosseLD09,Sheera00}. Recently, Gadelha {\it et al.} and Beyer {\it et al.} contribute a new algorithm to prove correctness of (a large set of) C programs by mathematical induction in a completely automatic way ({\it i.e.}, the user does not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence in the literature that model checking embedded software using \textit{k}-induction (and invariants) can be exploited efficiently in embedded systems verification~\cite{Rocha15}.
+
+
+%--------------------------------------
+\section{Achievements}
+\label{achievements}
+%--------------------------------------
+
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based context-BMC for full C/C++ programs (ESBMC)~\cite{Cordeiro12,ECBS13}. \textbf{(RP2)} This approach was further extended to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}. These verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer in standard benchmarks, which were confirmed by the benchmark’s creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} The SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems ({\it e.g.}, digital filters and controllers)~\cite{esbmc_controller,dsv_spin2015,esbmc_filter}. \textbf{(RP3)} Finally, novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in real-life embedded applications~\cite{Gadelha15,Rocha15}. Last but not least, ESBMC represents one of the most prominent BMC tools in the international software verification competition~\cite{MorseCNF13,MorseRCN014}.
+
+%--------------------------------------
+\section{Conclusions}
+\label{conclusions}
+%--------------------------------------
+
+This paper presented the main challenges to verify design correctness in embedded systems. In particular, stringent constraints imposed by the hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency) must be considered during verification. Additionally, there is little evidence that model checking embedded software using \textit{k}-induction (and invariants) can be applied to formally verify the correctness and the timeliness of embedded systems. Given that the complexity of software has increased significantly in embedded products, there are still some (recent) advances to stress and cover exhaustively the state space of the system, in order to verify low-level properties that have to meet the application's deadline, access the memory region, handle concurrency, and control the hardware registers. As future work, the main goal of this research is to extend BMC as a design and verification tool for achieving a correct-by-construction embedded systems implementation; special attention will be given to modern micro-grids, considering small-scale versions of a centralized electricity system so that reliability and carbon emission reduction are amenable to verification.
+
+
+
+% conference papers do not normally have an appendix
+
+
+% use section* for acknowledgment
+%\section*{Acknowledgment}
+
+%The authors would like to thank...
+
+
+\begin{thebibliography}{1}
+
+\bibitem{Kopetz11}
+H.~Kopetz.
+\newblock {\em Real-Time Systems - Design Principles for Distributed Embedded Applications}.
+\newblock Real-Time Systems Series, Springer, ISBN 978-1-4419-8236-0, pp. 1--376, 2011.
+
+\bibitem{handbook09}
+Biere A., Heule M., van Maaren H., Walsh T., eds.:
+\newblock Handbook of Satisfiability.
+\newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
+
+\bibitem{BarrettSST09}
+Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
+\newblock 26.
+\newblock In: Satisfiability Modulo Theories. Volume 185 of Frontiers in
+  Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
+
+\bibitem{Clarke04}
+Clarke E., Kroening D., Lerda F.:
+\newblock A tool for checking {ANSI-C} programs.
+\newblock In: Tools and Algorithms for the Construction and Analysis of Systems. LNCS 2988, Springer Berlin Heidelberg,  pp. 168--176, 2004.
+
+\bibitem{MerzFS12}
+Merz F., Falke S., Sinz C.:
+\newblock {LLBMC}: Bounded model checking of {C} and {C++} programs using a
+  compiler ir.
+\newblock In: International Conference on Verified Software: Theories, Tools, Experiments. Springer-Verlag, pp. 146--161, 2012.
+
+\bibitem{CordeiroF11}
+Cordeiro L., Fischer B.:
+\newblock Verifying multi-threaded software using {SMT}-based context-bounded
+  model checking.
+\newblock In: International Conference on Software Engineering. ACM,  pp. 331--340, 2011.
+
+\bibitem{Ivancic05}
+Ivanicic F., Shlyakhter I., Gupta A., Ganai, M.K.:
+\newblock Model checking {C} programs using {F-Soft}.
+\newblock In: IEEE International Conference on Computer Design: VLSI in Computers and Processors, pp. 297--308, 2005.
+
+\bibitem{Cordeiro12}
+Cordeiro L., Fischer B., Marques{-}Silva J.:
+\newblock Smt-based bounded model checking for embedded {ANSI-C} software.
+\newblock {IEEE} Trans. Software Eng. \textbf{38}(4), pp. 957--974, 2012.
+
+\bibitem{Donaldson10}
+Donaldson A., Kroening D., R{\"{u}}mmer P.:
+\newblock {SCRATCH}: A tool for automatic analysis of dma races.
+\newblock In: ACM Symposium on Principles and Practice of Parallel Programming. ACM, pp. 311--312, 2011.
+
+\bibitem{Kinductor}
+Donaldson A., Haller L., Kroening D., R{\"{u}}mmer, P.:
+\newblock Software verification using k-induction.
+\newblock In: International Conference on Static Analysis. Springer-Verlag, pp. 351--368, 2011.
+
+\bibitem{EenS03}
+E{\'{e}}n, N., S{\"{o}}rensson, N.:
+\newblock Temporal induction by incremental {SAT} solving.
+\newblock Electronic Notes in Theoretical Computer Science \textbf{89}(4), pp. 543 -- 560, 2003.
+
+\bibitem{GrosseLD09}
+Gro{\ss}e D., Le H., Drechsler R.:
+\newblock Induction-based formal verification of {SystemC TLM} designs.
+\newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
+
+\bibitem{Sheera00}
+Sheeran M., Singh S., St{\aa}lmarck G.:
+\newblock Checking safety properties using induction and a {SAT}-solver.
+\newblock In: International Conference on Formal Methods in Computer-Aided Design. Springer-Verlag, pp. 108--125, 2000.
+
+\bibitem{Gadelha15}
+Gadelha M., Ismail H., Cordeiro L.:
+\newblock Handling loops in bounded model checking of C programs via k-induction
+\newblock In: International Journal on Software Tools for Technology Transfer (to appear), pp. 1--18, 2015.
+\newblock http://dx.doi.org/10.1007/s10009-015-0407-9
+
+\bibitem{Beyer15}
+Beyer D., Dangl M., Wendler P.:
+\newblock Boosting k-Induction with Continuously-Refined Invariants.
+\newblock International Conference on Computer-Aided Verification, pp. 622--640, 2015.
+
+\bibitem{Rocha15}
+Rocha H., Ismail H., Cordeiro L., Barreto R.:
+\newblock Model Checking Embedded C Software using k-Induction and Invariants. 
+\newblock V Brazilian Symposium on Computing Systems Engineering (to appear), pp. 1--6, 2015.
+
+\bibitem{ECBS13}
+Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
+\newblock {SMT-Based Bounded Model Checking of C++ Programs}.
+\newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
+
+\bibitem{Pereira15}
+Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
+\newblock Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking. 
+\newblock To appear in ACM Symposium on Applied Computing, Software Verification and Testing, 2016. 
+
+\bibitem{esbmc_controller}
+Bessa I., Abreu R., Cordeiro L., Filho J.:
+\newblock {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers)}. 
+\newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
+
+\bibitem{dsv_spin2015}
+Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
+\newblock {DSVerifier: A Bounded Model Checking Tool for Digital Systems}. 
+\newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
+
+\bibitem{esbmc_filter}
+Abreu R., Cordeiro L., Filho E.:
+\newblock {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}. 
+\newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
+\newblock http://dx.doi.org/10.14209/sbrt.2013.57
+
+\bibitem{MorseCNF13}
+Morse J., Cordeiro L., Nicole D., Fischer B.:
+\newblock Handling unbounded loops with {ESBMC} 1.20.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
+
+\bibitem{MorseRCN014}
+Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
+\newblock {ESBMC} 1.22.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
+
+\end{thebibliography}
+
+
+
+
+% that's all folks
+\end{document}
+
+
