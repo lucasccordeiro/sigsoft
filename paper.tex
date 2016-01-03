@@ -104,13 +104,13 @@ This position paper tackles four major problems in computer-aided verification f
 \section{Bounded Model Checking of Embedded Systems}
 %--------------------------------------
 
-Bounded Model Checking (BMC) techniques based on Boolean Satisfiability (SAT)~\cite{handbook09} or SMT~\cite{BarrettSST09} have been successfully applied to verify single- and multi-threaded programs and find subtle bugs in real programs~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. The idea behind the BMC techniques is to check the violation of a given property at a predetermined depth, {\it i.e.}, given a transition system \textit{M}, a property $ \phi $, and a limit of iterations \textit{k}, BMC unfolds the system \textit{k} times and converts it into a Verification Condition (VC) $ \psi $, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth
+Bounded Model Checking (BMC) techniques based on Boolean Satisfiability (SAT)~\cite{handbook09} or SMT~\cite{BarrettSST09} have been successfully applied to verify single- and multi-threaded programs and find subtle bugs in real (embedded systems) software~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. The idea behind the BMC techniques is to check the violation of a given property at a predetermined depth, {\it i.e.}, given a transition system \textit{M}, a property $ \phi $, and a limit of iterations \textit{k}, BMC unfolds the system \textit{k} times and converts it into a Verification Condition (VC) $ \psi $, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth
 less than or equal to \textit{k}.
 
-In order to reason about embedded software accurately, an SMT-based BMC must consider a number of issues that are not easily mapped into the theories supported by SMT solvers ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency). Moreover, BMC techniques are able to falsify properties up to a depth \textit{k}, {\it i.e.}. Consequently, they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. In particular, BMC techniques limit the addressed regions of data structures ({\it e.g.}, arrays) and the number of loop iterations to a given bound $k$, which then restricts the state space that must be explored during verification, in such a way that real errors in applications \cite{Clarke04,MerzFS12,Ivancic05,Cordeiro12} can be found. Nonetheless, BMC tools are susceptible to exhaustion of time or memory limits, when checking programs with loops whose bounds are too large or cannot be statically determined.  
+In order to reason about embedded software accurately, an SMT-based BMC must consider a number of issues that are not easily mapped into the theories supported by SMT solvers ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency). Moreover, BMC techniques are able to falsify properties up to a depth \textit{k}. Consequently, they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. In particular, BMC techniques limit the addressed regions of data structures ({\it e.g.}, arrays) and the number of loop iterations to a given bound $k$, which then restricts the state space that must be explored during verification, in such a way that real errors in applications \cite{Clarke04,MerzFS12,Ivancic05,Cordeiro12} can be found. Nonetheless, BMC tools are susceptible to exhaustion of time or memory limits, when checking programs with loops whose bounds are too large or cannot be statically determined.  
 
 %--------------------------------------
-\subsection{Induction-based Verification of C/C++ Programs}
+\subsection{Induction-based Verification of C Programs}
 %--------------------------------------
 
 One technique typically used to prove properties, for any given depth, is mathematical induction. In particular, the algorithm called \textit{k}-induction was successfully applied to ensure that (restricted) C programs do not contain data races~\cite{Donaldson10,Kinductor} and do respect time constraints specified during the system design phase~\cite{EenS03}. Additionally, the \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented a new algorithm for proving correctness of (a large set of) C programs by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence in the associated literature that model checking embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15}.
@@ -119,16 +119,16 @@ One technique typically used to prove properties, for any given depth, is mathem
 \subsection{Incorporating System Knowledge to Verification}
 %--------------------------------------
 
-\textcolor{green}{It is worth noticing that, currently, SMT-based BMC approaches check code properties in real programs, which basically addresses programing language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then claims for schemes that not only check if source code is correct written, but also if it will respond properly in real environments or under external problems. For instance, the anti-lock braking system software of a car model can be bug free, but it may not work properly if a sensor is damaged.}
+It is worth noticing that, currently, SMT-based BMC approaches check for code properties in real programs, which basically addresses programing language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then claims for schemes that not only check if source code is correctly written, but also if it will respond properly in real environments or under external problems. For instance, the anti-lock braking system software of a car model can be bug free, but it may not work properly if a sensor is damaged.
 
-\textcolor{green}{Indeed, research in software verification is now taking such considerations into account and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, Husamma {\it et al.} proposed a verification tool for digital systems...}
+Indeed, research in software verification is now taking such considerations into account and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, Husamma {\it et al.} proposed a verification tool for digital systems to aid enginners to check for overflow, limit cycle, error, timing, stability, and minimum phase in digital systems, considering finite word length (FWL) effects~\cite{dsv_spin2015}.
 
 %--------------------------------------
 \section{Achievements}
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based context-BMC for full C/C++ programs (ESBMC)~\cite{Cordeiro12,ECBS13}. \textbf{(RP2)} This approach was further extended to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}. These verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer in standard benchmarks, which were confirmed by the benchmark’s creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} The SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems ({\it e.g.}, digital filters and controllers)~\cite{esbmc_controller,dsv_spin2015,esbmc_filter}. \textbf{(RP3)} Finally, novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in real-life embedded applications~\cite{Gadelha15,Rocha15}. Last but not least, ESBMC represents one of the most prominent BMC tools in the international software verification competition~\cite{MorseCNF13,MorseRCN014}.
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based context-BMC for full C/C++ programs (ESBMC)~\cite{Cordeiro12,ECBS13}. \textbf{(RP2)} This approach was further extended to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}. These verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer in standard benchmarks, which were confirmed by the benchmark's creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in real-life embedded applications~\cite{Gadelha15,Rocha15}. \textbf{(RP4)} The SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems ({\it e.g.}, digital filters and controllers)~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}.  Last but not least, ESBMC represents one of the most prominent BMC tools in the international software verification competition~\cite{MorseCNF13,MorseRCN014}.
 
 %--------------------------------------
 \section{Conclusions}
@@ -157,92 +157,89 @@ H.~Kopetz.
 
 \bibitem{Kroening15}
 Kroening D., Liang L., Melham T., Schrammel P., Tautschnig M.:
-\newblock Effective verification of low-level software with nested interrupts. 
+\newblock {\em Effective verification of low-level software with nested interrupts}. 
 \newblock In: Design, Automation and Test in Europe, pp. 229--234, 2015.
 
 \bibitem{Behrend15}
 Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
-\newblock Scalable and Optimized Hybrid Verification of Embedded Software. 
+\newblock {\em Scalable and Optimized Hybrid Verification of Embedded Software}. 
 \newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
 
 \bibitem{Lettnin09}
 Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Schönknecht V., Reitemeyer S.:
-\newblock Semiformal verification of temporal properties in automotive hardware dependent software. 
+\newblock {\em Semiformal verification of temporal properties in automotive hardware dependent software}. 
 \newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
 
 \bibitem{handbook09}
 Biere A., Heule M., van Maaren H., Walsh T., eds.:
-\newblock Handbook of Satisfiability.
+\newblock {\em Handbook of Satisfiability}.
 \newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
 
 
 \bibitem{BarrettSST09}
 Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
-\newblock 26.
-\newblock In: Satisfiability Modulo Theories. Volume 185 of Frontiers in
-  Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
+\newblock {\em Satisfiability Modulo Theories}. 
+\newblock In: Volume 185 of Frontiers in Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
 
 \bibitem{Clarke04}
 Clarke E., Kroening D., Lerda F.:
-\newblock A tool for checking {ANSI-C} programs.
+\newblock {\em A tool for checking {ANSI-C} programs.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems. LNCS 2988, Springer Berlin Heidelberg,  pp. 168--176, 2004.
 
 \bibitem{MerzFS12}
 Merz F., Falke S., Sinz C.:
-\newblock {LLBMC}: Bounded model checking of {C} and {C++} programs using a
-  compiler ir.
+\newblock {\em {LLBMC}: Bounded model checking of {C} and {C++} programs using a compiler {IR}.}
 \newblock In: International Conference on Verified Software: Theories, Tools, Experiments. Springer-Verlag, pp. 146--161, 2012.
 
 \bibitem{CordeiroF11}
 Cordeiro L., Fischer B.:
-\newblock Verifying multi-threaded software using {SMT}-based context-bounded
-  model checking.
+\newblock {\em Verifying multi-threaded software using {SMT}-based context-bounded model checking.}
 \newblock In: International Conference on Software Engineering. ACM,  pp. 331--340, 2011.
 
 \bibitem{Ivancic05}
 Ivanicic F., Shlyakhter I., Gupta A., Ganai, M.K.:
-\newblock Model checking {C} programs using {F-Soft}.
+\newblock {\em Model checking {C} programs using {F-Soft}.}
 \newblock In: IEEE International Conference on Computer Design: VLSI in Computers and Processors, pp. 297--308, 2005.
 
 \bibitem{Cordeiro12}
 Cordeiro L., Fischer B., Marques{-}Silva J.:
-\newblock Smt-based bounded model checking for embedded {ANSI-C} software.
+\newblock {\em {SMT}-based bounded model checking for embedded {ANSI-C} software.}
 \newblock {IEEE} Trans. Software Eng. \textbf{38}(4), pp. 957--974, 2012.
 
 \bibitem{Donaldson10}
 Donaldson A., Kroening D., R{\"{u}}mmer P.:
-\newblock {SCRATCH}: A tool for automatic analysis of dma races.
+\newblock {\em {SCRATCH}: A tool for automatic analysis of {DMA} races.}
 \newblock In: ACM Symposium on Principles and Practice of Parallel Programming. ACM, pp. 311--312, 2011.
 
 \bibitem{Kinductor}
 Donaldson A., Haller L., Kroening D., R{\"{u}}mmer, P.:
-\newblock Software verification using k-induction.
+\newblock {\em Software Verification using \textit{k}-Induction.}
 \newblock In: International Conference on Static Analysis. Springer-Verlag, pp. 351--368, 2011.
 
 \bibitem{EenS03}
 E{\'{e}}n, N., S{\"{o}}rensson, N.:
-\newblock Temporal induction by incremental {SAT} solving.
+\newblock {\em Temporal induction by incremental {SAT} solving.}
 \newblock Electronic Notes in Theoretical Computer Science \textbf{89}(4), pp. 543 -- 560, 2003.
 
 \bibitem{GrosseLD09}
 Gro{\ss}e D., Le H., Drechsler R.:
-\newblock Induction-based formal verification of {SystemC TLM} designs.
+\newblock {\em Induction-based formal verification of {SystemC TLM} designs.}
 \newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
 
 \bibitem{Sheera00}
 Sheeran M., Singh S., St{\aa}lmarck G.:
-\newblock Checking safety properties using induction and a {SAT}-solver.
+\newblock {\em Checking safety properties using induction and a {SAT}-solver.}
 \newblock In: International Conference on Formal Methods in Computer-Aided Design. Springer-Verlag, pp. 108--125, 2000.
 
 \bibitem{Gadelha15}
 Gadelha M., Ismail H., Cordeiro L.:
-\newblock Handling loops in bounded model checking of C programs via k-induction
+\newblock {\em Handling loops in bounded model checking of C programs via \textit{k}-induction.}
 \newblock In: International Journal on Software Tools for Technology Transfer (to appear), pp. 1--18, 2015.
 \newblock http://dx.doi.org/10.1007/s10009-015-0407-9
 
 \bibitem{Beyer15}
 Beyer D., Dangl M., Wendler P.:
-\newblock Boosting k-Induction with Continuously-Refined Invariants.
+\newblock {\em Boosting \textit{k}-Induction with Continuously-Refined Invariants.}
 \newblock International Conference on Computer-Aided Verification, pp. 622--640, 2015.
 
 \bibitem{Rocha15}
@@ -250,41 +247,41 @@ Rocha H., Ismail H., Cordeiro L., Barreto R.:
 \newblock Model Checking Embedded C Software using k-Induction and Invariants. 
 \newblock V Brazilian Symposium on Computing Systems Engineering (to appear), pp. 1--6, 2015.
 
+\bibitem{dsv_spin2015}
+Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
+\newblock {\em DSVerifier: A Bounded Model Checking Tool for Digital Systems}. 
+\newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
+
 \bibitem{ECBS13}
 Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
-\newblock {SMT-Based Bounded Model Checking of C++ Programs}.
+\newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
 \newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
 
 \bibitem{Pereira15}
 Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
-\newblock Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking. 
+\newblock {\em Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking.} 
 \newblock To appear in ACM Symposium on Applied Computing, Software Verification and Testing, 2016. 
 
 \bibitem{esbmc_controller}
 Bessa I., Abreu R., Cordeiro L., Filho J.:
-\newblock {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers)}. 
+\newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers)}.}
 \newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
-
-\bibitem{dsv_spin2015}
-Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
-\newblock {DSVerifier: A Bounded Model Checking Tool for Digital Systems}. 
-\newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
 
 \bibitem{esbmc_filter}
 Abreu R., Cordeiro L., Filho E.:
-\newblock {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}. 
+\newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
 \newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
 \newblock http://dx.doi.org/10.14209/sbrt.2013.57
 
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
-\newblock Handling unbounded loops with {ESBMC} 1.20.
+\newblock {\em Handling unbounded loops with {ESBMC} 1.20.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
 
 \bibitem{MorseRCN014}
 Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
-\newblock {ESBMC} 1.22.
+\newblock {\em {ESBMC} 1.22.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
 
