@@ -14,7 +14,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Software Model Checking in Embedded Systems}
+\title{Software Model Checking in Embedded Systems \\ (Position Paper)}
 
 
 % author names and affiliations
@@ -85,20 +85,20 @@ Indeed, many current embedded systems become interesting solutions only if they 
 performs their target tasks, such as unmanned aerial vehicles (UAVs) and medical monitoring systems. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may also cost human-lives, which is unacceptable. In addition, wrong diagnosis or condition-evaluation reports also have the potential to compromise patients' health, with serious consequences.
 
 
-A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost common to computer processors is enabling system designers to move more features to software, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency) must be considered.
+A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost common to computer processors is enabling system designers to move more features to software, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency) must be considered~\cite{Kroening15}.
 
 %--------------------------------------
 \section{Verification Challenges}
 %--------------------------------------
 
-State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification, and high-level processor models during simulation; however, embedded system verification also raises additional challenges, such as time and energy constraints, handling of concurrent software, platform restrictions, and legacy designs, which are usually developed in low-level languages. \textcolor{red}{dei uma modificada aqui... deh uma olhada... deixei o antigo comentado abaixo:}\textcolor{green}{In summary, the main challenges regarding the verification of embedded systems lie on improving coverage, where more system's functions are verified, reducing verification time, {\it i.e.}, pruning the state-space exploration during verification, and incorporating system models, which allows specific checks regarding system behavior and not only code correctness. For instance, such aspects are of extreme relevance in micro-grids, in order to ensure reliability, which is a key issue for (smart) cities and consumers}.
+State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification, and high-level processor models during simulation~\cite{Behrend15,Lettnin09}; however, embedded system verification also raises additional challenges, such as time and energy constraints, handling of concurrent software, platform restrictions, and legacy designs, which are usually developed in low-level languages. In summary, the main challenges regarding the verification of embedded systems lie on improving coverage, where more system's functions are verified, reducing verification time, {\it i.e.}, pruning the state-space exploration during verification, and incorporating system models, which allows specific checks regarding system behavior and not only code correctness. For instance, such aspects are of extreme relevance in micro-grids and syber-physical system, in order to ensure reliability, which is a key issue for (smart) cities, industries and consumers.
 %In summary, the main challenge when verifying embedded systems lies on improving coverage, where more system's functions are verified, and reducing verification time, {\it i.e.}, pruning the state-space exploration during verification. These aspects are of extreme relevance in micro-grids to ensure reliability, which is a key issue for (smart) cities and consumers.
 
 %--------------------------------------
 \section{Research Problem (RP)}
 %--------------------------------------
 
-This position paper tackles three major problems in computer-aided verification for embedded systems: (RP1) providing suitable encodings into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09} \textcolor{red}{achar outra palavra aqui?:}theories to reason accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, and (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware \textcolor{green}{and incorporating knowledge about system purpose and associated features}.
+This position paper tackles four major problems in computer-aided verification for embedded systems: (RP1) providing suitable encodings into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09}, in particular, extend background theories typically supported by SMT solvers to reason accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to threads interleavings, (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware, and (RP4) incorporating knowledge about system purpose and associated features, in order to detect system-level failures.
 
 %--------------------------------------
 \section{Bounded Model Checking of Embedded Systems}
@@ -155,17 +155,32 @@ H.~Kopetz.
 \newblock {\em Real-Time Systems - Design Principles for Distributed Embedded Applications}.
 \newblock Real-Time Systems Series, Springer, ISBN 978-1-4419-8236-0, pp. 1--376, 2011.
 
-\bibitem{BarrettSST09}
-Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
-\newblock 26.
-\newblock In: Satisfiability Modulo Theories. Volume 185 of Frontiers in
-  Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
+\bibitem{Kroening15}
+Kroening D., Liang L., Melham T., Schrammel P., Tautschnig M.:
+\newblock Effective verification of low-level software with nested interrupts. 
+\newblock In: Design, Automation and Test in Europe, pp. 229--234, 2015.
+
+\bibitem{Behrend15}
+Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
+\newblock Scalable and Optimized Hybrid Verification of Embedded Software. 
+\newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
+
+\bibitem{Lettnin09}
+Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Schönknecht V., Reitemeyer S.:
+\newblock Semiformal verification of temporal properties in automotive hardware dependent software. 
+\newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
 
 \bibitem{handbook09}
 Biere A., Heule M., van Maaren H., Walsh T., eds.:
 \newblock Handbook of Satisfiability.
 \newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
 
+
+\bibitem{BarrettSST09}
+Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
+\newblock 26.
+\newblock In: Satisfiability Modulo Theories. Volume 185 of Frontiers in
+  Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
 
 \bibitem{Clarke04}
 Clarke E., Kroening D., Lerda F.:
