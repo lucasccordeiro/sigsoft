@@ -113,7 +113,7 @@ In order to reason about embedded software accurately, an SMT-based BMC must con
 \subsection{Induction-based Verification of C Programs}
 %--------------------------------------
 
-One technique typically used to prove properties, for any given depth, is mathematical induction. In particular, the algorithm called \textit{k}-induction was successfully applied to ensure that (restricted) C programs do not contain data races~\cite{Donaldson10,Kinductor} and do respect time constraints specified during the system design phase~\cite{EenS03}. Additionally, the \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented a new algorithm for proving correctness of (a large set of) C programs by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence in the associated literature that model checking embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15}.
+One technique typically used to prove properties, for any given depth, is mathematical induction. In particular, the algorithm called \textit{k}-induction was successfully applied to ensure that (restricted) C programs do not contain data races~\cite{Donaldson10,Kinductor} and do respect time constraints specified during the system design phase~\cite{EenS03}. Additionally, the \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented a new algorithm for proving correctness of (a large set of) C programs by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence in the associated literature that model checking embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15,Brain15}.
 
 %--------------------------------------
 \subsection{Incorporating System Knowledge to Verification}
@@ -189,7 +189,7 @@ Clarke E., Kroening D., Lerda F.:
 \bibitem{MerzFS12}
 Merz F., Falke S., Sinz C.:
 \newblock {\em {LLBMC}: Bounded model checking of {C} and {C++} programs using a compiler {IR}.}
-\newblock In: International Conference on Verified Software: Theories, Tools, Experiments. Springer-Verlag, pp. 146--161, 2012.
+\newblock In: International Conference on Verified Software: Theories, Tools, Experiments. LNCS 7152, pp. 146--161, 2012.
 
 \bibitem{CordeiroF11}
 Cordeiro L., Fischer B.:
@@ -214,7 +214,7 @@ Donaldson A., Kroening D., R{\"{u}}mmer P.:
 \bibitem{Kinductor}
 Donaldson A., Haller L., Kroening D., R{\"{u}}mmer, P.:
 \newblock {\em Software Verification using \textit{k}-Induction.}
-\newblock In: International Conference on Static Analysis. Springer-Verlag, pp. 351--368, 2011.
+\newblock In: International Conference on Static Analysis. LNCS 6887, pp. 351--368, 2011.
 
 \bibitem{EenS03}
 E{\'{e}}n, N., S{\"{o}}rensson, N.:
@@ -244,8 +244,13 @@ Beyer D., Dangl M., Wendler P.:
 
 \bibitem{Rocha15}
 Rocha H., Ismail H., Cordeiro L., Barreto R.:
-\newblock Model Checking Embedded C Software using k-Induction and Invariants. 
+\newblock {\em Model Checking Embedded C Software using k-Induction and Invariants.}
 \newblock V Brazilian Symposium on Computing Systems Engineering (to appear), pp. 1--6, 2015.
+
+\bibitem{Brain15}
+Brain M., Joshi S., Kroening D., Schrammel P.:
+\newblock {\em Safety Verification and Refutation by k-Invariants and k-Induction.}
+\newblock In: International Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
 
 \bibitem{dsv_spin2015}
 Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
