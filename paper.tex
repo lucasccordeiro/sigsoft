@@ -128,7 +128,7 @@ Indeed, research in software verification is now taking such considerations into
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs (ESBMC)~\cite{Cordeiro12}, which was later extended to C++98 programs~\cite{ECBS13}. \textbf{(RP2)} This SMT-based BMC approach was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques to prune the state-space exploration~\cite{morse15}. These verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer in standard benchmarks, which were confirmed by the benchmark's creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in some real-life embedded systems applications~\cite{Gadelha15,Rocha15}. \textbf{(RP4)} The proposed SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems, in particular, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}. Lastly, yet importantly, ESBMC represents one of the most prominent BMC tools (for verifying embedded systems) as observed in the international software verification competitions~\cite{MorseCNF13,MorseRCN014}.
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs (ESBMC)~\cite{Cordeiro12}, which was later extended to C++98 programs~\cite{ECBS13}. \textbf{(RP2)} This SMT-based BMC approach was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques to prune the state-space exploration~\cite{morse15}. These verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer in standard benchmarks, which were confirmed by the benchmark's creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in some real-life embedded systems applications~\cite{Gadelha15,Rocha15}. \textbf{(RP4)} The proposed SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems, in particular, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. Lastly, yet importantly, ESBMC represents one of the most prominent BMC tools (for verifying embedded systems) as observed in the international software verification competitions~\cite{MorseCNF13,MorseRCN014}.
 
 %--------------------------------------
 \section{Conclusions}
@@ -290,6 +290,11 @@ Abreu R., Cordeiro L., Filho E.:
 \newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
 \newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
 \newblock http://dx.doi.org/10.14209/sbrt.2013.57
+
+\bibitem{JMorse15}
+Morse J., Cordeiro L., Nicole D., Fischer B.:
+\newblock {\em {Model checking LTL properties over ANSI-C programs with bounded traces.}} 
+\newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
 
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
