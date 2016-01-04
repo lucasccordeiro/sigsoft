@@ -69,7 +69,7 @@ Email: eddie@ctpim.org.br}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Our dependency on the correct functioning of embedded systems is rapidly growing, mainly due to their wide range of applications, such as micro-grids, airbag control, health care, surveillance, mobile devices, and high-end television sets. Their structures are becoming more and more complex and now require multi-core processors with scalable shared memory, in order to meet increasing computational power demands. As a consequence, reliability of embedded (distributed) software becomes a key issue during system development, which must be carefully addressed and assured. Normally, state-of-the-art verification methodologies for embedded systems generate test vectors (with constraints) and use assertion-based verification and high-level processor model during simulation; however, other additional challenges have been raised: the need for meeting time and energy constraints, handling concurrent software, dealing with platform restrictions, evaluating implementation-structure choices, and supporting legacy designs (usually written in low-level languages). The present paper discuss challenges, problems, and recent advances to ensure correctness and timeliness regarding embedded systems. Reliability issues, in the development of modern micro-grids, are then considered, as a prominent model checking application.
+Our dependency on the correct functioning of embedded systems is rapidly growing, mainly due to their wide range of applications, such as micro-grids, airbag control, health care, surveillance, mobile devices, and high-end television sets. Their structures are becoming more and more complex and now require multi-core processors with scalable shared memory, in order to meet increasing computational power demands. As a consequence, reliability of embedded (distributed) software becomes a key issue during system development, which must be carefully addressed and assured. Normally, state-of-the-art verification methodologies for embedded systems generate test vectors (with constraints) and use assertion-based verification and high-level processor model during simulation; however, other additional challenges have been raised: the need for meeting time and energy constraints, handling concurrent software, dealing with platform restrictions, evaluating implementation-structure choices, and supporting legacy designs (usually written in low-level languages). The present paper discuss challenges, problems, and recent advances to ensure correctness and timeliness regarding embedded systems. Reliability issues, in the development of micro-grids and cyber-physical systems, are then considered, as a prominent model checking application.
 \end{abstract}
 
 %\IEEEpeerreviewmaketitle
@@ -79,13 +79,12 @@ Our dependency on the correct functioning of embedded systems is rapidly growing
 \section{Introduction}
 %--------------------------------------
 
-Generally, embedded computer systems perform dedicated functions with high degree of reliability. They are used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers~\cite{Kopetz11}. Embedded systems are ubiquitous, in modern day information systems, and are also becoming increasingly important in our society, especially in micro-grids, where reliability and carbon emission reduction are of paramount importance. As a consequence, human life has also become more and more dependent on the services provided by this type of system; in particular, their success depends both on the provided service relevance and quality. 
+Generally, embedded computer systems perform dedicated functions with high degree of reliability. They are used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers~\cite{Kopetz11}. Embedded systems are ubiquitous, in modern day information systems, and are also becoming increasingly important in our society, especially in micro-grids, where reliability and carbon emission reduction are of paramount importance, and in cyber-physical systems, which demand short development cycles and high-level of reliability~\cite{leeCPS}. As a consequence, human life has also become more and more dependent on the services provided by this type of system; in particular, their success depends both on the provided service relevance and quality. 
 
 Indeed, many current embedded systems become interesting solutions only if they can reliably
 performs their target tasks, such as unmanned aerial vehicles (UAVs) and medical monitoring systems. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may also cost human-lives, which is unacceptable. In addition, wrong diagnosis or condition-evaluation reports also have the potential to compromise patients' health, with serious consequences.
 
-
-A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost common to computer processors is enabling system designers to move more features to software, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency) must be considered~\cite{Kroening15}.
+A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost common to computer processors is enabling system designers to move more features to software, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency) must be considered during verification~\cite{Kroening15}.
 
 %--------------------------------------
 \section{Verification Challenges}
@@ -156,6 +155,11 @@ This research was supported by CNPq $475647$/$2013$-$0$ grant.
 H.~Kopetz.
 \newblock {\em Real-Time Systems - Design Principles for Distributed Embedded Applications}.
 \newblock Real-Time Systems Series, Springer, ISBN 978-1-4419-8236-0, pp. 1--376, 2011.
+
+\bibitem{leeCPS}
+E.~Lee 
+\newblock {\em Cyber-physical systems: Design challenges.} 
+\newblock In: International Symposium on Object Oriented Real-Time Distributed Computing, pp. 363--369, 2008.
 
 \bibitem{Kroening15}
 Kroening D., Liang L., Melham T., Schrammel P., Tautschnig M.:
