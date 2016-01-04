@@ -98,7 +98,7 @@ State-of-the-art verification methodologies for embedded systems generate test v
 \section{Research Problem (RP)}
 %--------------------------------------
 
-This position paper tackles four major problems in computer-aided verification for embedded systems: (RP1) providing suitable encoding into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09}, which may extend the background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving, (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware, and (RP4) incorporating knowledge about system purpose and associated features, which aims to detect system-level failures.
+This position paper tackles four major problems in computer-aided verification for embedded systems: (RP1) providing suitable encoding into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09}, which may extend the background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic embedded programs; (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving; (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware; and (RP4) incorporating knowledge about system purpose and associated features, which aims to detect system-level failures.
 
 %--------------------------------------
 \section{Bounded Model Checking of Embedded Systems}
@@ -121,7 +121,7 @@ In particular, the \textit{k}-induction algorithm was successfully applied to en
 Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented new verification algorithms for proving correctness of (a large set of) C programs, by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence, in the associated literature, that model checking of embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15,Brain15} because of the distinctive characteristics mentioned earlier, which influence the embedded system development and verification process.
 
 %--------------------------------------
-\subsection{Incorporating System Knowledge to Verification Procedures}
+\subsection{Incorporating System Knowledge to Automated Verification Procedures}
 %--------------------------------------
 
 It is worth noticing that, currently, SMT-based BMC approaches check code properties in real programs, which basically addresses programing language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then claims for schemes that not only check if the source code is correctly written, but also if it will properly respond in real environments or under external problems. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged.
