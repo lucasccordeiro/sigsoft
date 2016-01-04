@@ -69,7 +69,7 @@ Email: eddie@ctpim.org.br}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The dependency on the correct functioning of embedded systems is rapidly growing, mainly due to their wide range of applications, such as micro-grids, automotive device control ({\it e.g.}, airbag control, etc.), health care, surveillance, mobile devices, and consumer electronics. Their structures are becoming more and more complex and now require multi-core processors with scalable shared memory, in order to meet increasing computational power demands. As a consequence, reliability of embedded (distributed) software becomes a key issue during system development, which must be carefully addressed and assured. Normally, state-of-the-art verification methodologies for embedded systems generate test vectors (with constraints) and use assertion-based verification and high-level processor model, during simulation; however, other additional challenges have been raised: the need for meeting time and energy constraints, handling concurrent software, dealing with platform restrictions, evaluating implementation-structure choices, and supporting legacy designs (usually written in low-level languages). The present paper discusses challenges, problems, and recent advances to ensure correctness and timeliness regarding embedded systems. Reliability issues, in the development of micro-grids and cyber-physical systems, are then considered, as a prominent model checking application.
+The dependency on the correct functioning of embedded systems is rapidly growing, mainly due to their wide range of applications, such as micro-grids, automotive device control ({\it e.g.}, airbag control), health care, surveillance, mobile devices, and consumer electronics. Their structures are becoming more and more complex and now require multi-core processors with scalable shared memory, in order to meet increasing computational power demands. As a consequence, reliability of embedded (distributed) software becomes a key issue during system development, which must be carefully addressed and assured. Normally, state-of-the-art verification methodologies for embedded systems generate test vectors (with constraints) and use assertion-based verification and high-level processor model, during simulation; however, other additional challenges have been raised: the need for meeting time and energy constraints, handling concurrent software, dealing with platform restrictions, evaluating implementation-structure choices, and supporting legacy designs (usually written in low-level languages). The present paper discusses challenges, problems, and recent advances to ensure correctness and timeliness regarding embedded systems. Reliability issues, in the development of micro-grids and cyber-physical systems, are then considered, as a prominent model checking application.
 \end{abstract}
 
 %\IEEEpeerreviewmaketitle
@@ -81,8 +81,7 @@ The dependency on the correct functioning of embedded systems is rapidly growing
 
 Generally, embedded computer systems perform dedicated functions with high degree of reliability. They are used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers~\cite{Kopetz11}. Embedded systems are ubiquitous, in modern day information systems, and are also becoming increasingly important in our society, especially in micro-grids, where reliability and carbon emission reduction are of paramount importance, and in cyber-physical systems (CPS), which demand short development cycles and again high-level of reliability~\cite{leeCPS,leeCPS2}. As a consequence, human life has also become more and more dependent on the services provided by this type of system and, in particular, their success is strictly related to both provided service relevance and quality. 
 
-Indeed, many current embedded systems, such as unmanned aerial vehicles (UAVs) and medical monitoring systems, become interesting solutions only if they can reliably
-perform their target tasks. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may also cost human-lives, which is unacceptable. In addition, wrong disease diagnosis or condition-evaluation reports also have the potential to compromise patients' health, with serious consequences.
+Indeed, many current embedded systems, such as unmanned aerial vehicles (UAVs) and medical monitoring systems~\cite{Cordeiro09}, become interesting solutions only if they can reliably perform their target tasks. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may also cost human-lives, which is unacceptable. In addition, wrong disease diagnosis or condition-evaluation reports also have the potential to compromise patients' health, with serious consequences.
 
 Besides, when physical interaction with the real world is needed, which happens in CPS, additional care must be taken, mainly when human action is directly replaced, as in vehicle driving. Regarding the latter, even human-in-the-loop feedback control can be employed \cite{munir}, which then raises deeper concerns related to the reliability of human behavior modeling and system implementation. Consequently, it is important to go beyond design correctness and also address behavior correctness, which may be performed by incorporating system models.
 
@@ -114,27 +113,37 @@ In order to reason about embedded software accurately, an SMT-based BMC must con
 \subsection{Induction-based Verification of C Programs}
 %--------------------------------------
 
-A feasible alternative to check for properties in BMC is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. 
-The simplest form of \textit{k}-induction consists of two steps: the \textit{base-case} and the \textit{induction-step}. In the former, the goal to check that $\phi$ holds in all states that are reachable from an initial state, within $k$ steps ($k \geq 0$ is assumed). The latter, in turn, aims to check that whenever $\phi$ holds, in $k$ consecutive states $s_1,\ldots,s_k$, $\phi$ also holds in the next system state $s_{k+1}$. 
+A feasible alternative to check properties in BMC is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. 
+The simplest form of \textit{k}-induction consists of two steps: the \textit{base-case} and the \textit{induction-step}. In the former, the goal is to check whether $\phi$ holds in all states that are reachable from an initial state, within $k$ steps ($k \geq 0$ is assumed). The latter, in turn, aims to check that whenever $\phi$ holds, in $k$ consecutive states $s_1,\ldots,s_k$, $\phi$ also holds in the next system state $s_{k+1}$. 
 
-In particular, the \textit{k}-induction algorithm was successfully applied to ensure that (restricted) C programs do not contain data races~\cite{Donaldson10,Kinductor} and do respect time constraints, which were specified during the system design phase~\cite{EenS03}. Besides, \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. 
+In particular, the \textit{k}-induction algorithm was successfully applied to ensure that (restricted) C programs do not contain violations related to data races~\cite{Donaldson10,Kinductor} and do respect time constraints, which were specified during the system design phase~\cite{EenS03}. Besides, \textit{k}-induction is a well-established technique in hardware verification, where it is easier to be applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. 
 
-Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented a \textcolor{red}{conforme conversamos, eh um novo mesmo?} new algorithm for proving correctness of (a large set of) C programs, by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence, in the associated literature, that model checking of embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15,Brain15}.
+Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented new verification algorithms for proving correctness of (a large set of) C programs, by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence, in the associated literature, that model checking of embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15,Brain15} because of the distinctive characteristics mentioned earlier, which influence the embedded system development and verification process.
 
 %--------------------------------------
-\subsection{Incorporating System Knowledge to Verification Procedures}
+\subsection{Incorporating System Knowledge to Automated Verification Procedures}
 %--------------------------------------
 
-It is worth noticing that, currently, SMT-based BMC approaches check for code properties in real programs, which basically addresses programing language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then claims for schemes that not only check if the source code is correctly written, but also if it will properly respond in real environments or under external problems. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged.
+It is worth noticing that, currently, SMT-based BMC approaches check code properties in real programs, which basically addresses programing language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then claims for schemes that not only check if the source code is correctly written, but also if it will properly respond in real environments or under external problems. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged.
 
-Indeed, research in software verification is now taking such considerations into account and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, Ismail {\it et al.} \cite{dsv_spin2015}  proposed a verification tool for digital systems, called digital system verifier (DSVerifier), which is able to aid engineers to check for overflow, limit cycle, output error, timing, stability, and minimum phase, considering finite word-length effects. Indeed, DSverifier is a useful test tool, which takes into account realization forms ({\it e.g.}, direct forms, transposed forms, etc.) and other implementation restrictions and, ultimately, if the system requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup. %Finally, DSVerifier has already been used for verifying digital filters and controllers, which even include UAV applications. 
+Indeed, research in software verification is now taking such considerations into account and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, Ismail {\it et al.} \cite{dsv_spin2015}  proposed a verification tool for digital systems, called digital system verifier (DSVerifier), which is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering finite word-length effects. Indeed, DSVerifier is a useful test tool, which takes into account realization forms ({\it e.g.}, direct forms, transposed forms, etc.) and other implementation restrictions and, ultimately, if the system requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup. 
+
+Scratch is also another example of software model checker, which uses knowledge about the system to be verified and the underlying hardware, for detecting races related to direct memory access (DMA) for the Cell BE processor~\cite{Donaldson10}. The tool also uses BMC to detect DMA races, and bounded model checking with \textit{k}-induction to prove absence of races.
+
+%Finally, DSVerifier has already been used for verifying digital filters and controllers, which even include UAV applications. 
 
 %--------------------------------------
 \section{Achievements}
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs (ESBMC)~\cite{Cordeiro12}, which was later extended to C++98~\cite{ECBS13}. \textbf{(RP2)} This SMT-based BMC approach was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Such verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were confirmed by the benchmark's creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in some real-life embedded system applications~\cite{Gadelha15,Rocha15}. \textbf{(RP4)} The proposed SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems, in particular, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UVA application was tackled, in order to verify its attitude controllers \textcolor{red}{que artigo do iury mencionar?}. Lastly, yet importantly, ESBMC represents one of the most prominent BMC tools (for verifying embedded systems), as observed in the international software verification competitions~\cite{MorseCNF13,MorseRCN014}.
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}. 
+
+\textbf{(RP2)} This SMT-based BMC approach was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Such verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were confirmed by the benchmark's creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). 
+
+\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in some real-life embedded system applications~\cite{Gadelha15,Rocha15}. 
+
+\textbf{(RP4)} The proposed SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems, in particular, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, in order to verify its attitude controllers~\cite{Bessa16}. Lastly, yet importantly, ESBMC represents one of the most prominent BMC tools (for verifying embedded systems), as observed in the international software verification competitions~\cite{MorseCNF13,MorseRCN014}.
 
 %--------------------------------------
 \section{Conclusions}
@@ -177,6 +186,11 @@ E.~Lee
 Lee E.:
 \newblock {\em The Past, Present and Future of Cyber-Physical Systems: A Focus on Models}. 
 \newblock In: Sensors 15(3): pp. 4837--4869, 2015.
+
+\bibitem{Cordeiro09}
+Cordeiro L., Fischer B., Chen H., Marques-Silva J.:
+\newblock {\em Semiformal Verification of Embedded Software in Medical Devices Considering Stringent Hardware Constraints.} 
+\newblock In: International Conference on Embedded Software and Systems, pp. 396--403, 2009.
 
 
 \bibitem{munir}
@@ -272,12 +286,12 @@ Beyer D., Dangl M., Wendler P.:
 
 \bibitem{Rocha15}
 Rocha H., Ismail H., Cordeiro L., Barreto R.:
-\newblock {\em Model Checking Embedded C Software using k-Induction and Invariants.}
+\newblock {\em Model Checking Embedded C Software using \textit{k}-Induction and Invariants.}
 \newblock V Brazilian Symposium on Computing Systems Engineering (to appear), pp. 1--6, 2015.
 
 \bibitem{Brain15}
 Brain M., Joshi S., Kroening D., Schrammel P.:
-\newblock {\em Safety Verification and Refutation by k-Invariants and k-Induction.}
+\newblock {\em Safety Verification and Refutation by k-Invariants and \textit{k}-Induction.}
 \newblock In: International Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
 
 \bibitem{dsv_spin2015}
@@ -315,6 +329,11 @@ Abreu R., Cordeiro L., Filho E.:
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {Model Checking LTL Properties over ANSI-C Programs with Bounded Traces.}} 
 \newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
+
+\bibitem{Bessa16}
+Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
+\newblock {\em { Verification of Delta Form Realization in Fixed-Point Digital Controllers Using Bounded Model Checking.}} 
+\newblock In: Design Automation for Embedded Systems (to appear), pp. 49--54, 2016.
 
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
