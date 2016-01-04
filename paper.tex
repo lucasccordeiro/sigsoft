@@ -128,7 +128,7 @@ It is worth noticing that, currently, SMT-based BMC approaches check code proper
 
 Indeed, research in software verification is now taking such considerations into account and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, Ismail {\it et al.} \cite{dsv_spin2015}  proposed a verification tool for digital systems, called digital system verifier (DSVerifier), which is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering finite word-length effects. Indeed, DSVerifier is a useful test tool, which takes into account realization forms ({\it e.g.}, direct forms, transposed forms, etc.) and other implementation restrictions and, ultimately, if the system requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup. 
 
-Scratch is also another example of software model checker, which uses knowledge about the system to be verified and the underlying hardware, for detecting races related to direct memory access (DMA) for the Cell BE processor~\cite{Donaldson10}. The tool also uses BMC to detect DMA races, and bounded model checking with k-induction to prove absence of races.
+Scratch is also another example of software model checker, which uses knowledge about the system to be verified and the underlying hardware, for detecting races related to direct memory access (DMA) for the Cell BE processor~\cite{Donaldson10}. The tool also uses BMC to detect DMA races, and bounded model checking with \textit{k}-induction to prove absence of races.
 
 %Finally, DSVerifier has already been used for verifying digital filters and controllers, which even include UAV applications. 
 
@@ -281,12 +281,12 @@ Beyer D., Dangl M., Wendler P.:
 
 \bibitem{Rocha15}
 Rocha H., Ismail H., Cordeiro L., Barreto R.:
-\newblock {\em Model Checking Embedded C Software using k-Induction and Invariants.}
+\newblock {\em Model Checking Embedded C Software using \textit{k}-Induction and Invariants.}
 \newblock V Brazilian Symposium on Computing Systems Engineering (to appear), pp. 1--6, 2015.
 
 \bibitem{Brain15}
 Brain M., Joshi S., Kroening D., Schrammel P.:
-\newblock {\em Safety Verification and Refutation by k-Invariants and k-Induction.}
+\newblock {\em Safety Verification and Refutation by k-Invariants and \textit{k}-Induction.}
 \newblock In: International Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
 
 \bibitem{dsv_spin2015}
