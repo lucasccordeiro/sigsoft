@@ -14,7 +14,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Software Model Checking in Embedded Systems \\ (Position Paper)}
+\title{Bounded Model Checking for Embedded Systems \\ (Position Paper)}
 
 
 % author names and affiliations
@@ -91,7 +91,7 @@ A number of distinctive characteristics might influence the embedded system deve
 \section{Verification Challenges}
 %--------------------------------------
 
-State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification, and high-level processor models during simulation~\cite{Behrend15,Lettnin09}; however, embedded system verification also raises additional challenges, such as time and energy constraints, handling of concurrent software, platform restrictions, and legacy designs, which are usually developed in low-level languages. In summary, the main challenges regarding the verification of embedded systems lie on improving coverage, where more system's functions are verified, reducing verification time, {\it i.e.}, pruning the state-space exploration during verification, and incorporating system models, which allows specific checks regarding system behavior and not only code correctness. For instance, such aspects are of extreme relevance in micro-grids and syber-physical system, in order to ensure reliability, which is a key issue for (smart) cities, industries and consumers.
+State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification, and high-level processor models during simulation~\cite{Behrend15,Lettnin09}; however, embedded system verification also raises additional challenges, such as time and energy constraints, handling of concurrent software, platform restrictions, and legacy designs, which are usually developed in low-level languages. In summary, the main challenges regarding the verification of embedded systems lie on improving coverage, where more system's functions are verified, reducing verification time, {\it i.e.}, pruning the state-space exploration during verification, and incorporating system models, which allows specific checks regarding system behavior and not only code correctness. For instance, such aspects are of extreme relevance in micro-grids and cyber-physical system, in order to ensure reliability, which is a key issue for (smart) cities, industries and consumers.
 %In summary, the main challenge when verifying embedded systems lies on improving coverage, where more system's functions are verified, and reducing verification time, {\it i.e.}, pruning the state-space exploration during verification. These aspects are of extreme relevance in micro-grids to ensure reliability, which is a key issue for (smart) cities and consumers.
 
 %--------------------------------------
@@ -128,7 +128,7 @@ Indeed, research in software verification is now taking such considerations into
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based context-BMC for full C/C++ programs (ESBMC)~\cite{Cordeiro12,ECBS13}. \textbf{(RP2)} This approach was further extended to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}. These verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer in standard benchmarks, which were confirmed by the benchmark's creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in real-life embedded applications~\cite{Gadelha15,Rocha15}. \textbf{(RP4)} The SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems ({\it e.g.}, digital filters and controllers)~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}.  Last but not least, ESBMC represents one of the most prominent BMC tools in the international software verification competition~\cite{MorseCNF13,MorseRCN014}.
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based context-BMC for full C programs (ESBMC)~\cite{Cordeiro12}, which was later extended to C++ programs~\cite{ECBS13}. \textbf{(RP2)} This approach was further developed and extended to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}. These verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer in standard benchmarks, which were confirmed by the benchmark's creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, demonstrating is effectiveness in real-life embedded applications~\cite{Gadelha15,Rocha15}. \textbf{(RP4)} The SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase in discrete-time systems ({\it e.g.}, digital filters and controllers)~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}. Last but not least, ESBMC represents one of the most prominent BMC tools in the international software verification competition~\cite{MorseCNF13,MorseRCN014}.
 
 %--------------------------------------
 \section{Conclusions}
@@ -143,9 +143,11 @@ This paper presented the main challenges to verify design correctness in embedde
 
 
 % use section* for acknowledgment
-%\section*{Acknowledgment}
+\section*{Acknowledgment}
 
 %The authors would like to thank...
+This research was supported by CNPq $475647$/$2013$-$0$ grant.
+
 
 
 \begin{thebibliography}{1}
@@ -240,7 +242,7 @@ Gadelha M., Ismail H., Cordeiro L.:
 \bibitem{Beyer15}
 Beyer D., Dangl M., Wendler P.:
 \newblock {\em Boosting \textit{k}-Induction with Continuously-Refined Invariants.}
-\newblock International Conference on Computer-Aided Verification, pp. 622--640, 2015.
+\newblock International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
 
 \bibitem{Rocha15}
 Rocha H., Ismail H., Cordeiro L., Barreto R.:
