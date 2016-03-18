@@ -91,7 +91,17 @@ A number of distinctive characteristics might influence the embedded system deve
 \section{Verification Challenges}
 %--------------------------------------
 
-State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification, and high-level processor models during simulation~\cite{Behrend15,Lettnin09}; however, embedded system verification also raises additional challenges, such as time and energy constraints, handling of concurrent software, platform restrictions, and legacy designs, which are usually developed with low-level languages. In summary, the main challenges regarding the verification of embedded systems lie on improving coverage, where more system's functions are verified, reducing verification time, {\it i.e.}, pruning the state-space exploration during verification, and incorporating system models, which allow specific checks regarding system behavior and not only code correctness. Indeed, the first two aspects are of extreme relevance in micro-grids and cyber-physical systems, in order to ensure reliability, which is a key issue for (smart) cities, industries, and consumers, and the third one is essential in systems that implement device models, such as digital filters and controllers, which present a behavior that is highly dependent on signal inputs and outputs and whose deployment may be heavily affected by hardware restrictions.
+State-of-the-art verification methodologies for embedded systems generate test vectors (with constraints), use assertion-based verification, and high-level processor models during simulation~\cite{Behrend15,Lettnin09}. In particular, the main challenges regarding the verification of embedded systems lie on improving coverage, where more system's functions are verified, reducing verification time, {\it i.e.}, pruning the state-space exploration during verification, and incorporating system models, which allow specific checks regarding system behavior and not only code correctness; additionally, embedded system verification raises additional challenges, such as 
+%
+\begin{enumerate}
+	\item time and energy constraints;
+	\item handling of concurrent software;
+	\item platform restrictions; and
+	\item legacy designs.%, which are usually developed with low-level languages.
+\end{enumerate}
+
+Indeed, the first two aspects are of extreme relevance in micro-grids and cyber-physical systems, in order to ensure reliability, which is a key issue for (smart) cities, industries, and consumers, and the third one is essential in systems that implement device models, such as digital filters and controllers, which present a behavior that is highly dependent on signal inputs and outputs and whose deployment may be heavily affected by hardware restrictions. The fourth aspect is inherent to a large number of embedded systems from  telecommunications, control systems, and medical devices.
+
 %In summary, the main challenge when verifying embedded systems lies on improving coverage, where more system's functions are verified, and reducing verification time, {\it i.e.}, pruning the state-space exploration during verification. These aspects are of extreme relevance in micro-grids to ensure reliability, which is a key issue for (smart) cities and consumers.
 
 %--------------------------------------
@@ -101,7 +111,7 @@ State-of-the-art verification methodologies for embedded systems generate test v
 This position paper tackles four major problems in computer-aided verification for embedded systems: (RP1) providing suitable encoding into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09}, which may extend the background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving, (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware, and (RP4) incorporating knowledge about system purpose and associated features, which aims to detect system-level and behavior failures.
 
 %--------------------------------------
-\section{Bounded Model Checking of Embedded Systems}
+\section{Bounded Model Checking for Embedded Systems}
 %--------------------------------------
 
 Bounded Model Checking (BMC) techniques based on Boolean Satisfiability (SAT)~\cite{handbook09} or SMT~\cite{BarrettSST09} have been successfully applied to verify single- and multi-threaded programs and find subtle bugs in real (embedded system) software~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. The idea behind BMC techniques is to check the violation of a given property at a predetermined depth, {\it i.e.}, given a transition system \textit{M}, a property $ \phi $, and a limit of iterations \textit{k}, BMC unfolds the system \textit{k} times and converts it into a verification condition $ \psi $, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth
