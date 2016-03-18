@@ -108,7 +108,32 @@ Indeed, the first two aspects are of extreme relevance in micro-grids and cyber-
 \section{Research Problem (RP)}
 %--------------------------------------
 
-This position paper tackles four major problems in computer-aided verification for embedded systems: (RP1) providing suitable encoding into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09}, which may extend the background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic embedded programs, (RP2) exploiting SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving, (RP3) proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware, and (RP4) incorporating knowledge about system purpose and associated features, which aims to detect system-level and behavior failures.
+This position paper tackles four major problems in computer-aided verification for embedded systems, which are (partially) open in present research.
+
+\textbf{(RP1)} providing suitable encoding into the Satisfiability Modulo Theories (SMT) \cite{BarrettSST09}, which may extend the background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic embedded programs.
+
+\textbf{(RP2)} exploiting SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving.
+	
+\textbf{(RP3)} proving correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware.
+	
+\textbf{(RP4)} incorporating knowledge about system purpose and associated features, which aims to detect system-level and behavior failures.
+
+Section~\ref{achievements} outlines contributions toward these research problems.
+
+%--------------------------------------
+\section{Achievements}
+\label{achievements}
+%--------------------------------------
+
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13} and Qt programs~\cite{Sousa15}. 
+
+\textbf{(RP2)} This SMT-based BMC approach was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Such verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). 
+
+\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, which demonstrates is effectiveness in some real-life embedded system applications~\cite{Gadelha15,Rocha15}. 
+
+\textbf{(RP4)} The proposed SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. 
+
+Lastly, yet importantly, ESBMC represents one of the most prominent BMC tools (for verifying embedded systems), as observed in the international software verification competitions~\cite{MorseCNF13,MorseRCN014}.
 
 %--------------------------------------
 \section{Bounded Model Checking for Embedded Systems}
@@ -142,20 +167,6 @@ Scratch is another example of software-model checker, which uses knowledge about
 
 %Finally, DSVerifier has already been used for verifying digital filters and controllers, which even include UAV applications. 
 
-%--------------------------------------
-\section{Achievements}
-\label{achievements}
-%--------------------------------------
-
-\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13} and Qt programs~\cite{Sousa15}. 
-
-\textbf{(RP2)} This SMT-based BMC approach was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Such verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). 
-
-\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, which demonstrates is effectiveness in some real-life embedded system applications~\cite{Gadelha15,Rocha15}. 
-
-\textbf{(RP4)} The proposed SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. 
-
-Lastly, yet importantly, ESBMC represents one of the most prominent BMC tools (for verifying embedded systems), as observed in the international software verification competitions~\cite{MorseCNF13,MorseRCN014}.
 
 %--------------------------------------
 \section{Conclusions}
