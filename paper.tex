@@ -103,11 +103,13 @@ SAT-based or SMT-based BMC procedures have been successfully applied to verify a
 \subsection{Induction-based Verification of C Programs}
 %--------------------------------------
 
-One possible way to achieve completeness in BMC techniques is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. However, the main limitation of such approach relies on producing or strengthening inductive assertions. In particular, loop invariants annotated in the program must be inductive (and not just invariant) for the corresponding VCs to be valid~\cite{Bradley07}. As a consequence, \textit{k}-induction procedures could even produce such assertions, which are indeed invariant, but if those assertions not inductive, then program correctness cannot be proved.
+One possible way to achieve completeness in BMC techniques is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. The main challenge of such approach relies on computing and strengthening inductive invariants from the program. In particular, loop invariants computed from the program must be inductive (and not just invariant) for the corresponding VCs to be valid~\cite{Bradley07}. As a consequence, even if \textit{k}-induction procedures successfully compute such assertions, which are indeed invariant, those assertions must be inductive to prove program correctness.
 
-There are invariant generation algorithms that discover linear and polynomial relations among integer and real variables, in order to provide loop invariants and also to discover the memory alignment in programming languages with pointers~\cite{pips:2013,Henry:2012}. The current literature even report successful applications of induction-based verification for hardware and software systems, in some cases using invariants. In particular, \textit{k}-induction based verification was already applied to ensure that (restricted) C programs do not contain violations related to data races~\cite{Donaldson10,Kinductor} and do respect time constraints, which were specified during the system design phase~\cite{EenS03}. \textit{k}-induction is also a well-established technique in hardware verification, where it is easily applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. 
+There are several invariant generation algorithms that discover linear and polynomial relations among integer and real variables, in order to provide loop invariants and also to discover the memory ``shape'' in programming languages with pointers~\cite{pips:2013,Henry:2012}. The current literature even reports successful applications of \textit{k}-induction based verification algorithms for hardware and software systems using invariants generation and strengthening~\cite{Beyer15,Rocha15,Brain15}. 
 
-Recently, Gadelha {\it et al.} and Beyer {\it et al.} presented new verification algorithms for proving correctness of (a large set of) C programs, by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. However, there is still little evidence, in the associated literature, that model checking of embedded software, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15,Brain15}. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes.
+More specifically, in previous work, \textit{k}-induction based verification was already applied to ensure that (restricted) C programs do not contain violations related to data races~\cite{Donaldson10,Kinductor} and do respect time constraints, which were specified during the system design phase~\cite{EenS03}. Recently, Gadelha {\it et al.}, Beyer {\it et al.}, and Brain {\it et al.} presented new verification algorithms for proving correctness of (a large set of) C programs, by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15}. 
+
+The \textit{k}-induction algorithm is also a well-established technique in hardware verification, where it is easily applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. However, there is still little evidence, in the available literature, that model checking hardware and software systems, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification~\cite{Rocha15,Brain15,Brain15}. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes.
 
 %--------------------------------------
 \subsection{Incorporating System Knowledge to Automated Verification Procedures}
@@ -338,15 +340,20 @@ Gadelha M., Ismail H., Cordeiro L.:
 \newblock In: International Journal on Software Tools for Technology Transfer (to appear), pp. 1--18, 2015.
 \newblock http://dx.doi.org/10.1007/s10009-015-0407-9
 
+\bibitem{Brain15}
+Brain M., Joshi S., Kroening D., Schrammel P.:
+\newblock {\em Safety Verification and Refutation by k-Invariants and k-Induction.} 
+\newblock In: Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
+
 \bibitem{Beyer15}
 Beyer D., Dangl M., Wendler P.:
 \newblock {\em Boosting \textit{k}-Induction with Continuously-Refined Invariants.}
-\newblock International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
+\newblock In: International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
 
 \bibitem{Rocha15}
 Rocha H., Ismail H., Cordeiro L., Barreto R.:
 \newblock {\em Model Checking Embedded C Software using \textit{k}-Induction and Invariants.}
-\newblock V Brazilian Symposium on Computing Systems Engineering (to appear), pp. 1--6, 2015.
+\newblock V Brazilian Symposium on Computing Systems Engineering, pp. 90--95, 2015.
 
 \bibitem{Brain15}
 Brain M., Joshi S., Kroening D., Schrammel P.:
