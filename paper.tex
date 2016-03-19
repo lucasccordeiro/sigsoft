@@ -14,7 +14,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Challenges and Recent Advances to SMT-Based Context-Bounded Model Checking for Embedded Systems}
+\title{SMT-Based Context-Bounded Model Checking for Embedded Systems: State of the Art and Future Trends}
 
 
 % author names and affiliations
@@ -109,7 +109,7 @@ There are several invariant generation algorithms that discover linear and polyn
 
 Additionally, \textit{k}-induction based verification was also applied to ensure that (restricted) C programs (1) do not contain violations related to data races~\cite{Donaldson10,Kinductor} considering the  Cell BE processor and (2) do respect time constraints, which are specified during the system design phase~\cite{EenS03}. The \textit{k}-induction algorithm is also a well-established technique in hardware verification, where it is easily applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. 
 
-However, there is still little evidence, in the available literature, that model checking hardware and software systems, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination of different invariant generation algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and facts about memory and variable aliasing~\cite{Bradley07}.
+However, there is still little evidence, in the available literature, that model checking hardware and software systems, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination of different invariant generation algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants about memory and variable aliasing~\cite{Bradley07}.
 
 %--------------------------------------
 \subsection{Incorporating System Knowledge to Automated Verification Procedures}
@@ -159,15 +159,15 @@ Section~\ref{achievements} outlines contributions toward these research problems
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13} and Qt-based consumer electronics applications~\cite{Sousa15}. Other efficient SMT-based BMC approaches have been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing approaches are still limited for specific class of programs, especially for those that contain floating-point arithmetic and manipulate the heap memory~\cite{BeyerSVCOMP15}.
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing approaches are still limited for specific class of programs, especially for those that contain floating-point arithmetic and manipulate the heap~\cite{BeyerSVCOMP15}.
 
-\textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro {\it et al.} was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Such verification methodologies and respective tools were also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC). Recent advances to verify multi-threaded C programs have been made by Inverso {\it et al.}~\cite{Inverso14}, but the class of programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited.
+\textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro {\it et al.} was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering partial-order reduction and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Such approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prunes the state space exploration~\cite{Inverso14,civl15}. However, the class of concurrent (embedded systems) programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited.
 
-\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, which demonstrates its effectiveness in some real-life embedded system applications~\cite{Gadelha15,Rocha15,Brain15}. However, the main challenge still remains to compute and strengthen loop invariants to prove program correctness. Invariant generation algorithms must still evolve to efficiently discover inductive assertions of programs or to continuously refine invariants, as described by Beyer {\it et al.}~\cite{Beyer15}.
+\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated, which demonstrate its effectiveness in some real-life embedded systems applications~\cite{Gadelha15,Rocha15,Brain15}. However, the main challenge still remains to compute and strengthen loop invariants to prove program correctness and timeliness. Invariant generation algorithms have substantially evolved over the years to efficiently discover inductive invariants of programs~\cite{pips:2013,Henry:2012} or to continuously refine them~\cite{Beyer15}. However, there is still a lack of studies for exploiting the combination of different invariant generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities), in order to ensure system robustness w.r.t. implementation aspects.
 
-\textbf{(RP4)} The proposed SMT-based context-BMC was also extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. 
+\textbf{(RP4)} State of the art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; in particular, micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication.
 
-Lastly, yet importantly, ESBMC represents one of the most prominent BMC tools (for verifying embedded systems), as observed in the international software verification competitions~\cite{MorseCNF13,MorseRCN014}.
+Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, and LLBMC~\cite{MerzFS12} represent the most prominent ones for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{BeyerSVCOMP15}.
 
 
 
@@ -274,7 +274,7 @@ Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
 \bibitem{Clarke04}
 Clarke E., Kroening D., Lerda F.:
 \newblock {\em A Tool for Checking {ANSI-C} Programs.}
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems. LNCS 2988, Springer Berlin Heidelberg,  pp. 168--176, 2004.
+\newblock In: Tools and Algorithms for the Construction and Analysis of Systems. LNCS 2988, Springer Berlin Heidelberg, pp. 168--176, 2004.
 
 \bibitem{MerzFS12}
 Merz F., Falke S., Sinz C.:
@@ -284,12 +284,12 @@ Merz F., Falke S., Sinz C.:
 \bibitem{CordeiroF11}
 Cordeiro L., Fischer B.:
 \newblock {\em Verifying Multi-threaded Software using {SMT}-based Context-Bounded Model Checking.}
-\newblock In: International Conference on Software Engineering. ACM,  pp. 331--340, 2011.
+\newblock In: International Conference on Software Engineering. pp. 331--340, 2011.
 
 \bibitem{Ivancic05}
 Ivanicic F., Shlyakhter I., Gupta A., Ganai, M.K.:
 \newblock {\em Model Checking {C} Programs using {F-Soft}.}
-\newblock In: IEEE International Conference on Computer Design: VLSI in Computers and Processors, pp. 297--308, 2005.
+\newblock In: International Conference on Computer Design: VLSI in Computers and Processors, pp. 297--308, 2005.
 
 \bibitem{Cordeiro12}
 Cordeiro L., Fischer B., Marques{-}Silva J.:
@@ -300,7 +300,6 @@ Cordeiro L., Fischer B., Marques{-}Silva J.:
 Bradley A., Manna Z.:
 \newblock {\em The calculus of computation - decision procedures with applications to verification}. 
 \newblock In: Springer, pp. I-XV, pp. 1--366, 2007.
-
 
 \bibitem{Donaldson10}
 Donaldson A., Kroening D., R{\"{u}}mmer P.:
@@ -342,17 +341,16 @@ D.~Beyer:
 \newblock {\em Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).} 
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
 
-
 \bibitem{Gadelha15}
 Gadelha M., Ismail H., Cordeiro L.:
 \newblock {\em Handling Loops in Bounded Model Checking of C Programs via \textit{k}-Induction.}
-\newblock In: International Journal on Software Tools for Technology Transfer (to appear), pp. 1--18, 2015.
+\newblock In: International Journal on Software Tools for Technology Transfer (to appear), 2015.
 \newblock http://dx.doi.org/10.1007/s10009-015-0407-9
 
 \bibitem{Brain15}
 Brain M., Joshi S., Kroening D., Schrammel P.:
 \newblock {\em Safety Verification and Refutation by k-Invariants and k-Induction.} 
-\newblock In: Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
+\newblock In: International Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
 
 \bibitem{Beyer15}
 Beyer D., Dangl M., Wendler P.:
@@ -372,7 +370,7 @@ Brain M., Joshi S., Kroening D., Schrammel P.:
 \bibitem{Inverso14}
 Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
 \newblock {\em Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}
-\newblock In: Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
+\newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
 
 \bibitem{dsv_spin2015}
 Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
@@ -392,12 +390,17 @@ Sousa F., Cordeiro L., Lima Filho E.:
 \bibitem{Pereira15}
 Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
 \newblock {\em Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking.} 
-\newblock To appear in ACM Symposium on Applied Computing, Software Verification and Testing, 2016. 
+\newblock In: ACM Symposium on Applied Computing, Software Verification and Testing Track, pp. 1648-1653, 2016. 
 
 \bibitem{morse15}
 J.~Morse.
 \newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
 \newblock {University of Southampton, PhD Thesis}, 2015.
+
+\bibitem{civl15}
+Zheng M, Rogers M, Luo Z, Dwyer M, Siegel S.
+\newblock {\em{{CIVL}: Formal Verification of Parallel Programs}}.
+\newblock In: International Conference on Automated Software Engineering, pp. 830--835, 2015.
 
 \bibitem{esbmc_controller}
 Bessa I., Abreu R., Cordeiro L., Filho J.:
@@ -418,7 +421,7 @@ Morse J., Cordeiro L., Nicole D., Fischer B.:
 \bibitem{Bessa16}
 Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
 \newblock {\em { Verification of Fixed-Point Digital Controllers Using Direct and Delta Forms Realizations.}} 
-\newblock In: Design Automation for Embedded Systems (to appear), pp. 49--54, 2016.
+\newblock In: Design Automation for Embedded Systems (to appear), 2016.
 
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
