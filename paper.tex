@@ -165,10 +165,9 @@ Section~\ref{achievements} outlines contributions toward these research problems
 
 \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated in the literature, which demonstrate its effectiveness in some real-life embedded systems applications~\cite{Gadelha15,Rocha15,Brain15}. However, the main challenge still remains open, {\it i.e.}, to compute and strengthen loop invariants to prove program correctness and timeliness in a more efficient and effective way in order to be competitive with other model checking approaches. In particular, invariant generation algorithms have substantially evolved over the last years to discover inductive invariants of programs~\cite{pips:2013,Henry:2012} or to continuously refine them during verification~\cite{Beyer15}. However, there is still a lack of studies for exploiting the combination of different invariant generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities) and how to strengthen them during verification, in order to ensure system robustness w.r.t. implementation aspects.
 
-\textbf{(RP4)} State of the art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; in particular, micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication.
+\textbf{(RP4)} State of the art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems; in particular, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter}, and to specify system-level properties of those systems using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; emphasis should be given to micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for engineers~\cite{Alves15}.
 
-Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, and LLBMC~\cite{MerzFS12} represent the most prominent ones for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15}.
-
+Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, and LLBMC~\cite{MerzFS12} represent the most prominent ones for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15}, where verifiable (correctness and violation) witnesses are of extreme importance for evaluating software verifiers~\cite{BeyerW15,RochaIFM12}.
 
 
 %Finally, DSVerifier has already been used for verifying digital filters and controllers, which even include UAV applications. 
@@ -483,10 +482,27 @@ Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
 
 %47
 \bibitem{KahlonWG09}
-Kahlon V, Wang C, Gupta A.
-\newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order
-  Reduction Technique}}.
+Kahlon V., Wang C., Gupta A.:
+\newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
 \newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
+
+%48
+\bibitem{Alves15}
+Alves E. , Cordeiro L., Lima Filho E.:
+\newblock {\em{ Fault Localization in Multi-Threaded C Programs using Bounded Model Checking}}. 
+\newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
+
+%49
+\bibitem{BeyerW15}
+Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
+\newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
+\newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
+
+%50
+\bibitem{RochaIFM12}
+Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
+\newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
+\newblock In: International Conference on Integrated Formal Methods, LNCS 7321, pp. 128-142, 2012.
 
 \end{thebibliography}
 
