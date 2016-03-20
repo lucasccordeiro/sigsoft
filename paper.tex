@@ -107,7 +107,7 @@ One possible way to achieve completeness in BMC techniques is to prove that an i
 
 There are several invariant generation algorithms that discover linear and polynomial relations among integer and real variables, in order to provide loop invariants and also to discover the memory ``shape'' in programming languages with pointers~\cite{pips:2013,Henry:2012}. The current literature also reports successful applications of \textit{k}-induction based verification algorithms for hardware and software systems using invariants generation and strengthening, mostly based on interval analysis. In particular, Gadelha {\it et al.}, Beyer {\it et al.}, and Brain {\it et al.} presented new verification algorithms for proving correctness of (a large set of) C programs, by mathematical induction, in a completely automatic way ({\it i.e.}, users do not need to provide the loop invariant)~\cite{Gadelha15,Beyer15,Brain15,Rocha15}.
 
-Additionally, \textit{k}-induction based verification was also applied to ensure that (restricted) C programs (1) do not contain violations related to data races~\cite{Donaldson10,Kinductor} considering the  Cell BE processor and (2) do respect time constraints, which are specified during the system design phase~\cite{EenS03}. The \textit{k}-induction algorithm is also a well-established technique in hardware verification, where it is easily applied, due to the monolithic transition relation present in such designs~\cite{EenS03,GrosseLD09,Sheera00}. 
+Additionally, \textit{k}-induction based verification was also applied to ensure that (restricted) C programs (1) do not contain violations related to data races~\cite{Donaldson10,Kinductor} considering the  Cell BE processor and (2) do respect time constraints, which are specified during the system design phase~\cite{EenS03}. The \textit{k}-induction algorithm is also a well-established technique in hardware verification, where it is easily applied, due to the monolithic transition relation present in such designs~\cite{EenS03,Sheera00,GrosseLD09}. 
 
 However, there is still little evidence, in the available literature, that model checking hardware and software systems, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded system verification. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination of different invariant generation algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants about memory and variable aliasing~\cite{Bradley07}.
 
@@ -159,7 +159,7 @@ Section~\ref{achievements} outlines contributions toward these research problems
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. Such approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing BMC approaches are still limited for specific class of programs, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers to develop more efficient decision procedures to handle specific class of programs.
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. Such approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing BMC approaches are still limited for specific class of programs, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers to develop more efficient decision procedures to handle specific class of programs.
 
 \textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro {\it et al}. was further developed to verify deadlock, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prune the state space exploration~\cite{Inverso14,civl15}. However, the class of concurrent programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores with the goal to remove redundant behaviour.
 
@@ -371,122 +371,122 @@ Donaldson A., Haller L., Kroening D., R{\"{u}}mmer, P.:
 \newblock In: International Conference on Static Analysis. LNCS 6887, pp. 351--368, 2011.
 
 %29
+\bibitem{GrosseLD09}
+Gro{\ss}e D., Le H., Drechsler R.:
+\newblock {\em Induction-based Formal Verification of {SystemC TLM} Designs.}
+\newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
+
+%30
 \bibitem{Behrend15}
 Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
 \newblock {\em Scalable and Optimized Hybrid Verification of Embedded Software}. 
 \newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
 
-%30
-\bibitem{Lettnin09}
-Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Sch{\"o}nknecht V., Reitemeyer S.:
-\newblock {\em Semiformal Verification of Temporal Properties in Automotive Hardware Dependent Software}. 
-\newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
-
 %31
-\bibitem{GrosseLD09}
-Gro{\ss}e D., Le H., Drechsler R.:
-\newblock {\em Induction-based Formal Verification of {SystemC TLM} Designs.}
-\newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
- 
-%32
-\bibitem{BeyerSVCOMP15}
-D.~Beyer:
-\newblock {\em Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).} 
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
-
-%33
-\bibitem{Inverso14}
-Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
-\newblock {\em Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}
-\newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
-
-%34
 \bibitem{dsv_spin2015}
 Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
 \newblock {\em DSVerifier: A Bounded Model Checking Tool for Digital Systems}. 
 \newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
 
+%32
+\bibitem{Lettnin09}
+Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Sch{\"o}nknecht V., Reitemeyer S.:
+\newblock {\em Semiformal Verification of Temporal Properties in Automotive Hardware Dependent Software}. 
+\newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
+
+%33
+\bibitem{Beyer14}
+D.~Beyer 
+\newblock {Status report on software verification - (competition summary {SV-COMP})}. 
+\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
+ 
+%34
+\bibitem{BeyerSVCOMP15}
+D.~Beyer:
+\newblock {\em Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).} 
+\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
+
 %35
+\bibitem{Inverso14}
+Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
+\newblock {\em Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}
+\newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
+
+%36
 \bibitem{ECBS13}
 Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
 \newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
 \newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
 
-%36
+%37
 \bibitem{Sousa15}
 Sousa F., Cordeiro L., Lima Filho E.: 
 \newblock {\em { Bounded Model Checking of C++ Programs Based on the Qt Framework.}} 
 \newblock In: Global Conference on Consumer Electronics, pp. 179--180, 2015.
 
-%37
+%38
 \bibitem{Pereira15}
 Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
 \newblock {\em Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking.} 
 \newblock In: ACM Symposium on Applied Computing, Software Verification and Testing Track, pp. 1648-1653, 2016. 
 
-%38
+%39
 \bibitem{morse15}
 J.~Morse.
 \newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
 \newblock {University of Southampton, PhD Thesis}, 2015.
 
-%39
+%40
 \bibitem{civl15}
 Zheng M, Rogers M, Luo Z, Dwyer M, Siegel S.
 \newblock {\em{{CIVL}: Formal Verification of Parallel Programs}}.
 \newblock In: International Conference on Automated Software Engineering, pp. 830--835, 2015.
 
-%40
+%41
 \bibitem{esbmc_controller}
 Bessa I., Abreu R., Cordeiro L., Filho J.:
 \newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers)}.}
 \newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
 
-%41
+%42
 \bibitem{esbmc_filter}
 Abreu R., Cordeiro L., Filho E.:
 \newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
 \newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
 \newblock http://dx.doi.org/10.14209/sbrt.2013.57
 
-%42
+%43
 \bibitem{JMorse15}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {Model Checking LTL Properties over ANSI-C Programs with Bounded Traces.}} 
 \newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
 
-%43
+%44
 \bibitem{Bessa16}
 Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
 \newblock {\em { Verification of Fixed-Point Digital Controllers Using Direct and Delta Forms Realizations.}} 
 \newblock In: Design Automation for Embedded Systems (to appear), 2016.
 
-%44
+%45
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em Handling unbounded loops with {ESBMC} 1.20.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
 
-%45
+%46
 \bibitem{MorseRCN014}
 Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {ESBMC} 1.22.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
 
-%46
+%47
 \bibitem{KahlonWG09}
 Kahlon V, Wang C, Gupta A.
 \newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order
   Reduction Technique}}.
 \newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
-
-%47
-\bibitem{Beyer14}
-D.~Beyer 
-\newblock {Status report on software verification - (competition summary {SV-COMP})}. 
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
 
 \end{thebibliography}
 
