@@ -81,11 +81,19 @@ The dependency on the correct functioning of embedded systems is rapidly growing
 
 Generally, embedded computer systems perform dedicated functions with high degree of reliability. They are used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers~\cite{Kopetz11}. Embedded systems are ubiquitous, in modern day information systems, and are also becoming increasingly important in our society, especially in micro-grids, where reliability and carbon emission reduction are of paramount importance~\cite{xu15}, and in cyber-physical systems (CPS), which demand short development cycles and again high-level of reliability~\cite{leeCPS,leeCPS2}. As a consequence, human life has also become more and more dependent on the services provided by this type of system and, in particular, their success is strictly related to both service relevance and quality. 
 
-Indeed, many current embedded systems, such as unmanned aerial vehicles (UAVs)~\cite{groza2015formal} and medical monitoring systems~\cite{Cordeiro09}, become interesting solutions only if they can reliably perform their target tasks. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may also cost human-lives, which is unacceptable. In addition, wrong disease diagnosis or condition-evaluation reports have the potential to compromise patients' health with serious consequences.
+Fig.~\ref{intelligent-product} shows examples of embedded systems, which consist of a human-machine interface ({\it e.g.}, keyboard and LCD) and an instrumentation interface ({\it e.g.}, sensor, network, and actuator). Indeed, many current embedded systems, such as unmanned aerial vehicles (UAVs)~\cite{groza2015formal} and medical monitoring systems~\cite{Cordeiro09}, become interesting solutions only if they can reliably perform their target tasks. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may also cost human-lives, which is unacceptable. In addition, wrong disease diagnosis or condition-evaluation reports have the potential to compromise patients' health with serious consequences.
+%
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=0.35]{figure1.eps}
+	\caption{Embedded system is part of a well-specified larger system (intelligent product).}
+	\label{intelligent-product}
+\end{figure}
 
 Besides, when physical interaction with the real world is needed, which happens in CPS, additional care must be taken, mainly when human action is directly replaced, as in vehicle driving. Regarding the latter, even human-in-the-loop feedback control can be employed \cite{munir}, which then raises deeper concerns related to the reliability of human behavior modeling and system implementation. Consequently, it is important to go beyond design correctness and also address behavior correctness, which may be performed by incorporating system models.
 
 A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost, which are common to the area of computer processors, are enabling system designers to move more features to software domain, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency) must be considered during verification~\cite{Kroening15}.
+
 
 %--------------------------------------
 \section{Bounded Model Checking (BMC)}
