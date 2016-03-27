@@ -101,7 +101,15 @@ A number of distinctive characteristics might influence the embedded system deve
 
 Bounded Model Checking (BMC) based on Boolean Satisfiability (SAT) was originally proposed to verify hardware designs~\cite{Biere99,handbook09}. Indeed, Biere {\it et al.} were able to successfully verify large digital circuits with approximately $9510$ latches and $9499$ inputs, leading to BMC formulae with $4 \times 10^6$ variables and $1.2 \times 10^7$ clauses to be checked by a standard SAT solver. BMC based on Satisfiability Modulo Theories (SMT)~\cite{BarrettSST09}, in turn, was originally proposed to deal with increasing software verification complexity~\cite{Armando06}. 
 
-In general, BMC techniques aim to check the violation of a given (safety) property at a given system depth. Indeed, given a transition system \textit{M}, which is derived from the control-flow graph of a program, a property $\phi$, which represents the program correctness and/or the system's behavior, and an iteration bound \textit{k}, which limits the loop unrolling, data structures, and context-switches, BMC techniques thus unfold the system \textit{k} times, in order to convert it into a verification condition $\psi$, expressed in propositional logic or in a decidable-fragment of first-order logic, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth less than or equal to \textit{k}.
+In general, BMC techniques aim to check the violation of a given (safety) property at a given system depth, as shown in Figure~\ref{bounded-model-checking}. Indeed, given a transition system \textit{M}, which is derived from the control-flow graph of a program, a property $\phi$, which represents the program correctness and/or the system's behavior, and an iteration bound \textit{k}, which limits the loop unrolling, data structures, and context-switches, BMC techniques thus unfold the system \textit{k} times, in order to convert it into a verification condition $\psi$, expressed in propositional logic or in a decidable-fragment of first-order logic, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth less than or equal to \textit{k}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.35]{figure2.eps}
+	\caption{Bounded Model Checking.}
+	\label{bounded-model-checking}
+\end{figure}
+
 
 From the practical point of view, SAT-based or SMT-based BMC procedures have been successfully applied to verify a large number of hardware and software systems, including digital circuits and single- and multi-threaded programs. Those BMC techniques were able to find subtle bugs in real digital and embedded software systems, as reported in the available literature~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. Nonetheless, the main criticism with respect to BMC techniques relies on completeness, since they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. 
 
@@ -139,7 +147,7 @@ State-of-the-art verification methodologies for embedded systems generate test v
 %
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.35]{figure2.eps}
+	\includegraphics[scale=0.35]{figure3.eps}
 	\caption{Verification methodologies for embedded systems.}
 	\label{verification-methodologies}
 \end{figure}
@@ -176,11 +184,11 @@ This position paper tackles four major problems in computer-aided verification f
 Section~\ref{achievements} outlines contributions toward these research problems.
 
 %--------------------------------------
-\section{Achievements}
+\section{Achievements and Future Trends}
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro, Fischer, and Marques-Silva proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. This approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing ones are still limited to specific classes of programs, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers to propose theories and develop more efficient decision procedures, in order to handle specific classes of programs.
+\textbf{(RP1)} Cordeiro, Fischer, and Marques-Silva proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. This approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing ones are still limited to specific classes of programs, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers to propose background theories and develop more efficient decision procedures, in order to handle specific classes of programs.
 
 \textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro, Fischer, and Marques-Silva was further developed to verify correct lock acquisition ordering and the absence of deadlocks, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prune the state-space exploration~\cite{Inverso14,civl15}; however, the class of concurrent programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores~\cite{Grumberg05} with the goal to remove redundant behaviour or to analyze interpolants~\cite{McMillan11} to prove non-interference of context switches.
 
