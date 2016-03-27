@@ -181,7 +181,7 @@ This position paper tackles five major problems in computer-aided verification f
 	
 \textbf{(RP4)} incorporate knowledge about system purpose and associated features, which aims to detect system-level and behavior failures.
 
-\textcolor{blue}{\textbf{(RP5)} provide tools and approaches capable of addressing different software languages and application interfaces, with the goal of reducing the time needed to adapt current verification techniques to new developments and technologies.}
+\textbf{(RP5)} provide tools and approaches capable of addressing different programming languages and application interfaces, with the goal of reducing the time needed to adapt current verification techniques to new developments and technologies.
 
 Section~\ref{achievements} outlines contributions toward these research problems.
 
@@ -198,8 +198,7 @@ Section~\ref{achievements} outlines contributions toward these research problems
 
 \textbf{(RP4)} State-of-the-art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems. Indeed, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} were tackled, in order to specify system-level properties of those systems, using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; emphasis should be given to micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for embedded systems engineers~\cite{Alves15}.
 
-\textcolor{blue}{\textbf{(RP5)} Although ESMBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and languages are often developed, which then claim for suitable verification tools. Indeed, it would be interesting if one needed only to load a new language model, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa, Cordeiro, and Filho, which employed operational models for checking Qt-based programs. In summary, the BMC core (in that case, ESBMC) is not changed, but instead an operation model, which implements the behavior and features of Qt libraries, is used for providing the new code structure to be checked. Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in software verification.}
-
+{\textbf{(RP5)} Although ESBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools. Indeed, it would be interesting if a new programming language model could be loaded, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa, Cordeiro, and Filho~\cite{Garcia16}, which employed operational models for checking Qt-based programs from consumer electronics. In summary, the BMC core (in that case, ESBMC) is not changed, but instead an operational model, which implements the behavior and features of Qt libraries, is used for providing the new code structure to be checked. Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in software verification.
 
 Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, and LLBMC~\cite{MerzFS12} represent the most prominent approaches for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15}, where verifiable (correctness and violation) witnesses are of extreme importance for evaluating software verifiers~\cite{BeyerW15,RochaIFM12}.
 
@@ -216,7 +215,7 @@ Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseC
 This paper presented the main challenges related to the verification of design correctness, in embedded systems, and also raised some important side considerations. In particular, it emphasizes that stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency), along with system behavior models, must be considered during verification. Additionally, there is little evidence that model checking embedded software using \textit{k}-induction (and invariants), which
 extends BMC-based approaches from falsification to verification, can be applied to formally verify correctness and timeliness of embedded systems. 
 
-Given that software complexity has significantly increased in embedded products, there are still some (recent) advances to stress and exhaustively cover the system state space, in order to verify low-level properties that have to meet the application's deadline, access memory regions, handle concurrency, and control hardware registers. Besides, there is a trend towards incorporating knowledge about the system to be verified, which may take software verification one step further, where not only code correctness will be addressed, but also full system reliability. \textcolor{blue}{Finally, it seems interesting to provide behavioral models when new application interfaces or language features are used, in order to extend the capabilities of current verification tools, without changing the core BMC module.}
+Given that software complexity has significantly increased in embedded products, there are still some (recent) advances to stress and exhaustively cover the system state space, in order to verify low-level properties that have to meet the application's deadline, access memory regions, handle concurrency, and control hardware registers. Besides, there is a trend towards incorporating knowledge about the system to be verified, which may take software verification one step further, where not only code correctness will be addressed, but also full system reliability. Finally, it seems interesting to provide behavioral models when new application interfaces or programming language features are used, in order to extend the capabilities of current verification tools, without changing the core BMC module.
 
 As future work, the main goal of this research is to extend BMC as a design and verification tool for achieving correct-by-construction embedded system implementations. Special attention will be given to cyber-physical systems and modern micro-grids, considering small-scale versions of a distributed system, so that reliability and other system-level properties ({\it e.g.}, carbon emission reduction in smart cities) are amenable to automated verification, probably through behavior models.
 
@@ -540,12 +539,18 @@ Alves E. , Cordeiro L., Lima Filho E.:
 \newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
 
 %51
+\bibitem{Garcia16}
+Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.: 
+\newblock {\em{ ESBMC$^{QtOM}$: A Bounded Model Checking Tool to Verify Qt Applications}}. 
+\newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
+
+%52
 \bibitem{BeyerW15}
 Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
 \newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
 
-%52
+%53
 \bibitem{RochaIFM12}
 Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 \newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
