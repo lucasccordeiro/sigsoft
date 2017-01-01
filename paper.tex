@@ -14,7 +14,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Verification and Synthesis of Embedded Systems: \\ Advances and Challenges}
+\title{Automated Verification and Synthesis of Embedded Systems: Advances and Challenges}
 
 
 % author names and affiliations
@@ -133,9 +133,9 @@ Nonetheless, there is still little evidence, in the available literature, that m
 \subsection{Program Synthesis via Counter-Example \\ Guided Inductive Synthesis (CEGIS)}
 %--------------------------------------
 
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\phi$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\phi$ as the starting point, and then produce a sequence of candidate programs that satisfy $\phi$~\cite{Alur13}. In this respect, a given candidate program $p$ is iteratively refined to match specification $\phi$ more closely. 
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$ as the starting point, and then produce incrementally a sequence of candidate solutions that satisfy $\sigma$~\cite{Abate17}. As a result, a given candidate program $p$ is iteratively refined to match the specification $\sigma$ more closely. Counter-Example Guided Inductive Synthesis (CEGIS) represents one of the most popular approaches to program synthesis currently used in practice~\cite{David15}. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} shows the basic architecture of the CEGIS approach, which has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
 
-Counter-Example Guided Inductive Synthesis (CEGIS) is currently one of the the most popular approaches to program synthesis in practice~\cite{David15}. Figures~\ref{Counter-Example-Guided-Inductive-Synthesis} shows the CEGIS approach, which has close connections to algorithmic debugging using counterexamples and abstraction refinement. These connections involve two specific steps: synthesizing a repair in the former case, and synthesizing an abstraction function in the latter.
+The input specification provided to the program synthesizer is of the form $\exists \vec{P} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{P})$ where $\vec{P}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free formula. The ground terms is interpreted over some finite domain $\mathcal{D}$. The {\sc Synthesize} and {\sc Verify} phases interact via a finite set of test vectors {\sc inputs} that is updated incrementally. Given the aforementioned specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{P}$ satisfying the specification $\sigma(\vec{x}, \vec{P})$ for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{P}$, this witness is a candidate solution to the full synthesis formula, which is passed to the {\sc verify} phase to check whether it is a full solution ({\it i.e.}, $\vec{P}$ satisfies the specification $\sigma(\vec{x}, \vec{P})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates; otherwise, additional information is provided to the {\sc synthesize} phase in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again. It is worth noting that each iteration of the loop adds a new input to the finite set $\text{\sc inputs}$ that is used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate a finite number of times.
 %
 \begin{figure}[h]
 	\centering
@@ -144,7 +144,7 @@ Counter-Example Guided Inductive Synthesis (CEGIS) is currently one of the the m
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
 
-Nowadays, program synthesis engines that implement Counter-Example Guided Inductive Synthesis (CEGIS)~\cite{sketch} can automatically produce programs for a large variety of specifications due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}.
+Nowadays, program synthesis engines that implement CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}.
 
 %--------------------------------------
 \subsection{Incorporating System Models to Automated \\ Verification and Synthesis Procedures}
