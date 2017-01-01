@@ -130,12 +130,12 @@ Novel verification algorithms for proving correctness of (a large set of) C prog
 Nonetheless, there is still little evidence, in the available literature, that model checking hardware and software systems, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded-system verification. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants about memory and variable aliasing~\cite{Bradley07}.
 
 %--------------------------------------
-\subsection{Incorporating System Models to Automated Verification Procedures}
+\subsection{Incorporating System Models to Automated \\ Verification and Synthesis Procedures}
 %--------------------------------------
 
 It is worth noticing that, currently, SMT-based BMC approaches check code properties in real programs, which basically address programing-language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then requires schemes that do not only check if the source code is correctly written, but also if it will properly respond in real environments or under external problems. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged.
 
-Indeed, research in software verification is now incorporating such considerations, during checking processes, and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, a verification tool for digital systems was proposed, which is called digital system verifier (DSVerifier)~\cite{dsv_spin2015} and is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering finite word-length (FWL) effects. Additionally, DSVerifier checks closed-loop systems with uncertain models considering FWL effects, which are typically represented as hybrid systems, {\it i.e.}, the controller is digital but the controlled agent (plant) is a physical and continuous system. Here, the verification procedure has to consider the interaction between a continuous plant and a digital (and sampled) controller with FWL effects, which can be connected using different control system configurations. Indeed, DSVerifier is a useful test tool, which takes into account different realization forms ({\it e.g.}, direct forms, delta forms, and transposed forms) and other implementation restrictions to explore the design space. Ultimately, if the system requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup. 
+Indeed, research in software verification is now incorporating such considerations, during checking processes, and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, a verification tool for digital systems was proposed, which is called digital system verifier (DSVerifier)~\cite{dsv_spin2015} and is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering finite word-length (FWL) effects. Additionally, DSVerifier checks closed-loop systems with uncertain models considering FWL effects, which are typically represented as hybrid systems, {\it i.e.}, the controller is digital but the controlled agent (plant) is a physical and continuous system~\cite{Bessa17}. Here, the verification procedure has to consider the interaction between a continuous plant and a digital (and sampled) controller with FWL effects, which can be connected using different control system configurations. Indeed, DSVerifier is a useful test tool, which takes into account different realization forms ({\it e.g.}, direct forms, delta forms, and transposed forms) and other implementation restrictions to explore the design space. Ultimately, if the system requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup. 
 
 Scratch is another example of a software model checker, which uses knowledge about the system to be verified and the underlying hardware, for detecting races related to direct memory access (DMA), in the Cell BE processor~\cite{Donaldson10}. That tool also uses BMC, in order to detect DMA races, and BMC with \textit{k}-induction, which aims to prove the absence of races. If support to other DMA operations were added, Scratch could be adapted to different architectures, {\it i.e.}, the same techniques would be employed, but with a different system behavior/knowledge.
 
@@ -424,147 +424,153 @@ Gro{\ss}e D., Le H., Drechsler R.:
 \newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
 
 %32
-\bibitem{Behrend15}
-Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
-\newblock {\em Scalable and Optimized Hybrid Verification of Embedded Software}. 
-\newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
-
-%33
 \bibitem{dsv_spin2015}
 Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
 \newblock {\em DSVerifier: A Bounded Model Checking Tool for Digital Systems}. 
 \newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
 
+%33
+\bibitem{Bessa17}
+Bessa, I., Ismail, H., Palhares, R., Cordeiro, L., Chaves Filho, J.:
+\newblock {\em Formal Non-Fragile Stability Verification of Digital Control Systems with Uncertainty}. 
+\newblock In: IEEE Transactions on Computers, 2017 (to appear).
+
 %34
+\bibitem{Behrend15}
+Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
+\newblock {\em Scalable and Optimized Hybrid Verification of Embedded Software}. 
+\newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
+
+%35
 \bibitem{Lettnin09}
 Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Sch{\"o}nknecht V., Reitemeyer S.:
 \newblock {\em Semiformal Verification of Temporal Properties in Automotive Hardware Dependent Software}. 
 \newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
 
-%35
+%36
 \bibitem{Beyer14}
 D.~Beyer 
 \newblock {Status report on software verification - (competition summary {SV-COMP})}. 
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
  
-%36
+%37
 \bibitem{BeyerSVCOMP15}
 D.~Beyer:
 \newblock {\em Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).} 
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
 
-%37
+%38
 \bibitem{Inverso14}
 Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
 \newblock {\em Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}
 \newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
 
-%38
+%39
 \bibitem{ECBS13}
 Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
 \newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
 \newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
 
-%39
+%40
 \bibitem{Pereira15}
 Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
 \newblock {\em Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking.} 
 \newblock In: ACM Symposium on Applied Computing, Software Verification and Testing Track, pp. 1648-1653, 2016. 
 
-%40
+%41
 \bibitem{Sousa15}
 Sousa F., Cordeiro L., Lima Filho E.: 
 \newblock {\em { Bounded Model Checking of C++ Programs Based on the Qt Framework.}} 
 \newblock In: Global Conference on Consumer Electronics, pp. 179--180, 2015.
 
-%41
+%42
 \bibitem{morse15}
 J.~Morse.
 \newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
 \newblock {University of Southampton, PhD Thesis}, 2015.
 
-%42
+%43
 \bibitem{civl15}
 Zheng M, Rogers M, Luo Z, Dwyer M, Siegel S.
 \newblock {\em{{CIVL}: Formal Verification of Parallel Programs}}.
 \newblock In: International Conference on Automated Software Engineering, pp. 830--835, 2015.
 
-%43
+%44
 \bibitem{Grumberg05}
 Grumberg O., Lerda F., Strichman O., Theobald M.:
 \newblock {\em { Proof-guided underapproximation-widening for multi-process systems.}} 
 \newblock In: Symposium on Principles of Programming Languages, pp. 122--131, 2005.
 
-%44
+%45
 \bibitem{McMillan11}
 K.~McMillan:
 \newblock {\em {Widening and Interpolation.}} 
 \newblock In: International Symposium on Static Analysis, LCNS 6887, pp. 1, 2011.
 
-%45
+%46
 \bibitem{esbmc_controller}
 Bessa I., Abreu R., Cordeiro L., Filho J.:
-\newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers)}.}
+\newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers}.}
 \newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
 
-%46
+%47
 \bibitem{esbmc_filter}
 Abreu R., Cordeiro L., Filho E.:
 \newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
 \newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
 \newblock http://dx.doi.org/10.14209/sbrt.2013.57
 
-%47
+%48
 \bibitem{JMorse15}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {Model Checking LTL Properties over ANSI-C Programs with Bounded Traces.}} 
 \newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
 
-%48
+%49
 \bibitem{Bessa16}
 Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
 \newblock {\em { Verification of Fixed-Point Digital Controllers Using Direct and Delta Forms Realizations.}} 
 \newblock In: Design Automation for Embedded Systems (to appear), 2016.
 
-%49
+%50
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em Handling unbounded loops with {ESBMC} 1.20.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
 
-%50
+%51
 \bibitem{MorseRCN014}
 Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {ESBMC} 1.22.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
 
-%51
+%52
 \bibitem{KahlonWG09}
 Kahlon V., Wang C., Gupta A.:
 \newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
 \newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
 
-%52
+%53
 \bibitem{Alves15}
 Alves E. , Cordeiro L., Lima Filho E.:
 \newblock {\em{ Fault Localization in Multi-Threaded C Programs using Bounded Model Checking}}. 
 \newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
 
-%53
+%54
 \bibitem{Garcia16}
 Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.: 
 \newblock {\em{ ESBMC$^{QtOM}$: A Bounded Model Checking Tool to Verify Qt Applications}}. 
 \newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
 
-%54
+%55
 \bibitem{BeyerW15}
 Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
 \newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
 
-%55
+%56
 \bibitem{RochaIFM12}
 Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 \newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
