@@ -135,7 +135,14 @@ Nonetheless, there is still little evidence, in the available literature, that m
 
 The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\phi$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\phi$ as the starting point, and then produce a sequence of candidate programs that satisfy $\phi$~\cite{Alur13}. In this respect, a given candidate program $p$ is iteratively refined to match specification $\phi$ more closely. 
 
-Counter-Example Guided Inductive Synthesis (CEGIS) is currently the most popular approach to program synthesis in practice~\cite{David15}. CEGIS has close connections to algorithmic debugging using counterexamples and abstraction refinement. These two connections, however, involve two specific steps: synthesizing a repair in the former case, and synthesizing an abstraction function in the latter.
+Counter-Example Guided Inductive Synthesis (CEGIS) is currently one of the the most popular approaches to program synthesis in practice~\cite{David15}. Figures~\ref{Counter-Example-Guided-Inductive-Synthesis} shows the CEGIS approach, which has close connections to algorithmic debugging using counterexamples and abstraction refinement. These connections involve two specific steps: synthesizing a repair in the former case, and synthesizing an abstraction function in the latter.
+%
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.12]{figure4.eps}
+	\caption{Counter-Example Guided Inductive Synthesis.}
+	\label{Counter-Example-Guided-Inductive-Synthesis}
+\end{figure}
 
 Nowadays, program synthesis engines that implement Counter-Example Guided Inductive Synthesis (CEGIS)~\cite{sketch} can automatically produce programs for a large variety of specifications due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}.
 
@@ -437,7 +444,7 @@ Gro{\ss}e D., Le H., Drechsler R.:
 
 %32
 \bibitem{Alur13}
-Alur R., Bodík R., Juniwal G., Martin M., Raghothaman M., Seshia S., Singh R., Solar-Lezama A., Torlak E., Udupa A.:
+Alur R., Bod\'{\i}k R., Juniwal G., Martin M., Raghothaman M., Seshia S., Singh R., Solar-Lezama A., Torlak E., Udupa A.:
 \newblock {\em Syntax-guided synthesis}. 
 \newblock In: Formal Methods in Computer-Aided Design, pp. 1--8, 2013.
 
