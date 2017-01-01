@@ -130,6 +130,16 @@ Novel verification algorithms for proving correctness of (a large set of) C prog
 Nonetheless, there is still little evidence, in the available literature, that model checking hardware and software systems, using \textit{k}-induction (and invariants), can be efficiently exploited in embedded-system verification. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants about memory and variable aliasing~\cite{Bradley07}.
 
 %--------------------------------------
+\subsection{Program Synthesis via Counter-Example \\ Guided Inductive Synthesis (CEGIS)}
+%--------------------------------------
+
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\phi$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\phi$ as the starting point, and then produce a sequence of candidate programs that satisfy $\phi$~\cite{Alur13}. In this respect, a given candidate program $p$ is iteratively refined to match specification $\phi$ more closely. 
+
+Counter-Example Guided Inductive Synthesis (CEGIS) is currently the most popular approach to program synthesis in practice~\cite{David15}. CEGIS has close connections to algorithmic debugging using counterexamples and abstraction refinement. These two connections, however, involve two specific steps: synthesizing a repair in the former case, and synthesizing an abstraction function in the latter.
+
+Nowadays, program synthesis engines that implement Counter-Example Guided Inductive Synthesis (CEGIS)~\cite{sketch} can automatically produce programs for a large variety of specifications due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}.
+
+%--------------------------------------
 \subsection{Incorporating System Models to Automated \\ Verification and Synthesis Procedures}
 %--------------------------------------
 
@@ -426,159 +436,183 @@ Gro{\ss}e D., Le H., Drechsler R.:
 \newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
 
 %32
+\bibitem{Alur13}
+Alur R., Bodík R., Juniwal G., Martin M., Raghothaman M., Seshia S., Singh R., Solar-Lezama A., Torlak E., Udupa A.:
+\newblock {\em Syntax-guided synthesis}. 
+\newblock In: Formal Methods in Computer-Aided Design, pp. 1--8, 2013.
+
+%33
+\bibitem{sketch}
+A.~Solar-Lezama.
+\newblock {\em Program sketching}.
+\newblock In: International Journal on Software Tools for Technology Transfer, 15(5-6):475--495, 2013.
+
+%34
+\bibitem{David15}
+C.~David, D.~Kroening, and M.~Lewis.
+\newblock {\em Using program synthesis for program analysis}.
+\newblock In: Logic for Programming, Artificial Intelligence, and Reasoning, LNCS 9450, pp. 483--498, 2015.
+
+%35
+\bibitem{Sharma14}
+R.~Sharma and A.~Aiken.
+\newblock {\em From invariant checking to invariant inference using randomized search}.
+\newblock In: Computer Aided Verification, LNCS 8559, pp. 88--105, 2014.
+
+%36
 \bibitem{dsv_spin2015}
 Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
 \newblock {\em DSVerifier: A Bounded Model Checking Tool for Digital Systems}. 
 \newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
 
-%33
+%37
 \bibitem{Monteiro16}
 F.~Monteiro:
 \newblock {\em Bounded model checking of state-space digital systems: the impact of finite word-length effects on the implementation of fixed-point digital controllers based on state-space modeling}. 
 \newblock In: 24th {ACM} {SIGSOFT} International Symposium on Foundations of Software Engineering, pp. 1151--1153, 2016.
 
-%34
+%38
 \bibitem{Bessa17}
 Bessa, I., Ismail, H., Palhares, R., Cordeiro, L., Chaves Filho, J.:
 \newblock {\em Formal Non-Fragile Stability Verification of Digital Control Systems with Uncertainty}. 
 \newblock In: IEEE Transactions on Computers, 2017 (to appear).
 
-%35
+%39
 \bibitem{Behrend15}
 Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
 \newblock {\em Scalable and Optimized Hybrid Verification of Embedded Software}. 
 \newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
 
-%36
+%40
 \bibitem{Lettnin09}
 Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Sch{\"o}nknecht V., Reitemeyer S.:
 \newblock {\em Semiformal Verification of Temporal Properties in Automotive Hardware Dependent Software}. 
 \newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
 
-%37
+%41
 \bibitem{Beyer14}
 D.~Beyer 
 \newblock {Status report on software verification - (competition summary {SV-COMP})}. 
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
  
-%38
+%42
 \bibitem{BeyerSVCOMP15}
 D.~Beyer:
 \newblock {\em Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).} 
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
 
-%39
+%43
 \bibitem{Inverso14}
 Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
 \newblock {\em Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}
 \newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
 
-%40
+%44
 \bibitem{ECBS13}
 Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
 \newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
 \newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
 
-%41
+%45
 \bibitem{Pereira15}
 Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
 \newblock {\em Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking.} 
 \newblock In: ACM Symposium on Applied Computing, Software Verification and Testing Track, pp. 1648-1653, 2016. 
 
-%42
+%46
 \bibitem{Sousa15}
 Sousa F., Cordeiro L., Lima Filho E.: 
 \newblock {\em { Bounded Model Checking of C++ Programs Based on the Qt Framework.}} 
 \newblock In: Global Conference on Consumer Electronics, pp. 179--180, 2015.
 
-%43
+%47
 \bibitem{morse15}
 J.~Morse.
 \newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
 \newblock {University of Southampton, PhD Thesis}, 2015.
 
-%44
+%48
 \bibitem{civl15}
 Zheng M, Rogers M, Luo Z, Dwyer M, Siegel S.
 \newblock {\em{{CIVL}: Formal Verification of Parallel Programs}}.
 \newblock In: International Conference on Automated Software Engineering, pp. 830--835, 2015.
 
-%45
+%49
 \bibitem{Grumberg05}
 Grumberg O., Lerda F., Strichman O., Theobald M.:
 \newblock {\em { Proof-guided underapproximation-widening for multi-process systems.}} 
 \newblock In: Symposium on Principles of Programming Languages, pp. 122--131, 2005.
 
-%46
+%50
 \bibitem{McMillan11}
 K.~McMillan:
 \newblock {\em {Widening and Interpolation.}} 
 \newblock In: International Symposium on Static Analysis, LCNS 6887, pp. 1, 2011.
 
-%47
+%51
 \bibitem{esbmc_controller}
 Bessa I., Abreu R., Cordeiro L., Filho J.:
 \newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers}.}
 \newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
 
-%48
+%52
 \bibitem{esbmc_filter}
 Abreu R., Cordeiro L., Filho E.:
 \newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
 \newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
 \newblock http://dx.doi.org/10.14209/sbrt.2013.57
 
-%49
+%53
 \bibitem{JMorse15}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {Model Checking LTL Properties over ANSI-C Programs with Bounded Traces.}} 
 \newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
 
-%50
+%54
 \bibitem{Bessa16}
 Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
 \newblock {\em { Verification of Fixed-Point Digital Controllers Using Direct and Delta Forms Realizations.}} 
 \newblock In: Design Automation for Embedded Systems 20(2): pp. 95--126, 2016.
 
-%51
+%55
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em Handling unbounded loops with {ESBMC} 1.20.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
 
-%52
+%56
 \bibitem{MorseRCN014}
 Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {ESBMC} 1.22.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
 
-%53
+%57
 \bibitem{KahlonWG09}
 Kahlon V., Wang C., Gupta A.:
 \newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
 \newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
 
-%54
+%58
 \bibitem{Alves15}
 Alves E. , Cordeiro L., Lima Filho E.:
 \newblock {\em{ Fault Localization in Multi-Threaded C Programs using Bounded Model Checking}}. 
 \newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
 
-%55
+%59
 \bibitem{Garcia16}
 Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.: 
 \newblock {\em{ ESBMC$^{QtOM}$: A Bounded Model Checking Tool to Verify Qt Applications}}. 
 \newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
 
-%56
+%60
 \bibitem{BeyerW15}
 Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
 \newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
 
-%57
+%61
 \bibitem{RochaIFM12}
 Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 \newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
