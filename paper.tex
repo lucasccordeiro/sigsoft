@@ -217,25 +217,22 @@ Section~\ref{achievements} outlines contributions toward these research problems
 
 \textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro, Fischer, and Marques-Silva was further developed to verify correct lock acquisition ordering and the absence of deadlocks, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prune the state-space exploration~\cite{Inverso14,civl15}; however, the class of concurrent programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores~\cite{Grumberg05} with the goal to remove redundant behaviour or to analyze interpolants~\cite{McMillan11} to prove non-interference of context switches.
 
-\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated in the literature, which demonstrate its effectiveness in some real-life embedded-system applications~\cite{Gadelha15,Brain15,Rocha15,Donaldson10}; however, the main challenge still remains open, {\it i.e.}, to compute and strengthen loop invariants to prove program correctness and timeliness in a more efficient and effective way, in order to be competitive with other model-checking approaches. In particular, invariant-generation algorithms have substantially evolved over the last years, with the goal of discovering inductive invariants of programs~\cite{pips:2013,Henry:2012} or continuously refine them during verification~\cite{Beyer15}; however, there is still a lack of studies for exploiting the combination of different invariant-generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities) and how to strengthen them during verification, in order to ensure system robustness w.r.t. implementation aspects.
+\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated in the literature, which demonstrate its effectiveness in some real-life embedded-system applications~\cite{Gadelha15,Brain15,Rocha15,Donaldson10,Rocha17}; however, the main challenge still remains open, {\it i.e.}, to compute and strengthen loop invariants to prove program correctness and timeliness in a more efficient and effective way, in order to be competitive with other model-checking approaches. In particular, invariant-generation algorithms have substantially evolved over the last years, with the goal of discovering inductive invariants of programs~\cite{pips:2013,Henry:2012} or continuously refine them during verification~\cite{Beyer15}; however, there is still a lack of studies for exploiting the combination of different invariant-generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities) and how to strengthen them during verification, in order to ensure system robustness w.r.t. implementation aspects.
 
-\textbf{(RP4)} State-of-the-art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems. Indeed, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} were tackled, in order to specify system-level properties of those systems, using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; emphasis should be given to micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for embedded systems engineers~\cite{Alves15}.
+\textbf{(RP4)} State-of-the-art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems. Indeed, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} were tackled, in order to specify system-level properties of those systems, using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16,Chaves17}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; emphasis should be given to micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for embedded systems engineers~\cite{Alves15}.
 
 {\textbf{(RP5)} Although ESBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools. Indeed, it would be interesting if a new programming language model could be loaded, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa, Cordeiro, and Filho~\cite{Garcia16}, which employed operational models for checking Qt-based programs from consumer electronics. In summary, the BMC core (in that case, ESBMC) is not changed, but instead an operational model, which implements the behavior and features of Qt libraries, is used for providing the new code structure to be checked. Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in software verification.
 
-Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, and LLBMC~\cite{MerzFS12} represent the most prominent approaches for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15}, where verifiable (correctness and violation) witnesses are of extreme importance for evaluating software verifiers~\cite{BeyerW15,RochaIFM12}.
+{\textbf{(RP6)} State-of-the-art synthesis approaches for embedded (control) systems typically disregard the platform in which the embedded system software operates and restrict itself to generate code that do not take into account FWL effects. The synthesized system, however, must include the physical plant to avoid serious system's malfunctioning (or even a catastrophe) due to the embedded (control) software, {\it e.g.}, the Mars Polar Lander did not account for leg compressions prior to landing~\cite{Jackson16}. Research in this direction has made some progress to design, implement, and evaluate an automated approach for generating correct-by-construction digital controllers that is based on state-of-the-art inductive synthesis techniques~\cite{Abate17}. However, there is still little evidence whether that approach can scale for larger systems modeled by other types of representations ({\it e.g.}, state-space). Another research direction for synthesizers is to generate code for UAV trajectory and mission planning by taking into account system's dynamics and nonholonomic constraints~\cite{Araujo16}.
 
-%\textcolor{red}{to pensando se o Qt nao pode ser descrito como um esforco de prover verificadores para interfaces diferentes}
-
-%Finally, DSVerifier has already been used for verifying digital filters and controllers, which even include UAV applications. 
-
+Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, SMACK~\cite{Haran15}, and LLBMC~\cite{MerzFS12} represent the most prominent approaches for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15,Beyer16}, where verifiable (correctness and violation) witnesses are of extreme importance for evaluating software verifiers~\cite{BeyerW15,RochaIFM12}. The increasing number of verification tasks being added every year to the competition allows developers to further improve their verifiers by implementing new types of abstraction and simplification techniques. As a consequence, the continuous development and improvement of verifiers can leverage more efficient synthesizers and increase further the reliability of the verified (embedded) system.
 
 %--------------------------------------
 \section{Conclusions}
 \label{conclusions}
 %--------------------------------------
 
-This paper presented the main challenges related to the verification of design correctness, in embedded systems, and also raised some important side considerations. In particular, it emphasizes that stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency), along with system behavior models, must be considered during verification. Additionally, there is little evidence that model checking embedded software using \textit{k}-induction (and invariants), which
+This paper presented the main challenges related to the verification of design correctness, in embedded systems, and also raised some important side considerations about synthesis. In particular, it emphasizes that stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency), along with system behavior models, must be considered during verification and synthesis. Additionally, there is little evidence that model checking embedded software using \textit{k}-induction (and invariants), which
 extends BMC-based approaches from falsification to verification, can be applied to formally verify correctness and timeliness of embedded systems. 
 
 Given that software complexity has significantly increased in embedded products, there are still some (recent) advances to stress and exhaustively cover the system state space, in order to verify low-level properties that have to meet the application's deadline, access memory regions, handle concurrency, and control hardware registers. Besides, there is a trend towards incorporating knowledge about the system to be verified, which may take software verification one step further, where not only code correctness will be addressed, but also full system reliability. Finally, it seems interesting to provide behavioral models when new application interfaces or programming language features are used, in order to extend the capabilities of current verification tools, without changing the core BMC module.
@@ -584,44 +581,74 @@ Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
 \newblock In: Design Automation for Embedded Systems 20(2): pp. 95--126, 2016.
 
 %55
+\bibitem{Chaves17}
+Chaves L., Bessa I., Cordeiro L.:
+\newblock {\em { DSValidator: An Automated Counterexample Reproducibility Tool for Digital Systems}}. 
+\newblock In: CoRR abs/1610.07066, 2016.
+
+%56
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em Handling unbounded loops with {ESBMC} 1.20.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
 
-%56
+%57
 \bibitem{MorseRCN014}
 Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {ESBMC} 1.22.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
 
-%57
+%58
 \bibitem{KahlonWG09}
 Kahlon V., Wang C., Gupta A.:
 \newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
 \newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
 
-%58
+%59
 \bibitem{Alves15}
 Alves E. , Cordeiro L., Lima Filho E.:
 \newblock {\em{ Fault Localization in Multi-Threaded C Programs using Bounded Model Checking}}. 
 \newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
 
-%59
+%60
 \bibitem{Garcia16}
 Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.: 
 \newblock {\em{ ESBMC$^{QtOM}$: A Bounded Model Checking Tool to Verify Qt Applications}}. 
 \newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
 
-%60
+%61
+\bibitem{Jackson16}
+Jackson D., Vaziri M.:
+\newblock {\em{ Correct or usable? the limits of traditional verification (impact paper award)}}. 
+\newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 11, 2016.
+
+%62
+\bibitem{Araujo16}
+Araujo, R., Bessa, I., Cordeiro, L., Chaves Filho, J.:
+\newblock {\em{ SMT-based Verification Applied to Non-convex Optimization Problems}}. 
+\newblock In: VI Brazilian Symposium on Computing Systems Engineering, 2016 (to appear).
+
+%63
+\bibitem{Haran15}
+Haran A., Carter M., Emmi M., Lal A., Qadeer S., Rakamaric Z.:
+\newblock {\em{ SMACK+Corral: A Modular Verifier - (Competition Contribution)}}. 
+\newblock In: 21st International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 451--454, 2015.
+
+%64
+\bibitem{Beyer16}
+Beyer, D.:
+\newblock {\em{ Reliable and Reproducible Competition Results with BenchExec and Witnesses (Report on SV-COMP 2016)}}. 
+\newblock In: 22nd International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9636, pp. 887--904, 2016.
+
+%65
 \bibitem{BeyerW15}
 Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
 \newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
 
-%61
+%66
 \bibitem{RochaIFM12}
 Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 \newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
