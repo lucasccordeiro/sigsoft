@@ -105,6 +105,17 @@ A number of distinctive characteristics might influence the embedded system deve
 We cover preliminaries on bounded model checking, \textit{k}-induction verification based on invariant inference, and counter-example guided inductive synthesis, in Section~\ref{Preliminaries}. In Section~\ref{Verification-Challenges}, we describe the main challenges regarding the verification and synthesis of embedded systems, while Section~\ref{Research-Problem} tackles those challenges that are (partially) open in current published research. Section \ref{Newapp} then tackles new applications, which take into account the new paradigm addressed here, and Section~\ref{achievements} describes current achievements and future trends in verification and synthesis of embedded systems. Finally, we conclude and describe future work in Section~\ref{conclusions}.
 
 %--------------------------------------
+\section{A model for Cyber-physical systems}
+\label{sec:model}
+%--------------------------------------
+
+Models are very important for sciences and engineering that employs it to analyze, predict and design the behavior of modeled systems. Specially, deterministic and stochastic model are the basis of the major part of engineering advances for the last centuries. However, these models are not enough to represent CPS because the convergence between software, communications and hardware present a lot of events that could not be deterministically or stochastically modeled, and are better represented by nondeterministic models~\cite{leeCPS15}.
+
+The early representation of hybrid systems, {\it i.e.} systems that mixes continuous and discrete dynamics, consists in representing the discrete components and discretized continuous dynamics using discrete models, considering the non-modeled effects as uncertainties or perturbations exogenous to the models. This approach is not suitable for complex CPS that presents a lot of nondeterminism.
+
+CPS have been modeled through different structures that present different degrees of nondeterminism and proportion between continuous and discrete dynamics, e.g., timed automata (\textcolor{red}{CITAR}) and hybrid automata (\textcolor{red}{CITAR}). Rungger and Tabuada (\textcolor{red}{CITAR TAC 2016}) proposed a general and wide model for CPS. Following this proposal, a CPS $S$ is a tuple $S=(X,X_{0},U,r)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, and $r$ is a transition function, such that $r:X\times U \rightarrow X$.
+
+%--------------------------------------
 \section{Bounded Model Checking (BMC)}
 \label{Preliminaries}
 %--------------------------------------
