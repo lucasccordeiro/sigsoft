@@ -226,27 +226,25 @@ Those eight challenges place additional difficulties for developing reliable syn
 \label{Research-Problem}
 %--------------------------------------
 
-This position paper tackles six major problems in computer-aided verification and synthesis for embedded systems, which are (partially) open in current published research.
+This position paper tackles seven major problems in computer-aided verification and synthesis for embedded systems, which are (partially) open in current published research.
 
-\textbf{(RP1)} provide suitable encoding into SMT \cite{BarrettSST09}, which may extend the background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic embedded programs.
+\textbf{(RP1)} provision of suitable encoding into SMT \cite{BarrettSST09}, which may extend the background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic embedded programs.
 
-\textbf{(RP2)} exploit SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving.
+\textbf{(RP2)} exploitation of SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving.
 	
-\textbf{(RP3)} prove correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware.
+\textbf{(RP3)} proof of correctness and timeliness of embedded systems, by taking into account stringent constraints imposed by hardware.
 	
-\textbf{(RP4)} incorporate knowledge about system purpose and associated features, which aims to detect system-level and behavior failures.
+\textbf{(RP4)} incorporation of knowledge about system purpose and associated features, which aims to detect system-level and behavior failures.
 
-\textbf{(RP5)} provide tools and approaches capable of addressing different programming languages and application interfaces, with the goal of reducing the time needed to adapt current verification techniques to new developments and technologies.
+\textbf{(RP5)} provision of tools and approaches capable of addressing different programming languages and application interfaces, with the goal of reducing the time needed to adapt current verification techniques to new developments and technologies.
 
-\textbf{(RP6)} develop automated synthesis approaches that are algorithmically and numerically sound, in order to handle (control) software that is tightly coupled with the physical environment by considering uncertain models and FWL effects.
+\textbf{(RP6)} development of automated synthesis approaches that are algorithmically and numerically sound, in order to handle (control) software that is tightly coupled with the physical environment by considering uncertain models and FWL effects.
 
-\textbf{(RP7)} provide a unified framework, which is able to tackle high and low level properties, as well as system behavior, which can lead to another degree of completeness, in such a way that every implementation aspect of an embedded system is addressed and evaluated.
+\textbf{(RP7)} provision of a unified framework, which is able to tackle high and low level properties, as well as system behavior, with the potential to lead to another degree of completeness, in such a way that every implementation aspect of an embedded system is addressed and evaluated.
 
 
 Section~\ref{achievements} outlines contributions toward these research problems.
 
-\section{New Applications: Beyond Code Correctness}
-\label{Newapp}
 
 
 %--------------------------------------
@@ -267,6 +265,10 @@ Section~\ref{achievements} outlines contributions toward these research problems
 {\textbf{(RP6)} State-of-the-art synthesis approaches for embedded (control) systems typically disregard the platform in which the embedded system software operates and restrict itself to generate code that do not take into account FWL effects. The synthesized system, however, must include the physical plant to avoid serious system's malfunctioning (or even a catastrophe) due to the embedded (control) software, {\it e.g.}, the Mars Polar Lander did not account for leg compressions prior to landing~\cite{Jackson16}. Research in this direction has made some progress to design, implement, and evaluate an automated approach for generating correct-by-construction digital controllers that is based on state-of-the-art inductive synthesis techniques~\cite{Abate17}. However, there is still little evidence whether that approach can scale for larger systems modeled by other types of representations ({\it e.g.}, state-space). In addition to that, another research direction for synthesizers is to generate code for UAV trajectory and mission planning by taking into account system's dynamics and nonholonomic constraints~\cite{Araujo16}. As a consequence, verifiers and synthesizers need to handle a wide range of functions, including non-linear and non-convex optimization problems based on both fixed- and floating-point arithmetic.
 
 Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, SMACK~\cite{Haran15}, and LLBMC~\cite{MerzFS12} represent the most prominent approaches for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15,Beyer16}, where verifiable (correctness and violation) witnesses are of extreme importance for evaluating software verifiers~\cite{BeyerW15,RochaIFM12}. The increasing number of verification tasks being added every year to the competition allows developers to further improve their verifiers by implementing new types of abstraction and simplification techniques. As a consequence, the continuous development and improvement of verifiers can leverage more efficient synthesizers and increase further the reliability of the verified (embedded) system.
+
+\section{New Applications: Beyond Code Correctness}
+\label{Newapp}
+
 
 %--------------------------------------
 \section{Conclusions}
