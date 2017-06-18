@@ -277,6 +277,10 @@ Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseC
 \section{New Applications: Beyond Code Correctness}
 \label{Newapp}
 
+As already mentioned in section \ref{sec:model}, problems that are not directly related to code correctness may be tackled with formal methods, as long as the are conveniently modeled. Ara\'ujo {\it et. al} \cite{Araujo16} employed SMT for handling non-convex optimization problems, with the goal of ensuring optimal solutions. Indeed, it is possible to recursively re-constrains a model checking procedure, by using the current counterexample as a seed for the next run, until a global minimum is achieved. Nonetheless, the elapsed execution time is still a bottleneck for some applications, such as changes in UAV trajectory.
+
+In the same fashion, other problems may benefit from the recursive-refinement approach provided by SMT-based verification schemes. For instance, de Jesus {\it et. al} \cite{antennasbrt} developed a simplified methodology for antenna alignment that makes use of many modules already available in satellite TV receivers, along with a suitable structure for performing position correction. In summary, a reference signal is evaluated, until an (approximately) error-free reception is acquired, which can be measured through a simple transport stream (TS) error-indication interface and further refined with other parameters, such as carrier-to-noise ratio and signal level. This way, by using an SMT-based verification method, one may map the TS error indication and other performance figures as properties and then recursively perform realignments procedures, until a counterexample is not output. It is worth noticing that the timing requirements are more relaxed than what was mentioned in the work developed by Ara\'ujo {\it et. al} \cite{Araujo16}, which can be seen as an advantage for such an implementation.
+
 
 %--------------------------------------
 \section{Conclusions}
@@ -728,7 +732,7 @@ Chaves L., Bessa I., Cordeiro L.:
 
 %60
 \bibitem{sbrtdaniel}
-de Mello D. P. M., de Freitas M.L., Cordeiro L., da Silva J\'unior W. S., de Bessa I. V., de Lima Filho E. B, Clavier L.:
+de Mello D. P. M., de Freitas M. L., Cordeiro L., da Silva J\'unior W. S., de Bessa I. V., de Lima Filho E. B, Clavier L.:
 \newblock {\em{Verification of Magnitude and Phase Responses in Fixed-Point Digital Filters}}. 
 \newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017.
 
@@ -793,6 +797,12 @@ Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
 Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 \newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
 \newblock In: International Conference on Integrated Formal Methods, LNCS 7321, pp. 128-142, 2012.
+
+\bibitem{antennasbrt}
+de Jesus A. S., rodrigues R. N., Ferreira A. N. G., Valente V. H., de Melo W. C., de Lima Filho E. B, da Silva J\'unior W. S.:
+\newblock {\em{Automatic Antenna Alignment System for Satellite Receivers Operating in C and Ku Bands}}. 
+\newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017. (in Portuguese)
+
 
 \end{thebibliography}
 
