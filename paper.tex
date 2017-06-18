@@ -258,19 +258,19 @@ Section~\ref{achievements} outlines contributions toward these research problems
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro, Fischer, and Marques-Silva proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. This approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing ones are still limited to specific classes of programs, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers to propose background theories and develop more efficient decision procedures, in order to handle specific classes of programs.
+\textbf{(RP1)} Cordeiro, Fischer, and Marques-Silva proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{cudalucas,Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. This approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing ones are still limited to specific classes of programs, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers, propose background theories, and develop more efficient decision procedures, in order to handle specific classes of programs.
 
-\textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro, Fischer, and Marques-Silva was further developed to verify correct lock acquisition ordering and the absence of deadlocks, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prune the state-space exploration~\cite{Inverso14,civl15}; however, the class of concurrent programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores~\cite{Grumberg05} with the goal to remove redundant behaviour or to analyze interpolants~\cite{McMillan11} to prove non-interference of context switches.
+\textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro, Fischer, and Marques-Silva was further developed to verify correct lock acquisition ordering and the absence of deadlocks, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune the state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prune the state-space exploration~\cite{Inverso14,civl15}; however, the classes of concurrent programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores~\cite{Grumberg05}, with the goal to remove redundant behaviour or analyze interpolants~\cite{McMillan11} to prove non-interference of context switches.
 
-\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated in the literature, which demonstrate its effectiveness in some real-life embedded-system applications~\cite{Gadelha15,Brain15,Rocha15,Donaldson10,Rocha17}; however, the main challenge still remains open, {\it i.e.}, to compute and strengthen loop invariants to prove program correctness and timeliness in a more efficient and effective way, in order to be competitive with other model-checking approaches. In particular, invariant-generation algorithms have substantially evolved over the last years, with the goal of discovering inductive invariants of programs~\cite{pips:2013,Henry:2012} or continuously refine them during verification~\cite{Beyer15}; however, there is still a lack of studies for exploiting the combination of different invariant-generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities) and how to strengthen them during verification, in order to ensure system robustness w.r.t. implementation aspects.
+\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated in the literature, which demonstrate its effectiveness in some real-life embedded-system applications~\cite{Gadelha15,Brain15,Rocha15,Donaldson10,Rocha17}; however, the main challenge remains still open, {\it i.e.}, to compute and strengthen loop invariants to prove program correctness and timeliness in a more efficient and effective way, in order to be competitive with other model-checking approaches. In particular, invariant-generation algorithms have substantially evolved over the last years, with the goal of discovering inductive invariants of programs~\cite{pips:2013,Henry:2012} or continuously refine them during verification~\cite{Beyer15}; however, there is still a lack of studies for exploiting the combination of different invariant-generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities) and how to strengthen them during verification, in order to ensure system robustness w.r.t. implementation aspects. Finally, optimal configurations for invariant generators are still of paramount importance, given that applications with code based on different aspects may benefit from different setups.
 
-\textbf{(RP4)} State-of-the-art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems. Indeed, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} were tackled, in order to specify system-level properties of those systems, using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal to verify its attitude controllers~\cite{Bessa16,Chaves17}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; emphasis should be given to micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for embedded systems engineers~\cite{Alves15}.
+\textbf{(RP4)} State-of-the-art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems. Indeed, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} were tackled, in order to specify system-level properties of those systems, using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal of verifying its attitude controllers~\cite{Bessa16,Chaves17}. More recently, other implementation aspects were added to the existing verification framework, including magnitude, phase, poles, and zeros, which provide a deeper analysis regarding digital systems, by tackling frequency-domain parameters, permissible deviation, and associated natural response \cite{sbrtdaniel}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; emphasis should be given to micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for embedded systems engineers~\cite{Alves15}.
 
-{\textbf{(RP5)} Although ESBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools. Indeed, it would be interesting if a new programming language model could be loaded, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa, Cordeiro, and Filho~\cite{Garcia16}, which employed operational models for checking Qt-based programs from consumer electronics. In summary, the BMC core (in that case, ESBMC) is not changed, but instead an operational model, which implements the behavior and features of Qt libraries, is used for providing the new code structure to be checked. Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in software verification.
+{\textbf{(RP5)} Although ESBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools. Indeed, it would be interesting if a new programming language model could be loaded, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa, Cordeiro, and Filho~\cite{Garcia16}, which employed operational models for checking Qt-based programs from consumer electronics. In summary, the BMC core (in that case, ESBMC) is not changed, but instead an operational model, which implements the behavior and features of Qt libraries, is used for providing the new code structure to be checked. \textcolor{red}{nao deveriamos falar que no pior caso poderiamos traduzir para c? aqui nao deveriamos mencionar o trabalho do januario?} Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in software verification.
 
-{\textbf{(RP6)} State-of-the-art synthesis approaches for embedded (control) systems typically disregard the platform in which the embedded system software operates and restrict itself to generate code that do not take into account FWL effects. The synthesized system, however, must include the physical plant to avoid serious system's malfunctioning (or even a catastrophe) due to the embedded (control) software, {\it e.g.}, the Mars Polar Lander did not account for leg compressions prior to landing~\cite{Jackson16}. Research in this direction has made some progress to design, implement, and evaluate an automated approach for generating correct-by-construction digital controllers that is based on state-of-the-art inductive synthesis techniques~\cite{Abate17}. However, there is still little evidence whether that approach can scale for larger systems modeled by other types of representations ({\it e.g.}, state-space). In addition to that, another research direction for synthesizers is to generate code for UAV trajectory and mission planning by taking into account system's dynamics and nonholonomic constraints~\cite{Araujo16}. As a consequence, verifiers and synthesizers need to handle a wide range of functions, including non-linear and non-convex optimization problems based on both fixed- and floating-point arithmetic.
+{\textbf{(RP6)} State-of-the-art synthesis approaches for embedded (control) systems typically disregard the platform in which the embedded system software operates and restrict themselves to generate code that do not take into account FWL effects. The synthesized system, however, must include the physical plant to avoid serious system's malfunctioning (or even a catastrophe), due to the embedded (control) software, {\it e.g.}, the Mars Polar Lander did not account for leg compressions prior to landing~\cite{Jackson16}. Research in this direction has made some progress to design, implement, and evaluate an automated approach for generating correct-by-construction digital controllers that is based on state-of-the-art inductive synthesis techniques~\cite{Abate17}. Nonetheless, there is still little evidence whether that approach can scale for larger systems modeled by other types of representations ({\it e.g.}, state-space). In addition to that, another research direction for synthesizers is to generate code for UAV trajectory and mission planning by taking into account system's dynamics and nonholonomic constraints~\cite{Araujo16}. As a consequence, verifiers and synthesizers need to handle a wide range of functions, including non-linear and non-convex optimization problems based on both fixed- and floating-point arithmetic.
 
-\textcolor{red}{We still have to mention RP7...}
+\textcolor{red}{We still have to mention RP7...} \textcolor{green}{I leave that to you...}
 
 Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, SMACK~\cite{Haran15}, and LLBMC~\cite{MerzFS12} represent the most prominent approaches for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15,Beyer16}, where verifiable (correctness and violation) witnesses are of extreme importance for evaluating software verifiers~\cite{BeyerW15,RochaIFM12}. The increasing number of verification tasks being added every year to the competition allows developers to further improve their verifiers by implementing new types of abstraction and simplification techniques. As a consequence, the continuous development and improvement of verifiers can leverage more efficient synthesizers and increase further the reliability of the verified (embedded) system.
 
@@ -620,29 +620,13 @@ Vilca J., Adouane L., Mezouar Y.:
 \newblock {\em {Optimal Multi-Criteria Waypoint Selection for Autonomous Vehicle Navigation in Structured Environment}}. 
 \newblock In: Journal of Intelligent and Robotic Systems 82(2): pp. 301--324, 2016.
 
-%42
-\bibitem{Beyer14}
-D.~Beyer 
-\newblock {\em {Status report on software verification - (competition summary {SV-COMP})}}. 
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
- 
-%43
-\bibitem{BeyerSVCOMP15}
-D.~Beyer:
-\newblock {\em {Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).}} 
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
-
-%44
-\bibitem{Inverso14}
-Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
-\newblock {\em {Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}}
-\newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
 
 %45
 \bibitem{ECBS13}
 Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
 \newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
 \newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
+
 
 %46
 \bibitem{Pereira15}
@@ -656,11 +640,42 @@ Sousa F., Cordeiro L., Lima Filho E.:
 \newblock {\em { Bounded Model Checking of C++ Programs Based on the Qt Framework.}} 
 \newblock In: Global Conference on Consumer Electronics, pp. 179--180, 2015.
 
+%42
+\bibitem{Beyer14}
+D.~Beyer 
+\newblock {\em {Status report on software verification - (competition summary {SV-COMP})}}. 
+\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
+ 
+%43
+\bibitem{BeyerSVCOMP15}
+D.~Beyer:
+\newblock {\em {Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).}} 
+\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
+
+%59
+\bibitem{KahlonWG09}
+Kahlon V., Wang C., Gupta A.:
+\newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
+\newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
+
+
+
+
+
 %48
 \bibitem{morse15}
 J.~Morse.
 \newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
 \newblock {University of Southampton, PhD Thesis}, 2015.
+
+%44
+\bibitem{Inverso14}
+Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
+\newblock {\em {Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}}
+\newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
+
+
+
 
 %49
 \bibitem{civl15}
@@ -711,25 +726,12 @@ Chaves L., Bessa I., Cordeiro L.:
 \newblock {\em { DSValidator: An Automated Counterexample Reproducibility Tool for Digital Systems}}. 
 \newblock In: CoRR abs/1610.07066, 2016.
 
-%57
-\bibitem{MorseCNF13}
-Morse J., Cordeiro L., Nicole D., Fischer B.:
-\newblock {\em {Handling unbounded loops with {ESBMC} 1.20}}.
-\newblock In: Tools and Algorithms for the Construction and Analysis of
-  Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
+%60
+\bibitem{sbrtdaniel}
+de Mello D. P. M., de Freitas M.L., Cordeiro L., da Silva J\'unior W. S., de Bessa I. V., de Lima Filho E. B, Clavier L.:
+\newblock {\em{Verification of Magnitude and Phase Responses in Fixed-Point Digital Filters}}. 
+\newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017.
 
-%58
-\bibitem{MorseRCN014}
-Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
-\newblock {\em {ESBMC} 1.22.}
-\newblock In: Tools and Algorithms for the Construction and Analysis of
-  Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
-
-%59
-\bibitem{KahlonWG09}
-Kahlon V., Wang C., Gupta A.:
-\newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
-\newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
 
 %60
 \bibitem{Alves15}
@@ -751,11 +753,28 @@ Jackson D., Vaziri M.:
 
 %63
 
+
+%57
+\bibitem{MorseCNF13}
+Morse J., Cordeiro L., Nicole D., Fischer B.:
+\newblock {\em {Handling unbounded loops with {ESBMC} 1.20}}.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
+
+%58
+\bibitem{MorseRCN014}
+Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
+\newblock {\em {ESBMC} 1.22.}
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
+
 %64
 \bibitem{Haran15}
 Haran A., Carter M., Emmi M., Lal A., Qadeer S., Rakamaric Z.:
 \newblock {\em{ SMACK+Corral: A Modular Verifier - (Competition Contribution)}}. 
 \newblock In: 21st International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 451--454, 2015.
+
+
 
 %65
 \bibitem{Beyer16}
