@@ -73,7 +73,7 @@ iury.bessa@ufam.edu.br}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The dependency on the correct operation of embedded systems is rapidly growing, mainly due to their wide range of applications, such as micro-grids, automotive device control, health care, surveillance, mobile devices, telecommunications, and consumer electronics. Their structures are becoming more and more complex and now require multi-core processors with scalable shared memory and sophisticated software modules, in order to meet increasing computational power, flexibility demands, and adaptation to new scenarios and behaviors. As a consequence, reliability of embedded (distributed) software becomes a key issue during system development, which must be carefully addressed and assured. Normally, state-of-the-art verification methodologies for embedded systems generate test vectors (with constraints) and use assertion-based verification and high-level processor models, during simulation. Nonetheless, other additional challenges have been raised: the need for meeting time and energy constraints, handling concurrent software, dealing with platform restrictions, evaluating implementation-structure choices, validating operation logic, ensuring correct behavior, providing compliance with the target system, recognize the incorporation of knowledge about new problems and conditions, and supporting new software architectures and legacy designs (usually written in low-level languages). The present research discusses challenges, problems, and recent advances to ensure correctness and timeliness regarding embedded systems. Reliability issues, in the development of micro-grids and cyber-physical systems, are then considered, as a prominent verification and synthesis application for achieving a \textit{correct-by-construction} design.
+The dependency on the correct operation of embedded systems is rapidly growing, mainly due to their wide range of applications, such as micro-grids, automotive device control, health care, surveillance, mobile devices, telecommunications, internet of things and consumer electronics. Their structures are becoming more and more complex and now require multi-core processors with scalable shared memory, signal-processing pipelines and sophisticated software modules, in order to meet increasing computational power, flexibility demands, and adaptation to new scenarios and behaviors. As a consequence, reliability of embedded (distributed) software becomes a key issue during system development, which must be carefully addressed and assured. Normally, state-of-the-art verification methodologies for embedded systems generate test vectors (with constraints) and use assertion-based verification and high-level processor models, during simulation. Nonetheless, other additional challenges have been raised: the need for meeting time and energy constraints, handling concurrent software, dealing with platform restrictions, evaluating implementation-structure choices, validating operation logic, ensuring correct behavior, providing compliance with the target system, incorporating knowledge about new problems and conditions, and supporting new software architectures and legacy designs (usually written in low-level languages). The present research discusses challenges, problems, and recent advances to ensure correctness and timeliness regarding embedded systems. Reliability issues, in the development of micro-grids and cyber-physical systems, are then considered, as a prominent verification and synthesis application for achieving a \textit{correct-by-construction} design.
 \end{abstract}
 
 %\IEEEpeerreviewmaketitle
@@ -83,52 +83,54 @@ The dependency on the correct operation of embedded systems is rapidly growing, 
 \section{Introduction}
 %--------------------------------------
 
-Generally, embedded computer systems perform dedicated functions with a high degree of reliability, according to their original design and requirements ({\it e.g.}, real time). They are ubiquitous in modern day information systems and are also becoming increasingly important in our society, due to their use to process, monitor, and control every human activity: factories, power plants, mobile devices, robotics, traffic control, vehicles, and home appliances. Besides, they are also used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers~\cite{Kopetz11}. 
+Generally, embedded computer systems perform dedicated functions with a high degree of reliability, according to their original design and requirements ({\it e.g.}, real time). They are ubiquitous in modern day information systems and are also becoming increasingly important in our society, due to their use to process, monitor, control, and even replace every human activity: factories, power plants, mobile devices, robotics, traffic control, vehicles, and home appliances. Besides, they are also used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers~\cite{Kopetz11}. 
 
-The interaction between embedded software and physical processes created a different class of systems, which are complex, highly integrated, and present a mixture of continuous and discrete dynamics, {\it i.e.}, \textit{hybrid systems}. Indeed, the embedded-system domain allied to the most recent communication revolution caused an intense integration between different and spread physical processes (that are usually embedded systems), which are called cyber-physical systems (CPSs). 
+The interaction between embedded software and physical processes created a different class of systems, which are complex, highly integrated, and present a mixture of continuous and discrete dynamics, named as \textit{hybrid systems}. Indeed, the embedded-system domain allied to the most recent communication revolution caused an intense integration between different and spread physical processes (that are usually embedded systems), which are called cyber-physical systems (CPSs). 
 
-The main difference between embedded systems and CPSs is indeed the strong presence of modern communication technologies ({\it e.g.}, Internet of Things - IoT) in the latter. This simple difference causes a revolution in terms of flexibility, scalability, and complexity of those systems and adds a novel class of problems to the challenges found in the embedded systems domain. For example, micro-grids, {\it i.e.}, small-scale electricity systems that gather different sources of distributed generation (DG) and loads, are emerging CPSs, where reliability and carbon emission reduction are of paramount importance~\cite{xu15}. One may also notice that each DG element and the majority of current loads already employ embedded software and present several safety-critical requirements; however, the integration of both constitute a CPS, where additional challenges related to synchronization, stability, control, communication, and reliability of the entire micro-grid arise.
+The main difference between embedded systems and CPSs is indeed the strong presence of modern communication technologies ({\it e.g.}, internet of things - IoT) in the latter. This simple difference causes a revolution in terms of flexibility, scalability, and complexity of those systems and adds a novel class of problems to the challenges found in the embedded systems domain. For example, micro-grids, {\it i.e.}, small-scale electricity systems that gather different sources of distributed generation (DG) and loads, are emerging CPSs, where reliability and carbon emission reduction are of paramount importance~\cite{xu15}. One may also notice that each DG element and the majority of current loads already employ embedded software and present several safety-critical requirements; however, the integration of both constitute a CPS, where additional challenges related to synchronization, stability, control, communication, and reliability of the entire micro-grid arise.
 
 Thus, CPSs demand short development cycles and high level of reliability and robustness~\cite{leeCPS,leeCPS2}, besides presenting challenges that include but are not limited to the ones already imposed by embedded systems. As a consequence of their popularization, human life has also become more and more dependent on services provided by this type of system and, in particular, their success is strictly related to both service relevance and quality/reliability. 
 
-Figure~\ref{intelligent-product} shows some examples of embedded systems, which typically consist of a human-machine interface ({\it e.g.}, keyboard and LCD), a processing unit ({\it e.g.}, real-time computer system), and an instrumentation interface ({\it e.g.}, sensor, network, and actuator) \cite{Kopetz11}. Indeed, many current embedded systems, such as unmanned aerial vehicles (UAVs)~\cite{groza2015formal} and medical monitoring systems~\cite{Cordeiro09}, become interesting solutions only if they can reliably perform their target tasks. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may cost civilian lives, which is unacceptable. In addition, wrong disease diagnosis or condition-evaluation reports have the potential to compromise patients' health and even many aspects of their lives, with serious consequences. On the one hand, portable embedded systems are capable of monitoring and identifying conditions that are very difficult for a physician, mainly when his contact with patients happens only in medical clinics. On the other hand, wrong or incomplete diagnostic data may delay necessary treatments or deteriorate patients' health. 
+Figure~\ref{intelligent-product} shows some examples of embedded systems, which typically consist of a human-machine interface ({\it e.g.}, keyboard and display), a processing unit ({\it e.g.}, real-time computer system), and an instrumentation interface ({\it e.g.}, sensor, network, and actuator) \cite{Kopetz11}. Indeed, many current embedded systems, such as unmanned aerial vehicles (UAVs)~\cite{groza2015formal} and medical monitoring systems~\cite{Cordeiro09}, become interesting solutions only if they can reliably perform their target tasks. For instance, UAVs are a trend on military missions, due to the absence of pilots; however, an incorrect plan execution may cost civilian lives, which is unacceptable. In addition, wrong disease diagnosis or condition-evaluation reports have the potential to compromise patients' health and even many aspects of their lives, with serious consequences. On the one hand, portable embedded systems are capable of monitoring and identifying conditions that are very difficult for a physician, mainly when his contact with patients happens only in medical clinics. On the other hand, wrong or incomplete diagnostic data may delay necessary treatments or deteriorate patients' health. 
 %
 \begin{figure}[!t]
 	\centering
 	\includegraphics[scale=0.35]{figure1.eps}
-	\caption{An embedded system is part of a well-specified larger system (intelligent product).}
+	\caption{An embedded system is part of a well-specified larger one (intelligent product).}
 	\label{intelligent-product}
 \end{figure}
 
 Besides, when physical interaction with the real world is needed, which happens in CPSs, additional care must be taken, mainly when human action is directly replaced, as in vehicle driving. Regarding the latter, even human-in-the-loop feedback control can be employed \cite{munir}, which then raises deeper concerns related to the reliability of human behavior modeling and system implementation. Consequently, it is important to go beyond design correctness and also address behavior correctness, which may be performed by incorporating system models. Specifically, such models can be used to synthesize a given particular system, by ensuring that all needed functions are correctly implemented and the correct behavior is exhibited, {i.e.}, the system is indeed correct by its method of construction~\cite{Abate17}.
 
-For instance, one may argue that a Linux device driver \cite{ldd} was verified and correctly uses the related kernel services; however, not much can be said about correct access to the associated hardware and its use, {\it i.e.}, if \textit{read} and \textit{write} operations are performed according to what is specified in the device's datasheet and setup periods are respected. In summary, the main goal would be to ensure that the developed driver is compliant with the underlying hardware, which goes further than code correctness and also tackles the interaction with surrounding entities.
+For instance, one may argue that a Linux device driver \cite{ldd} was verified and correctly uses the related kernel services; however, not much can be said about correct access to the associated hardware and its use, {\it i.e.}, if \textit{read} and \textit{write} operations are performed according to what is specified in the device's datasheet and setup periods are respected, for instance. In summary, the main goal would be to ensure that the developed driver is compliant with the underlying hardware, which goes further than code correctness and also tackles the interaction with surrounding entities.
 
-Regarding behavior correctness, one important observation is that it is becoming more difficult, since fixed mathematical models are being replaced by machine learning approaches (ML) \cite{mlembe}, where future operation may be change based on data acquired during previous actions, due to model updating. As a consequence, system correctness verification procedures should also adapt somehow and incorporate new checks.
+Regarding behavior correctness, one important observation is that it is becoming more difficult, since fixed mathematical models are being replaced by machine learning approaches (ML) \cite{mlembe}, where future operation may be change based on data acquired during previous actions, due to model updating. As a consequence, system correctness verification procedures should also adapt somehow and incorporate new checks, which may also rely on ML, when analyzing target models or fed with acquired data.
 
-A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost, which are common to the area of computer processors, are enabling system designers to move more features to software domain, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, interfacing, and concurrency) must be considered during verification~\cite{Kroening15}. Such observations expand the addressed issues and even complement what was mentioned in the previous paragraphs.
+A number of distinctive characteristics might influence the embedded system development and verification process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, the increasing computational power and decreasing size and cost, which are common to the area of computer processors, are enabling system designers to move more features to software domain, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, interfacing, and concurrency)~\cite{Kroening15} or even new structures provided with the goal of ensuring more computational capacity~\cite{cudalucas} must be considered during verification. Such observations expand the addressed issues and even complement what was mentioned in the previous paragraphs.
 
-The goals of the present article is to briefly present part of the established research and also clarify the current trends, which are mainly driven by CPSs, IoT, and ML. We present a brief discussion about models for CPS, in Section \ref{sec:model}, and then cover preliminaries on bounded model checking, \textit{k}-induction verification based on invariant inference, and counter-example guided inductive synthesis, in Section~\ref{Preliminaries}. In Section~\ref{Verification-Challenges}, the main challenges regarding the verification and synthesis of embedded systems are described, while Section~\ref{Research-Problem} tackles those challenges that are (partially) open in current published research. Section \ref{Newapp} then addresses new applications, which take into account the new trends mentioned here, and Section~\ref{achievements} describes current achievements and future trends in verification and synthesis of embedded systems. Finally, we conclude and describe future work in Section~\ref{conclusions}.
+The goals of the present article is to briefly present part of the established research and also clarify current trends, which are mainly driven by CPSs, IoT, and ML. We present a brief discussion about models for CPS, in Section \ref{sec:model}, and then cover preliminaries on bounded model checking, \textit{k}-induction verification based on invariant inference, counter-example guided inductive synthesis, and system model incorporation, in Section~\ref{Preliminaries}. In Section~\ref{Verification-Challenges}, the main challenges regarding the verification and synthesis of embedded systems are described, while Section~\ref{Research-Problem} tackles those challenges that are (partially) open in current published research. Section \ref{Newapp} then addresses new applications, which take into account the new trends mentioned here, and Section~\ref{achievements} describes current achievements and future trends in verification and synthesis of embedded systems. Finally, we conclude and describe future work in Section~\ref{conclusions}.
 
 %--------------------------------------
 \section{A model for Cyber-physical systems}
 \label{sec:model}
 %--------------------------------------
 
-Models are largely employed in the science and engineering areas, in order to analyze, predict, and modify the behavior of real-world systems. Specially, deterministic and stochastic models are the basis of many engineering advances, in the last centuries. The former is uniquely determined by parameter values and previous states, while the latter presents inherent randomness, which is described by probability distributions. Nonetheless, one can argue that such models are not enough to represent CPS since the interaction among software, communications, and hardware presents a lot of events that could not be deterministically or stochastically modeled and may be better represented by nondeterministic approaches~\cite{leeCPS2}. Indeed, that is even more evident when unknown properties are addressed, such as human behavior.
+Models are largely employed in the science and engineering areas, in order to analyze, predict, and modify the behavior of real-world systems. Specially, deterministic and stochastic models are the basis of many engineering advances, in the last centuries. The former is uniquely determined by parameter values and previous states, while the latter presents inherent randomness, which is described by probability distributions \cite{stochmodel}. Nonetheless, one can argue that such models are not enough to represent, CPSs since the interaction among software, communications, and hardware presents a lot of events that could not be deterministically or stochastically modeled and may be better represented by nondeterministic approaches~\cite{leeCPS2}. Indeed, that is even more evident when unknown properties are addressed, such as human behavior.
 
-On the one hand, the early representation of hybrid systems, {\it i.e.}, systems that mix continuous and discrete dynamics, consisted in representing discrete components and discretized continuous dynamics by using discrete models and considering non-modeled effects as uncertainties or perturbations exogenous to them, which may even be negligible. On the other hand, that approach is not suitable for complex CPS that present intense nondeterminism, given that uncertainties play a central role.
+On the one hand, early representations of hybrid systems, {\it i.e.}, systems that mix continuous and discrete dynamics, consisted in instantiating discrete components and discretized continuous dynamics by using discrete models and considering non-modeled effects as uncertainties or perturbations exogenous to them, which may even be negligible. On the other hand, that approach is not suitable for complex CPSs that present intense nondeterminism, where uncertainties play a central role and may in validate the entire system behavior.
 
 CPSs have been modeled through different structures that present different degrees of nondeterminism and balance between continuous and discrete dynamics, such as timed automata (\textcolor{red}{CITAR}) and hybrid automata (\textcolor{red}{CITAR}). Rungger and Tabuada (\textcolor{red}{CITAR TAC 2016}) proposed a general and wide model for CPS. Following this proposal, a CPS $S$ is a tuple $S=(X,X_{0},U,r)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, and $r$ is a transition function, such that $r:X\times U \rightarrow X$.
 
-\textcolor{red}{seria legal falar que nondeterminism pode ser tratado com model checking}
+\textcolor{red}{seria legal falar que nao determinismo pode ser tratado com model checking e ligar com o nosso trabalho... inclusive , o tabuada tem um artigo falando sobre seguranca e SMT, que eu comentei abaixo}
+
+In addition, Shoukry {\it et. al} \cite{Shoukry} tackled another important problem related to CPSs: security. Indeed, the very essence of CPSs claim for sophisticated interfacing ({\it e.g.}, sensors and network connections), which normally leads to security issues \cite{cpsattack}, given that wrong control actions may be generated based on corrupted measurements. The mentioned authors proposed a methodology for estimating the state of physical systems, through formal methods, even if sensor inputs are contaminated with erroneous or intentionally corrupted data, in order to still be able to execute suitable control commands. Indeed, many situations may be regarded as satisfiability problems and solved, for instance, with approaches based on Satisfiability Modulo Theories (SMT) \cite{Araujo16} \textcolor{red}{eh bom citar mais}, which indicates many links with other research areas and may lead to a unified approach regarding system verification, security enforcement, and interaction handling.
 
 %--------------------------------------
 \section{Bounded Model Checking (BMC)}
 \label{Preliminaries}
 %--------------------------------------
 
-Bounded Model Checking (BMC) based on Boolean Satisfiability (SAT) was originally proposed to verify hardware designs~\cite{Biere99,handbook09}. Indeed, Biere {\it et al.} were able to successfully verify large digital circuits with approximately $9510$ latches and $9499$ inputs, leading to BMC formulae with $4 \times 10^6$ variables and $1.2 \times 10^7$ clauses to be checked by standard SAT solvers. BMC based on Satisfiability Modulo Theories (SMT)~\cite{BarrettSST09}, in turn, was originally proposed to deal with increasing software verification complexity~\cite{Armando06}. 
+Bounded Model Checking (BMC) based on Boolean Satisfiability (SAT) was originally proposed to verify hardware designs~\cite{Biere99,handbook09}. Indeed, Biere {\it et al.} were able to successfully verify large digital circuits with approximately $9510$ latches and $9499$ inputs, leading to BMC formulae with $4 \times 10^6$ variables and $1.2 \times 10^7$ clauses to be checked by standard SAT solvers. BMC based on SMT~\cite{BarrettSST09}, in turn, was originally proposed to deal with increasing software verification complexity~\cite{Armando06}. 
 
 In general, BMC techniques aim to check the violation of a given (safety) property at a given system depth, as shown in Figure~\ref{bounded-model-checking}. Indeed, given a transition system \textit{M}, which is derived from the control-flow graph of a program, a property $\phi$, which represents program correctness and/or a system's behavior, and an iteration bound \textit{k}, which limits loop unrolling, data structures, and context-switches, BMC techniques thus unfold a system \textit{k} times, in order to convert it into a verification condition $\psi$, which is expressed in propositional logic or in a decidable-fragment of first-order logic, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth less than or equal to \textit{k}.
 
@@ -141,13 +143,13 @@ In general, BMC techniques aim to check the violation of a given (safety) proper
 
 From the practical point of view, SAT-based or SMT-based BMC procedures have been successfully applied to verify a large number of hardware and software systems, including digital circuits and single- and multi-threaded programs. Those BMC techniques were able to find subtle bugs in real digital and embedded software systems, as reported in the available literature~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. Nonetheless, the main criticism with respect to BMC techniques relies on completeness, since they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. 
 
-Due to that limitation, BMC tools are typically susceptible to exhaustion of time or memory limits, when checking complex circuit-implementations or programs with loops, whose bounds are too large or cannot be statically determined.  
+Due to that limitation, BMC tools are typically susceptible to exhaustion of time or memory limits, when checking complex circuit-implementations or programs with loops, whose bounds are too large or cannot be statically determined. Indeed, such an issue has pushed researchers to overcame the depth limitation and propose extensions capable of proving global correctness.
 
 %--------------------------------------
 \subsection{Induction-based Verification of C Programs}
 %--------------------------------------
 
-One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. The main challenge, however, of such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to validate the corresponding verification conditions, {\it i.e.}, induction cannot determine the invariance of a non-inductive assertion~\cite{Bradley07}. As a consequence, even if \textit{k}-induction procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that verifiers can automatically prove program correctness.
+One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. The main challenge, however, of such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to validate the corresponding verification conditions, {\it i.e.}, induction cannot determine the invariance of a non-inductive assertion~\cite{Bradley07} \textcolor{red}{confesso que, para mim, essa frase ficou confusa... eu nao consegui baixa esse livre}. As a consequence, even if \textit{k}-induction procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that verifiers can automatically prove program correctness.
 
 There are several invariant-generation algorithms that discover linear and polynomial relations among integer and real variables, in order to provide loop invariants and also discover the memory ``shape'', in programming languages with pointers~\cite{pips:2013,Henry:2012}. The current literature also reports successful applications of \textit{k}-induction based verification algorithms for hardware and software systems, using invariant generation and strengthening, mostly based on interval analysis~\cite{Beyer15}. 
 
@@ -155,15 +157,15 @@ Novel verification algorithms for proving correctness of (a large set of) C prog
 
 It is worth noticing that \textit{k}-induction with invariants has the potential to be directly integrated into existing BMC approaches, given that the induction algorithm itself can be seen as an extension after \textit{k} unwindings and it is possible to generate program invariants with other software modules, which are then translated and instrumented into an input program \cite{Rocha15}.
 
-Nonetheless, there is~little evidence, in the available literature, that model checking hardware and software systems through \textit{k}-induction (and invariants) can be efficiently exploited in embedded-system verification. That happens due to the distinctive characteristics mentioned earlier, which influence the embedded system development and also the employed verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants related to memory and variable aliasing~\cite{Bradley07}.
+Nonetheless, there is~little evidence, in the available literature, that model checking hardware and software systems through \textit{k}-induction (and invariants) can be efficiently exploited in embedded-system verification. That happens due to the distinctive characteristics mentioned earlier, which influence embedded system development and also employed verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination and configuration of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants related to memory and variable aliasing~\cite{Bradley07}.
 
 %--------------------------------------
 \subsection{Program Synthesis via Counter-Example \\ Guided Inductive Synthesis (CEGIS)}
 %--------------------------------------
 
-The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$ as the starting point, and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$~\cite{Abate17}. As a result, a given candidate program $p$ is iteratively refined, in order to match the specification $\sigma$ more closely. Counter-Example Guided Inductive Synthesis (CEGIS) represents one of the most popular approaches to program synthesis that are currently used in practice~\cite{David15}. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} shows the basic architecture of the CEGIS approach, which has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$~\cite{Abate17}. As a result, a given candidate program $p$ is iteratively refined, in order to match the specification $\sigma$ more closely. Counter-Example Guided Inductive Synthesis (CEGIS) represents one of the most popular approaches to program synthesis that are currently used in practice~\cite{David15}. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} shows the basic architecture of the CEGIS approach, which has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
 
-The correctness specification $\sigma$ provided to the program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. The {\sc Synthesize} and {\sc Verify} phases interact via a finite set of test vectors {\sc inputs} that is updated incrementally. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, this witness is a candidate solution to the full synthesis formula, which is passed to the {\sc verify} phase, in order to check whether it is a full solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates; otherwise, additional information is provided to the {\sc synthesize} phase, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again. 
+The correctness specification $\sigma$ provided to the program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. The {\sc Synthesize} and {\sc Verify} phases interact via a finite set of test vectors {\sc inputs} that is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, this witness is a candidate solution to the full synthesis formula, which is passed to the {\sc verify} phase, in order to check whether it is a full solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates; otherwise, additional information is provided to the {\sc synthesize} phase, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again. 
 %
 \begin{figure}[h]
 	\centering
@@ -172,7 +174,7 @@ The correctness specification $\sigma$ provided to the program synthesizer is of
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
 
-Note that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$ that is used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$. In order to avoid exploring all possible values, machine learning techniques can be used in the {\sc Synthesize} phase, with the goal of learning from experience, {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}.
+One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$ that is used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$. In order to avoid exploring all possible values, machine learning techniques can be used in the {\sc Synthesize} phase, with the goal of learning from experience, {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}.
 
 Nowadays, program synthesis engines that implement CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}.
 
@@ -180,18 +182,18 @@ Nowadays, program synthesis engines that implement CEGIS approach~\cite{sketch} 
 \subsection{Incorporating System Models to Automated \\ Verification and Synthesis Procedures}
 %--------------------------------------
 
-Currently, SMT-based BMC approaches check code properties in real programs, which basically address programing-language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then requires schemes that do not only check if source code is correctly written, but also if it will properly respond in real environments or under external problems. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged.
+Currently, SMT-based BMC approaches check code properties in real programs, which basically address programing-language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then requires schemes that do not only check if source code is correctly written, but also if it will properly respond in real environments or under external problems or corrupted data. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged or even intentionally tampered \cite{Shoukry}.
 
 Indeed, research in software verification is now incorporating such considerations, during checking processes, and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, a verification tool for digital systems was proposed, which is called digital system verifier (DSVerifier)~\cite{dsv_spin2015,Monteiro16} and is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering finite word-length (FWL) effects. Additionally, DSVerifier checks closed-loop systems with uncertain models considering FWL effects, which are typically represented as hybrid systems, {\it i.e.}, the controller is digital but the controlled agent (plant) is a physical and continuous system~\cite{Bessa17}. That ultimately leads to the use of analog-to-digital converters, which are one of the most important aspects to be considered, given that data loss (quantization) is inevitable. As a consequence, the verification procedure has to consider the interaction between a continuous plant and a digital (and sampled) controller with FWL effects, which can be connected using different control system configurations. Additionally, the latter may present a different behavior, regarding what was specified in analog domain, due to the inherent discret-time operation. 
 
 
-In summary, DSVerifier is a useful test tool, which takes into account different representations ({\it e.g.}, transfer-function and state-space), realization forms ({\it e.g.}, direct forms, delta forms, and transposed forms) and other implementation restrictions, in order to explore the design space. Finally, if a system's requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup. 
+In summary, DSVerifier is a useful test tool, which takes into account different representations ({\it e.g.}, transfer-function and state-space), realization forms ({\it e.g.}, direct, delta, and transposed forms) and other implementation restrictions, in order to explore the design space. Finally, if a system's requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup, which may even be incorporated into a given system development procedure, by providing both system verification and model refinement. 
 
-In this respect, DSVerifier has been extended to automatically synthesize digital stabilizing controllers for continuous plants~\cite{Abate17}. In particular, a CEGIS-based approach, implemented in a tool called digital system synthesizer (DSSynth), uses inductive synthesis in conjunction with DSVerifier's algorithm for verifying robust closed-loop stability that addresses plant variations as interval sets, as well as FWL uncertainties in digital controllers. DSSynth is able to successfully synthesize stable digital controllers for a set of intricate plant models, taken from the control literature, within minutes.
+In this respect, DSVerifier has been extended to automatically synthesize digital stabilizing controllers for continuous plants~\cite{Abate17}. In particular, a CEGIS-based approach, implemented in a tool called digital system synthesizer (DSSynth), uses inductive synthesis in conjunction with the DSVerifier's algorithm for verifying robust closed-loop stability that addresses plant variations as interval sets, as well as FWL uncertainties in digital controllers. DSSynth is able to successfully synthesize stable digital controllers for a set of intricate plant models, taken from the control literature, within minutes. Nonetheless, system correction is of paramount importance and even with such a synthesizing tool, a final verification procedure should be executed, with the goal of ensuring that the generated solution still complies with the provided specs and other issues, which may have not been initial tackled and have the potential to compromise system reliability, are not present.
 
 Apart from the control system domain, Scratch is another example software model-checking tool, which uses knowledge about the system to be verified and the underlying hardware, with the goal of detecting races related to direct memory access (DMA), in the Cell BE processor~\cite{Donaldson10}. That tool also uses BMC, in order to detect DMA races, and BMC with \textit{k}-induction, which aims to prove the absence of races. If support to other DMA operations were added, Scratch could be adapted to different architectures, {\it i.e.}, the same techniques would be employed, but with a different system behavior/knowledge.
 
-One may also notice that such a paradigm, {\it i.e.}, verification and synthesis based on an expected system behavior, is not restricted to digital filters and controllers or DMA races, but it can also by applied to possibly any real system, as long as the desired behavior can be expressed as properties in BMC frameworks. For instance, regarding self-driving cars, a property could be the detection of pedestrians or animals, or even bicycles. Indeed, the latter is considered one of the most difficult problems, due to the myriad of possible shape and colors \cite{selfcar}. In addition, the mentioned problem is closely related to machine learning, from which refinement strategies can be devised \cite{BMCml}. 
+One may also notice that such a paradigm, {\it i.e.}, verification and synthesis based on an expected system behavior, is not restricted to digital filters and controllers or DMA races, but it can also be applied to possibly any real system, as long as the desired behavior can be expressed as properties in BMC frameworks. For instance, regarding self-driving cars, an important property could be the detection of pedestrians, animals, bicycles, or any obstacle present on urban and rural roads. Indeed, for instance, bicycles are considered one of the most difficult problems, due to the myriad of possible shape and colors \cite{selfcar}. In addition, the mentioned problem is closely related to machine learning, from which refinement strategies can be devised and incorporated to BMC approaches\cite{BMCml}. 
 
 
 %--------------------------------------
@@ -326,6 +328,9 @@ Lee E.:
 \newblock {\em {The Past, Present and Future of Cyber-Physical Systems: A Focus on Models}}. 
 \newblock In: Sensors 15(3): pp. 4837--4869, 2015.
 
+
+
+
 %5
 \bibitem{groza2015formal}
 Groza A., Letia I., Goron A., Zaporojan S.: 
@@ -368,6 +373,38 @@ S.~Virtanen:
 Kroening D., Liang L., Melham T., Schrammel P., Tautschnig M.:
 \newblock {\em {Effective Verification of Low-Level Software with Nested Interrupts}}. 
 \newblock In: Design, Automation and Test in Europe, pp. 229--234, 2015.
+
+%4
+\bibitem{cudalucas}
+Monteiro F. R., da Silva Alves E. H., Silva I. S., Ismail H., Cordeiro L. C., de Lima Filho E. B.:
+\newblock {\em {ESBMC-GPU A Context-Bounded Model Checking Tool to Verify CUDA Programs}}. 
+\newblock In: Science of Computer Programming xx(y): pp. xxxx--xxxx, 2017.
+
+
+
+%1
+\bibitem{stochmodel}
+Bargmann H.:
+\newblock {\em {The role of stochastic modelling in engineering science}}.
+\newblock In: Acta Mecanica 125(1), pp. 63--71, 1997.
+
+\bibitem{Shoukry}
+Shoukry Y., Nuzzo P., Puggelli A., Sangiovanni-Vincentelli A. L., Seshia S. A., Tabuada P.:
+\newblock {\em {Secure State Estimation for Cyber Physical Systems Under Sensor Attacks: A Satisfiability Modulo Theory Approach}}.
+\newblock {IEEE} Trans. Automatic Control PP(99), pp. 1--16, 2017.
+
+
+
+\bibitem{cpsattack}
+Liu Y., Ning P., Reiter M. K.:
+\newblock {\em {“False data injection attacks against state estimation in electric power grid}}.
+\newblock In: ACM Conference on Computer and Communications Security, pp. 21--32, 2009.
+
+\bibitem{Araujo16}
+Araujo, R., Bessa, I., Cordeiro, L., Chaves Filho, J.:
+\newblock {\em{ SMT-based Verification Applied to Non-convex Optimization Problems}}. 
+\newblock In: VI Brazilian Symposium on Computing Systems Engineering, 2016 (to appear).
+
 
 %10
 \bibitem{Biere99}
@@ -453,6 +490,13 @@ Henry J., Monniaux D., Moy M.:
 \newblock {\em {PAGAI: A Path Sensitive Static Analyser}}. 
 \newblock In: Electronic Notes in Theoretical Computer Science, pp. 15--25, 2012.
 
+%25
+\bibitem{Beyer15}
+Beyer D., Dangl M., Wendler P.:
+\newblock {\em {Boosting \textit{k}-Induction with Continuously-Refined Invariants}}.
+\newblock In: International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
+
+
 %24
 \bibitem{Gadelha15}
 Gadelha M., Ismail H., Cordeiro L.:
@@ -460,11 +504,6 @@ Gadelha M., Ismail H., Cordeiro L.:
 \newblock In: International Journal on Software Tools for Technology Transfer (to appear), 2015.
 \newblock http://dx.doi.org/10.1007/s10009-015-0407-9
 
-%25
-\bibitem{Beyer15}
-Beyer D., Dangl M., Wendler P.:
-\newblock {\em {Boosting \textit{k}-Induction with Continuously-Refined Invariants}}.
-\newblock In: International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
 
 %26
 \bibitem{Brain15}
@@ -496,24 +535,17 @@ Donaldson A., Kroening D., R{\"{u}}mmer P.:
 \newblock {\em {{SCRATCH}: A Tool for Automatic Analysis of {DMA} Races}}.
 \newblock In: ACM Symposium on Principles and Practice of Parallel Programming. ACM, pp. 311--312, 2011.
 
-
-\bibitem{selfcar}
-Fairley P.:
-\newblock {\em {Self-Driving Cars Have a Bicycle Problem}}.
-\newblock http://spectrum.ieee.org/transportation/self-driving/selfdriving-cars-have-a-bicycle-problem.
-
-
-\bibitem{BMCml}
-L.~Bortolussi, D. Milios, G, Sanguinetti.:
-\newblock {\em {Smoothed model checking for uncertain Continuous-Time Markov Chains}}.
-\newblock In:. Information and Computation, 2016.
-
-
 %31
 \bibitem{GrosseLD09}
 Gro{\ss}e D., Le H., Drechsler R.:
 \newblock {\em {Induction-based Formal Verification of {SystemC TLM} Designs}}.
 \newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
+
+%34
+\bibitem{David15}
+C.~David, D.~Kroening, and M.~Lewis.
+\newblock {\em {Using program synthesis for program analysis}}.
+\newblock In: Logic for Programming, Artificial Intelligence, and Reasoning, LNCS 9450, pp. 483--498, 2015.
 
 %32
 \bibitem{Alur13}
@@ -527,11 +559,6 @@ A.~Solar-Lezama.
 \newblock {\em {Program sketching}}.
 \newblock In: International Journal on Software Tools for Technology Transfer, 15(5-6):475--495, 2013.
 
-%34
-\bibitem{David15}
-C.~David, D.~Kroening, and M.~Lewis.
-\newblock {\em {Using program synthesis for program analysis}}.
-\newblock In: Logic for Programming, Artificial Intelligence, and Reasoning, LNCS 9450, pp. 483--498, 2015.
 
 %35
 \bibitem{Sharma14}
@@ -556,6 +583,23 @@ F.~Monteiro:
 Bessa, I., Ismail, H., Palhares, R., Cordeiro, L., Chaves Filho, J.:
 \newblock {\em {Formal Non-Fragile Stability Verification of Digital Control Systems with Uncertainty}}. 
 \newblock In: IEEE Transactions on Computers, 2017 (to appear).
+
+
+\bibitem{selfcar}
+Fairley P.:
+\newblock {\em {Self-Driving Cars Have a Bicycle Problem}}.
+\newblock http://spectrum.ieee.org/transportation/self-driving/selfdriving-cars-have-a-bicycle-problem.
+
+
+\bibitem{BMCml}
+L.~Bortolussi, D. Milios, G, Sanguinetti.:
+\newblock {\em {Smoothed model checking for uncertain Continuous-Time Markov Chains}}.
+\newblock In:. Information and Computation, 2016.
+
+
+
+
+
 
 %39
 \bibitem{Behrend15}
@@ -705,10 +749,6 @@ Jackson D., Vaziri M.:
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 11, 2016.
 
 %63
-\bibitem{Araujo16}
-Araujo, R., Bessa, I., Cordeiro, L., Chaves Filho, J.:
-\newblock {\em{ SMT-based Verification Applied to Non-convex Optimization Problems}}. 
-\newblock In: VI Brazilian Symposium on Computing Systems Engineering, 2016 (to appear).
 
 %64
 \bibitem{Haran15}
