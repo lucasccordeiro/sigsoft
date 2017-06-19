@@ -2,18 +2,17 @@
 #include <assert.h>
 #include <math.h>
 int main(void) {
- unsigned int i=1, n = -1;
- float x;
- __VERIFIER_assume(x>1);
- while (i<=n) {
+ unsigned int i=1;
+ float x=0.9;
+ while (1) {
    x = ((2*x) - 1);
    if(isinf(x)) {
      printf("\%d\n", i);
      break;
    }
+   printf("iii: \%d\n", i);
    assert(x>0);
-   printf("i: \%d\n", i);   
-   i++;
+   ++i;
  }
  assert(x>0);
  return 0;
