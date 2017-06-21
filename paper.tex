@@ -161,7 +161,7 @@ Due to that limitation, BMC tools are typically susceptible to exhaustion of tim
 \subsection{Induction-based Verification of C Programs}
 %--------------------------------------
 
-One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. The main challenge, however, of such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to check the corresponding verification conditions, {\it i.e.}, induction cannot determine the invariance of a non-inductive assertion~\cite{Bradley07}. For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive-invariant}. If we consider the floating-point arithmetic semantics, then  the loop invariant $x>0$ holds initially and after each iteration; actually, $x$ tends to infinity after $128$ iterations. This invariant, however, is not inductive, given that $x>0$ before an initial iteration does not ensure that $x>0$ after each iteration; if we have initially $x=0.9$, then $x<0$ after the fourth iteration. As a consequence, even if \textit{k}-induction procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that verifiers can automatically prove program correctness. In this specific example, an inductive invariant would be $x>1$, given that if we can check that if $x>1$ before the initial iteration, then also $x>1$ after \textit{k} iterations.
+One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}. The main challenge, however, of such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to check the corresponding verification conditions, {\it i.e.}, induction cannot determine the invariance of a non-inductive assertion~\cite{Bradley07}. For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive-invariant}. If we consider the IEEE floating-point standard (IEEE 754)~\cite{4610935,Goldberg91whatevery}, then  the loop invariant $x>0$ holds initially and after each iteration; actually, $x$ tends to infinity after $128$ iterations. This invariant, however, is not inductive, given that $x>0$ before an initial iteration does not ensure that $x>0$ after each iteration; if we have initially $x=0.9$, then $x<0$ after the fourth iteration. As a consequence, even if \textit{k}-induction procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that verifiers can automatically prove program correctness. In this specific example, an inductive invariant would be $x>1$, given that if we can check that if $x>1$ before the initial iteration, then also $x>1$ after \textit{k} iterations.
 %
 \begin{figure}
 \centering
@@ -364,9 +364,6 @@ Lee E.:
 \newblock {\em {The Past, Present and Future of Cyber-Physical Systems: A Focus on Models}}. 
 \newblock In: Sensors 15(3): pp. 4837--4869, 2015.
 
-
-
-
 %5
 \bibitem{groza2015formal}
 Groza A., Letia I., Goron A., Zaporojan S.: 
@@ -396,439 +393,425 @@ Witkowski T., Blanc N., Kroening D., Weissenbacher G.:
 \newblock {\em {Model checking concurrent linux device drivers}}.
 \newblock In: 22nd IEEE/ACM international conference on Automated software engineering, pp. 501--504, 2007.
 
-
-
-%1
+%9
 \bibitem{mlembe}
 S.~Virtanen:
 \newblock {\em {Advancing Embedded Systems and Real-Time Communications with Emerging Technologies}}.
 \newblock IGI Global, ISBN 978-1466660342, pp. 1--502, 2014.
 
-%9
+%10
 \bibitem{Kroening15}
 Kroening D., Liang L., Melham T., Schrammel P., Tautschnig M.:
 \newblock {\em {Effective Verification of Low-Level Software with Nested Interrupts}}. 
 \newblock In: Design, Automation and Test in Europe, pp. 229--234, 2015.
 
-%4
+%11
 \bibitem{cudalucas}
 Monteiro F. R., da Silva Alves E. H., Silva I. S., Ismail H., Cordeiro L. C., de Lima Filho E. B.:
 \newblock {\em {ESBMC-GPU A Context-Bounded Model Checking Tool to Verify CUDA Programs}}. 
 \newblock In: Science of Computer Programming xx(y): pp. xxxx--xxxx, 2017.
 
-
-
-%1
+%12
 \bibitem{stochmodel}
 Bargmann H.:
 \newblock {\em {The role of stochastic modelling in engineering science}}.
 \newblock In: Acta Mecanica 125(1), pp. 63--71, 1997.
 
+%13
 \bibitem{Shoukry}
 Shoukry Y., Nuzzo P., Puggelli A., Sangiovanni-Vincentelli A. L., Seshia S. A., Tabuada P.:
 \newblock {\em {Secure State Estimation for Cyber Physical Systems Under Sensor Attacks: A Satisfiability Modulo Theory Approach}}.
 \newblock {IEEE} Trans. Automatic Control PP(99), pp. 1--16, 2017.
 
-
-
+%14
 \bibitem{cpsattack}
 Liu Y., Ning P., Reiter M. K.:
 \newblock {\em {“False data injection attacks against state estimation in electric power grid}}.
 \newblock In: ACM Conference on Computer and Communications Security, pp. 21--32, 2009.
 
+%15
 \bibitem{Araujo16}
 Araujo, R., Bessa, I., Cordeiro, L., Chaves Filho, J.:
 \newblock {\em{ SMT-based Verification Applied to Non-convex Optimization Problems}}. 
 \newblock In: VI Brazilian Symposium on Computing Systems Engineering, 2016 (to appear).
 
-
-%10
+%16
 \bibitem{Biere99}
 Biere A., Cimatti A., Clarke E., Zhu Y.:
 \newblock {\em {Symbolic Model Checking without BDDs}}. 
 \newblock In: Tools and Algorithms for Construction and Analysis of Systems, LNCS 1579, pp. 193--207, 1999.
 
-%11
+%17
 \bibitem{handbook09}
 Biere A., Heule M., van Maaren H., Walsh T., eds.:
 \newblock {\em {Handbook of Satisfiability}}.
 \newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
 
-%12
+%18
 \bibitem{BarrettSST09}
 Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
 \newblock {\em {Satisfiability Modulo Theories}}. 
 \newblock In: Volume 185 of Frontiers in Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
 
-%13
+%19
 \bibitem{Armando06}
 Armando A., Mantovani J., Platania L.:
 \newblock {\em {Bounded Model Checking of Software Using SMT Solvers Instead of SAT Solvers}}. 
 \newblock In: {SPIN} Workshop on Model Checking Software, LNCS 3925, pp. 146-162, 2006.
 
-%14
+%20
 \bibitem{Clarke04}
 Clarke E., Kroening D., Lerda F.:
 \newblock {\em {A Tool for Checking {ANSI-C} Programs}}.
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems. LNCS 2988, Springer Berlin Heidelberg, pp. 168--176, 2004.
 
-%15
+%21
 \bibitem{MerzFS12}
 Merz F., Falke S., Sinz C.:
 \newblock {\em {{LLBMC}: Bounded Model Checking of {C} and {C++} Programs using a Compiler {IR}}}.
 \newblock In: International Conference on Verified Software: Theories, Tools, Experiments. LNCS 7152, pp. 146--161, 2012.
 
-%16
+%22
 \bibitem{CordeiroF11}
 Cordeiro L., Fischer B.:
 \newblock {\em {Verifying Multi-threaded Software using {SMT}-based Context-Bounded Model Checking}}.
 \newblock In: International Conference on Software Engineering. pp. 331--340, 2011.
 
-%17
+%23
 \bibitem{Ivancic05}
 Ivanicic F., Shlyakhter I., Gupta A., Ganai, M.K.:
 \newblock {\em {Model Checking {C} Programs using {F-Soft}}}.
 \newblock In: International Conference on Computer Design: VLSI in Computers and Processors, pp. 297--308, 2005.
 
-%18
+%24
 \bibitem{Cordeiro12}
 Cordeiro L., Fischer B., Marques{-}Silva J.:
 \newblock {\em {{SMT}-based Bounded Model Checking for Embedded {ANSI-C} Software}}.
 \newblock {IEEE} Trans. Software Eng. 38(4), pp. 957--974, 2012.
 
-%19
+%25
 \bibitem{EenS03}
 E{\'{e}}n, N., S{\"{o}}rensson, N.:
 \newblock {\em {Temporal Induction by Incremental {SAT} Solving}}.
 \newblock Electronic Notes in Theoretical Computer Science 89(4), pp. 543 -- 560, 2003.
 
-%20
+%26
 \bibitem{Sheera00}
 Sheeran M., Singh S., St{\aa}lmarck G.:
 \newblock {\em {Checking Safety Properties using Induction and a {SAT}-solver}}.
 \newblock In: International Conference on Formal Methods in Computer-Aided Design. Springer-Verlag, pp. 108--125, 2000.
 
-%21
+%27
 \bibitem{Bradley07}
 Bradley A., Manna Z.:
 \newblock {\em {The calculus of computation - decision procedures with applications to verification}}. 
 \newblock In: Springer, pp. I-XV, pp. 1--366, 2007.
 
-%22
+%28
+\bibitem{4610935}
+{IEEE} standard for floating-point arithmetic.
+\newblock {\em IEEE Std 754-2008}, pages 1--70, Aug 2008.
+
+%29
+\bibitem{Goldberg91whatevery}
+David Goldberg.
+\newblock What every computer scientist should know about floating point
+  arithmetic.
+\newblock {\em ACM Computing Surveys}, 23(1):5--48, 1991.
+
+%30
 \bibitem{pips:2013}
 ParisTech M.:
 \newblock {\em {PIPS: Automatic Parallelizer and Code Transformation Framework}}. 
 \newblock Accessed 21 February 2016
 
-%23
+%31
 \bibitem{Henry:2012}
 Henry J., Monniaux D., Moy M.: 
 \newblock {\em {PAGAI: A Path Sensitive Static Analyser}}. 
 \newblock In: Electronic Notes in Theoretical Computer Science, pp. 15--25, 2012.
 
-%25
+%32
 \bibitem{Beyer15}
 Beyer D., Dangl M., Wendler P.:
 \newblock {\em {Boosting \textit{k}-Induction with Continuously-Refined Invariants}}.
 \newblock In: International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
 
-
-%24
+%33
 \bibitem{Gadelha15}
 Gadelha M., Ismail H., Cordeiro L.:
 \newblock {\em {Handling Loops in Bounded Model Checking of C Programs via \textit{k}-Induction}}.
 \newblock In: International Journal on Software Tools for Technology Transfer (to appear), 2015.
 \newblock http://dx.doi.org/10.1007/s10009-015-0407-9
 
-
-%26
+%34
 \bibitem{Brain15}
 Brain M., Joshi S., Kroening D., Schrammel P.:
 \newblock {\em {Safety Verification and Refutation by k-Invariants and \textit{k}-Induction}}.
 \newblock In: International Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
 
-%27
+%35
 \bibitem{Rocha15}
 Rocha H., Ismail H., Cordeiro L., Barreto R.:
 \newblock {\em {Model Checking Embedded C Software using \textit{k}-Induction and Invariants}}.
 \newblock In: V Brazilian Symposium on Computing Systems Engineering, pp. 90--95, 2015.
 
-%28
+%36
 \bibitem{Kinductor}
 Donaldson A., Haller L., Kroening D., R{\"{u}}mmer, P.:
 \newblock {\em {Software Verification using \textit{k}-Induction}}.
 \newblock In: International Symposium on Static Analysis. LNCS 6887, pp. 351--368, 2011.
 
-%29
+%37
 \bibitem{Rocha17}
 Rocha, W., Rocha, H., Ismail H., Cordeiro, L., Fischer, B.:
 \newblock {\em {DepthK: A \textit{k}-Induction Verifier Based on Invariant Inference for C Programs}}. 
 \newblock In: International Conference on Tools and Algorithms for the Construction and Analysis of Systems, 2017 (to appear).
 
-%30
+%38
 \bibitem{Donaldson10}
 Donaldson A., Kroening D., R{\"{u}}mmer P.:
 \newblock {\em {{SCRATCH}: A Tool for Automatic Analysis of {DMA} Races}}.
 \newblock In: ACM Symposium on Principles and Practice of Parallel Programming. ACM, pp. 311--312, 2011.
 
-%31
+%39
 \bibitem{GrosseLD09}
 Gro{\ss}e D., Le H., Drechsler R.:
 \newblock {\em {Induction-based Formal Verification of {SystemC TLM} Designs}}.
 \newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
 
-%34
+%40
 \bibitem{David15}
 C.~David, D.~Kroening, and M.~Lewis.
 \newblock {\em {Using program synthesis for program analysis}}.
 \newblock In: Logic for Programming, Artificial Intelligence, and Reasoning, LNCS 9450, pp. 483--498, 2015.
 
-%32
+%41
 \bibitem{Alur13}
 Alur R., Bod\'{\i}k R., Juniwal G., Martin M., Raghothaman M., Seshia S., Singh R., Solar-Lezama A., Torlak E., Udupa A.:
 \newblock {\em {Syntax-guided synthesis}}. 
 \newblock In: Formal Methods in Computer-Aided Design, pp. 1--8, 2013.
 
-%33
+%42
 \bibitem{sketch}
 A.~Solar-Lezama.
 \newblock {\em {Program sketching}}.
 \newblock In: International Journal on Software Tools for Technology Transfer, 15(5-6):475--495, 2013.
 
-
-%35
+%43
 \bibitem{Sharma14}
 R.~Sharma and A.~Aiken.
 \newblock {\em {From invariant checking to invariant inference using randomized search}}.
 \newblock In: Computer Aided Verification, LNCS 8559, pp. 88--105, 2014.
 
-%36
+%44
 \bibitem{dsv_spin2015}
 Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
 \newblock {\em {DSVerifier: A Bounded Model Checking Tool for Digital Systems}}. 
 \newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
 
-%37
+%45
 \bibitem{Monteiro16}
 F.~Monteiro:
 \newblock {\em {Bounded model checking of state-space digital systems: the impact of finite word-length effects on the implementation of fixed-point digital controllers based on state-space modeling}}. 
 \newblock In: 24th {ACM} {SIGSOFT} International Symposium on Foundations of Software Engineering, pp. 1151--1153, 2016.
 
-%38
+%46
 \bibitem{Bessa17}
 Bessa, I., Ismail, H., Palhares, R., Cordeiro, L., Chaves Filho, J.:
 \newblock {\em {Formal Non-Fragile Stability Verification of Digital Control Systems with Uncertainty}}. 
 \newblock In: IEEE Transactions on Computers, 2017 (to appear).
 
-
+%47
 \bibitem{selfcar}
 Fairley P.:
 \newblock {\em {Self-Driving Cars Have a Bicycle Problem}}.
 \newblock http://spectrum.ieee.org/transportation/self-driving/selfdriving-cars-have-a-bicycle-problem.
 
-
+%48
 \bibitem{BMCml}
 L.~Bortolussi, D. Milios, G, Sanguinetti.:
 \newblock {\em {Smoothed model checking for uncertain Continuous-Time Markov Chains}}.
 \newblock In:. Information and Computation, 2016.
 
-
-
-
-
-
-%39
+%49
 \bibitem{Behrend15}
 Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
 \newblock {\em {Scalable and Optimized Hybrid Verification of Embedded Software}}. 
 \newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
 
-%40
+%50
 \bibitem{Lettnin09}
 Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Sch{\"o}nknecht V., Reitemeyer S.:
 \newblock {\em {Semiformal Verification of Temporal Properties in Automotive Hardware Dependent Software}}. 
 \newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
 
-%41
+%51
 \bibitem{Adouane16}
 Vilca J., Adouane L., Mezouar Y.:
 \newblock {\em {Optimal Multi-Criteria Waypoint Selection for Autonomous Vehicle Navigation in Structured Environment}}. 
 \newblock In: Journal of Intelligent and Robotic Systems 82(2): pp. 301--324, 2016.
 
-
-%45
+%52
 \bibitem{ECBS13}
 Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
 \newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
 \newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
 
-
-%46
+%53
 \bibitem{Pereira15}
 Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
 \newblock {\em {Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking}}.
 \newblock In: ACM Symposium on Applied Computing, Software Verification and Testing Track, pp. 1648-1653, 2016. 
 
-%47
+%54
 \bibitem{Sousa15}
 Sousa F., Cordeiro L., Lima Filho E.: 
 \newblock {\em { Bounded Model Checking of C++ Programs Based on the Qt Framework.}} 
 \newblock In: Global Conference on Consumer Electronics, pp. 179--180, 2015.
 
-%42
+%55
 \bibitem{Beyer14}
 D.~Beyer 
 \newblock {\em {Status report on software verification - (competition summary {SV-COMP})}}. 
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
  
-%43
+%56
 \bibitem{BeyerSVCOMP15}
 D.~Beyer:
 \newblock {\em {Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).}} 
 \newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
 
-%59
+%57
 \bibitem{KahlonWG09}
 Kahlon V., Wang C., Gupta A.:
 \newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
 \newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
 
-
-
-
-
-%48
+%58
 \bibitem{morse15}
 J.~Morse.
 \newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
 \newblock {University of Southampton, PhD Thesis}, 2015.
 
-%44
+%59
 \bibitem{Inverso14}
 Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
 \newblock {\em {Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}}
 \newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
 
-
-
-
-%49
+%60
 \bibitem{civl15}
 Zheng M, Rogers M, Luo Z, Dwyer M, Siegel S.
 \newblock {\em{{CIVL}: Formal Verification of Parallel Programs}}.
 \newblock In: International Conference on Automated Software Engineering, pp. 830--835, 2015.
 
-%50
+%61
 \bibitem{Grumberg05}
 Grumberg O., Lerda F., Strichman O., Theobald M.:
 \newblock {\em { Proof-guided underapproximation-widening for multi-process systems.}} 
 \newblock In: Symposium on Principles of Programming Languages, pp. 122--131, 2005.
 
-%51
+%62
 \bibitem{McMillan11}
 K.~McMillan:
 \newblock {\em {Widening and Interpolation.}} 
 \newblock In: International Symposium on Static Analysis, LCNS 6887, pp. 1, 2011.
 
-%52
+%63
 \bibitem{esbmc_controller}
 Bessa I., Abreu R., Cordeiro L., Filho J.:
 \newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers}.}
 \newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
 
-%53
+%64
 \bibitem{esbmc_filter}
 Abreu R., Cordeiro L., Filho E.:
 \newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
 \newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
 \newblock http://dx.doi.org/10.14209/sbrt.2013.57
 
-%54
+%65
 \bibitem{JMorse15}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {Model Checking LTL Properties over ANSI-C Programs with Bounded Traces.}} 
 \newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
 
-%55
+%66
 \bibitem{Bessa16}
 Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
 \newblock {\em { Verification of Fixed-Point Digital Controllers Using Direct and Delta Forms Realizations.}} 
 \newblock In: Design Automation for Embedded Systems 20(2): pp. 95--126, 2016.
 
-%56
+%67
 \bibitem{Chaves17}
 Chaves L., Bessa I., Cordeiro L.:
 \newblock {\em { DSValidator: An Automated Counterexample Reproducibility Tool for Digital Systems}}. 
 \newblock In: CoRR abs/1610.07066, 2016.
 
-%60
+%68
 \bibitem{sbrtdaniel}
 de Mello D. P. M., de Freitas M. L., Cordeiro L., da Silva J\'unior W. S., de Bessa I. V., de Lima Filho E. B, Clavier L.:
 \newblock {\em{Verification of Magnitude and Phase Responses in Fixed-Point Digital Filters}}. 
 \newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017.
 
-
-%60
+%69
 \bibitem{Alves15}
 Alves E. , Cordeiro L., Lima Filho E.:
 \newblock {\em{ Fault Localization in Multi-Threaded C Programs using Bounded Model Checking}}. 
 \newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
 
-%61
+%70
 \bibitem{Garcia16}
 Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.: 
 \newblock {\em{ ESBMC$^{QtOM}$: A Bounded Model Checking Tool to Verify Qt Applications}}. 
 \newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
 
-%62
+%71
 \bibitem{Jackson16}
 Jackson D., Vaziri M.:
 \newblock {\em{ Correct or usable? the limits of traditional verification (impact paper award)}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 11, 2016.
 
-%63
-
-
-%57
+%72
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {Handling unbounded loops with {ESBMC} 1.20}}.
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
 
-%58
+%73
 \bibitem{MorseRCN014}
 Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {ESBMC} 1.22.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
 
-%64
+%74
 \bibitem{Haran15}
 Haran A., Carter M., Emmi M., Lal A., Qadeer S., Rakamaric Z.:
 \newblock {\em{ SMACK+Corral: A Modular Verifier - (Competition Contribution)}}. 
 \newblock In: 21st International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 451--454, 2015.
 
-
-
-%65
+%75
 \bibitem{Beyer16}
 Beyer, D.:
 \newblock {\em{ Reliable and Reproducible Competition Results with BenchExec and Witnesses (Report on SV-COMP 2016)}}. 
 \newblock In: 22nd International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9636, pp. 887--904, 2016.
 
-%66
+%76
 \bibitem{BeyerW15}
 Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
 \newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
 
-%67
+%77
 \bibitem{RochaIFM12}
 Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 \newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
 \newblock In: International Conference on Integrated Formal Methods, LNCS 7321, pp. 128-142, 2012.
 
+%78
 \bibitem{antennasbrt}
 de Jesus A. S., rodrigues R. N., Ferreira A. N. G., Valente V. H., de Melo W. C., de Lima Filho E. B, da Silva J\'unior W. S.:
 \newblock {\em{Automatic Antenna Alignment System for Satellite Receivers Operating in C and Ku Bands}}. 
