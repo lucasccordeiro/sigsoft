@@ -376,9 +376,10 @@ As already mentioned in section \ref{sec:model}, problems that are not directly 
 
 In the same fashion, other problems may benefit from the recursive-refinement approach provided by SMT-based verification schemes. For instance, de Jesus {\it et. al} \cite{antennasbrt} developed a simplified methodology for antenna alignment that makes use of many modules already available in satellite TV receivers, along with a suitable structure for performing position correction. In summary, a reference signal is evaluated, until an (approximately) error-free reception is acquired, which can be measured through a simple transport stream (TS) error-indication interface and further refined with other parameters, such as carrier-to-noise ratio and signal level. This way, by using an SMT-based verification method, one may map the TS error indication and other performance figures as properties and then recursively perform realignments procedures, until a counterexample is not output. It is worth noticing that the timing requirements are more relaxed than what was mentioned in the work developed by Ara\'ujo {\it et al.}~\cite{Araujo16}, which can be seen as an advantage for such an implementation.
 
-Regarding behavior correctness, many other applications can be tackled, such as the ones related to automatic classification. Amoedo {\it et al.} proposed a modulation classification methodology, which the goal of spectrum sensing for opportunistic transmissions. Given that 
+Regarding behavior correctness, many other applications can be tackled, such as the ones related to automatic classification. Amoedo {\it et al.} \cite{amoedo} proposed a modulation classification methodology, with the goal of spectrum sensing for opportunistic transmissions. Besides a correct software implementation, {\it i.e.}, source code, which is already covered by formal methods already available in the literature \cite{esbmc_filter,Cordeiro12,Clarke04}, one may argue if the proposed methodology is able to recognize modulations under some reception condition, such as severe analog interference. This way, it would be interesting to develop a verification module for transmission and reception software, which could be capable of creating inputs related to sampled radio frequency signals under a variety of condition, unifying source code and behavior verification. In addition, that kind of implementation usually employs digital filters with specific parameters, which could also be tackled.
 
-\textcolor{red}{Eddie: Acho que esta faltando texto aqui, certo?}
+Finally, ML techniques are already being used in the software verification area \cite{mlswverif,nguyen}. For instance, Hamel \cite{mlswverif} proposes to induce a theory, through ML, that fits a test set for a program, in such a way that it implement the respective test set. ML is already being employ in space state reduction, ML technique can be used also for invariant generation
+
 %--------------------------------------
 \section{Conclusions}
 \label{conclusions}
@@ -914,6 +915,21 @@ Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 de Jesus A. S., rodrigues R. N., Ferreira A. N. G., Valente V. H., de Melo W. C., de Lima Filho E. B, da Silva J\'unior W. S.:
 \newblock {\em{Automatic Antenna Alignment System for Satellite Receivers Operating in C and Ku Bands}}. 
 \newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017. (in Portuguese)
+
+\bibitem{amoedo}
+Amoedo D. A., da Silva J\'unior W. S., de Lima Filho E. A.:
+\newblock {\em{Parameter Selection for SVM in Automatic Modulation Classification of Analog and Digital Signals}}. 
+\newblock In: International Telecommunications Symposium (ITS), pp. 1-5, 2014.
+
+\bibitem{mlswverif}
+L Hamel:
+\newblock {\em {On the Use of Machine Learning in Formal Software Verification.}} 
+\newblock {Technical Report TR03-294, Dept. of Computer Science and Statistics, University of Rhode Island}, 2003.
+
+\bibitem{nguyen}
+L Hamel:
+\newblock {\em {The Application of Machine Learning Methods in Software Verification and Validation.}} 
+\newblock {University of Texas at Austin, master of science dissertation}, 2010.
  
 \end{thebibliography}
 
