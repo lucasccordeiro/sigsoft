@@ -359,7 +359,7 @@ Section~\ref{achievements} outlines contributions toward these research problems
 
 \textbf{(RP4)} State-of-the-art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems. Indeed, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} were tackled, in order to specify system-level properties of those systems, using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal of verifying its attitude controllers~\cite{Bessa16,Chaves17}. More recently, other implementation aspects were added to the existing verification framework, including magnitude, phase, poles, and zeros, which provide a deeper analysis regarding digital systems, by tackling frequency-domain parameters, permissible deviation, and associated natural response \cite{sbrtdaniel}. In general, however, there is still a lack of studies to verify system-level properties related to embedded systems; emphasis should be given to micro-grids~\cite{xu15} and cyber-physical systems~\cite{leeCPS2}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for embedded systems engineers~\cite{Alves15}.
 
-{\textbf{(RP5)} Although ESBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools. Indeed, it would be interesting if a new programming language model could be loaded, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa, Cordeiro, and Filho~\cite{Garcia16}, which employed operational models for checking Qt-based programs from consumer electronics. In summary, the BMC core (in that case, ESBMC) is not changed, but instead an operational model, which implements the behavior and features of Qt libraries, is used for providing the new code structure to be checked. \textcolor{red}{nao deveriamos falar que no pior caso poderiamos traduzir para c? aqui nao deveriamos mencionar o trabalho do januario?} Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in software verification.
+{\textbf{(RP5)} Although ESBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools. Indeed, it would be interesting if a new programming language model could be loaded, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa, Cordeiro, and Filho~\cite{Garcia16}, which employed operational models for checking Qt-based programs from consumer electronics. In summary, the BMC core (in that case, ESBMC) is not changed, but instead an operational model, which implements the behavior and features of Qt libraries, is used for providing the new code structure to be checked. This approach could adopt the clang compiler~\cite{Lopes:2014:GSL:2692607}, which is already widely used in industry~\cite{clang-usage}, in order to produce an Abstract Syntax Tree (AST) for a given programming language ({\it e.g.}, C/C++/ObjectiveC/ObjectiveC++). This AST can then be converted either to an intermediate representation (IR) of the underlying verifier or to LLVM bitcode that is already produced by clang. Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in software verification.
 
 {\textbf{(RP6)} State-of-the-art synthesis approaches for embedded (control) systems typically disregard the platform in which the embedded system software operates and restrict themselves to generate code that do not take into account FWL effects. The synthesized system, however, must include the physical plant to avoid serious system's malfunctioning (or even a catastrophe), due to the embedded (control) software, {\it e.g.}, the Mars Polar Lander did not account for leg compressions prior to landing~\cite{Jackson16}. Research in this direction has made some progress to design, implement, and evaluate an automated approach for generating correct-by-construction digital controllers that is based on state-of-the-art inductive synthesis techniques~\cite{Abate17}. Nonetheless, there is still little evidence whether that approach can scale for larger systems modeled by other types of representations ({\it e.g.}, state-space). In addition to that, another research direction for synthesizers is to generate code for UAV trajectory and mission planning by taking into account system's dynamics and nonholonomic constraints~\cite{Araujo16}. As a consequence, verifiers and synthesizers need to handle a wide range of functions, including non-linear and non-convex optimization problems based on both fixed- and floating-point arithmetic.
 
@@ -867,70 +867,87 @@ Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.:
 \newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
 
 %77
+\bibitem{Lopes:2014:GSL:2692607}
+Bruno~Cardoso Lopes and Rafael Auler.
+\newblock {\em Getting Started with LLVM Core Libraries}.
+\newblock Packt Publishing, 2014.
+
+%78
+ \bibitem{clang-usage}
+Cade Metz.
+\newblock Why {A}pple?s swift language will instantly remake computer
+  programming, 204.
+\newblock http://www.wired.com/2014/07/apple-swift/.
+
+%79
 \bibitem{Jackson16}
 Jackson D., Vaziri M.:
 \newblock {\em{ Correct or usable? the limits of traditional verification (impact paper award)}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 11, 2016.
 
-%78
+%80
 \bibitem{MorseCNF13}
 Morse J., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {Handling unbounded loops with {ESBMC} 1.20}}.
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
 
-%79
+%81
 \bibitem{MorseRCN014}
 Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
 \newblock {\em {ESBMC} 1.22.}
 \newblock In: Tools and Algorithms for the Construction and Analysis of
   Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
 
-%80
+%82
 \bibitem{Haran15}
 Haran A., Carter M., Emmi M., Lal A., Qadeer S., Rakamaric Z.:
 \newblock {\em{ SMACK+Corral: A Modular Verifier - (Competition Contribution)}}. 
 \newblock In: 21st International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 451--454, 2015.
 
-%81
+%83
 \bibitem{Beyer16}
 Beyer, D.:
 \newblock {\em{ Reliable and Reproducible Competition Results with BenchExec and Witnesses (Report on SV-COMP 2016)}}. 
 \newblock In: 22nd International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9636, pp. 887--904, 2016.
 
-%82
+%84
 \bibitem{BeyerW15}
 Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
 \newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
 \newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
 
-%83
+%85
 \bibitem{RochaIFM12}
 Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
 \newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
 \newblock In: International Conference on Integrated Formal Methods, LNCS 7321, pp. 128-142, 2012.
 
-%84
+%86
 \bibitem{antennasbrt}
 de Jesus A. S., rodrigues R. N., Ferreira A. N. G., Valente V. H., de Melo W. C., de Lima Filho E. B, da Silva J\'unior W. S.:
 \newblock {\em{Automatic Antenna Alignment System for Satellite Receivers Operating in C and Ku Bands}}. 
 \newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017. (in Portuguese)
 
+%87
 \bibitem{amoedo}
 Amoedo D. A., da Silva J\'unior W. S., de Lima Filho E. A.:
 \newblock {\em{Parameter Selection for SVM in Automatic Modulation Classification of Analog and Digital Signals}}. 
 \newblock In: International Telecommunications Symposium (ITS), pp. 1-5, 2014.
 
+%88
 \bibitem{mlswverif}
 L Hamel:
 \newblock {\em {On the Use of Machine Learning in Formal Software Verification.}} 
 \newblock {Technical Report TR03-294, Dept. of Computer Science and Statistics, University of Rhode Island}, 2003.
 
+%89
 \bibitem{nguyen}
 L Hamel:
 \newblock {\em {The Application of Machine Learning Methods in Software Verification and Validation.}} 
 \newblock {University of Texas at Austin, master of science dissertation}, 2010.
  
+
 \end{thebibliography}
 
 
