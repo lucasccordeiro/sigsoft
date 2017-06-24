@@ -378,7 +378,7 @@ In the same fashion, other problems may benefit from the recursive-refinement ap
 
 Regarding behavior correctness, many other applications can be tackled, such as the ones related to automatic classification. Amoedo {\it et al.} \cite{amoedo} proposed a modulation classification methodology, with the goal of spectrum sensing for opportunistic transmissions. Besides a correct software implementation, {\it i.e.}, source code, which is already covered by formal methods already available in the literature \cite{esbmc_filter,Cordeiro12,Clarke04}, one may argue if the proposed methodology is able to recognize modulations under some reception condition, such as severe analog interference. This way, it would be interesting to develop a verification module for transmission and reception software, which could be capable of creating inputs related to sampled radio frequency signals under a variety of condition, unifying source code and behavior verification. In addition, that kind of implementation usually employs digital filters with specific parameters, which could also be tackled.
 
-Finally, ML techniques are already being used in the software verification area \cite{mlswverif,nguyen}. For instance, Hamel~\cite{mlswverif} proposes to induce a theory, through ML, that fits a test set for a program, in such a way that it implements the respective test set. ML is already being employed in space state reduction and to boost software verification by automatic tuning decision procedures~\cite{babic07}. ML technique can be used also for invariant generation.
+ML techniques are already being used in the software verification area \cite{mlswverif,nguyen,bridge,babic07}. For instance, Hamel~\cite{mlswverif} proposed to induce a theory, through ML, that fits a test set for a program, in such a way that it implements the respective test set. Phuc \cite{nguyen}, in turn, applied decision tree C4.5 and multilayer perceptron to annotated programs (metrics related to structure and semantics) and tackled the generation of test sets satisfying the desired constraints. Finally, Bridge studied the automation of heuristic selection based on features, regarding first-order logic theorem proving, and Hutter {\it et. al} \cite{babic07} showed that ML can be used for improving SAT solvers regarding huge verification tasks, when applied to parameter tuning~\cite{babic07}. Given what was presented, it seems worthwhile to pursue the integration of ML to BMC-based checkers, specifically ESBMC, mainly regarding solver tuning. In addition, ML can also be used for invariant computation and strengthening, which is a major bottleneck in \textit{k}-induction verification based on invariant algorithms. 
 
 %--------------------------------------
 \section{Conclusions}
@@ -388,9 +388,9 @@ Finally, ML techniques are already being used in the software verification area 
 This paper presented the main challenges related to the verification of design correctness, in embedded systems, and also raised some important side considerations about synthesis. In particular, it emphasizes that stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency), along with system behavior models, must be considered during verification and synthesis. Additionally, there is little evidence that model checking embedded software using \textit{k}-induction (and invariants), which
 extends BMC-based approaches from falsification to verification, can be applied to formally verify correctness and timeliness of embedded systems. 
 
-Given that software complexity has significantly increased in embedded products, there are still some (recent) advances to stress and exhaustively cover the system state space, in order to verify low-level properties that have to meet the application's deadline, access memory regions, handle concurrency, and control hardware registers. Besides, there is a trend towards incorporating knowledge about the system to be verified, which may take software verification and synthesis one step further, where not only code correctness will be addressed, but also full system reliability. Finally, it seems interesting to provide behavioral models when new application interfaces or programming language features are used, in order to extend the capabilities of current verification tools, without changing the core BMC module.
+Given that software complexity has significantly increased in embedded products, there are still some (recent) advances to stress and exhaustively cover the system state space, in order to verify low-level properties that have to meet the application's deadline, access memory regions, handle concurrency, and control hardware registers. There is a trend towards incorporating knowledge about the system to be verified, which may take software verification and synthesis one step further, where not only code correctness will be addressed, but also full system reliability. In addition, it seems interesting to provide behavioral models when new application interfaces or programming language features are used, in order to extend the capabilities of current verification tools, without changing the core BMC module. Finally, there are some bottlenecks in software verification that are possible to be handled with machine learning, given some initial studies carried out in the current literature, which may represent another step towards a unified and complete approach that combines code verification, behavior correctness and environment adaptation.
 
-As future work, the main goal of this research is to extend BMC as a design, verification, and synthesis tool for achieving correct-by-construction embedded system implementations. Special attention will be given to cyber-physical systems and modern micro-grids, considering small-scale versions of a distributed system, so that reliability and other system-level properties ({\it e.g.}, carbon emission reduction in smart cities) are amenable to automated verification, probably through behavior models.
+As future work, the main goal of this research is to extend BMC as a design, verification, and synthesis tool for achieving correct-by-construction embedded system implementations. Special attention will be given to cyber-physical systems and modern micro-grids, considering small-scale versions of a distributed system, so that reliability and other system-level properties ({\it e.g.}, carbon emission reduction in smart cities) are amenable to automated verification, probably through behavior models. Additionally, ML techniques will be incorporated to BMC frameworks, in order to provide flexibility and specific-problem tuning.
 
 
 
@@ -937,17 +937,25 @@ Amoedo D. A., da Silva J\'unior W. S., de Lima Filho E. A.:
 
 %88
 \bibitem{mlswverif}
-L Hamel:
+Hamel L.:
 \newblock {\em {On the Use of Machine Learning in Formal Software Verification.}} 
 \newblock {Technical Report TR03-294, Dept. of Computer Science and Statistics, University of Rhode Island}, 2003.
 
+
 %89
 \bibitem{nguyen}
-L Hamel:
+Phuc N. V.,:
 \newblock {\em {The Application of Machine Learning Methods in Software Verification and Validation.}} 
 \newblock {University of Texas at Austin, master of science dissertation}, 2010.
+
+%90
+\bibitem{bridge}
+Bridge J. P.:
+\newblock {\em {Machine learning and automated theorem proving.}} 
+\newblock {Technical Report 792, Computer Laboratory, University of Cambridge}, 2010.
+
  
- %90
+ %91
 \bibitem{babic07}
 Hutter F., Babic D., Hoos H. H., Hu A. J.              
 \newblock {\em{Boosting Verification by Automatic Tuning of Decision Procedures.}}
