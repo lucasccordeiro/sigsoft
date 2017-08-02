@@ -289,15 +289,31 @@ In addition, Shoukry {\it et al.} \cite{Shoukry} tackled another important probl
 %--------------------------------------
 
 Bounded Model Checking (BMC) based on Boolean Satisfiability (SAT) was originally proposed to verify hardware designs~\cite{Biere99,handbook09}. Indeed, Biere {\it et al.} were able to successfully verify large digital circuits with approximately $9510$ latches and $9499$ inputs, leading to BMC formulae with $4 \times 10^6$ variables and $1.2 \times 10^7$ clauses to be checked by standard SAT solvers. BMC based on SMT~\cite{BarrettSST09}, in turn, was originally proposed to deal with increasing software verification complexity~\cite{Armando2009}. 
-
-In general, BMC techniques aim to check the violation of a given (safety) property at a given system depth, as shown in Figure~\ref{bounded-model-checking}. Indeed, given a transition system \textit{M}, which is derived from the control-flow graph of a program, a property $\phi$, which represents program correctness and/or a system's behavior, and an iteration bound \textit{k}, which limits loop unrolling, data structures, and context-switches, BMC techniques thus unfold a system \textit{k} times, in order to convert it into a verification condition $\psi$, which is expressed in propositional logic or in a decidable-fragment of first-order logic, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth less than or equal to \textit{k}.
-
+%
+In general, BMC techniques aim to check the violation of a given (safety) property at a given system depth, as shown in Figure~\ref{bounded-model-checking}. 
+%
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.35]{figure2.eps}
 	\caption{Bounded Model Checking.}
 	\label{bounded-model-checking}
 \end{figure}
+
+Indeed, given a transition system \textit{M}, which is derived from the control-flow graph of a program, a property $\phi$, which represents program correctness and/or a system's behavior, and an iteration bound \textit{k}, which limits loop unrolling, data structures, and context-switches, BMC techniques thus unfold a system \textit{k} times, in order to convert it into a verification condition $\psi$, which is expressed in propositional logic or in a decidable-fragment of first-order logic, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth less than or equal to \textit{k}. The propositional problem associated with SAT-based BMC is formulated by constructing the following formula~\cite{Biere99}:
+%
+\begin{equation}
+\label{bounded-model-checking-biere}
+\psi_{k} = I\left(s_{0}\right) \wedge \bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right) \wedge \neg \phi_{k}
+\end{equation}
+
+\noindent Here, $\phi_{k}$ represents a safety property $\phi$ in step $k$, $I$ is the set of initial states of $M$, $R\left(s_{i},s_{i+1}\right)$ is the transition relation of $M$ at time steps $i$ and $i+1$. Hence, the formula $\bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right)$ represents the set of all executions of $M$ of length $k$. $\neg \phi_{k}$ represents the condition that $\phi$ is violated in state $k$, which is reached by a bounded execution of $M$ of length $k$. Finally, the resulting (bit-vector) formula is translated to conjunctive normal form in linear time and passed to a SAT solver for checking satisfiability. Formula (\ref{bounded-model-checking-biere}) can be used to check safety properties~\cite{PrasadBG05}. Liveness properties (e.g., starvation, deadlock) that contain the LTL operator $F$ are checked by encoding $\neg \phi_{k}$ in a loop within a bounded execution of length at most $k$, such that $\phi$ is violated on each state in the loop. In this case, formula~\ref{bounded-model-checking-biere} can be rewritten as:
+
+%
+\begin{equation}
+\psi_{k} = I\left(s_{0}\right) \wedge \bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right) \wedge \left(\bigvee^{k}_{i=0} \neg \phi_{i}\right)
+\end{equation}
+
+\noindent where $\phi_{i}$ is the propositional variable $\phi$ at time step $i$. Thus, this formula can be satisfied if and only if for some $i$ ($i \leq k$) there exists a reachable state at time step $i$ in which $\phi$ is violated. 
 
 Note that BMC analyzes only bounded program runs, but generates verification conditions (VCs) that reflect the exact path in which a statement is executed, the context in which a given function is called, and the bit-accurate representation of expressions. A verification condition is a logical formula (constructed from the bounded program and desired correctness properties) whose validity implies that the program's behaviour agrees with its specification~\cite{Bradley07}. Correctness properties in programs can be specified by the user via \textit{assert} statements or automatically generated from a specification language~\cite{Thomas01}. If all of a bounded program's VCs are valid, then a program is in compliance with its specification up to the given bound.
 
@@ -397,6 +413,40 @@ Novel verification algorithms for proving correctness of (a large set of) C prog
 It is worth noticing that \textit{k}-induction with invariants has the potential to be directly integrated into existing BMC approaches, given that the induction algorithm itself can be seen as an extension after \textit{k} unwindings and it is possible to generate program invariants with other software modules, which are then translated and instrumented into an input program \cite{Rocha15}.
 
 Nonetheless, there is~little evidence, in the available literature, that model checking hardware and software systems through \textit{k}-induction (and invariants) can be efficiently exploited in embedded-system verification. That happens due to the distinctive characteristics mentioned earlier, which influence embedded system development and also verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination and configuration of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants related to memory and variable aliasing~\cite{Bradley07}.
+
+%------------------------------------------------------
+\subsection{Craig Interpolation}
+\label{sec:CraigInterpolationInModelChecking}
+%------------------------------------------------------
+
+Another feasible alternative to prove properties in BMC is to compute the Craig interpolants for inconsistent pairs (or more generally, sets) of formulae~\cite{McMillan03,McMillan05,McMillan06,McMillan07}. This alternative approach exploits the SAT/SMT solvers' ability to produce refutations, i.e., proofs that there is no counter-example of depth less than or equal to $k$. This proof does not ensure whether a given property holds in the model, but it contains information about the reachable states of the model.
+
+%\begin{prf}\label{interpolants}
+\begin{definition}\label{interpolants}
+\textit{Given a pair of formulae $\left(A,B\right)$, and a proof by resolution for $\left(A,B\right)$, an \textit{interpolant} for $\left(A,B\right)$ is a formula $F$ with the following properties~\cite{McMillan03,McMillan05}: }
+
+\begin{itemize}
+	\item $A \Rightarrow F$
+	\item $F \wedge B$ \textit{is unsatisfiable}
+	\item $F$ \textit{refers only to the common variables of $A$ and $B$}
+\end{itemize}
+\end{definition}
+%\end{prf}
+
+As an example, consider $A = \left(x_1 \wedge x_2\right)$ and $B = \left(\neg x_2 \wedge x_3\right)$. Given that $\left(x_1 \wedge x_2\right)$ must imply $F$ (or simply that $\neg x_1 \vee \neg x_2 \vee F$ hold) and $F \wedge \neg x_2 \wedge x_3$ must be unsatisfiable, one possible interpolant for the given pair of formulae $\left(A,B\right)$ is $F = x_2$ since $x_2$ is also common to both $A$ and $B$. 
+
+The use of interpolants allows us to define a complete method for finite-state reachability analysis based on SAT and SMT solvers. In order to show how BMC and interpolation can be combined, we refer to Section~\ref{Preliminaries} where we define the Formula (\ref{bounded-model-checking-biere}) and the terms $I$, $R$, and $\phi$. Now suppose that $Q=I$ and we partition Formula (\ref{bounded-model-checking-biere}) so that the set of initial states $I$ and the first instance of the transition relation $R$ are in set $A$, while the remaining instances of $R$ and the property $\phi$ are in set $B$ as shown in Figure~\ref{figure:computing-image-by-interpolation} (note that $k$ is unknown).
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.4]{interpolants}
+\caption{Computing image by interpolation~\cite{McMillan03}.}
+\label{figure:computing-image-by-interpolation}
+\end{figure}
+
+
+Suppose that we use an SMT solver to prove that the $A \wedge B$ is unsatisfiable, i.e., we use an SMT solver to conclude that there is no satisfying assignment to $A \wedge B$.\footnote{Note that if at any stage we can satisfy the property $\phi$ within $k$ steps from the initial state, then we have found a counterexample.} The internal steps performed by the SMT solvers for reaching this conclusion can be used to construct a proof of unsatisfiability $\Pi$. From this proof, we can derive an interpolant $F$ for the pair of formulae $\left(A,B\right)$, i.e., $F = interpolant\left(\Pi, A, B\right)$. According to Definition~\ref{interpolants}, $A$ must imply $F$ and since we defined $A$ to be the set of initial states and the first instance of $R$ (i.e., from Figure~\ref{figure:computing-image-by-interpolation}, $A=s_{0} \wedge s_{1}$), it follows that $F$ is \textit{true} in every state reachable from the initial state in one step. In other words, we can say that $F$ is an over-approximation of the forward image of $I$~\cite{McMillan03,McMillan05}. Also according to Definition~\ref{interpolants}, the formula $F \wedge B$ must be unsatisfiable (from Figure~\ref{figure:computing-image-by-interpolation}, $B=s_{2} \wedge s_{3} \wedge \ldots \wedge s_{k}$), which means that there is no state satisfying $F$ that can reach a final state $s_k$. After computing the interpolant $F$, we then check whether $F$ implies $Q$. If $F$ implies $Q$, then no reachable state can satisfy the property $\phi$ and we can thus conclude that the property holds. However, since $F$ is an approximation, we can falsely conclude that the final state is reachable. In this case, we update $Q = F \vee Q$ and $A = F \wedge R_{0}$, increase the value of $k+1$ and check whether $A \wedge B$ is unsatisfiable. If $A \wedge B$ is satisfiable, we have found a valid counter-example (i.e., a path from the initial state to the final state). Otherwise, we compute the interpolant $F = interpolant\left(\Pi, A, B\right)$ again and check whether $F$ implies $Q$. We stop this procedure when we have found a valid counter-example or have proved that the final state is not reachable (i.e., the property holds). The details of the algorithm and further information about the use of interpolants in model checking can be found in~\cite{McMillan03,McMillan05,McMillan06,McMillan07}. 
+
 
 %--------------------------------------
 \subsection{Program Synthesis via Counter-Example \\ Guided Inductive Synthesis (CEGIS)}
