@@ -1,12 +1,57 @@
-\documentclass{acm_sen_article}
+\documentclass[format=acmsmall, review=false, screen=true]{acmart}
 
-
-\usepackage{color}
+\usepackage{booktabs} % For formal tables
+% \usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage{listings}
+\usepackage{hyperref}	
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage[caption=false]{subfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{xcolor,colortbl}
+% \usepackage{cite}
+\newtheorem{mydef}{Definition}
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage[ruled]{algorithm2e} % For algorithms
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
 
-% correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor}
-%\renewcommand{\baselinestretch}{0.93}
+
+% Metadata Information
+\acmJournal{TCPS}
+\acmVolume{9}
+\acmNumber{9}
+\acmArticle{99}
+\acmYear{2017}
+\acmMonth{12}
+\copyrightyear{2017}
+%\acmArticleSeq{9}
+
+% Copyright
+%\setcopyright{acmcopyright}
+\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+% DOI
+\acmDOI{0000001.0000001}
+
+% Paper history
+\received{February 2007}
+\received[revised]{March 2009}
+\received[accepted]{June 2009}
+
 
 \lstset{language=C,basicstyle=\small}
 \lstset{numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt}
@@ -17,6 +62,14 @@
   language={C},
   morekeywords={assert,stdio,math,printf,assume,then,end-if,end,input,output}
 }
+
+\usepackage{color}
+\usepackage{listings}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+%\renewcommand{\baselinestretch}{0.93}
+
 
 \begin{document}
 %
@@ -29,21 +82,51 @@
 \title{Automated Verification and Synthesis of Embedded Systems: Advances and Challenges}
 
 
-% author names and affiliations
-% use a multiple column layout for up to three different
-% affiliations
-\author{Lucas C. Cordeiro \\
-%Department of Computer Science\\
-University of Oxford, UK\\
-lucas.cordeiro@cs.ox.ac.uk
-\and
-Eddie B. de Lima Filho \\
-Samsung Electronics, Brazil \\
-eddie.l@samsung.com
-\and
-Iury V. de Bessa \\
-Federal University of Amazonas, Brazil \\
-iury.bessa@ufam.edu.br}
+\author{Lucas C. Cordeiro}
+\orcid{0000-0002-6235-4272}
+\affiliation{%
+  \institution{Department of Computer Science, University of Oxford}
+%  \streetaddress{Wolfson Building, Parks Rd, Oxford OX1 3QD}
+  \city{Oxford}
+%  \state{VA}
+%  \postcode{23185}
+  \country{UK}}
+
+\author{Eddie B. de Lima Filho}
+\orcid{0000-0002-2758-4638}
+\affiliation{%
+  \institution{TP Vision}
+%  \streetaddress{Wolfson Building, Parks Rd, Oxford OX1 3QD}
+  \city{Manaus}
+%  \state{VA}
+%  \postcode{23185}
+  \country{Brazil}}
+
+\author{Iury V. de Bessa}
+\orcid{0000-0002-2758-4638}
+\affiliation{%
+  \institution{Department of Electricity, Federal University of Amazonas}
+%  \streetaddress{Wolfson Building, Parks Rd, Oxford OX1 3QD}
+  \city{Manaus}
+%  \state{VA}
+%  \postcode{23185}
+  \country{Brazil}}
+
+%% author names and affiliations
+%% use a multiple column layout for up to three different
+%% affiliations
+%\author{Eddie B. de Lima Filho \\
+%%Department of Computer Science\\
+%University of Oxford, UK\\
+%lucas.cordeiro@cs.ox.ac.uk
+%\and
+%Eddie B. de Lima Filho \\
+%Samsung Electronics, Brazil \\
+%eddie.l@samsung.com
+%\and
+%Iury V. de Bessa \\
+%Federal University of Amazonas, Brazil \\
+%iury.bessa@ufam.edu.br}
 %\IEEEauthorblockN{Homer Simpson}
 %\IEEEauthorblockA{Twentieth Century Fox\\
 %Springfield, USA\\
@@ -89,7 +172,35 @@ The dependency on the correct operation of embedded systems is rapidly growing, 
 \end{abstract}
 
 %\IEEEpeerreviewmaketitle
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10010405.10010432.10010439.10010440</concept_id>
+<concept_desc>Applied computing~Computer-aided design</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010520.10010553</concept_id>
+<concept_desc>Computer systems organization~Embedded and cyber-physical systems</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010178.10010213.10010214</concept_id>
+<concept_desc>Computing methodologies~Computational control theory</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+<concept>
+<concept_id>10002944.10011122.10002945</concept_id>
+<concept_desc>General and reference~Surveys and overviews</concept_desc>
+<concept_significance>100</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
 
+\ccsdesc[500]{Applied computing~Computer-aided design}
+\ccsdesc[500]{Computer systems organization~Embedded and cyber-physical systems}
+\ccsdesc[300]{Computing methodologies~Computational control theory}
+\ccsdesc[100]{General and reference~Surveys and overviews}
 
 %--------------------------------------
 \section{Introduction}
@@ -97,7 +208,7 @@ The dependency on the correct operation of embedded systems is rapidly growing, 
 
 Generally, embedded computer systems perform dedicated functions with a high degree of reliability, according to their original design and requirements ({\it e.g.}, real-time). They are ubiquitous in modern day information systems and are also becoming increasingly important in our society, due to their use to process, monitor, control, and even replace every human activity: factories, power plants, mobile devices, robotics, traffic control, vehicles, and home appliances. Besides, they are also used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers~\cite{Kopetz11}. 
 
-The interaction between embedded software and physical processes created a different class of systems, which are complex, highly integrated, and present a mixture of continuous and discrete dynamics, named as \textit{hybrid systems}. Indeed, the embedded-system domain allied to the most recent communication revolution caused an intense integration between different and spread physical processes (that are usually embedded systems), which are called cyber-physical systems (CPSs). 
+The interaction between embedded software and physical processes created a different class of systems, which are complex, highly integrated, and present a mixture of continuous and discrete dynamics, named as \textit{hybrid systems} (HSs). Indeed, the embedded-system domain allied to the most recent communication revolution caused an intense integration between different and spread physical processes (that are usually embedded systems), which are called cyber-physical systems (CPSs). 
 
 The main difference between embedded systems and CPSs is indeed the strong presence of modern communication technologies ({\it e.g.}, internet of things - IoT) in the latter. This simple difference causes a revolution in terms of flexibility, scalability, and complexity of those systems and adds a novel class of problems to the challenges found in the embedded systems domain. For example, micro-grids, {\it i.e.}, small-scale electricity systems that gather different sources of distributed generation (DG) and loads, are emerging CPSs, where reliability and carbon emission reduction are of paramount importance~\cite{xu15}. One may also notice that each DG element and the majority of current loads already employ embedded software and present several safety-critical requirements; however, the integration of both constitute a CPS, where additional challenges related to synchronization, stability, control, communication, and reliability of the entire micro-grid arise.
 
@@ -123,26 +234,61 @@ A number of distinctive characteristics might influence the embedded system deve
 The goals of the present article is to briefly present part of the established research and also clarify current trends, which are mainly driven by CPSs, IoT, and ML. We present a brief discussion about models for CPS, in Section \ref{sec:model}, and then cover preliminaries on bounded model checking, \textit{k}-induction verification based on invariant inference, counter-example guided inductive synthesis, and system model incorporation, in Section~\ref{Preliminaries}. In Section~\ref{Verification-Challenges}, the main challenges regarding verification and synthesis of embedded systems are described, while Section~\ref{Research-Problem} tackles those challenges that are (partially) open in current published research. Section~\ref{achievements} then describes current achievements and future trends in verification and synthesis of embedded \& cyber-physical systems and Section \ref{Newapp} addresses new applications, which take into account the new trends mentioned here. Finally, we conclude and describe future work in Section~\ref{conclusions}.
 
 %--------------------------------------
-\section{A model for Cyber-physical systems}
+\section{Automated Verification and Synthesis of Cyber-physical systems}
 \label{sec:model}
+%--------------------------------------
+
+Automated and formal verification have been employed to ensure the correctness and reliability of CPS during the last decade, as well as controller synthesis for CPS and HS. A CPS $S$ is a tuple $S=(X,X_{0},U,Y,r,v)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, $Y$ is the set of outputs, $r$ is a transition function such that $r:X\times U \rightarrow X$, and  $v$ is an output mapping function such that $v:X\times U \rightarrow Y$~\cite{Rungger16,Alur00,Girard11}.
+
+The overall process of formal and automated synthesis for CPS and HS involves three main steps: modeling, that is related to obtain a sound mathematical representation that is able to capture all the relevant aspects of continuous and discrete dynamics and their interaction, as well as formulate properties and invariants that describe the desirable behavior; verification, where the CPS behavior is checked through the proposed mathematical structure and the attendance of the desired behavior is verified; and, finally, the controller synthesis itself, that produces a controller or finds invariant control laws that are able to make the CPS, modeled according to the first step (modeling), meets the requirements and behaves as desired, as confirmed by the verification step. 
+
+
+%--------------------------------------
+\subsection{A model for Cyber-physical systems}
+\label{ssec:model}
 %--------------------------------------
 
 Models are largely employed in science and engineering areas, in order to analyze, predict, and modify the behavior of real-world systems. Specially, deterministic and stochastic models are the basis of many recent engineering advances. The former is uniquely determined by parameter values and previous states, while the latter presents inherent randomness, which is described by probability distributions~\cite{stochmodel}. Nonetheless, one can argue that such models are not enough to represent CPSs, since interaction among different entities (software and hardware components) presents several events that could not be deterministically or stochastically modeled; they can be better represented by nondeterministic approaches~\cite{leeCPS2}. Indeed, that is even more evident when unknown properties are addressed, such as human behavior.
 
 On the one hand, early representations of hybrid systems, {\it i.e.}, systems that mix continuous and discrete dynamics, consisted in instantiating discrete components and discretized continuous dynamics by using discrete models and considering non-modeled effects as uncertainties or perturbations exogenous to them, which can even be negligible. On the other hand, that approach is not suitable for complex CPSs that present intense nondeterminism, where uncertainties play a central role and might invalidate the entire system behavior.
 
-CPSs have been modeled through different structures that present different degrees of nondeterminism and balance between continuous and discrete dynamics, such as timed automata (\textcolor{red}{CITAR}) and hybrid automata (\textcolor{red}{CITAR}). Rungger and Tabuada (\textcolor{red}{CITAR TAC 2016}) proposed a general and wide model for CPS. Following their proposal, a CPS $S$ is a tuple $S=(X,X_{0},U,r)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, and $r$ is a transition function, such that $r:X\times U \rightarrow X$.
+CPSs have been modeled through different structures that present different degrees of nondeterminism and balance between continuous and discrete dynamics, such as timed automata~\cite{Alur94}, hybrid automata~\cite{Alur93,Henzinger95}, and stochastic hybrid automata~\cite{Julius09,Ghosh05,Pola03}.
 
-\textcolor{red}{seria legal falar que nao determinismo pode ser tratado com model checking e ligar com o nosso trabalho... inclusive , o tabuada tem um artigo falando sobre seguranca e SMT, que eu comentei abaixo}
+Timed automata employ finite automata with clocks, {\it i.e.}, real variables that follow continuous trajectories with constant slope. Hybrid automata generalize timed automata, also employing finite automata with real variables whose trajectories follow more general dynamical laws~\cite{Henzinger95}.  Timed automata and hybrid automata are deterministic model for hybrid systems that built the basis of HS representations, which were subdivided into different classes of hybrid automata depending on the mapping functions ($r$ and $v$), {\it e.g.}, linear hybrid automata~\cite{Lafferriere99}, rectangular hybrid automata~\cite{Puri94,Henzinger95}, nonlinear hybrid automata~\cite{Henzinger95NL,Broucke1997}, integration graphs~\cite{Kesten1993}, and linear stochastic hybrid automata~\cite{Julius09}. 
+
+
+Rungger and Tabuada~\cite{Rungger16} and Tabuada et al.~\cite{Tabuada14} proposed a general and wide model for CPS based on hybrid automata, providing the concept of robustness and important tools for robust stability analysis for CPS.
+
+%Following their proposal, a CPS $S$ is a tuple $S=(X,X_{0},U,Y,r,t)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, and $r$ is a transition function, such that $r:X\times U \rightarrow X$.
+
+
+
+%\textcolor{red}{seria legal falar que nao determinismo pode ser tratado com model checking e ligar com o nosso trabalho... inclusive , o tabuada tem um artigo falando sobre seguranca e SMT, que eu comentei abaixo}
+
+
+
+
+%--------------------------------------
+\subsection{Automated and Formal Verification of Cyber-physical systems}
+\label{ssec:verification}
+%--------------------------------------
+
+Given a class of CPS's $\Omega$ and a set $\Phi$ of desired properties, a class of verification problems is called decidable, if there is an algorithm that is able to decide in a finite number of steps whether $\forall \mathcal{O}\in\Omega$ satisfies every property $\mathcal{L}\in \Phi$~\cite{Alur00}. Decidability is a key issue in CPS verification, since there are uncountable states and complex dynamics to be considered, {\it i.e.}, hybrid automata and their variations (usually employed to model CPS) are infinite-state machines~\cite{Henzinger95}. Generally, the properties that must be hold for CPS are related to safety, liveness, and reachability. In particular, model checking procedures have been employed to verify these properties of model programs even under undecidability conditions via approximations, {\it e.g.} bounding the number of steps from the initial state, which leads to bounded model checking~\cite{Veanes09}.
 
 In addition, Shoukry {\it et. al} \cite{Shoukry} tackled another important problem related to CPSs: security. Indeed, the essence of CPSs claims for sophisticated interfacing ({\it e.g.}, sensors and network connections), which normally leads to security issues~\cite{cpsattack}, given that wrong control actions can be generated through corrupted measurements. The mentioned authors proposed a methodology for estimating the state of physical systems, through formal methods, even if sensor inputs are contaminated with erroneous or intentionally corrupted data, in order to still be able to execute suitable control commands. Indeed, many situations can be regarded as satisfiability problems and solved, for instance, with approaches based on Satisfiability Modulo Theories (SMT)~\cite{Araujo16} \textcolor{red}{eh bom citar mais fontes}, which indicates many links with other research areas and might lead to a unified approach regarding system verification, security enforcement, and interaction handling.
+
+%--------------------------------------
+\subsection{Control synthesis of Cyber-physical systems}
+\label{ssec:synthesis}
+%--------------------------------------
+
 
 %--------------------------------------
 \section{Bounded Model Checking (BMC)}
 \label{Preliminaries}
 %--------------------------------------
 
-Bounded Model Checking (BMC) based on Boolean Satisfiability (SAT) was originally proposed to verify hardware designs~\cite{Biere99,handbook09}. Indeed, Biere {\it et al.} were able to successfully verify large digital circuits with approximately $9510$ latches and $9499$ inputs, leading to BMC formulae with $4 \times 10^6$ variables and $1.2 \times 10^7$ clauses to be checked by standard SAT solvers. BMC based on SMT~\cite{BarrettSST09}, in turn, was originally proposed to deal with increasing software verification complexity~\cite{Armando06}. 
+Bounded Model Checking (BMC) based on Boolean Satisfiability (SAT) was originally proposed to verify hardware designs~\cite{Biere99,handbook09}. Indeed, Biere {\it et al.} were able to successfully verify large digital circuits with approximately $9510$ latches and $9499$ inputs, leading to BMC formulae with $4 \times 10^6$ variables and $1.2 \times 10^7$ clauses to be checked by standard SAT solvers. BMC based on SMT~\cite{BarrettSST09}, in turn, was originally proposed to deal with increasing software verification complexity~\cite{Armando2009}. 
 
 In general, BMC techniques aim to check the violation of a given (safety) property at a given system depth, as shown in Figure~\ref{bounded-model-checking}. Indeed, given a transition system \textit{M}, which is derived from the control-flow graph of a program, a property $\phi$, which represents program correctness and/or a system's behavior, and an iteration bound \textit{k}, which limits loop unrolling, data structures, and context-switches, BMC techniques thus unfold a system \textit{k} times, in order to convert it into a verification condition $\psi$, which is expressed in propositional logic or in a decidable-fragment of first-order logic, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth less than or equal to \textit{k}.
 
@@ -211,7 +357,7 @@ Apart from that, this program has an exponential number of paths, since each ele
               \\           
 \end{equation}
 
-The ternary operator $f \: \: ? \: \: t_1 : t_2$, shown in Figure~\ref{figure:verification-condition}(b), is converted into the conditional expression $\mathit{ite}(f, t_1, t_2)$ that takes as its first argument the Boolean formula $f$ and, depending on its value, selects either the second (i.e., $t_1$) or the third argument (i.e., $t_2$). In order to verify that the assertion $a<=N$ holds, its negation is added to $\psi$ and it is checked whether the entire formula is satisfiable, through an off-the-self SMT solver. Formula (\ref{verification-condition-example}) can be represented simply as a Boolean logic circuit, which can be further transformed into a (equisatisfiable) CNF formula over propositional variables, by Tseitin's transform~\cite{Tseitin83} in linear time and by introducing at most a linear number of fresh variables; however, checking the validity of a first-order logic formula, in a given background theory, is an ${\cal NP}$-complete problem~\cite{PatarinG97}).
+The ternary operator $f \: \: ? \: \: t_1 : t_2$, shown in Figure~\ref{figure:verification-condition}(b), is converted into the conditional expression $\mathit{ite}(f, t_1, t_2)$ that takes as its first argument the Boolean formula $f$ and, depending on its value, selects either the second (i.e., $t_1$) or the third argument (i.e., $t_2$). In order to verify that the assertion $a<=N$ holds, its negation is added to $\psi$ and it is checked whether the entire formula is satisfiable, through an off-the-self SMT solver. Formula (\ref{verification-condition-example}) can be represented simply as a Boolean logic circuit, which can be further transformed into a (equisatisfiable) CNF formula over propositional variables, by Tseitin's transform~\cite{Tseitin83} in linear time and by introducing at most a linear number of fresh variables; however, checking the validity of a first-order logic formula, in a given background theory, is an ${\mathcal{NP}}$-complete problem~\cite{PatarinG97}).
 
 From the practical point of view, SAT- or SMT-based BMC procedures have been successfully applied to verify a large number of hardware and software systems, including digital circuits and single- and multi-threaded programs. Those BMC techniques were able to find subtle bugs in real digital and embedded software systems, as reported in the available literature~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. Nonetheless, the main criticism with respect to BMC techniques relies on completeness, since they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. 
 
@@ -351,9 +497,9 @@ Section~\ref{achievements} outlines contributions toward such research problems.
 \label{achievements}
 %--------------------------------------
 
-\textbf{(RP1)} Cordeiro, Fischer, and Marques-Silva proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{cudalucas,Pereira15}, and Qt-based consumer electronics applications~\cite{Sousa15}. This approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing ones are still limited to specific program classes, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers, propose background theories, and develop more efficient decision procedures, in order to handle specific program classes.
+\textbf{(RP1)} Cordeiro, Fischer, and Marques-Silva proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{cudalucas,Pereira17}, and Qt-based consumer electronics applications~\cite{Sousa15}. This approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing ones are still limited to specific program classes, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers, propose background theories, and develop more efficient decision procedures, in order to handle specific program classes.
 
-\textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro, Fischer, and Marques-Silva was further developed to verify correct lock acquisition ordering and the absence of deadlocks, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira15}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prune the state-space exploration~\cite{Inverso14,civl15}; however, the classes of concurrent programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores~\cite{Grumberg05}, with the goal to remove redundant behaviour or analyze interpolants~\cite{McMillan11} to prove non-interference of context switches.
+\textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro, Fischer, and Marques-Silva was further developed to verify correct lock acquisition ordering and the absence of deadlocks, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira17}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up the verification time, which significantly prune the state-space exploration~\cite{Inverso14,civl15}; however, the classes of concurrent programs ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores~\cite{Grumberg05}, with the goal to remove redundant behaviour or analyze interpolants~\cite{McMillan11} to prove non-interference of context switches.
 
 \textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated in the literature, which demonstrate its effectiveness in some real-life embedded-system applications~\cite{Gadelha15,Brain15,Rocha15,Donaldson10,Rocha17}; however, the main challenge remains still open, {\it i.e.}, to compute and strengthen loop invariants to prove program correctness and timeliness in a more efficient and effective way, in order to be competitive with other model-checking approaches. In particular, invariant-generation algorithms have substantially evolved over the last years, with the goal of discovering inductive invariants of programs~\cite{pips:2013,Henry:2012} or continuously refine them during verification~\cite{Beyer15}; however, there is still a lack of studies for exploiting the combination of different invariant-generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities) and how to strengthen them during verification, in order to ensure system robustness w.r.t. implementation aspects. Finally, optimal configurations for invariant generators are still of paramount importance, given that applications with code based on different aspects may benefit from different setups.
 
@@ -392,6 +538,8 @@ Given that software complexity has significantly increased in embedded products,
 
 As future work, the main goal of this research is to extend BMC as a design, verification, and synthesis tool for achieving correct-by-construction embedded system implementations. Special attention will be given to cyber-physical systems and modern micro-grids, considering small-scale versions of a distributed system, so that reliability and other system-level properties ({\it e.g.}, carbon emission reduction in smart cities) are amenable to automated verification, probably through behavior models. Additionally, ML techniques will be incorporated to BMC frameworks, in order to provide flexibility and specific-problem tuning.
 
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
 
 
 % conference papers do not normally have an appendix
@@ -408,558 +556,558 @@ As future work, the main goal of this research is to extend BMC as a design, ver
 \begin{thebibliography}{1}
 
 %1
-\bibitem{Kopetz11}
-H.~Kopetz:
-\newblock {\em {Real-Time Systems - Design Principles for Distributed Embedded Applications}}.
-\newblock Real-Time Systems Series, Springer, ISBN 978-1-4419-8236-0, pp. 1--376, 2011.
-
-%2
-\bibitem{xu15}
-Xua X., Jiaa H., Wanga D., Yub D., Chiangc H.:
-\newblock {\em {Hierarchical energy management system for multi-source multi-product microgrids}}.
-\newblock In: Renewable Energy, v. 78, pp. 621--630, 2015.
-
-%3
-\bibitem{leeCPS}
-Lee E.:
-\newblock {\em {Cyber-physical Systems: Design Challenges}}.
-\newblock In: International Symposium on Object Oriented Real-Time Distributed Computing, pp. 363--369, 2008.
-
-%4
-\bibitem{leeCPS2}
-Lee E.:
-\newblock {\em {The Past, Present and Future of Cyber-Physical Systems: A Focus on Models}}. 
-\newblock In: Sensors 15(3): pp. 4837--4869, 2015.
-
-%5
-\bibitem{groza2015formal}
-Groza A., Letia I., Goron A., Zaporojan S.: 
-\newblock {\em {A formal approach for identifying assurance deficits in unmanned aerial vehicle software}}.
-\newblock In: Progress in Systems Engineering, Springer, pp. 233--239, 2015.
-
-%6
-\bibitem{Cordeiro09}
-Cordeiro L., Fischer B., Chen H., Marques-Silva J.:
-\newblock {\em {Semiformal Verification of Embedded Software in Medical Devices Considering Stringent Hardware Constraints}}.
-\newblock In: International Conference on Embedded Software and Systems, pp. 396--403, 2009.
-
-%7
-\bibitem{munir}
-Munir S., Stankovic J. A., Liang C.-J. M., Lin S.:
-\newblock {\em {Cyber Physical System Challenges for Human-in-the-Loop Control}}. 
-\newblock In: 8th International Workshop on Feedback Computing, pp. 1--4, 2013.
-
-%8
-\bibitem{Abate17}
-Abate A., Bessa I., Cattaruzza D., Cordeiro L., David C., Kesseli P., Kroening D.:
-\newblock {\em {Sound and Automated Synthesis of Digital Stabilizing Controllers for Continuous Plants}}.
-\newblock In: 20th ACM International Conference on Hybrid Systems: Computation and Control, 2017 (to appear).
-
-%9
-\bibitem{ldd}
-Witkowski T., Blanc N., Kroening D., Weissenbacher G.:
-\newblock {\em {Model checking concurrent linux device drivers}}.
-\newblock In: 22nd IEEE/ACM international conference on Automated software engineering, pp. 501--504, 2007.
-
-%10
-\bibitem{mlembe}
-S.~Virtanen:
-\newblock {\em {Advancing Embedded Systems and Real-Time Communications with Emerging Technologies}}.
-\newblock IGI Global, ISBN 978-1466660342, pp. 1--502, 2014.
-
-%11
-\bibitem{Kroening15}
-Kroening D., Liang L., Melham T., Schrammel P., Tautschnig M.:
-\newblock {\em {Effective Verification of Low-Level Software with Nested Interrupts}}. 
-\newblock In: Design, Automation and Test in Europe, pp. 229--234, 2015.
-
-%12
-\bibitem{cudalucas}
-Monteiro F. R., da Silva Alves E. H., Silva I. S., Ismail H., Cordeiro L. C., de Lima Filho E. B.:
-\newblock {\em {ESBMC-GPU A Context-Bounded Model Checking Tool to Verify CUDA Programs}}. 
-\newblock In: Science of Computer Programming xx(y): pp. xxxx--xxxx, 2017.
-
-%13
-\bibitem{stochmodel}
-Bargmann H.:
-\newblock {\em {The role of stochastic modelling in engineering science}}.
-\newblock In: Acta Mecanica 125(1), pp. 63--71, 1997.
-
-%14
-\bibitem{Shoukry}
-Shoukry Y., Nuzzo P., Puggelli A., Sangiovanni-Vincentelli A. L., Seshia S. A., Tabuada P.:
-\newblock {\em {Secure State Estimation for Cyber Physical Systems Under Sensor Attacks: A Satisfiability Modulo Theory Approach}}.
-\newblock {IEEE} Trans. Automatic Control PP(99), pp. 1--16, 2017.
-
-%15
-\bibitem{cpsattack}
-Liu Y., Ning P., Reiter M. K.:
-\newblock {\em {“False data injection attacks against state estimation in electric power grid}}.
-\newblock In: ACM Conference on Computer and Communications Security, pp. 21--32, 2009.
-
-%16
-\bibitem{Araujo16}
-Araujo, R., Bessa, I., Cordeiro, L., Chaves Filho, J.:
-\newblock {\em{ SMT-based Verification Applied to Non-convex Optimization Problems}}. 
-\newblock In: VI Brazilian Symposium on Computing Systems Engineering, 2016 (to appear).
-
-%17
-\bibitem{Biere99}
-Biere A., Cimatti A., Clarke E., Zhu Y.:
-\newblock {\em {Symbolic Model Checking without BDDs}}. 
-\newblock In: Tools and Algorithms for Construction and Analysis of Systems, LNCS 1579, pp. 193--207, 1999.
-
-%18
-\bibitem{handbook09}
-Biere A., Heule M., van Maaren H., Walsh T., eds.:
-\newblock {\em {Handbook of Satisfiability}}.
-\newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
-
-%19
-\bibitem{BarrettSST09}
-Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
-\newblock {\em {Satisfiability Modulo Theories}}. 
-\newblock In: Volume 185 of Frontiers in Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
-
-%20
-\bibitem{Armando06}
-Armando A., Mantovani J., Platania L.:
-\newblock {\em {Bounded Model Checking of Software Using SMT Solvers Instead of SAT Solvers}}. 
-\newblock In: {SPIN} Workshop on Model Checking Software, LNCS 3925, pp. 146-162, 2006.
-
-%21
-\bibitem{Bradley07}
-Bradley A., Manna Z.:
-\newblock {\em {The calculus of computation - decision procedures with applications to verification}}. 
-\newblock In: Springer, pp. I-XV, pp. 1--366, 2007.
-
-%22
-\bibitem{Thomas01}
-Thomas Ball and Sriram~K. Rajamani.
-\newblock {\em SLIC: A Specification Language for Interface Checking (of C)}.
-\newblock Technical Report MSR-TR-2001-21, Microsoft Research, 2001.
-
-%23
-\bibitem{Strichman08}
-Daniel Kroening and Ofer Strichman.
-\newblock {\em Decision Procedures: An Algorithmic Point of View}.
-\newblock Springer Publishing Company, Incorporated, 2008.
-
-%24
-\bibitem{Appel97}
-Andrew~W. Appel.
-\newblock {\em Modern Compiler Implementation in C: Basic Techniques}.
-\newblock Cambridge University Press, New York, NY, USA, 1997.
-
-%25
-\bibitem{Tseitin83}
-G.~S. Tseitin.
-\newblock On the complexity of derivation in propositional calculus.
-\newblock In {\em In J. Siekmann and G. Wrightson, editors, Automation of
-  Reasoning 2: Classical Papers on Computational Logic 1967-1970}.
- 
- %26
- \bibitem{PatarinG97}
-Jacques Patarin and Louis Goubin.
-\newblock Trapdoor one-way permutations and multivariate polynominals.
-\newblock In {\em ICICS}, {\em LNCS} 1334, pages 356--368. Springer, 1997. 
-
-%27
-\bibitem{Clarke04}
-Clarke E., Kroening D., Lerda F.:
-\newblock {\em {A Tool for Checking {ANSI-C} Programs}}.
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems. LNCS 2988, Springer Berlin Heidelberg, pp. 168--176, 2004.
-
-%28
-\bibitem{MerzFS12}
-Merz F., Falke S., Sinz C.:
-\newblock {\em {{LLBMC}: Bounded Model Checking of {C} and {C++} Programs using a Compiler {IR}}}.
-\newblock In: International Conference on Verified Software: Theories, Tools, Experiments. LNCS 7152, pp. 146--161, 2012.
-
-%29
-\bibitem{CordeiroF11}
-Cordeiro L., Fischer B.:
-\newblock {\em {Verifying Multi-threaded Software using {SMT}-based Context-Bounded Model Checking}}.
-\newblock In: International Conference on Software Engineering. pp. 331--340, 2011.
-
-%30
-\bibitem{Ivancic05}
-Ivanicic F., Shlyakhter I., Gupta A., Ganai, M.K.:
-\newblock {\em {Model Checking {C} Programs using {F-Soft}}}.
-\newblock In: International Conference on Computer Design: VLSI in Computers and Processors, pp. 297--308, 2005.
-
-%31
-\bibitem{Cordeiro12}
-Cordeiro L., Fischer B., Marques{-}Silva J.:
-\newblock {\em {{SMT}-based Bounded Model Checking for Embedded {ANSI-C} Software}}.
-\newblock {IEEE} Trans. Software Eng. 38(4), pp. 957--974, 2012.
-
-%32
-\bibitem{EenS03}
-E{\'{e}}n, N., S{\"{o}}rensson, N.:
-\newblock {\em {Temporal Induction by Incremental {SAT} Solving}}.
-\newblock Electronic Notes in Theoretical Computer Science 89(4), pp. 543 -- 560, 2003.
-
-%33
-\bibitem{Sheera00}
-Sheeran M., Singh S., St{\aa}lmarck G.:
-\newblock {\em {Checking Safety Properties using Induction and a {SAT}-solver}}.
-\newblock In: International Conference on Formal Methods in Computer-Aided Design. Springer-Verlag, pp. 108--125, 2000.
-
-%34
-\bibitem{4610935}
-{IEEE} standard for floating-point arithmetic.
-\newblock {\em IEEE Std 754-2008}, pages 1--70, Aug 2008.
-
-%35
-\bibitem{Goldberg91whatevery}
-David Goldberg.
-\newblock What every computer scientist should know about floating point
-  arithmetic.
-\newblock {\em ACM Computing Surveys}, 23(1):5--48, 1991.
-
-%36
-\bibitem{pips:2013}
-ParisTech M.:
-\newblock {\em {PIPS: Automatic Parallelizer and Code Transformation Framework}}. 
-\newblock Accessed 21 February 2016
-
-%37
-\bibitem{Henry:2012}
-Henry J., Monniaux D., Moy M.: 
-\newblock {\em {PAGAI: A Path Sensitive Static Analyser}}. 
-\newblock In: Electronic Notes in Theoretical Computer Science, pp. 15--25, 2012.
-
-%38
-\bibitem{Beyer15}
-Beyer D., Dangl M., Wendler P.:
-\newblock {\em {Boosting \textit{k}-Induction with Continuously-Refined Invariants}}.
-\newblock In: International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
-
-%39
-\bibitem{Gadelha15}
-Gadelha M., Ismail H., Cordeiro L.:
-\newblock {\em {Handling Loops in Bounded Model Checking of C Programs via \textit{k}-Induction}}.
-\newblock In: International Journal on Software Tools for Technology Transfer (to appear), 2015.
-\newblock http://dx.doi.org/10.1007/s10009-015-0407-9
-
-%40
-\bibitem{Brain15}
-Brain M., Joshi S., Kroening D., Schrammel P.:
-\newblock {\em {Safety Verification and Refutation by k-Invariants and \textit{k}-Induction}}.
-\newblock In: International Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
-
-%41
-\bibitem{Rocha15}
-Rocha H., Ismail H., Cordeiro L., Barreto R.:
-\newblock {\em {Model Checking Embedded C Software using \textit{k}-Induction and Invariants}}.
-\newblock In: V Brazilian Symposium on Computing Systems Engineering, pp. 90--95, 2015.
-
-%42
-\bibitem{Kinductor}
-Donaldson A., Haller L., Kroening D., R{\"{u}}mmer, P.:
-\newblock {\em {Software Verification using \textit{k}-Induction}}.
-\newblock In: International Symposium on Static Analysis. LNCS 6887, pp. 351--368, 2011.
-
-%43
-\bibitem{Rocha17}
-Rocha, W., Rocha, H., Ismail H., Cordeiro, L., Fischer, B.:
-\newblock {\em {DepthK: A \textit{k}-Induction Verifier Based on Invariant Inference for C Programs}}. 
-\newblock In: International Conference on Tools and Algorithms for the Construction and Analysis of Systems, 2017 (to appear).
-
-%44
-\bibitem{Donaldson10}
-Donaldson A., Kroening D., R{\"{u}}mmer P.:
-\newblock {\em {{SCRATCH}: A Tool for Automatic Analysis of {DMA} Races}}.
-\newblock In: ACM Symposium on Principles and Practice of Parallel Programming. ACM, pp. 311--312, 2011.
-
-%45
-\bibitem{GrosseLD09}
-Gro{\ss}e D., Le H., Drechsler R.:
-\newblock {\em {Induction-based Formal Verification of {SystemC TLM} Designs}}.
-\newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
-
-%46
-\bibitem{David15}
-C.~David, D.~Kroening, and M.~Lewis.
-\newblock {\em {Using program synthesis for program analysis}}.
-\newblock In: Logic for Programming, Artificial Intelligence, and Reasoning, LNCS 9450, pp. 483--498, 2015.
-
-%47
-\bibitem{Alur13}
-Alur R., Bod\'{\i}k R., Juniwal G., Martin M., Raghothaman M., Seshia S., Singh R., Solar-Lezama A., Torlak E., Udupa A.:
-\newblock {\em {Syntax-guided synthesis}}. 
-\newblock In: Formal Methods in Computer-Aided Design, pp. 1--8, 2013.
-
-%48
-\bibitem{sketch}
-A.~Solar-Lezama.
-\newblock {\em {Program sketching}}.
-\newblock In: International Journal on Software Tools for Technology Transfer, 15(5-6):475--495, 2013.
-
-%49
-\bibitem{Sharma14}
-R.~Sharma and A.~Aiken.
-\newblock {\em {From invariant checking to invariant inference using randomized search}}.
-\newblock In: Computer Aided Verification, LNCS 8559, pp. 88--105, 2014.
-
-%50
-\bibitem{dsv_spin2015}
-Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
-\newblock {\em {DSVerifier: A Bounded Model Checking Tool for Digital Systems}}. 
-\newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
-
-%51
-\bibitem{Monteiro16}
-F.~Monteiro:
-\newblock {\em {Bounded model checking of state-space digital systems: the impact of finite word-length effects on the implementation of fixed-point digital controllers based on state-space modeling}}. 
-\newblock In: 24th {ACM} {SIGSOFT} International Symposium on Foundations of Software Engineering, pp. 1151--1153, 2016.
-
-%52
-\bibitem{Bessa17}
-Bessa, I., Ismail, H., Palhares, R., Cordeiro, L., Chaves Filho, J.:
-\newblock {\em {Formal Non-Fragile Stability Verification of Digital Control Systems with Uncertainty}}. 
-\newblock In: IEEE Transactions on Computers, 2017 (to appear).
-
-%53
-\bibitem{selfcar}
-Fairley P.:
-\newblock {\em {Self-Driving Cars Have a Bicycle Problem}}.
-\newblock http://spectrum.ieee.org/transportation/self-driving/selfdriving-cars-have-a-bicycle-problem.
-
-%54
-\bibitem{BMCml}
-L.~Bortolussi, D. Milios, G, Sanguinetti.:
-\newblock {\em {Smoothed model checking for uncertain Continuous-Time Markov Chains}}.
-\newblock In:. Information and Computation, 2016.
-
-%55
-\bibitem{Behrend15}
-Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
-\newblock {\em {Scalable and Optimized Hybrid Verification of Embedded Software}}. 
-\newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
-
-%56
-\bibitem{Lettnin09}
-Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Sch{\"o}nknecht V., Reitemeyer S.:
-\newblock {\em {Semiformal Verification of Temporal Properties in Automotive Hardware Dependent Software}}. 
-\newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
-
-%57
-\bibitem{Adouane16}
-Vilca J., Adouane L., Mezouar Y.:
-\newblock {\em {Optimal Multi-Criteria Waypoint Selection for Autonomous Vehicle Navigation in Structured Environment}}. 
-\newblock In: Journal of Intelligent and Robotic Systems 82(2): pp. 301--324, 2016.
-
-%58
-\bibitem{ECBS13}
-Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
-\newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
-\newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
-
-%59
-\bibitem{Pereira15}
-Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
-\newblock {\em {Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking}}.
-\newblock In: ACM Symposium on Applied Computing, Software Verification and Testing Track, pp. 1648-1653, 2016. 
-
-%60
-\bibitem{Sousa15}
-Sousa F., Cordeiro L., Lima Filho E.: 
-\newblock {\em { Bounded Model Checking of C++ Programs Based on the Qt Framework.}} 
-\newblock In: Global Conference on Consumer Electronics, pp. 179--180, 2015.
-
-%61
-\bibitem{Beyer14}
-D.~Beyer 
-\newblock {\em {Status report on software verification - (competition summary {SV-COMP})}}. 
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
- 
-%62
-\bibitem{BeyerSVCOMP15}
-D.~Beyer:
-\newblock {\em {Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).}} 
-\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
-
-%63
-\bibitem{KahlonWG09}
-Kahlon V., Wang C., Gupta A.:
-\newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
-\newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
-
-%64
-\bibitem{morse15}
-J.~Morse.
-\newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
-\newblock {University of Southampton, PhD Thesis}, 2015.
-
-%65
-\bibitem{Inverso14}
-Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
-\newblock {\em {Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}}
-\newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
-
-%66
-\bibitem{civl15}
-Zheng M, Rogers M, Luo Z, Dwyer M, Siegel S.
-\newblock {\em{{CIVL}: Formal Verification of Parallel Programs}}.
-\newblock In: International Conference on Automated Software Engineering, pp. 830--835, 2015.
-
-%67
-\bibitem{Grumberg05}
-Grumberg O., Lerda F., Strichman O., Theobald M.:
-\newblock {\em { Proof-guided underapproximation-widening for multi-process systems.}} 
-\newblock In: Symposium on Principles of Programming Languages, pp. 122--131, 2005.
-
-%68
-\bibitem{McMillan11}
-K.~McMillan:
-\newblock {\em {Widening and Interpolation.}} 
-\newblock In: International Symposium on Static Analysis, LCNS 6887, pp. 1, 2011.
-
-%69
-\bibitem{esbmc_controller}
-Bessa I., Abreu R., Cordeiro L., Filho J.:
-\newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers}.}
-\newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
-
-%70
-\bibitem{esbmc_filter}
-Abreu R., Cordeiro L., Filho E.:
-\newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
-\newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
-\newblock http://dx.doi.org/10.14209/sbrt.2013.57
-
-%71
-\bibitem{JMorse15}
-Morse J., Cordeiro L., Nicole D., Fischer B.:
-\newblock {\em {Model Checking LTL Properties over ANSI-C Programs with Bounded Traces.}} 
-\newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
-
-%72
-\bibitem{Bessa16}
-Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
-\newblock {\em { Verification of Fixed-Point Digital Controllers Using Direct and Delta Forms Realizations.}} 
-\newblock In: Design Automation for Embedded Systems 20(2): pp. 95--126, 2016.
-
-%73
-\bibitem{Chaves17}
-Chaves L., Bessa I., Cordeiro L.:
-\newblock {\em { DSValidator: An Automated Counterexample Reproducibility Tool for Digital Systems}}. 
-\newblock In: CoRR abs/1610.07066, 2016.
-
-%74
-\bibitem{sbrtdaniel}
-de Mello D. P. M., de Freitas M. L., Cordeiro L., da Silva J\'unior W. S., de Bessa I. V., de Lima Filho E. B, Clavier L.:
-\newblock {\em{Verification of Magnitude and Phase Responses in Fixed-Point Digital Filters}}. 
-\newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017.
-
-%75
-\bibitem{Alves15}
-Alves E. , Cordeiro L., Lima Filho E.:
-\newblock {\em{ Fault Localization in Multi-Threaded C Programs using Bounded Model Checking}}. 
-\newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
-
-%76
-\bibitem{Garcia16}
-Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.: 
-\newblock {\em{ ESBMC$^{QtOM}$: A Bounded Model Checking Tool to Verify Qt Applications}}. 
-\newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
-
-%77
-\bibitem{Lopes:2014:GSL:2692607}
-Bruno~Cardoso Lopes and Rafael Auler.
-\newblock {\em Getting Started with LLVM Core Libraries}.
-\newblock Packt Publishing, 2014.
-
-%78
- \bibitem{clang-usage}
-Cade Metz.
-\newblock Why {A}pple?s swift language will instantly remake computer
-  programming, 204.
-\newblock http://www.wired.com/2014/07/apple-swift/.
-
-%79
-\bibitem{Jackson16}
-Jackson D., Vaziri M.:
-\newblock {\em{ Correct or usable? the limits of traditional verification (impact paper award)}}. 
-\newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 11, 2016.
-
-%80
-\bibitem{MorseCNF13}
-Morse J., Cordeiro L., Nicole D., Fischer B.:
-\newblock {\em {Handling unbounded loops with {ESBMC} 1.20}}.
-\newblock In: Tools and Algorithms for the Construction and Analysis of
-  Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
-
-%81
-\bibitem{MorseRCN014}
-Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
-\newblock {\em {ESBMC} 1.22.}
-\newblock In: Tools and Algorithms for the Construction and Analysis of
-  Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
-
-%82
-\bibitem{Haran15}
-Haran A., Carter M., Emmi M., Lal A., Qadeer S., Rakamaric Z.:
-\newblock {\em{ SMACK+Corral: A Modular Verifier - (Competition Contribution)}}. 
-\newblock In: 21st International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 451--454, 2015.
-
-%83
-\bibitem{Beyer16}
-Beyer, D.:
-\newblock {\em{ Reliable and Reproducible Competition Results with BenchExec and Witnesses (Report on SV-COMP 2016)}}. 
-\newblock In: 22nd International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9636, pp. 887--904, 2016.
-
-%84
-\bibitem{BeyerW15}
-Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
-\newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
-\newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
-
-%85
-\bibitem{RochaIFM12}
-Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
-\newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
-\newblock In: International Conference on Integrated Formal Methods, LNCS 7321, pp. 128-142, 2012.
-
-%86
-\bibitem{antennasbrt}
-de Jesus A. S., rodrigues R. N., Ferreira A. N. G., Valente V. H., de Melo W. C., de Lima Filho E. B, da Silva J\'unior W. S.:
-\newblock {\em{Automatic Antenna Alignment System for Satellite Receivers Operating in C and Ku Bands}}. 
-\newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017. (in Portuguese)
-
-%87
-\bibitem{amoedo}
-Amoedo D. A., da Silva J\'unior W. S., de Lima Filho E. A.:
-\newblock {\em{Parameter Selection for SVM in Automatic Modulation Classification of Analog and Digital Signals}}. 
-\newblock In: International Telecommunications Symposium (ITS), pp. 1-5, 2014.
-
-%88
-\bibitem{mlswverif}
-Hamel L.:
-\newblock {\em {On the Use of Machine Learning in Formal Software Verification.}} 
-\newblock {Technical Report TR03-294, Dept. of Computer Science and Statistics, University of Rhode Island}, 2003.
-
-
-%89
-\bibitem{nguyen}
-Phuc N. V.,:
-\newblock {\em {The Application of Machine Learning Methods in Software Verification and Validation.}} 
-\newblock {University of Texas at Austin, master of science dissertation}, 2010.
-
-%90
-\bibitem{bridge}
-Bridge J. P.:
-\newblock {\em {Machine learning and automated theorem proving.}} 
-\newblock {Technical Report 792, Computer Laboratory, University of Cambridge}, 2010.
-
- 
- %91
-\bibitem{babic07}
-Hutter F., Babic D., Hoos H. H., Hu A. J.              
-\newblock {\em{Boosting Verification by Automatic Tuning of Decision Procedures.}}
-\newblock {In 7th International Conference Formal Methods in Computer-Aided Design {(FMCAD)}, pp. 27--34, 2007.}
+%\bibitem{Kopetz11}
+%H.~Kopetz:
+%\newblock {\em {Real-Time Systems - Design Principles for Distributed Embedded Applications}}.
+%\newblock Real-Time Systems Series, Springer, ISBN 978-1-4419-8236-0, pp. 1--376, 2011.
+%
+%%2
+%\bibitem{xu15}
+%Xua X., Jiaa H., Wanga D., Yub D., Chiangc H.:
+%\newblock {\em {Hierarchical energy management system for multi-source multi-product microgrids}}.
+%\newblock In: Renewable Energy, v. 78, pp. 621--630, 2015.
+%
+%%3
+%\bibitem{leeCPS}
+%Lee E.:
+%\newblock {\em {Cyber-physical Systems: Design Challenges}}.
+%\newblock In: International Symposium on Object Oriented Real-Time Distributed Computing, pp. 363--369, 2008.
+%
+%%4
+%\bibitem{leeCPS2}
+%Lee E.:
+%\newblock {\em {The Past, Present and Future of Cyber-Physical Systems: A Focus on Models}}. 
+%\newblock In: Sensors 15(3): pp. 4837--4869, 2015.
+%
+%%5
+%\bibitem{groza2015formal}
+%Groza A., Letia I., Goron A., Zaporojan S.: 
+%\newblock {\em {A formal approach for identifying assurance deficits in unmanned aerial vehicle software}}.
+%\newblock In: Progress in Systems Engineering, Springer, pp. 233--239, 2015.
+%
+%%6
+%\bibitem{Cordeiro09}
+%Cordeiro L., Fischer B., Chen H., Marques-Silva J.:
+%\newblock {\em {Semiformal Verification of Embedded Software in Medical Devices Considering Stringent Hardware Constraints}}.
+%\newblock In: International Conference on Embedded Software and Systems, pp. 396--403, 2009.
+%
+%%7
+%\bibitem{munir}
+%Munir S., Stankovic J. A., Liang C.-J. M., Lin S.:
+%\newblock {\em {Cyber Physical System Challenges for Human-in-the-Loop Control}}. 
+%\newblock In: 8th International Workshop on Feedback Computing, pp. 1--4, 2013.
+%
+%%8
+%\bibitem{Abate17}
+%Abate A., Bessa I., Cattaruzza D., Cordeiro L., David C., Kesseli P., Kroening D.:
+%\newblock {\em {Sound and Automated Synthesis of Digital Stabilizing Controllers for Continuous Plants}}.
+%\newblock In: 20th ACM International Conference on Hybrid Systems: Computation and Control, 2017 (to appear).
+%
+%%9
+%\bibitem{ldd}
+%Witkowski T., Blanc N., Kroening D., Weissenbacher G.:
+%\newblock {\em {Model checking concurrent linux device drivers}}.
+%\newblock In: 22nd IEEE/ACM international conference on Automated software engineering, pp. 501--504, 2007.
+%
+%%10
+%\bibitem{mlembe}
+%S.~Virtanen:
+%\newblock {\em {Advancing Embedded Systems and Real-Time Communications with Emerging Technologies}}.
+%\newblock IGI Global, ISBN 978-1466660342, pp. 1--502, 2014.
+%
+%%11
+%\bibitem{Kroening15}
+%Kroening D., Liang L., Melham T., Schrammel P., Tautschnig M.:
+%\newblock {\em {Effective Verification of Low-Level Software with Nested Interrupts}}. 
+%\newblock In: Design, Automation and Test in Europe, pp. 229--234, 2015.
+%
+%%12
+%\bibitem{cudalucas}
+%Monteiro F. R., da Silva Alves E. H., Silva I. S., Ismail H., Cordeiro L. C., de Lima Filho E. B.:
+%\newblock {\em {ESBMC-GPU A Context-Bounded Model Checking Tool to Verify CUDA Programs}}. 
+%\newblock In: Science of Computer Programming xx(y): pp. xxxx--xxxx, 2017.
+%
+%%13
+%\bibitem{stochmodel}
+%Bargmann H.:
+%\newblock {\em {The role of stochastic modelling in engineering science}}.
+%\newblock In: Acta Mecanica 125(1), pp. 63--71, 1997.
+%
+%%14
+%\bibitem{Shoukry}
+%Shoukry Y., Nuzzo P., Puggelli A., Sangiovanni-Vincentelli A. L., Seshia S. A., Tabuada P.:
+%\newblock {\em {Secure State Estimation for Cyber Physical Systems Under Sensor Attacks: A Satisfiability Modulo Theory Approach}}.
+%\newblock {IEEE} Trans. Automatic Control PP(99), pp. 1--16, 2017.
+%
+%%15
+%\bibitem{cpsattack}
+%Liu Y., Ning P., Reiter M. K.:
+%\newblock {\em {“False data injection attacks against state estimation in electric power grid}}.
+%\newblock In: ACM Conference on Computer and Communications Security, pp. 21--32, 2009.
+%
+%%16
+%\bibitem{Araujo16}
+%Araujo, R., Bessa, I., Cordeiro, L., Chaves Filho, J.:
+%\newblock {\em{ SMT-based Verification Applied to Non-convex Optimization Problems}}. 
+%\newblock In: VI Brazilian Symposium on Computing Systems Engineering, 2016 (to appear).
+%
+%%17
+%\bibitem{Biere99}
+%Biere A., Cimatti A., Clarke E., Zhu Y.:
+%\newblock {\em {Symbolic Model Checking without BDDs}}. 
+%\newblock In: Tools and Algorithms for Construction and Analysis of Systems, LNCS 1579, pp. 193--207, 1999.
+%
+%%18
+%\bibitem{handbook09}
+%Biere A., Heule M., van Maaren H., Walsh T., eds.:
+%\newblock {\em {Handbook of Satisfiability}}.
+%\newblock Volume 185 of Frontiers in Artificial Intelligence and Applications., {IOS} Press, 2009.
+%
+%%19
+%\bibitem{BarrettSST09}
+%Barrett C., Sebastiani R., Seshia S.A., Tinelli C.:
+%\newblock {\em {Satisfiability Modulo Theories}}. 
+%\newblock In: Volume 185 of Frontiers in Artificial Intelligence and Applications. IOS Press, pp. 825--885, 2009.
+%
+%%20
+%\bibitem{Armando2009}
+%Armando A., Mantovani J., Platania L.:
+%\newblock {\em {Bounded Model Checking of Software Using SMT Solvers Instead of SAT Solvers}}. 
+%\newblock In: {SPIN} Workshop on Model Checking Software, LNCS 3925, pp. 146-162, 2006.
+%
+%%21
+%\bibitem{Bradley07}
+%Bradley A., Manna Z.:
+%\newblock {\em {The calculus of computation - decision procedures with applications to verification}}. 
+%\newblock In: Springer, pp. I-XV, pp. 1--366, 2007.
+%
+%%22
+%\bibitem{Thomas01}
+%Thomas Ball and Sriram~K. Rajamani.
+%\newblock {\em SLIC: A Specification Language for Interface Checking (of C)}.
+%\newblock Technical Report MSR-TR-2001-21, Microsoft Research, 2001.
+%
+%%23
+%\bibitem{Strichman08}
+%Daniel Kroening and Ofer Strichman.
+%\newblock {\em Decision Procedures: An Algorithmic Point of View}.
+%\newblock Springer Publishing Company, Incorporated, 2008.
+%
+%%24
+%\bibitem{Appel97}
+%Andrew~W. Appel.
+%\newblock {\em Modern Compiler Implementation in C: Basic Techniques}.
+%\newblock Cambridge University Press, New York, NY, USA, 1997.
+%
+%%25
+%\bibitem{Tseitin83}
+%G.~S. Tseitin.
+%\newblock On the complexity of derivation in propositional calculus.
+%\newblock In {\em In J. Siekmann and G. Wrightson, editors, Automation of
+%  Reasoning 2: Classical Papers on Computational Logic 1967-1970}.
+% 
+% %26
+% \bibitem{PatarinG97}
+%Jacques Patarin and Louis Goubin.
+%\newblock Trapdoor one-way permutations and multivariate polynominals.
+%\newblock In {\em ICICS}, {\em LNCS} 1334, pages 356--368. Springer, 1997. 
+%
+%%27
+%\bibitem{Clarke04}
+%Clarke E., Kroening D., Lerda F.:
+%\newblock {\em {A Tool for Checking {ANSI-C} Programs}}.
+%\newblock In: Tools and Algorithms for the Construction and Analysis of Systems. LNCS 2988, Springer Berlin Heidelberg, pp. 168--176, 2004.
+%
+%%28
+%\bibitem{MerzFS12}
+%Merz F., Falke S., Sinz C.:
+%\newblock {\em {{LLBMC}: Bounded Model Checking of {C} and {C++} Programs using a Compiler {IR}}}.
+%\newblock In: International Conference on Verified Software: Theories, Tools, Experiments. LNCS 7152, pp. 146--161, 2012.
+%
+%%29
+%\bibitem{CordeiroF11}
+%Cordeiro L., Fischer B.:
+%\newblock {\em {Verifying Multi-threaded Software using {SMT}-based Context-Bounded Model Checking}}.
+%\newblock In: International Conference on Software Engineering. pp. 331--340, 2011.
+%
+%%30
+%\bibitem{Ivancic05}
+%Ivanicic F., Shlyakhter I., Gupta A., Ganai, M.K.:
+%\newblock {\em {Model Checking {C} Programs using {F-Soft}}}.
+%\newblock In: International Conference on Computer Design: VLSI in Computers and Processors, pp. 297--308, 2005.
+%
+%%31
+%\bibitem{Cordeiro12}
+%Cordeiro L., Fischer B., Marques{-}Silva J.:
+%\newblock {\em {{SMT}-based Bounded Model Checking for Embedded {ANSI-C} Software}}.
+%\newblock {IEEE} Trans. Software Eng. 38(4), pp. 957--974, 2012.
+%
+%%32
+%\bibitem{EenS03}
+%E{\'{e}}n, N., S{\"{o}}rensson, N.:
+%\newblock {\em {Temporal Induction by Incremental {SAT} Solving}}.
+%\newblock Electronic Notes in Theoretical Computer Science 89(4), pp. 543 -- 560, 2003.
+%
+%%33
+%\bibitem{Sheera00}
+%Sheeran M., Singh S., St{\aa}lmarck G.:
+%\newblock {\em {Checking Safety Properties using Induction and a {SAT}-solver}}.
+%\newblock In: International Conference on Formal Methods in Computer-Aided Design. Springer-Verlag, pp. 108--125, 2000.
+%
+%%34
+%\bibitem{4610935}
+%{IEEE} standard for floating-point arithmetic.
+%\newblock {\em IEEE Std 754-2008}, pages 1--70, Aug 2008.
+%
+%%35
+%\bibitem{Goldberg91whatevery}
+%David Goldberg.
+%\newblock What every computer scientist should know about floating point
+%  arithmetic.
+%\newblock {\em ACM Computing Surveys}, 23(1):5--48, 1991.
+%
+%%36
+%\bibitem{pips:2013}
+%ParisTech M.:
+%\newblock {\em {PIPS: Automatic Parallelizer and Code Transformation Framework}}. 
+%\newblock Accessed 21 February 2016
+%
+%%37
+%\bibitem{Henry:2012}
+%Henry J., Monniaux D., Moy M.: 
+%\newblock {\em {PAGAI: A Path Sensitive Static Analyser}}. 
+%\newblock In: Electronic Notes in Theoretical Computer Science, pp. 15--25, 2012.
+%
+%%38
+%\bibitem{Beyer15}
+%Beyer D., Dangl M., Wendler P.:
+%\newblock {\em {Boosting \textit{k}-Induction with Continuously-Refined Invariants}}.
+%\newblock In: International Conference on Computer-Aided Verification, LNCS 9206, pp. 622--640, 2015.
+%
+%%39
+%\bibitem{Gadelha15}
+%Gadelha M., Ismail H., Cordeiro L.:
+%\newblock {\em {Handling Loops in Bounded Model Checking of C Programs via \textit{k}-Induction}}.
+%\newblock In: International Journal on Software Tools for Technology Transfer (to appear), 2015.
+%\newblock http://dx.doi.org/10.1007/s10009-015-0407-9
+%
+%%40
+%\bibitem{Brain15}
+%Brain M., Joshi S., Kroening D., Schrammel P.:
+%\newblock {\em {Safety Verification and Refutation by k-Invariants and \textit{k}-Induction}}.
+%\newblock In: International Symposium on Static Analysis, LNCS 9291, pp. 145--161, 2015.
+%
+%%41
+%\bibitem{Rocha15}
+%Rocha H., Ismail H., Cordeiro L., Barreto R.:
+%\newblock {\em {Model Checking Embedded C Software using \textit{k}-Induction and Invariants}}.
+%\newblock In: V Brazilian Symposium on Computing Systems Engineering, pp. 90--95, 2015.
+%
+%%42
+%\bibitem{Kinductor}
+%Donaldson A., Haller L., Kroening D., R{\"{u}}mmer, P.:
+%\newblock {\em {Software Verification using \textit{k}-Induction}}.
+%\newblock In: International Symposium on Static Analysis. LNCS 6887, pp. 351--368, 2011.
+%
+%%43
+%\bibitem{Rocha17}
+%Rocha, W., Rocha, H., Ismail H., Cordeiro, L., Fischer, B.:
+%\newblock {\em {DepthK: A \textit{k}-Induction Verifier Based on Invariant Inference for C Programs}}. 
+%\newblock In: International Conference on Tools and Algorithms for the Construction and Analysis of Systems, 2017 (to appear).
+%
+%%44
+%\bibitem{Donaldson10}
+%Donaldson A., Kroening D., R{\"{u}}mmer P.:
+%\newblock {\em {{SCRATCH}: A Tool for Automatic Analysis of {DMA} Races}}.
+%\newblock In: ACM Symposium on Principles and Practice of Parallel Programming. ACM, pp. 311--312, 2011.
+%
+%%45
+%\bibitem{GrosseLD09}
+%Gro{\ss}e D., Le H., Drechsler R.:
+%\newblock {\em {Induction-based Formal Verification of {SystemC TLM} Designs}}.
+%\newblock In: International Workshop on Microprocessor Test and Verification, pp. 101--106, 2009.
+%
+%%46
+%\bibitem{David15}
+%C.~David, D.~Kroening, and M.~Lewis.
+%\newblock {\em {Using program synthesis for program analysis}}.
+%\newblock In: Logic for Programming, Artificial Intelligence, and Reasoning, LNCS 9450, pp. 483--498, 2015.
+%
+%%47
+%\bibitem{Alur13}
+%Alur R., Bod\'{\i}k R., Juniwal G., Martin M., Raghothaman M., Seshia S., Singh R., Solar-Lezama A., Torlak E., Udupa A.:
+%\newblock {\em {Syntax-guided synthesis}}. 
+%\newblock In: Formal Methods in Computer-Aided Design, pp. 1--8, 2013.
+%
+%%48
+%\bibitem{sketch}
+%A.~Solar-Lezama.
+%\newblock {\em {Program sketching}}.
+%\newblock In: International Journal on Software Tools for Technology Transfer, 15(5-6):475--495, 2013.
+%
+%%49
+%\bibitem{Sharma14}
+%R.~Sharma and A.~Aiken.
+%\newblock {\em {From invariant checking to invariant inference using randomized search}}.
+%\newblock In: Computer Aided Verification, LNCS 8559, pp. 88--105, 2014.
+%
+%%50
+%\bibitem{dsv_spin2015}
+%Ismail H., Bessa I., Cordeiro L., Lima Filho E., Chaves Filho J.:
+%\newblock {\em {DSVerifier: A Bounded Model Checking Tool for Digital Systems}}. 
+%\newblock In: International SPIN Symposium on Model Checking of Software, LNCS 9232, pp. 126--131, 2015.
+%
+%%51
+%\bibitem{Monteiro16}
+%F.~Monteiro:
+%\newblock {\em {Bounded model checking of state-space digital systems: the impact of finite word-length effects on the implementation of fixed-point digital controllers based on state-space modeling}}. 
+%\newblock In: 24th {ACM} {SIGSOFT} International Symposium on Foundations of Software Engineering, pp. 1151--1153, 2016.
+%
+%%52
+%\bibitem{Bessa17}
+%Bessa, I., Ismail, H., Palhares, R., Cordeiro, L., Chaves Filho, J.:
+%\newblock {\em {Formal Non-Fragile Stability Verification of Digital Control Systems with Uncertainty}}. 
+%\newblock In: IEEE Transactions on Computers, 2017 (to appear).
+%
+%%53
+%\bibitem{selfcar}
+%Fairley P.:
+%\newblock {\em {Self-Driving Cars Have a Bicycle Problem}}.
+%\newblock http://spectrum.ieee.org/transportation/self-driving/selfdriving-cars-have-a-bicycle-problem.
+%
+%%54
+%\bibitem{BMCml}
+%L.~Bortolussi, D. Milios, G, Sanguinetti.:
+%\newblock {\em {Smoothed model checking for uncertain Continuous-Time Markov Chains}}.
+%\newblock In:. Information and Computation, 2016.
+%
+%%55
+%\bibitem{Behrend15}
+%Behrend J., Lettnin D., Gruenhage A., Ruf J., Kropf T., Rosenstiel W.:
+%\newblock {\em {Scalable and Optimized Hybrid Verification of Embedded Software}}. 
+%\newblock In: J. Electronic Testing 31(2): pp. 151--166, 2015.
+%
+%%56
+%\bibitem{Lettnin09}
+%Lettnin D., Nalla P. K., Behrend J., Ruf J., Gerlach J., Kropf T., Rosenstiel W., Sch{\"o}nknecht V., Reitemeyer S.:
+%\newblock {\em {Semiformal Verification of Temporal Properties in Automotive Hardware Dependent Software}}. 
+%\newblock In: Design, Automation and Test in Europe, pp. 1214--1217, 2009.
+%
+%%57
+%\bibitem{Adouane16}
+%Vilca J., Adouane L., Mezouar Y.:
+%\newblock {\em {Optimal Multi-Criteria Waypoint Selection for Autonomous Vehicle Navigation in Structured Environment}}. 
+%\newblock In: Journal of Intelligent and Robotic Systems 82(2): pp. 301--324, 2016.
+%
+%%58
+%\bibitem{ECBS13}
+%Ramalho M., Lopes M., Sousa F., Marques H., Cordeiro L., Fischer B.:
+%\newblock {\em {SMT-Based Bounded Model Checking of C++ Programs} }.
+%\newblock In: International Conference on Engineering of Computer-Based Systems, pp. 147--156, 2013.
+%
+%%59
+%\bibitem{Pereira15}
+%Pereira P.  Albuquerque H., Marques H., Silva I., Carvalho C., Santos V., Ferreira R., Cordeiro L.: 
+%\newblock {\em {Verifying CUDA Programs using SMT-Based Context-Bounded Model Checking}}.
+%\newblock In: ACM Symposium on Applied Computing, Software Verification and Testing Track, pp. 1648-1653, 2016. 
+%
+%%60
+%\bibitem{Sousa15}
+%Sousa F., Cordeiro L., Lima Filho E.: 
+%\newblock {\em { Bounded Model Checking of C++ Programs Based on the Qt Framework.}} 
+%\newblock In: Global Conference on Consumer Electronics, pp. 179--180, 2015.
+%
+%%61
+%\bibitem{Beyer14}
+%D.~Beyer 
+%\newblock {\em {Status report on software verification - (competition summary {SV-COMP})}}. 
+%\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 8413, pp. 373--388, 2014.
+% 
+%%62
+%\bibitem{BeyerSVCOMP15}
+%D.~Beyer:
+%\newblock {\em {Software Verification and Verifiable Witnesses - (Report on SV-COMP 2015).}} 
+%\newblock In: Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 401-416, 2015.
+%
+%%63
+%\bibitem{KahlonWG09}
+%Kahlon V., Wang C., Gupta A.:
+%\newblock {\em{Monotonic Partial Order Reduction: An Optimal Symbolic Partial Order Reduction Technique}}.
+%\newblock In: International Conference on Computer-Aided Verification, LNCS 5643, pp. 398--413, 2009.
+%
+%%64
+%\bibitem{morse15}
+%J.~Morse.
+%\newblock {\em {Expressive and Efficient Bounded Model Checking of Concurrent Software}}.
+%\newblock {University of Southampton, PhD Thesis}, 2015.
+%
+%%65
+%\bibitem{Inverso14}
+%Inverso O., Tomasco E., Fischer B., La Torre S., Parlato G.:
+%\newblock {\em {Bounded Model Checking of Multi-threaded C Programs via Lazy Sequentialization.}}
+%\newblock In: International Conference on Computer-Aided Verification, LNCS 8559, pp. 585-602, 2014.
+%
+%%66
+%\bibitem{civl15}
+%Zheng M, Rogers M, Luo Z, Dwyer M, Siegel S.
+%\newblock {\em{{CIVL}: Formal Verification of Parallel Programs}}.
+%\newblock In: International Conference on Automated Software Engineering, pp. 830--835, 2015.
+%
+%%67
+%\bibitem{Grumberg05}
+%Grumberg O., Lerda F., Strichman O., Theobald M.:
+%\newblock {\em { Proof-guided underapproximation-widening for multi-process systems.}} 
+%\newblock In: Symposium on Principles of Programming Languages, pp. 122--131, 2005.
+%
+%%68
+%\bibitem{McMillan11}
+%K.~McMillan:
+%\newblock {\em {Widening and Interpolation.}} 
+%\newblock In: International Symposium on Static Analysis, LCNS 6887, pp. 1, 2011.
+%
+%%69
+%\bibitem{esbmc_controller}
+%Bessa I., Abreu R., Cordeiro L., Filho J.:
+%\newblock {\em {SMT-Based Bounded Model Checking of Fixed-Point Digital Controllers}.}
+%\newblock In: Annual Conference of the Industrial Electronics Society, pp. 295--301, 2014.
+%
+%%70
+%\bibitem{esbmc_filter}
+%Abreu R., Cordeiro L., Filho E.:
+%\newblock {\em {Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model Checking}.}
+%\newblock In: XXXI Brazilian Symposium on Telecommunications, 2013.
+%\newblock http://dx.doi.org/10.14209/sbrt.2013.57
+%
+%%71
+%\bibitem{JMorse15}
+%Morse J., Cordeiro L., Nicole D., Fischer B.:
+%\newblock {\em {Model Checking LTL Properties over ANSI-C Programs with Bounded Traces.}} 
+%\newblock In: Software and System Modeling 14(1): pp. 65--81, 2015.
+%
+%%72
+%\bibitem{Bessa16}
+%Bessa I., Ismail H., Cordeiro L., Chaves Filho J.:
+%\newblock {\em { Verification of Fixed-Point Digital Controllers Using Direct and Delta Forms Realizations.}} 
+%\newblock In: Design Automation for Embedded Systems 20(2): pp. 95--126, 2016.
+%
+%%73
+%\bibitem{Chaves17}
+%Chaves L., Bessa I., Cordeiro L.:
+%\newblock {\em { DSValidator: An Automated Counterexample Reproducibility Tool for Digital Systems}}. 
+%\newblock In: CoRR abs/1610.07066, 2016.
+%
+%%74
+%\bibitem{sbrtdaniel}
+%de Mello D. P. M., de Freitas M. L., Cordeiro L., da Silva J\'unior W. S., de Bessa I. V., de Lima Filho E. B, Clavier L.:
+%\newblock {\em{Verification of Magnitude and Phase Responses in Fixed-Point Digital Filters}}. 
+%\newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017.
+%
+%%75
+%\bibitem{Alves15}
+%Alves E. , Cordeiro L., Lima Filho E.:
+%\newblock {\em{ Fault Localization in Multi-Threaded C Programs using Bounded Model Checking}}. 
+%\newblock In: Brazilian Symposium on Computing Systems Engineering, pp. 96-101, 2015.
+%
+%%76
+%\bibitem{Garcia16}
+%Garcia M. , Sousa F., Cordeiro, L., Lima Filho E.: 
+%\newblock {\em{ ESBMC$^{QtOM}$: A Bounded Model Checking Tool to Verify Qt Applications}}. 
+%\newblock In: International SPIN symposium on Model Checking of Software (to appear), 2016.
+%
+%%77
+%\bibitem{Lopes:2014:GSL:2692607}
+%Bruno~Cardoso Lopes and Rafael Auler.
+%\newblock {\em Getting Started with LLVM Core Libraries}.
+%\newblock Packt Publishing, 2014.
+%
+%%78
+% \bibitem{clang-usage}
+%Cade Metz.
+%\newblock Why {A}pple?s swift language will instantly remake computer
+%  programming, 204.
+%\newblock http://www.wired.com/2014/07/apple-swift/.
+%
+%%79
+%\bibitem{Jackson16}
+%Jackson D., Vaziri M.:
+%\newblock {\em{ Correct or usable? the limits of traditional verification (impact paper award)}}. 
+%\newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 11, 2016.
+%
+%%80
+%\bibitem{MorseCNF13}
+%Morse J., Cordeiro L., Nicole D., Fischer B.:
+%\newblock {\em {Handling unbounded loops with {ESBMC} 1.20}}.
+%\newblock In: Tools and Algorithms for the Construction and Analysis of
+%  Systems. LNCS 7795, Springer Berlin Heidelberg, pp. 619--622, 2013.
+%
+%%81
+%\bibitem{MorseRCN014}
+%Morse J., Ramalho M., Cordeiro L., Nicole D., Fischer B.:
+%\newblock {\em {ESBMC} 1.22.}
+%\newblock In: Tools and Algorithms for the Construction and Analysis of
+%  Systems. LNCS 8413, Springer Berlin Heidelberg, pp. 405--407, 2014.
+%
+%%82
+%\bibitem{Haran15}
+%Haran A., Carter M., Emmi M., Lal A., Qadeer S., Rakamaric Z.:
+%\newblock {\em{ SMACK+Corral: A Modular Verifier - (Competition Contribution)}}. 
+%\newblock In: 21st International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9035, pp. 451--454, 2015.
+%
+%%83
+%\bibitem{Beyer16}
+%Beyer, D.:
+%\newblock {\em{ Reliable and Reproducible Competition Results with BenchExec and Witnesses (Report on SV-COMP 2016)}}. 
+%\newblock In: 22nd International Conference Tools and Algorithms for the Construction and Analysis of Systems, LNCS 9636, pp. 887--904, 2016.
+%
+%%84
+%\bibitem{BeyerW15}
+%Beyer D., Dangl M., Dietsch D., Heizmann M., Stahlbauer A.:
+%\newblock {\em{ Witness validation and stepwise testification across software verifiers}}. 
+%\newblock In: ESEC/SIGSOFT Foundations of Software Engineering, pp. 721--733, 2015.
+%
+%%85
+%\bibitem{RochaIFM12}
+%Rocha H., Barreto R., Cordeiro L., Dias Neto A.:
+%\newblock {\em{ Understanding Programming Bugs in ANSI-C Software Using Bounded Model Checking Counter-Examples}}. 
+%\newblock In: International Conference on Integrated Formal Methods, LNCS 7321, pp. 128-142, 2012.
+%
+%%86
+%\bibitem{antennasbrt}
+%de Jesus A. S., rodrigues R. N., Ferreira A. N. G., Valente V. H., de Melo W. C., de Lima Filho E. B, da Silva J\'unior W. S.:
+%\newblock {\em{Automatic Antenna Alignment System for Satellite Receivers Operating in C and Ku Bands}}. 
+%\newblock To appear in: Brazilian Symposium on Telecommunications and Signal Processing, pp. 1-5, 2017. (in Portuguese)
+%
+%%87
+%\bibitem{amoedo}
+%Amoedo D. A., da Silva J\'unior W. S., de Lima Filho E. A.:
+%\newblock {\em{Parameter Selection for SVM in Automatic Modulation Classification of Analog and Digital Signals}}. 
+%\newblock In: International Telecommunications Symposium (ITS), pp. 1-5, 2014.
+%
+%%88
+%\bibitem{mlswverif}
+%Hamel L.:
+%\newblock {\em {On the Use of Machine Learning in Formal Software Verification.}} 
+%\newblock {Technical Report TR03-294, Dept. of Computer Science and Statistics, University of Rhode Island}, 2003.
+%
+%
+%%89
+%\bibitem{nguyen}
+%Phuc N. V.,:
+%\newblock {\em {The Application of Machine Learning Methods in Software Verification and Validation.}} 
+%\newblock {University of Texas at Austin, master of science dissertation}, 2010.
+%
+%%90
+%\bibitem{bridge}
+%Bridge J. P.:
+%\newblock {\em {Machine learning and automated theorem proving.}} 
+%\newblock {Technical Report 792, Computer Laboratory, University of Cambridge}, 2010.
+%
+% 
+% %91
+%\bibitem{babic07}
+%Hutter F., Babic D., Hoos H. H., Hu A. J.              
+%\newblock {\em{Boosting Verification by Automatic Tuning of Decision Procedures.}}
+%\newblock {In 7th International Conference Formal Methods in Computer-Aided Design {(FMCAD)}, pp. 27--34, 2007.}
 
 \end{thebibliography}
 
