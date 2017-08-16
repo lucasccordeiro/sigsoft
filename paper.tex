@@ -233,7 +233,7 @@ Regarding behavior correctness, one important observation is that it is becoming
 
 A number of distinctive characteristics might influence the ECPS verification and synthesis process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, increasing computational power and decreasing size and cost, which are common to the area of computer processors, are enabling system designers to move more features to software domain, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, interfacing, and concurrency)~\cite{Kroening15} or even new structures provided with the goal of ensuring more computational capacity~\cite{cudalucas} must be considered during verification. Such observations expand the addressed issues and even complement what was previously mentioned.
 
-The goals of the present article is to briefly present part of the established research and also clarify current trends, which are mainly driven by ECPSs, IoT, and ML. We present a brief discussion about models for ECPSs, in Section \ref{sec:model}, and then cover preliminaries on bounded model checking, \textit{k}-induction verification based on invariant inference, Craig interpolants, counterexample guided inductive synthesis, and system model incorporation, in Section~\ref{Preliminaries}. In Section~\ref{Verification-Challenges}, the main challenges regarding verification and synthesis of embedded systems are described, while Section~\ref{Research-Problem} tackles those challenges that are (partially) open in current published research. Section~\ref{achievements} then describes current achievements and future trends in verification and synthesis of ECPSs and Section \ref{Newapp} addresses new applications, which take into account the new trends ({\it e.g.}, ML) mentioned here. Finally, we conclude and describe future work, in Section~\ref{conclusions}.
+The goals of the present article is to briefly present part of the established research and also clarify current trends, which are mainly driven by ECPSs, IoT, and ML. We present a brief discussion about models for ECPSs, in Section \ref{sec:model}, and then cover preliminaries on bounded model checking, \textit{k}-induction verification based on invariant inference, counterexample guided inductive synthesis, and system model incorporation, in Section~\ref{Preliminaries}. In Section~\ref{Verification-Challenges}, the main challenges regarding verification and synthesis of embedded systems are described, while Section~\ref{Research-Problem} tackles those challenges that are (partially) open in current published research. Section~\ref{achievements} then describes current achievements and future trends in verification and synthesis of ECPSs and Section \ref{Newapp} addresses new applications, which take into account the new trends ({\it e.g.}, ML) mentioned here. Finally, we conclude and describe future work, in Section~\ref{conclusions}.
 
 %--------------------------------------
 \section{Automated Verification and Synthesis of Cyber-physical systems}
@@ -443,37 +443,39 @@ It is worth noticing that \textit{k}-induction with invariants has the potential
 Nonetheless, there is~little evidence, in the available literature, that model checking hardware and software systems through \textit{k}-induction (and invariants) can be efficiently exploited in ECPS verification. That happens due to the distinctive characteristics mentioned earlier, which influence ECPS development and also verification processes. Additionally, there is still a lack of studies for embedded software verifiers to exploit the combination and configuration of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants related to memory and variable aliasing~\cite{Bradley07}.
 
 %------------------------------------------------------
-\subsection{Craig Interpolation}
-\label{sec:CraigInterpolationInModelChecking}
+%\subsection{Craig Interpolation}
+%\label{sec:CraigInterpolationInModelChecking}
 %------------------------------------------------------
 
-Another feasible alternative to prove properties in BMC is to compute Craig interpolants for inconsistent pairs (or more generally, sets) of formulae~\cite{McMillan03,McMillan05,McMillan06,McMillan07}. This alternative approach exploits the SAT/SMT solvers' ability to produce refutations, {\it i.e.}, proofs regarding the nonexistence of counterexamples of depth less than or equal to $k$. Those proofs do not ensure whether a given property holds in the model, but they contain information about reachable states of a model.
+%Another feasible alternative to prove properties in BMC is to compute Craig interpolants for inconsistent pairs (or more generally, sets) of formulae~\cite{McMillan03,McMillan05,McMillan06,McMillan07}. This alternative approach exploits the SAT/SMT solvers' ability to produce refutations, {\it i.e.}, proofs regarding the nonexistence of counterexamples of depth less than or equal to $k$. Those proofs do not ensure whether a given property holds in the model, but they contain information about reachable states of a model.
 
 %\begin{prf}\label{interpolants}
-\begin{definition}\label{interpolants}
-\textit{Given a pair of formulae $\left(A,B\right)$, such that $A \wedge B$ is inconsistent, and a proof by resolution for $\left(A,B\right)$, an \textit{interpolant} for $\left(A,B\right)$ is a formula $F$ with the following properties~\cite{McMillan03,McMillan05}: }
+%\begin{definition}\label{interpolants}
+%\textit{Given a pair of formulae $\left(A,B\right)$, such that $A \wedge B$ is inconsistent, and a proof by resolution for $\left(A,B\right)$, an \textit{interpolant} for $\left(A,B\right)$ is a formula $F$ with the following properties~\cite{McMillan03,McMillan05}: }
 
-\begin{itemize}
-	\item $A \Rightarrow F$;
-	\item $F \wedge B$ \textit{is unsatisfiable};
-	\item $F$ \textit{expressed only over the common variables (nonlogical symbols) of $A$ and $B$}.
-\end{itemize}
-\end{definition}
+%\begin{itemize}
+%	\item $A \Rightarrow F$;
+%	\item $F \wedge B$ \textit{is unsatisfiable};
+%	\item $F$ \textit{expressed only over the common variables (nonlogical symbols) of $A$ and $B$}.
+%\end{itemize}
+%\end{definition}
 %\end{prf}
 
-As an example, consider $A = \left(x_1 \wedge x_2\right)$ and $B = \left(\neg x_2 \wedge x_3\right)$. Given that $\left(x_1 \wedge x_2\right)$ must imply $F$ (or simply that $\neg x_1 \vee \neg x_2 \vee F$ hold) and $F \wedge \neg x_2 \wedge x_3$ must be unsatisfiable, one possible interpolant for the given pair of formulae $\left(A,B\right)$ is $F = x_2$, since $x_2$ is a common part of both $A$ and $B$. 
+%As an example, consider $A = \left(x_1 \wedge x_2\right)$ and $B = \left(\neg x_2 \wedge x_3\right)$. Given that $\left(x_1 \wedge x_2\right)$ must imply $F$ (or simply that $\neg x_1 \vee \neg x_2 \vee F$ hold) and $F \wedge \neg x_2 \wedge x_3$ must be unsatisfiable, one possible interpolant for the given pair of formulae $\left(A,B\right)$ is $F = x_2$, since $x_2$ is a common part of both $A$ and $B$. 
 
-The use of interpolants allows us to define a complete method for finite-state reachability analysis based on SAT and SMT solvers. In order to show how BMC and interpolation can be combined, we refer to Section~\ref{Preliminaries} where we define Eq.~(\ref{bounded-model-checking-biere}) and the terms $I$, $R$, and $\phi$. Now, suppose that $Q=I$ and Eq.~(\ref{bounded-model-checking-biere}) is partitioned, so that the set of initial states $I$ and the first instance of the transition relation $R$ are in set $A$, while the remaining instances of $R$ and the property $\phi$ are in set $B$, as shown in Figure~\ref{figure:computing-image-by-interpolation} (note that $k$ is unknown).
+%The use of interpolants allows us to define a complete method for finite-state reachability analysis based on SAT and SMT solvers. 
+%
+%In order to show how BMC and interpolation can be combined, we refer to Section~\ref{Preliminaries} where we define Eq.~(\ref{bounded-model-checking-biere}) and the terms $I$, $R$, and $\phi$. Now, suppose that $Q=I$ and Eq.~(\ref{bounded-model-checking-biere}) is partitioned, so that the set of initial states $I$ and the first instance of the transition relation $R$ are in set $A$, while the remaining instances of $R$ and the property $\phi$ are in set $B$, as shown in Figure~\ref{figure:computing-image-by-interpolation} (note that $k$ is unknown).
+%
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=\textwidth]{interpolants}
+%\caption{Computing image by interpolation~\cite{McMillan03}.}
+%\label{figure:computing-image-by-interpolation}
+%\end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{interpolants}
-\caption{Computing image by interpolation~\cite{McMillan03}.}
-\label{figure:computing-image-by-interpolation}
-\end{figure}
-
-
-Suppose that we use an SMT solver to prove that the $A \wedge B$ is unsatisfiable, {\it i.e.}, we use an SMT solver to conclude that there is no satisfying assignment to $A \wedge B$.\footnote{Note that if at any stage we can satisfy the property $\phi$ within $k$ steps from the initial state, then we have found a counterexample.} The internal steps performed by the SMT solvers for reaching this conclusion can be used to construct a proof of unsatisfiability $\Pi$. From this proof, we can derive an interpolant $F$ for the pair of formulae $\left(A,B\right)$, i.e., $F = interpolant\left(\Pi, A, B\right)$. According to Definition~\ref{interpolants}, $A$ must imply $F$ and since we defined $A$ to be the set of initial states and the first instance of $R$ (i.e., from Figure~\ref{figure:computing-image-by-interpolation}, $A=s_{0} \wedge s_{1}$), it follows that $F$ is \textit{true} in every state reachable from the initial state in one step. In other words, we can say that $F$ is an over-approximation of the forward image of $I$~\cite{McMillan03,McMillan05}. Also according to Definition~\ref{interpolants}, the formula $F \wedge B$ must be unsatisfiable (from Figure~\ref{figure:computing-image-by-interpolation}, $B=s_{2} \wedge s_{3} \wedge \ldots \wedge s_{k}$), which means that there is no state satisfying $F$ that can reach a final state $s_k$. After computing $F$, we then check whether $F$ implies $Q$. If $F$ implies $Q$, then no reachable state can satisfy the property $\phi$ and we can thus conclude that the property holds; however, since $F$ is an approximation, we can falsely conclude that the final state is reachable. In this case, we update $Q = F \vee Q$ and $A = F \wedge R_{0}$, increase the value of $k+1$ and check whether $A \wedge B$ is unsatisfiable. If $A \wedge B$ is satisfiable, we have found a valid counter-example (i.e., a path from the initial state to the final state); otherwise, we compute the interpolant $F = interpolant\left(\Pi, A, B\right)$ again and check whether $F$ implies $Q$. This procedure is stopped when we have found a valid counterexample or have proved that the final state is not reachable (i.e., the property holds). The details of the algorithm and further information about the use of interpolants in model checking can be found in~\cite{McMillan03,McMillan05,McMillan06,McMillan07}. 
+%Suppose that we use an SMT solver to prove that the $A \wedge B$ is unsatisfiable, {\it i.e.}, we use an SMT solver to conclude that there is no satisfying assignment to $A \wedge B$.\footnote{Note that if at any stage we can satisfy the property $\phi$ within $k$ steps from the initial state, then we have found a counterexample.} The internal steps performed by the SMT solvers for reaching this conclusion can be used to construct a proof of unsatisfiability $\Pi$. From this proof, we can derive an interpolant $F$ for the pair of formulae $\left(A,B\right)$, i.e., $F = interpolant\left(\Pi, A, B\right)$. According to Definition~\ref{interpolants}, $A$ must imply $F$ and since we defined $A$ to be the set of initial states and the first instance of $R$ (i.e., from Figure~\ref{figure:computing-image-by-interpolation}, $A=s_{0} \wedge s_{1}$), it follows that $F$ is \textit{true} in every state reachable from the initial state in one step. In other words, we can say that $F$ is an over-approximation of the forward image of $I$~\cite{McMillan03,McMillan05}. Also according to Definition~\ref{interpolants}, the formula $F \wedge B$ must be unsatisfiable (from Figure~\ref{figure:computing-image-by-interpolation}, $B=s_{2} \wedge s_{3} \wedge \ldots \wedge s_{k}$), which means that there is no state satisfying $F$ that can reach a final state $s_k$. After computing $F$, we then check whether $F$ implies $Q$. If $F$ implies $Q$, then no reachable state can satisfy the property $\phi$ and we can thus conclude that the property holds; however, since $F$ is an approximation, we can falsely conclude that the final state is reachable. In this case, we update $Q = F \vee Q$ and $A = F \wedge R_{0}$, increase the value of $k+1$ and check whether $A \wedge B$ is unsatisfiable. If $A \wedge B$ is satisfiable, we have found a valid counter-example (i.e., a path from the initial state to the final state); otherwise, we compute the interpolant $F = interpolant\left(\Pi, A, B\right)$ again and check whether $F$ implies $Q$. This procedure is stopped when we have found a valid counterexample or have proved that the final state is not reachable (i.e., the property holds). 
+%The details of the algorithm and further information about the use of interpolants in model checking can be found in~\cite{McMillan03,McMillan05,McMillan06,McMillan07}. 
 
 %--------------------------------------
 \subsection{Program Synthesis via Counter-Example \\ Guided Inductive Synthesis (CEGIS)}
