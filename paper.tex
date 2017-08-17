@@ -221,7 +221,7 @@ Figure~\ref{intelligent-product} shows some examples of ECPSs, which typically c
 \begin{figure}[!t]
 	\centering
 	\includegraphics[width=\textwidth]{figure1.jpg}
-	\caption{An embedded system is part of a well-specified larger one (intelligent product).}
+	\caption{An ECPS is part of a well-specified larger one (intelligent product).}
 	\label{intelligent-product}
 \end{figure}
 
@@ -500,7 +500,7 @@ Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sket
 
 Currently, SMT-based BMC approaches check code properties in real programs, which basically address programing-language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then requires schemes that do not only check if source code is correctly written, but also if it will properly respond in real environments or under external problems or corrupted data. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged or even intentionally tampered \cite{Shoukry}.
 
-Indeed, research in software verification is now incorporating such considerations, during checking processes, and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, a verification tool for digital systems was proposed, which is called digital system verifier (DSVerifier)~\cite{dsv_spin2015,Monteiro16} and is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering FWL effects. Additionally, DSVerifier checks closed-loop systems with uncertain models considering FWL effects, which are typically represented as hybrid systems, {\it i.e.}, the controller is digital but the controlled agent (plant) is a physical and continuous system~\cite{Bessa17}. That ultimately leads to the use of analog-to-digital converters, which are one of the most important aspects to be considered, given that data loss (quantization) is inevitable. As a consequence, verification procedures have to consider the interaction between a continuous plant and a digital (and sampled) controller with FWL effects, which can be connected using different control system configurations. Additionally, the latter may present a different behavior, regarding what was specified in analog domain, due to the inherent discret-time operation. 
+Indeed, research in software verification is now incorporating such considerations, during checking processes, and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, a verification tool for digital systems was proposed, which is called digital system verifier (DSVerifier)~\cite{dsv_spin2015,Monteiro16} and is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering FWL effects. Additionally, DSVerifier checks closed-loop systems with uncertain models considering FWL effects, which are typically represented as hybrid systems, {\it i.e.}, the controller is digital but the controlled agent (plant) is a physical and continuous system~\cite{Bessa17}. That ultimately leads to the use of analog-to-digital (A/D) converters, which are one of the most important aspects to be considered, given that data loss (quantization) is inevitable. As a consequence, verification procedures have to consider the interaction between a continuous plant and a digital (and sampled) controller with FWL effects, which can be connected using different control system configurations. Additionally, the latter may present a different behavior, regarding what was specified in analog domain, due to the inherent discret-time operation. 
 
 
 In summary, DSVerifier is a useful test tool, which takes into account different representations ({\it e.g.}, transfer-function and state-space), realization forms ({\it e.g.}, direct, delta, and transposed forms), and other implementation restrictions, in order to explore the design space. Finally, if a system's requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup, which can even be incorporated into a given system development procedure, by providing both system verification and model refinement. 
@@ -515,7 +515,7 @@ In summary, current approaches already tackle ECPS characteristics ({\it e.g.}, 
 
 
 %--------------------------------------
-\section{Verification and Synthesis \\ Challenges for Embedded Systems}
+\section{Verification and Synthesis \\ Challenges for Embedded \& Cyber-physical Systems}
 \label{Verification-Challenges} 
 %--------------------------------------
 
