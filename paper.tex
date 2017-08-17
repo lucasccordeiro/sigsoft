@@ -551,18 +551,18 @@ The sixth aspect is related to evolving development processes and technologies, 
 
 The ninth aspect is a consequence of changes in environment or different applications and scenarios, which may present new problems to embedded systems that did not exist or were not tackled during their development. Such a challenge is also closely related to ML techniques, given that they may be integrated into commercial systems and have the potential to devise new and refined control strategies, which must then be identified, checked, and validated. For instance, a diagnostic system may employ techniques that make it able to learn new tumor patterns and them warn their presence on patients' bodies, but a wrong updated model may compromise earlier traditional assessments and erroneously perform new ones, which should be verified and validated. Finally, the latter also raises another question: an embedded system must be checked only when it is developed/created or also during its life cycle, in order to ensure that improved models and actions are sound and reliable? That is an issue that will probably concern researchers, when ML becomes mature and widely spread in software verification.
 
-Those nine challenges place additional difficulties for developing reliable synthesizers for embedded systems, especially for cyber-physical systems and micro-grids, where controlled objects ({\it e.g.}, physical plants) typically exhibit continuous behavior (which may eventually change), whereas controllers (usually implemented by real-time computer systems) operate in discrete time and over a quantized domain. In particular, synthesizers for those systems need to consider the effects of quantizers (A/D and D/A converters), when a digital equivalent of the controlled object is considered, {\it i.e.}, a model of their physical environment (cf. intelligent product in Figure~\ref{intelligent-product}). Additionally,  finite-precision arithmetic and their related rounding errors need to be considered, when correct-by-construction code is generated for embedded systems.
+Those nine challenges place additional difficulties for developing reliable synthesizers for embedded systems, especially for cyber-physical systems and micro-grids, where controlled objects ({\it e.g.}, physical plants) typically exhibit continuous behavior (which may eventually change), whereas controllers (usually implemented by real-time computer systems) operate in discrete time and over a quantized domain. In particular, synthesizers for those systems need to consider the effects of quantizers (A/D and D/A converters), when a digital equivalent of the controlled object is considered, {\it i.e.}, a model of their physical environment (cf. intelligent product in Figure~\ref{intelligent-product}). Additionally,  finite-precision arithmetic and their related rounding errors need to be considered, when correct-by-construction code is generated for ECPS.
 
 %--------------------------------------
 \section{Research Problem (RP)}
 \label{Research-Problem}
 %--------------------------------------
 
-This position paper tackles seven major problems in computer-aided verification and synthesis for ECPS, which are (partially) open in current published research.
+This survey tackles seven major problems in computer-aided verification and synthesis for ECPS, which are (partially) open in current published research.
 
 \textbf{(RP1)} provision of suitable encoding into SMT \cite{BarrettSST09}, which may extend background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic ECPS.
 
-\textbf{(RP2)} exploitation of SMT techniques to leverage bounded model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving.
+\textbf{(RP2)} exploitation of SMT techniques to leverage (bounded) model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving.
 	
 \textbf{(RP3)} proof of correctness and timeliness of ECPS, by taking into account stringent constraints imposed by hardware platforms.
 	
