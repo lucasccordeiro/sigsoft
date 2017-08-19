@@ -26,13 +26,13 @@
 
 
 % Metadata Information
-\acmJournal{TCPS}
-\acmVolume{9}
-\acmNumber{9}
-\acmArticle{99}
-\acmYear{2017}
-\acmMonth{12}
-\copyrightyear{2017}
+%\acmJournal{TCPS}
+%\acmVolume{9}
+%\acmNumber{9}
+%\acmArticle{99}
+%\acmYear{2017}
+%\acmMonth{12}
+%\copyrightyear{2017}
 %\acmArticleSeq{9}
 
 % Copyright
@@ -48,9 +48,9 @@
 \acmDOI{0000001.0000001}
 
 % Paper history
-\received{February 2007}
-\received[revised]{March 2009}
-\received[accepted]{June 2009}
+\received{August 2017}
+%\received[revised]{March 2009}
+%\received[accepted]{June 2009}
 
 
 \lstset{language=C,basicstyle=\small}
@@ -69,7 +69,7 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 %\renewcommand{\baselinestretch}{0.93}
-
+\renewcommand{\baselinestretch}{0.97}
 
 \begin{document}
 %
@@ -220,7 +220,7 @@ Figure~\ref{intelligent-product} shows some examples of ECPSs, which typically c
 %
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=\textwidth]{figure1.jpg}
+	\includegraphics[width=0.6\textwidth]{figure1.jpg}
 	\caption{An ECPS is part of a well-specified larger one (intelligent product).}
 	\label{intelligent-product}
 \end{figure}
@@ -320,7 +320,7 @@ In general, BMC techniques aim to check the violation of a given (safety) proper
 %
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{figure2.jpg}
+	\includegraphics[width=0.6\textwidth]{figure2.jpg}
 	\caption{Bounded Model Checking.}
 	\label{bounded-model-checking}
 \end{figure}
@@ -347,8 +347,8 @@ As an example, consider a simple C program (slightly modified from~\cite{Strichm
 %
 \begin{figure}[ht]
 \centering
-\begin{minipage}{0.45\textwidth}
-\begin{lstlisting}
+\begin{minipage}{0.4\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize]
 #include <assert.h>
 int x[N], a;
 ...
@@ -366,8 +366,8 @@ int main(void) {
 (a)
 \end{center}
 \centering
-\begin{minipage}{0.45\textwidth}
-\begin{lstlisting}
+\begin{minipage}{0.4\textwidth}
+\begin{lstlisting}[basicstyle=\footnotesize]
 a1 = N
 a2 = (x[0] > 1) ? a1 - 1 : a1
 a3 = (x[1] > 1) ? a2 - 1 : a2
@@ -416,7 +416,7 @@ For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.45\textwidth}
-\begin{lstlisting}
+\begin{lstlisting}[basicstyle=\footnotesize]
 #include <assert.h>
 int main(void) {
  float x=2;
@@ -485,7 +485,7 @@ The correctness specification $\sigma$ provided to the program synthesizer is of
 %
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{figure3.jpg}
+	\includegraphics[width=0.4\textwidth]{figure3.jpg}
 	\caption{CounterExample Guided Inductive Synthesis (CEGIS).}
 	\label{Counter-Example-Guided-Inductive-Synthesis}
 \end{figure}
@@ -523,7 +523,7 @@ Generally, state-of-the-art verification methodologies for embedded systems (inc
 %
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{figure4.jpg}
+	\includegraphics[width=0.5\textwidth]{figure4.jpg}
 	\caption{Verification methodologies for embedded systems.}
 	\label{verification-methodologies}
 \end{figure}
