@@ -413,17 +413,10 @@ The ternary operator $f \: \: ? \: \: t_1 : t_2$, shown in Figure~\ref{figure:ve
 
 From the practical point of view, SAT- or SMT-based BMC procedures have been successfully applied to verify a large number of hardware and software systems, including digital circuits and single- and multi-threaded programs. Those BMC techniques were able to find subtle bugs in real digital and embedded software systems, as reported in the available literature~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. Nonetheless, the main criticism with respect to BMC techniques relies on completeness, since they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. 
 
-Due to that limitation, BMC tools are typically susceptible to exhaustion of time or memory limits, when checking complex circuit-implementations or programs with loops, whose bounds are too large or cannot be statically determined. Indeed, such an issue has pushed researchers to overcome the depth limitation and propose extensions capable of proving global correctness.
+Due to that limitation, BMC tools are typically susceptible to exhaustion of time or memory limits, when checking complex circuit-implementations or programs with loops, whose bounds are too large or cannot be statically determined. Indeed, such an issue has pushed researchers to overcome the depth limitation and propose extensions capable of proving global correctness. \textcolor{blue}{In particular, we can adopt two possible strategies to prove properties using BMC: \textit{(i)} compute the \textit{completeness threshold}, which can be smaller than or equal to the maximum number of loop-iterations occurring in the program or \textit{(ii)} determine the high-level worst-case execution time (WCET), which also gives a bound on the maximum number of loop-iterations~\cite{handbook09,ckso04,Ganai08}. However, in practice, complex software systems involve large data-paths and complex expressions. Therefore, the verification conditions that arise from BMC of programs become harder to solve and require substantial amounts of memory to build.}
 
 %--------------------------------------
-\subsection{Completeness}
-\label{completeness}
-%--------------------------------------
-
-\textcolor{blue}{BMC can be used to find property violations up to the bound $k$ but not to prove properties, unless an upper bound is known on the depth of the state space, which is not generally the case. For software verification and synhtesis, we can adopt two different strategies in order to \emph{prove} properties: \textit{(i)} compute the \textit{completeness threshold}, which can be smaller than or equal to the maximum number of loop-iterations occurring in the program or \textit{(ii)} determine the high-level worst-case execution time (WCET), which also gives a bound on the maximum number of loop-iterations~\cite{handbook09,ckso04,Ganai08}. However, in practice, complex software systems involve large data-paths and complex expressions. Therefore, the verification conditions that arise from BMC of programs become harder to solve and require substantial amounts of memory to build.}
-
-%--------------------------------------
-\subsubsection{Induction-based Verification of C Programs}
+\subsection{Induction-based Verification of C Programs}
 %--------------------------------------
 
 One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}; however, the main challenge regarding such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to check the corresponding VCs, {\it i.e.}, induction cannot determine invariance of a non-inductive assertion~\cite{Bradley07}. 
@@ -457,8 +450,15 @@ It is worth noticing that \textit{k}-induction with invariants has the potential
 
 Nonetheless, there is~little evidence, in the available literature, that model checking hardware and software systems through \textit{k}-induction (and invariants) can be efficiently exploited in ECPS verification and synhesis. That happens due to the distinctive characteristics mentioned earlier, which influence ECPS development and also verification processes. Additionally, there is still a lack of studies for software verifiers to exploit the combination and configuration of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants related to memory and variable aliasing~\cite{Bradley07}.
 
+%--------------------------------------
+\subsection{Property-based Reachability (or IC3)}
+%--------------------------------------
+
+\textcolor{blue}{The application of the \textit{k}-induction method is gaining popularity in the software verification community. Bradley {\it et al.} introduced  ``property-based reachability'' (or IC$3$) procedure for the safety verification of systems~\cite{Bradley12,Bradley13}; the authors have shown that IC$3$ can scale on certain benchmarks, where \textit{k}-induction fails to succeed.}
+
+
 %------------------------------------------------------
-\subsubsection{Craig Interpolation}
+\subsection{Craig Interpolation}
 \label{sec:CraigInterpolationInModelChecking}
 %------------------------------------------------------
 
