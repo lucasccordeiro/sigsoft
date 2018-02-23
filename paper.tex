@@ -10,6 +10,7 @@
 \usepackage[caption=false]{subfig}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{centernot}
 \usepackage{epstopdf}
 \usepackage{xcolor,colortbl}
 % \usepackage{cite}
@@ -61,7 +62,7 @@
 \lstset{frame=single}
 \lstset{
   language={C},
-  morekeywords={assert,stdio,math,printf,assume,then,end-if,end,input,output}
+  morekeywords={stdio,math,printf,assume,then,end-if,end,input,output}
 }
 
 \usepackage{color}
@@ -421,15 +422,15 @@ Due to that limitation, BMC tools are typically susceptible to exhaustion of tim
 
 One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}; however, the main challenge regarding such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to check the corresponding VCs, {\it i.e.}, induction cannot determine invariance of a non-inductive assertion~\cite{Bradley07}. 
 
-For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive-invariant}. If we consider the IEEE floating-point standard (IEEE 754)~\cite{4610935,Goldberg91whatevery}, then  the loop invariant $x>0$ holds initially and after each iteration; actually, $x$ tends to infinity after $128$ iterations. Nonetheless, this invariant is not inductive, given that $x>0$ before an initial iteration does not ensure that $x>0$ after each iteration; if we initially have $x=0.9$, then $x<0$ after the fourth iteration. As a consequence, even if invariant generation procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that \textit{k}-induction verifiers can automatically prove program correctness. In this specific example, an inductive invariant would be $x>1$, given that if $x>1$ before the initial iteration, then also $x>1$ after \textit{k} iterations.
+For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive-invariant}. The star-notation indicates nondeterminism. If we consider the IEEE floating-point standard (IEEE 754)~\cite{4610935,Goldberg91whatevery}, then  the invariant $x>0$ holds initially and after each iteration; actually, $x$ tends to infinity after $128$ iterations. Nonetheless, this invariant is not inductive, given that $x>0$ before an initial iteration does not ensure that $x>0$ after each iteration; if we initially have $x=0.9$, then $x<0$ after the fourth iteration. As a consequence, even if invariant generation procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that \textit{k}-induction verifiers can automatically prove program correctness. In this specific example, an inductive invariant would be $x>1$, given that if $x>1$ before the initial iteration, then also $x>1$ after \textit{k} iterations.
 %
 \begin{figure}[h]
 \centering
-\begin{minipage}{0.45\textwidth}
+\begin{minipage}{0.35\textwidth}
 \begin{lstlisting}[basicstyle=\footnotesize]
 #include <assert.h>
 int main(void) {
- float x=2;
+ float x=*;
  while (1) {
    x = ((2*x) - 1);
  }
@@ -454,8 +455,15 @@ Nonetheless, there is~little evidence, in the available literature, that model c
 \subsection{Property-based Reachability (or IC3)}
 %--------------------------------------
 
-\textcolor{blue}{The application of the \textit{k}-induction method is gaining popularity in the software verification community. Bradley {\it et al.} introduced  ``property-based reachability'' (or IC$3$) procedure for the safety verification of systems~\cite{Bradley12,Bradley13}; the authors have shown that IC$3$ can scale on certain benchmarks, where \textit{k}-induction fails to succeed.}
+\textcolor{blue}{Bradley {\it et al.} introduced  ``property-based reachability'' (or IC$3$) procedure for the safety verification of systems~\cite{Bradley12,Bradley13}; the authors have shown that IC$3$ can scale on certain benchmarks, where \textit{k}-induction fails to succeed. In particular, the success of IC3 over \textit{k}-induction procedures is due to the ability of the former to guide the search for inductive instances with counterexamples to the inductiveness (CTIs) of the given property~\cite{Bradley18}. Consider again the C-code fragment shown in Figure~\ref{figure:inductive-invariant}, that $\rho : x > 0$ is an invariant.}
 
+\begin{equation}
+x > 0 \wedge x' = 2*x - 1 \centernot\implies x > 0. \nonumber
+\end{equation}
+
+\textcolor{blue}{In this specific example, a CTI returned by an SMT solver is $x=0$. If this state is not eliminated, then the invariant $\rho$ cannot be established. The generated inductive assertion should establish that the CTI $x=0$  is unreachable. If no such inductive assertion exists, then other CTIs can be examined instead ({\it e.g.}, $0.1$, $0.2$, $\dots$, $0.9$). As a result, the lemmas should be strong enough that consecutively revisiting a finite set of CTIs will eventually end up in an assertion, which is inductive relative to them, thus eliminating the CTI. In this example, the instance $x > 1$ ($a=1$, $b=0$) is inductive and eliminates all possible CTIs.}
+
+\textcolor{blue}{Jovanovi\'{c} {\it et al.}~\cite{Jovanovic:2016:PK:3077629.3077648} present a reformulation of IC3, separating the reachability checking from the inductive reasoning. They further replace the regular induction algorithm by the \textit{k}-induction algorithm and show that it provides more concise invariants. The authors implemented the algorithm in the SALLY model checker using Yices2 to do a forward search and MathSAT5 to do a backward search. They showed that the new algorithm is able to solve a number of real-world benchmarks, at least as fast as other approaches.}
 
 %------------------------------------------------------
 \subsection{Craig Interpolation}
