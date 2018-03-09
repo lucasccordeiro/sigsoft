@@ -252,7 +252,7 @@ Automated formal verification has been employed to ensure correctness and reliab
 
 An ECPS $S$ can be represented as a tuple $S=(X,X_{0},U,Y,r,v)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, $Y$ is the set of outputs, $r$ is a transition function such that $r:X\times U \rightarrow X$, and  $v$ is an output mapping function such that $v:X\times U \rightarrow Y$~\cite{Rungger16,Alur00,Girard11}.
 
-\textcolor{red}{confesso que, para mim, o paragrafo abaixo ficou estranho... parece que estamos misturando tudo... sera que na tengtativa de implementar os comentarios e ter o artigo aceito nao estamos deixando o artigo muito nebuloso?}
+\textcolor{red}{confesso que, para mim, o paragrafo abaixo ficou estranho... parece que estamos misturando tudo... sera que na tengtativa de implementar os comentarios e ter o artigo aceito nao estamos deixando o artigo um pouco nebuloso?}
 The overall automated formal synthesis process for ECPSs and HSs involves three main steps: \textit{modeling}, which is related to obtaining a sound mathematical representation able to capture all relevant aspects of continuous and discrete dynamics and their interaction, as well as formulating properties and invariants that describe a desirable behavior, \textit{verification}, where a ECPS behavior is checked through the proposed mathematical structure and compliance with a desired behavior is verified, and, finally, controller \textit{synthesis}, which produces a controller or finds invariant control laws that allow a ECPS to meet requirements and behave as desired, which is confirmed by a verification oracle. 
 
 
@@ -325,7 +325,7 @@ A common procedure for controller synthesis for ECPS is based on finite-state ap
 
 %The amount of software embedded in CPS is increasing, partly due to increased design complexity, but also as a result of shift toward software-centric implementations, which designers prefer because software allows them to flexibly and efficiently implement new features. Synthesis is one of the key automation techniques for improving productivity and developing efficient implementations for a design specification.
 
-\textcolor{blue}{Due to the advent of sophisticated SMT solvers built over efficient SAT solvers, an increasingly number of software verifiers as well as synthesizers have emerged in the literature, in order to verify design correctness and produce reliable implementations for ECPS. Here, we describe some achievements in symbolic model checking of software, including BMC, \textit{k}-induction, ``property-based reachability'' (or IC3), and Craig interpolation, which are currently used to the safety verification of ECPS. This section also overviews software synthesis techniques that are applicable to write correct-by-construction implementations of ECPS.}
+\textcolor{blue}{Due to the advent of sophisticated SMT solvers built over efficient SAT solvers, an increasingly number of software verifiers as well as synthesizers have emerged in the literature, in order to verify design correctness and produce reliable implementations for ECPS, which was later reinforced by the introduction of knowledge regarding their behavior. Here, we describe some achievements in symbolic model checking of software, including BMC, \textit{k}-induction, ``property-based reachability'' (or IC3), and Craig interpolation, which are currently used to the safety verification of ECPS. This section also overviews software synthesis techniques that are applicable to write correct-by-construction implementations of ECPS.}
 
 %--------------------------------------
 \subsection{Bounded Model Checking (BMC)}
@@ -350,7 +350,7 @@ Indeed, given a transition system \textit{M}, which is derived from the control-
 \psi_{k} = I\left(s_{0}\right) \wedge \bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right) \wedge \neg \phi_{k}
 \end{equation}
 
-\noindent Here, $\phi_{k}$ represents a safety property $\phi$ in step $k$, $I$ is the set of initial states of $M$, $R\left(s_{i},s_{i+1}\right)$ is the transition relation of $M$ at time steps $i$ and $i+1$. Hence, the equation $\bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right)$ represents the set of all executions of $M$ of length $k$. $\neg \phi_{k}$ represents the condition that $\phi$ is violated in state $k$, which is reached by a bounded execution of $M$ of length $k$. Finally, the resulting (bit-vector) equation is translated to conjunctive normal form in linear time and passed to a SAT solver for checking satisfiability. Eq.~(\ref{bounded-model-checking-biere}) can be used to check safety properties~\cite{PrasadBG05}. Liveness properties ({\it e.g.}, starvation, deadlock) that contain the Linear-time Temporal Logic (LTL) operator $F$ are checked by encoding $\neg \phi_{k}$ in a loop within a bounded execution of length at most $k$, such that $\phi$ is violated on each state in the loop~\cite{JMorse15}. In this case, Eq.~\ref{bounded-model-checking-biere} can be rewritten as:
+\noindent Here, $\phi_{k}$ represents a safety property $\phi$ in step $k$, $I$ is the set of initial states of $M$, $R\left(s_{i},s_{i+1}\right)$ is the transition relation of $M$ at time steps $i$ and $i+1$. Hence, the equation $\bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right)$ represents the set of all executions of $M$ of length $k$ and $\neg \phi_{k}$ means the condition that $\phi$ is violated in state $k$, which is reached by a bounded execution of $M$ of length $k$. Finally, the resulting (bit-vector) equation is translated to conjunctive normal form in linear time and passed to a SAT solver for checking satisfiability. Eq.~(\ref{bounded-model-checking-biere}) can be used to check safety properties~\cite{PrasadBG05}. Liveness properties ({\it e.g.}, starvation, deadlock) that contain the Linear-time Temporal Logic (LTL) operator $F$ are checked by encoding $\neg \phi_{k}$ in a loop within a bounded execution of length at most $k$, such that $\phi$ is violated on each state in the loop~\cite{JMorse15}. In that case, Eq.~\ref{bounded-model-checking-biere} can be rewritten as:
 
 %
 \begin{equation}
@@ -361,7 +361,7 @@ Indeed, given a transition system \textit{M}, which is derived from the control-
 
 One may notice that BMC analyzes only bounded program runs, but generates verification conditions (VCs) that reflect the exact path in which a statement is executed, the context in which a given function is called, and the bit-accurate representation of expressions. A verification condition is a logical formula (constructed from the bounded program and desired correctness properties) whose validity implies that the program's behaviour agrees with its specification~\cite{Bradley07}. Correctness properties in programs can be specified by the user via \textit{assert} statements or automatically generated from a specification language~\cite{Thomas01}. If all of a bounded program's VCs are valid, then a program is in compliance with its specification up to the given bound.
 
-As an example, consider a simple C program (slightly modified from~\cite{Strichman08}) with an exponential number of paths, as shown in Figure~\ref{figure:verification-condition}(a); the corresponding C program, in single static assignment (SSA) form~\cite{Appel97}, is shown in Figure~\ref{figure:verification-condition}(b). The SSA form is an intermediate representation, which is used by compilers to facilitate optimizations and transformations of source code. The common property in SSA form is that every variable has only one definition in the program text. This is achieved by introducing a fresh variable from the original name ({\it e.g.}, with a subscript), such that every assignment has a unique left-hand side, as shown in Figure~\ref{figure:verification-condition}(b).
+As an example, consider a simple C program (slightly modified from~\cite{Strichman08}) with an exponential number of paths, as shown in Figure~\ref{figure:verification-condition}(a); the corresponding C program, in single static assignment (SSA) form~\cite{Appel97}, is shown in Figure~\ref{figure:verification-condition}(b). The SSA form is an intermediate representation, which is used by compilers to facilitate optimizations and transformations of source code. The common property in SSA form is that every variable state has only one definition in the program text. This is achieved by introducing a fresh variable from the original name ({\it e.g.}, with a subscript), such that every assignment has a unique left-hand side, as shown in Figure~\ref{figure:verification-condition}(b).
 %
 \begin{figure}[ht]
 \centering
@@ -413,7 +413,7 @@ Apart from that, this program has an exponential number of paths, since each ele
                 \wedge \ldots \\
                 \wedge \, \, a_{N+1} = ite\left(x[N-1] > 1, a_{N} - 1 , a_{N}\right) \\
                 \wedge \neg \left(a_{N+1} \leq N\right) \\
-              \end{array} \right ]  \\
+              \end{array} \right ].  \\
               \\           
 \end{equation}
 
@@ -421,7 +421,7 @@ The ternary operator $f \: \: ? \: \: t_1 : t_2$, shown in Figure~\ref{figure:ve
 
 From the practical point of view, SAT- or SMT-based BMC procedures have been successfully applied to verify a large number of hardware and software systems, including digital circuits and single- and multi-threaded programs. Those BMC techniques were able to find subtle bugs in real digital and embedded software systems, as reported in the available literature~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. Nonetheless, the main criticism with respect to BMC techniques relies on completeness, since they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. 
 
-Due to that limitation, BMC tools are typically susceptible to exhaustion of time or memory limits, when checking complex circuit-implementations or programs with loops, whose bounds are too large or cannot be statically determined. Indeed, such an issue has pushed researchers to overcome the depth limitation and propose extensions capable of proving global correctness. \textcolor{blue}{In particular, we can adopt two possible strategies to prove properties using BMC: \textit{(i)} compute the \textit{completeness threshold}, which can be smaller than or equal to the maximum number of loop-iterations occurring in the program or \textit{(ii)} determine the high-level worst-case execution time (WCET), which also gives a bound on the maximum number of loop-iterations~\cite{handbook09,ckso04,Ganai08}. However, in practice, complex software systems involve large data-paths and complex expressions. Therefore, the verification conditions that arise from BMC of programs become harder to solve and require substantial amounts of memory to build.}
+Due to that limitation, BMC tools are typically susceptible to exhaustion of time or memory limits, when checking complex circuit-implementations or programs with loops, whose bounds are too large or cannot be statically determined. Indeed, such an issue has pushed researchers to overcome the depth limitation and propose extensions capable of proving global correctness. \textcolor{blue}{In particular, we can adopt two possible strategies to prove properties using BMC: \textit{(i)} compute the \textit{completeness threshold}, which can be smaller than or equal to the maximum number of loop-iterations occurring in the program or \textit{(ii)} determine the high-level worst-case execution time (WCET), which also gives a bound on the maximum number of loop-iterations~\cite{handbook09,ckso04,Ganai08}. However, in practice, complex software systems involve large data-paths and complex expressions. Therefore, the verification conditions that arise from BMC of programs become harder to solve and require substantial amounts of memory to build. Finally, another strategy is to use a complementary technique, with the potential to fill the gap between the adopted depth and all subsequent ones, such as induction, which is explained below.} \textcolor{red}{colocar uma ref}.
 
 %--------------------------------------
 \subsection{Induction-based Verification of C Programs}
@@ -429,7 +429,7 @@ Due to that limitation, BMC tools are typically susceptible to exhaustion of tim
 
 One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}; however, the main challenge regarding such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to check the corresponding VCs, {\it i.e.}, induction cannot determine invariance of a non-inductive assertion~\cite{Bradley07}. 
 
-For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive-invariant}; \textcolor{blue}{the star-notation indicates nondeterminism. Suppose that one wants to prove that $P : x > 0$ is invariant. To attempt to prove the invariant property P, one can apply induction:}
+For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive-invariant}, \textcolor{blue}{where the star-notation indicates nondeterminism. Suppose that one wants to prove that $P : x > 0$ is invariant and, in order to do that, induction can be applied:}
 
 \begin{itemize} 
 \item \textcolor{blue}{It holds initially because}
@@ -440,14 +440,14 @@ For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive
 \end{equation}
 
 \begin{itemize} 
-\item \textcolor{blue}{Whenever $P$ holds for $k$ loop unwindings, it also holds for $k + 1$ steps.}
+\item \textcolor{blue}{Whenever $P$ holds for $k$ loop unwindings, it also holds for $k + 1$ steps, given that}
 \end{itemize}
 
 \begin{equation}
 \underbrace{x > 0}_{\text{P}} \wedge \underbrace{x = 2 \wedge x' = 2*x - 1}_{\text{transition relation}} \implies \underbrace{x' > 0}_{\text{P'}}. \nonumber
 \end{equation}
 
-\textcolor{blue}{If we consider the IEEE floating-point standard (IEEE 754)~\cite{4610935,Goldberg91whatevery}, then  the invariant $x>0$ holds initially and after each iteration; actually, $x$ tends to infinity after $128$ iterations. Nonetheless, this invariant is not inductive, given that $x>0$ before an initial iteration does not ensure that $x>0$ after each iteration; in particular, if we initially assign $x=0.9$, then $x<0$ after the fourth iteration.} As a consequence, even if invariant generation procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that \textit{k}-induction verifiers can automatically prove correctness. In this specific example, an inductive invariant would be $x>1$, given that if $x>1$ before the initial iteration, then also $x>1$ after \textit{k} iterations.
+\textcolor{blue}{If we consider the IEEE floating-point standard (IEEE 754)~\cite{4610935,Goldberg91whatevery}, then  the invariant $x>0$ holds initially and after each iteration and $x$ tends to infinity after $128$ iterations. Nonetheless, this invariant is not inductive, given that $x>0$ before an initial iteration does not ensure that $x>0$ after each iteration. In particular, if we initially assign $x=0.9$, then $x<0$ after the fourth iteration.} As a consequence, even if invariant generation procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that \textit{k}-induction verifiers can automatically prove correctness. In that specific example, an inductive invariant would be $x>1$, given that if $x>1$ before the initial iteration, then also $x>1$ after \textit{k} iterations.
 %
 \begin{figure}[h]
 \centering
@@ -480,7 +480,7 @@ Nonetheless, there is~little evidence, in the available literature, that model c
 \subsection{Property-based Reachability (or IC3)}
 %--------------------------------------
 
-\textcolor{blue}{Bradley {\it et al.} introduced  ``property-based reachability'' (or IC$3$) procedure for the safety verification of systems~\cite{Bradley12,Bradley13}; the authors have shown that IC$3$ can scale on certain benchmarks, where \textit{k}-induction fails to succeed. In particular, the success of IC3 over \textit{k}-induction procedures is due to the ability of the former to guide the search for inductive instances with counterexamples to the inductiveness (CTIs) of the given property~\cite{Bradley18}. Consider again the C-code fragment shown in Figure~\ref{figure:inductive-invariant}, that $P : x > 0$ is an invariant.}
+\textcolor{blue}{Bradley {\it et al.} introduced  the ``property-based reachability'' (or IC$3$) procedure for the safety verification of systems~\cite{Bradley12,Bradley13} and have shown that IC$3$ can scale on certain benchmarks, where \textit{k}-induction fails to succeed. In particular, the success of IC3 over \textit{k}-induction procedures is due to the ability of the former to guide the search for inductive instances with counterexamples for the inductiveness (CTIs) of a given property~\cite{Bradley18}. Consider again the C-code fragment shown in Figure~\ref{figure:inductive-invariant}, where $P : x > 0$ is an invariant.}
 
 \begin{equation}
 \underbrace{x > 0}_{\text{P}} \wedge \underbrace{x = * \wedge x' = 2*x - 1}_{\text{transition relation}} \centernot\implies \underbrace{x > 0}_{\text{P'}}. \nonumber
@@ -488,7 +488,7 @@ Nonetheless, there is~little evidence, in the available literature, that model c
 
 \textcolor{blue}{In this specific example, a CTI returned by an SMT solver is $x=0$. If this state is not eliminated, then the invariant $P$ cannot be established. The generated inductive assertion should establish that the CTI $x=0$  is unreachable. If no such inductive assertion exists, then other CTIs can be examined instead ({\it e.g.}, $0.1$, $0.2$, $\dots$, $0.9$). As a result, the lemmas should be strong enough that consecutively revisiting a finite set of CTIs will eventually end up in an assertion, which is inductive relative to them, thus eliminating the CTI. In this example, the instance $x > 1$ ($a=1$, $b=0$) is inductive and eliminates all possible CTIs.}
 
-\textcolor{blue}{Jovanovi\'{c} {\it et al.}~\cite{Jovanovic:2016:PK:3077629.3077648} present a reformulation of IC3, separating the reachability checking from the inductive reasoning. They further replace the regular induction algorithm by the \textit{k}-induction algorithm and show that it provides more concise invariants. The authors implemented the algorithm in the SALLY model checker using Yices2 to do a forward search and MathSAT5 to do a backward search. They showed that the new algorithm is able to solve a number of real-world benchmarks, at least as fast as other approaches.}
+\textcolor{blue}{Jovanovi\'{c} {\it et al.}~\cite{Jovanovic:2016:PK:3077629.3077648} presented a reformulation of IC3, by separating reachability checking from inductive reasoning. They further replace the regular induction algorithm by the \textit{k}-induction one and show that it provides more concise invariants. Those authors implemented the mentioned algorithm in the SALLY model checker using Yices2, in order to perform a forward search, and MathSAT5, which executes a backward search. They showed that the new algorithm is able to solve a number of real-world benchmarks, at least as fast as other approaches.}
 
 %------------------------------------------------------
 \subsection{Craig Interpolation}
@@ -513,7 +513,7 @@ Nonetheless, there is~little evidence, in the available literature, that model c
 
 \textcolor{blue}{The use of interpolants allows us to define a complete method for finite-state reachability analysis based on SAT and SMT solvers.}
 %
-\textcolor{blue}{In order to show how BMC and interpolation can be combined, we refer to Section~\ref{Preliminaries} where we define Eq.~(\ref{bounded-model-checking-biere}) and the terms $I$, $R$, and $\phi$. Now, suppose that $Q=I$ and Eq.~(\ref{bounded-model-checking-biere}) is partitioned, so that the set of initial states $I$ and the first instance of the transition relation $R$ are in set $A$, while the remaining instances of $R$ and the property $\phi$ are in set $B$, as shown in Figure~\ref{figure:computing-image-by-interpolation} (note that $k$ is unknown).}
+\textcolor{blue}{In order to show how BMC and interpolation can be combined, we refer to Section~\ref{Preliminaries}, where we define Eq.~(\ref{bounded-model-checking-biere}) and the terms $I$, $R$, and $\phi$. Now, suppose that $Q=I$ and Eq.~(\ref{bounded-model-checking-biere}) is partitioned, so that the set of initial states $I$ and the first instance of the transition relation $R$ are in set $A$, while the remaining instances of $R$ and the property $\phi$ are in set $B$, as shown in Figure~\ref{figure:computing-image-by-interpolation} (note that $k$ is unknown).}
 %
 \begin{figure}[ht]
 \centering
@@ -522,7 +522,7 @@ Nonetheless, there is~little evidence, in the available literature, that model c
 \label{figure:computing-image-by-interpolation}
 \end{figure}
 
-\textcolor{blue}{Suppose that we use an SMT solver to prove that the $A \wedge B$ is unsatisfiable, {\it i.e.}, we use an SMT solver to conclude that there is no satisfying assignment to $A \wedge B$.\footnote{Note that if at any stage we can satisfy the property $\phi$ within $k$ steps from the initial state, then we have found a counterexample.} The internal steps performed by the SMT solvers for reaching this conclusion can be used to construct a proof of unsatisfiability $\Pi$. From this proof, we can derive an interpolant $F$ for the pair of formulae $\left(A,B\right)$, i.e., $F = interpolant\left(\Pi, A, B\right)$. According to Definition~\ref{interpolants}, $A$ must imply $F$ and since we defined $A$ to be the set of initial states and the first instance of $R$ (i.e., from Figure~\ref{figure:computing-image-by-interpolation}, $A=s_{0} \wedge s_{1}$), it follows that $F$ is \textit{true} in every state reachable from the initial state in one step. In other words, we can say that $F$ is an over-approximation of the forward image of $I$~\cite{McMillan03,McMillan05}. Also according to Definition~\ref{interpolants}, the formula $F \wedge B$ must be unsatisfiable (from Figure~\ref{figure:computing-image-by-interpolation}, $B=s_{2} \wedge s_{3} \wedge \ldots \wedge s_{k}$), which means that there is no state satisfying $F$ that can reach a final state $s_k$. After computing $F$, we then check whether $F$ implies $Q$. If $F$ implies $Q$, then no reachable state can satisfy the property $\phi$ and we can thus conclude that the property holds; however, since $F$ is an approximation, we can falsely conclude that the final state is reachable. In this case, we update $Q = F \vee Q$ and $A = F \wedge R_{0}$, increase the value of $k+1$ and check whether $A \wedge B$ is unsatisfiable. If $A \wedge B$ is satisfiable, we have found a valid counter-example (i.e., a path from the initial state to the final state); otherwise, we compute the interpolant $F = interpolant\left(\Pi, A, B\right)$ again and check whether $F$ implies $Q$. This procedure is stopped when we have found a valid counterexample or have proved that the final state is not reachable (i.e., the property holds). The details of the algorithm and further information about the use of interpolants in model checking can be found in~\cite{McMillan03,McMillan05,McMillan06,McMillan07}}. 
+\textcolor{blue}{Suppose that we use an SMT solver to prove that the $A \wedge B$ is unsatisfiable, {\it i.e.}, we use an SMT solver to conclude that there is no satisfying assignment to $A \wedge B$.\footnote{Note that if at any stage we can satisfy the property $\phi$ within $k$ steps from the initial state, then we have found a counterexample.} The internal steps performed by SMT solvers for reaching this conclusion can be used to construct a proof of unsatisfiability $\Pi$, from which we can derive an interpolant $F$ for the pair of formulae $\left(A,B\right)$, i.e., $F = interpolant\left(\Pi, A, B\right)$. According to Definition~\ref{interpolants}, $A$ must imply $F$ and since we defined $A$ to be the set of initial states and the first instance of $R$ (i.e., from Figure~\ref{figure:computing-image-by-interpolation}, $A=s_{0} \wedge s_{1}$), it follows that $F$ is \textit{true} in every state reachable from the initial state in one step. In other words, we can say that $F$ is an over-approximation of the forward image of $I$~\cite{McMillan03,McMillan05}. Also according to Definition~\ref{interpolants}, the formula $F \wedge B$ must be unsatisfiable (from Figure~\ref{figure:computing-image-by-interpolation}, $B=s_{2} \wedge s_{3} \wedge \ldots \wedge s_{k}$), which means that there is no state satisfying $F$ that can reach a final state $s_k$. After computing $F$, we then check whether $F$ implies $Q$. If $F$ implies $Q$, then no reachable state can satisfy the property $\phi$ and we can thus conclude that the property holds; however, since $F$ is an approximation, we can falsely conclude that the final state is reachable. In this case, we update $Q = F \vee Q$ and $A = F \wedge R_{0}$, increase the value of $k+1$ and check whether $A \wedge B$ is unsatisfiable. If $A \wedge B$ is satisfiable, we have found a valid counter-example (i.e., a path from the initial state to the final one); otherwise, we compute the interpolant $F = interpolant\left(\Pi, A, B\right)$ again and check whether $F$ implies $Q$. This procedure is stopped when we have found a valid counterexample or proved that the final state is not reachable (i.e., the property holds). The details of the algorithm and further information about the use of interpolants in model checking can be found in~\cite{McMillan03,McMillan05,McMillan06,McMillan07}}. 
 
 %--------------------------------------
 \subsection{Program Synthesis via Counter-Example \\ Guided Inductive Synthesis (CEGIS)}
@@ -550,41 +550,40 @@ Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sket
 %---------------------------------------------------
 
 \textcolor{blue}{A typical synthesizer for Embedded \& CPS iterates between two main phases, 
-an inductive synthesis phase, {\sc synthesise}, and a validation phase, {\sc verify}~\cite{AbateBCCCDKKP17}.  
+an inductive synthesis phase, that is, {\sc synthesise}, and a validation one, that is, {\sc verify}~\cite{AbateBCCCDKKP17}.  
 The two phases interact via a finite set of test vectors, which is updated
-incrementally.  Given a specification of the ECPS ({\it e.g.}, stability and safety), the inductive
-synthesis procedure tries to find a candidate solution satisfying the
-specification for the given set of test inputs.}
+incrementally.  Given a specification of a ECPS ({\it e.g.}, stability and safety), the inductive
+synthesis procedure tries to find a candidate solution satisfying that
+specification, for the given set of test inputs.}
 %
-\textcolor{blue}{If the synthesis phase succeeds in finding a witness, this witness is a
-candidate solution to the full synthesis formula.  This candidate
-solution is passed to the validation phase, which checks whether it is a proper solution
-({\it i.e.}, satisfies the specification for all possible inputs).  If this is the
+\textcolor{blue}{If the synthesis phase succeeds in finding a witness, then the latter is a
+candidate solution for the full synthesis formula. This candidate is passed to the validation phase, which checks whether it is a proper solution
+({\it i.e.}, it satisfies the specification for all possible inputs).  If this is the
 case, then the algorithm terminates; otherwise, additional information is
-provided to the inductive synthesis phase in the form of a new
+provided to the inductive synthesis phase, in the form of a new
 counterexample, C-ex, which is added to the set of test inputs, and the loop
 iterates again.}
 
 \textcolor{blue}{One possible architecture for a synthesiser is 
 presented in Fig.~\ref{fig:CEGIS-precision-increment}, considering the 
 stability and safety specification. It starts by devising a digital controller that 
-stabilizes the physical model while remaining safe for a pre-selected time 
-horizon ($k$) and a single initial state; then, it employs a multi-staged verification 
-process as follows: (i)~The first verification stage ({\sc safety}) checks that the candidate
+stabilizes the physical model, while remaining safe for a pre-selected time 
+horizon ($k$) and a single initial state. Then, it employs a multi-staged verification 
+process as follows: (i)~The first verification stage ({\sc safety}) checks if the candidate
 solution, which we synthesized to be safe for at least one initial
-state, is safe for \emph{all} possible initial states, {\it i.e.}, does not reach
+state, is safe for \emph{all} possible initial states, {\it i.e.}, it does not reach
 an unsafe state within $k$ steps.
 (ii)~The second verification stage ({\sc precision})
- restores soundness with respect to the plant precision
+ restores soundness with respect to plant precision,
 by using interval arithmetic~\cite{moore1966interval} to validate the 
 operations performed by the previous stage. 
-(iii)~The third verification stage ({\sc complete}) checks that the current
-$k$ is large enough to ensure safety for any $k'{>}k$.  Here, we compute the
+(iii)~The third verification stage ({\sc complete}) checks if the current
+$k$ is large enough to ensure safety for any $k'{>}k$. Here, we compute the
 completeness threshold $\overline{k}$ for the current candidate controller 
 $K$~\cite{abatecav2017}, {\it i.e.}, the number of
 iterations required to sufficiently unwind the closed-loop state-space
-model such that the boundaries are not violated for any larger number of
-iterations, and check that $k{\geq}\overline{k}$}.
+model, such that the boundaries are not violated for any larger number of
+iterations, and check if $k{\geq}\overline{k}$}.
 
 
 %
