@@ -1,0 +1,808 @@
+\documentclass{cta-author}
+
+\newtheorem{theorem}{Theorem}{}
+\newtheorem{corollary}{Corollary}{}
+\newtheorem{remark}{Remark}{}
+\newtheorem{definition}{Definition}{}
+
+\usepackage{booktabs} % For formal tables
+% \usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{hyperref}	
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage[caption=false]{subfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{centernot}
+\usepackage{epstopdf}
+\usepackage{xcolor,colortbl}
+\usepackage{tikz}
+\usetikzlibrary{positioning, automata, shapes.arrows, calc, shapes, arrows}
+\usetikzlibrary{patterns}
+% \usepackage{cite}
+\newtheorem{mydef}{Definition}
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage[ruled]{algorithm2e} % For algorithms
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+%\newtheorem{prf}{\textbf{Definition}}
+
+\renewcommand{\baselinestretch}{0.986}
+\setlength{\belowcaptionskip}{-2.8 pt} 
+
+
+\begin{document}
+
+%\supertitle{Brief Paper}
+
+\title{Automated Verification and Synthesis of Cyber-Physical Systems: Advances and Challenges}
+
+\author{\au{Lucas C. Cordeiro$^{1\corr}$} \au{Eddie B. de Lima Filho$^2$} \au{Iury V. de Bessa$^3$}}
+
+\address{\add{1}{Department of Computer Science, University of Oxford, Oxford, United Kingdom}
+\add{2}{TPV Technology, Manaus, Brazil}
+\add{3}{Department of Electricity, Federal University of Amazonas, Manaus, Brazil}
+\email{lucasccordeiro@gmail.com}}
+
+\begin{abstract}
+\looseness=-1 Dependency on the correct operation of embedded systems is rapidly growing, mainly due to their wide range of applications, such as micro-grids, automotive device control, health care, surveillance, mobile devices, telecommunications, internet of things, and consumer electronics. Their structures are becoming more and more complex and now require multi-core processors with scalable shared memory, signal-processing pipelines, and sophisticated software modules, in order to meet increasing computational power, flexibility demands, and adaptation to new scenarios and behaviors. Additionally, interaction with real-world entities and addition of modern communication capabilities further enhance the mentioned features and give rise to a new class of systems: embedded \& cyber-physical systems (ECPSs). As a consequence, reliability of ECPSs becomes a key issue during system development, which must be carefully addressed and assured. Normally, state-of-the-art verification methodologies for ECPSs generate test vectors (with constraints) and use assertion-based verification and high-level processor models, during simulation. Nonetheless, other additional challenges have been raised: the need for meeting time and energy constraints, handling concurrent software, dealing with platform restrictions, evaluating implementation-structure choices, validating operation logic, ensuring correct system behavior together with physical plants, providing compliance with target systems, incorporating knowledge about new problems and conditions, and supporting new software architectures and legacy designs. The present survey discusses challenges, problems, and recent advances to ensure correctness and timeliness regarding ECPSs. Reliability issues, in the development of ECPSs, are then considered, as a prominent verification and synthesis application for achieving a \textit{correct-by-construction} design.
+\end{abstract}
+
+\maketitle
+
+%--------------------------------------
+\section{Introduction}
+%--------------------------------------
+
+Generally, embedded computer systems perform dedicated functions with high degree of reliability, according to their original design and requirements ({\it e.g.}, real-time)~\cite{Kopetz11}. They are ubiquitous in modern day information systems and are also becoming increasingly important in our society, due to their use to process, monitor, control, and even replace every human activity: factories, power plants, mobile devices, robotics, traffic control, vehicles, and home duties~\cite{xu15}. Besides, they are also used in a variety of sophisticated applications, which range from entertainment software, such as games and graphics animation, to safety-critical systems, such as nuclear reactors and automotive controllers. 
+
+The interaction between embedded software and physical processes created a different class of systems, which are complex, highly integrated, and present a mixture of continuous and discrete dynamics, named as \textit{hybrid systems} (HSs). Indeed, the embedded-system domain allied to the most recent communication revolution caused an intense integration between different and spread physical processes, which are called embedded \& cyber-physical systems (ECPSs)~\cite{leeCPS}. In particular, the presence of modern communication technologies ({\it e.g.}, internet of things - IoT) causes a revolution in terms of flexibility, scalability, and complexity of those systems and adds a novel class of problems to the challenges found in the embedded systems domain. For example, micro-grids, {\it i.e.}, small-scale electricity systems that gather different sources of distributed generation (DG) and loads, are emerging ECPSs, where reliability and carbon emission reduction are of paramount importance~\cite{xu15}. One may also notice that each DG element and the majority of current loads already employ embedded software and present several safety-critical requirements; however, the integration of both constitute an ECPS, where additional challenges related to synchronization, stability, control, communication, and reliability of the entire micro-grid arise.
+
+Thus, ECPSs demand short development cycles and high-level of reliability and robustness~\cite{leeCPS,leeCPS2}, besides presenting challenges that include but are not limited to the ones already imposed by embedded systems. As a consequence of their popularization, human life has also become more and more dependent on services provided by this type of system and, in particular, their success is strictly related to both service relevance and quality/reliability. 
+
+{\color{blue}
+Figure~\ref{intelligent-product} shows some examples of ECPSs, which typically consist of a human-machine interface ({\it e.g.}, keyboard and display), a processing unit ({\it e.g.}, real-time computer system), and an instrumentation interface ({\it e.g.}, sensor, network, and actuator) that can be connected to some physical plant~\cite{Kopetz11}. Indeed, many current ECPSs, such as unmanned aerial vehicles (UAVs)~\cite{groza2015formal} and medical monitoring systems~\cite{Cordeiro09}, become interesting solutions only if they can reliably perform their target tasks. For instance, UAVs are a trend on military missions and civil applications, since they can easily achieve places that cannot be accessed by humans without on-board pilots with different degrees of autonomy; however, an incorrect plan execution may cost civilian lives, which is unacceptable. In addition, wrong disease diagnosis or condition-evaluation reports have the potential to compromise patients' health and even many aspects of their lives, with serious consequences. On the one hand, portable ECPSs are capable of monitoring and identifying conditions that are very difficult for a physician, mainly when his contact with patients happens only in medical clinics. On the other hand, wrong or incomplete diagnostic data may delay necessary treatments or deteriorate patients' health.
+}
+%
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=\columnwidth]{figure1.jpg}
+	\caption{An ECPS is part of a well-specified larger one (intelligent product).}
+	\label{intelligent-product}
+\end{figure}
+
+Besides, when physical interaction with the real world is needed, which happens in ECPSs, additional care must be taken, mainly when human action is directly replaced, as in vehicle driving. Regarding the latter, even human-in-the-loop feedback control can be employed \cite{munir}, which then raises deeper concerns related to reliability of human behavior modeling and system implementation. Consequently, it is important to go beyond design correctness and also address behavior correctness, which may be performed by incorporating system models. Specifically, such models can be used to evaluate and even synthesize a given particular system, by ensuring that all needed functions are correctly implemented and the correct behavior is exhibited, {\it i.e.}, the system is indeed correct by its method of construction~\cite{Abate17}.
+
+For instance, one may argue that a Linux device driver \cite{ldd} was verified and correctly uses the related kernel services ({\it e.g.,} exported symbols and scheduling); however, not much can be said about correct access to the associated hardware and its use, {\it i.e.}, if \textit{read} and \textit{write} operations are performed according to what is specified in the device's datasheet and setup periods are respected, for instance. In summary, the main goal would be to ensure that the developed driver is compliant with the underlying hardware, which goes further than code correctness and also tackles interaction with surrounding entities.
+
+{\color{blue}
+Regarding behavior correctness, one important observation is that it is becoming more difficult, since fixed mathematical models are being replaced by machine learning approaches (ML) \cite{mlembe}, where future operation may change based on data acquired during previous actions, due to model updating. Indeed, ML algorithms have a dual role on software verification development. With the dissemination of the use of these algorithms, several ECPS have embedded ML software, and as a consequence, system-correctness verification procedures should also adapt somehow and incorporate new checks, which may also rely on ML, when analyzing target models or fed with acquired data, as recently reported in the literature~\cite{DBLP:conf/cav/HuangKWW17,DBLP:conf/cav/KatzBDJK17}, where formal verification techniques are applied to verify deep neural networks. Otherwise, model checking mechanisms have also incorporated ML algorithms to increase the efficiency of verification~\cite{BUCCAFURRI199957,Bortolussi2015323,Braazdil201498} and synthesis~\cite{Jha2017693} procedures.
+}
+
+A number of distinctive characteristics might influence the ECPS verification and synthesis process, which include: mass production and static structure, functionality determined by software in read-only memory, multi-core processors with scalable shared memory, and limited amount of energy. Additionally, increasing computational power and decreasing size and cost, which are common to the area of computer processors, are enabling system designers to move more features to software domain, which consequently leads to difficulties in verifying design correctness, since stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, interfacing, and concurrency)~\cite{Kroening15} or even new structures provided with the goal of ensuring more computational capacity~\cite{cudalucas} must be considered during verification. Such observations expand the addressed issues and even complement what was previously mentioned.
+
+{\color{blue}
+The present article is an survey study whose main goals are described as follows:
+\begin{itemize}
+	\item briefly present part of the established research about ECPS modelling, verification and synthesis;
+	\item provide an overview about the technical issues and advances in symbolic formal verification and synthesis methodologies that are currently employed for ECPS;
+	\item present the open challenges on the ECPS verification and synthesis and also clarify current trends, which are mainly driven by ECPSs, IoT, and ML. 
+\end{itemize}
+
+The remaining of this survey is organized as follows. We present a brief discussion about models for ECPSs, in Section \ref{sec:model}, and then cover preliminaries on bounded model checking, \textit{k}-induction verification based on invariant inference, counterexample guided inductive synthesis, and system model incorporation, in Section~\ref{Preliminaries}. In Section~\ref{Verification-Challenges}, the main challenges regarding verification and synthesis of embedded systems are described, while Section~\ref{achievements} tackles those challenges that are (partially) open in current published research and later describes current achievements and future trends in verification and synthesis of ECPSs, and Section \ref{Newapp} addresses new applications, which take into account the new trends ({\it e.g.}, ML) mentioned here. Finally, we conclude and describe future work, in Section~\ref{conclusions}.
+}
+
+%--------------------------------------
+\section{Automated Verification and Synthesis of Cyber-Physical Systems}
+\label{sec:model}
+%--------------------------------------
+
+{\color{blue}
+
+Automated formal verification has been employed to ensure correctness and reliability of ECPSs, during the last decade, as well as provide controller synthesis~\cite{Nilsson16,Prabhakar17,EsmaeilZadehSoudjani17,Ames17,tabuada2009verification,Hasuo17,Zamani15} for ECPSs and HSs~\cite{Clarke11,Aerts17,Zhang14,Simko14,Sanwal13,Lee13,Li14}. The reliability of an ECPS is related to its ability to maintain the continuity of correct execution of specific function. In particular, the reliability of an ECPSs depends on the correctness of their embedded software and the compatibility with hardware. The correctness is asserted with respect to a given specification, that may be a safety specification or a reachability specification~\cite{Jhala:2009:SMC:1592434.1592438}. A safety specification is related to  a set of undesirable states that must be avoided by the system, and a reachability is related to a desired state, that must be achieved. In both cases, it is needed a model to compute the reachability of ECPS an than decide about the correctness and reliability.
+
+A general model for a ECPS is defined as follows. 
+
+\begin{definition}
+	An ECPS $S$ is a tuple $S=(X,X_{0},U,Y,r,v)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, $Y$ is the set of outputs, $r$ is a transition function such that $r:X\times U \rightarrow X$, and  $v$ is an output mapping function such that $v:X\times U \rightarrow Y$~\cite{Rungger16,Alur00,Girard11}.
+\end{definition}
+
+
+%\textcolor{red}{confesso que, para mim, o paragrafo abaixo ficou estranho... parece que estamos misturando tudo... sera que na tengtativa de implementar os comentarios e ter o artigo aceito nao estamos deixando o artigo um pouco nebuloso?}
+
+The synthesis of reliable ECPS is related to the synthesis of controllers that are able to handle the complex dynamic of these systems. Indeed, the so-called ECPS can be considered HS, since they present a mixture of continuous and discrete dynamics. Thus, the control synthesis for ECPS is based in the hybrid control system theory, that is still in development, since the control theory for continuous and discrete systems were developed without connexions~\cite{lunze_lamnabhi-lagarrigue_2009}. The formal synthesis of ECPS includes but is not limited to the control synthesis problem, and must consider the formal verification of correctness and reliability.
+
+Summarizing, the overall automated formal synthesis process for ECPSs and HSs involves three main steps: \textit{modeling}, which is related to obtaining a sound mathematical representation able to capture all relevant aspects of continuous and discrete dynamics and their interaction, as well as formulating properties and invariants that describe a desirable behavior, \textit{verification}, where a ECPS behavior is checked through the proposed mathematical structure and compliance with a desired behavior is verified, and, finally, controller \textit{synthesis}, which produces a controller or finds invariant control laws that allow a ECPS to meet requirements and behave as desired, which is confirmed by a verification oracle. 
+
+
+}
+
+%The classification of approaches in terms of their deterministic vs stochastic nature should be definitely revised: a model is non-deterministic when it accepts different behaviors without providing a measure of probability (e.g. this is the case of Timed Automata, which are instead mentioned as a deterministic model); a model is stochastic when the space of behaviors is provided with a measure of probability. By the way, a large literature now develops on mixed models that combine non-deterministic and stochastic behavior (e.g. Markov Decision Processes), but this class of models is not even mentioned.
+
+
+%--------------------------------------
+\subsection{A Model for Cyber-physical Systems}
+\label{ssec:model}
+%--------------------------------------
+{
+\color{blue}
+
+Models are largely employed in science and engineering areas, in order to analyze, predict, and modify the behavior of real-world systems. Specially, deterministic and stochastic models are the basis of many recent engineering advances. The former is uniquely determined by parameter values and previous states, while the latter presents inherent randomness which is described by probability distributions, i.e., some of these variable are random variables whose behavior are described by probability density functions~\cite{stochmodel}. Nonetheless, one can argue that such models are not enough to represent ECPSs, since interaction among different entities (software and hardware components) presents several events, which could not be deterministically or stochastically modeled, and they should be better represented by nondeterministic approaches~\cite{leeCPS2}. Non-deterministic models is able to model different behaviors without providing a measure of probability, i.e., their variables are assumed to be different values but they are not random variables. Indeed, that is even more evident when unknown properties are addressed, such as human behavior.
+}
+
+
+On the one hand, early representations of hybrid systems, {\it i.e.}, systems that mix continuous and discrete dynamics, consisted in instantiating discrete components and discretized continuous dynamics by using discrete models and considering non-modeled effects as uncertainties or perturbations exogenous to them, which can even be negligible. On the other hand, that approach is not suitable for complex ECPSs, which present intense nondeterminism, where uncertainties play a central role and might invalidate the entire system behavior. Indeed, ECPSs have been modeled through different structures that present different degrees of nondeterminism and balance between continuous and discrete dynamics, such as timed automata~\cite{Alur94}, hybrid automata~\cite{Alur93,Henzinger95}, and stochastic hybrid automata~\cite{Julius09,Ghosh05,Pola03}.
+
+Timed automata targets real-time systems and employs finite automata with clocks, {\it i.e.}, real variables that follow continuous trajectories (behaviors) with constant slope. Hybrid automata bridges digital processing and analog entities and consequently generalizes timed automata, by also employing finite automata with real variables, but whose trajectories follow more general dynamical laws~\cite{Henzinger95}.  Timed automata and hybrid automata are deterministic models for hybrid systems that built the basis of HS representations, which were subdivided into different classes of hybrid automata, depending on mapping functions ($r$ and $v$), {\it e.g.}, linear hybrid automata~\cite{Lafferriere99}, rectangular hybrid automata~\cite{Puri94,Henzinger95}, nonlinear hybrid automata~\cite{Henzinger95NL,Broucke1997}, integration graphs~\cite{Kesten1993}, and linear stochastic hybrid automata~\cite{Julius09}. Recently, Rungger and Tabuada~\cite{Rungger16} and Tabuada {\it et al.}~\cite{Tabuada14} proposed a general and wide model for ECPSs, which is based on hybrid automata, by providing the concept of robustness and important tools for robust stability analysis. In addition to HA and TA based models, there are a number of other ECPS modeling initiatives based on (exact or approximate) bisimulation~\cite{Girard11}, simulation~\cite{Rungger13} and interval analysis~\cite{Li16}.
+
+Another approach to ECPS modeling tackles quantized control systems and finite-word length (FWL) effects on the performance of those systems. Differently from bisimulation, quantized models are built from a countable subset of the (quantized) input space~\cite{Tabuada07}. In particular, Keel and Bhattacharyya showed that even robust and optimal controllers may still present an undesired property~\cite{Keel01,bhattacharyya}: fragility or sensitivity to implementation aspects ({\it e.g.}, FWL representations of digital controllers). Therefore, various studies tried to connect sampled-data theory to hybrid-system models~\cite{Bicchi02,Petreczky10,Petreczky07,Ye98}.
+
+{\color{blue}
+In addition to ECPS-dynamics modeling, it is often interesting to establish invariants on a ECPS's state space, which can be used for accelerating formal verification and synthesis processes regarding those systems. Such invariants might be synthesized, in order to point out state-space boundaries~\cite{BenSassi12} and determine ECPS stability~\cite{Paul14} or reachability~\cite{Li16_2,Li16}. Finally, it is worth to mention that there are still some recent modelling approaches that are mixtures of stochastic and non-deterministic models for ECPS, e.g., stochastic nondeterministic automata~\cite{Fisher2014}, and piecewise-deterministic Markov chains~\cite{Julius09}.
+}
+
+%Following their proposal, a CPS $S$ is a tuple $S=(X,X_{0},U,Y,r,t)$, where $X$ is a set of reachable states, $X_{0}$ is a set of initial states, $U$ is a set of inputs, and $r$ is a transition function, such that $r:X\times U \rightarrow X$.
+
+
+
+%\textcolor{red}{seria legal falar que nao determinismo pode ser tratado com model checking e ligar com o nosso trabalho... inclusive , o tabuada tem um artigo falando sobre seguranca e SMT, que eu comentei abaixo}
+
+
+%--------------------------------------
+\subsection{Automated and Formal Verification of Cyber-Physical Systems}
+\label{ssec:verification}
+%--------------------------------------
+
+{\color{blue}
+
+An ECPS verification problem is defined as follows:
+
+\begin{definition}
+	Given a class of ECPSs $\Omega$ and a set $\Phi$ of desired properties, a class of verification problems is called decidable if there is an algorithm that is able to decide if a finite number of steps $\forall \mathcal{O}\in\Omega$ satisfy every property $\mathcal{L}\in \Phi$~\cite{Alur00}.
+\end{definition}
+
+ Decidability is a key issue in ECPS verification, since there are uncountable states and complex dynamics to be considered, {\it i.e.}, hybrid automata and their variations (usually employed to model ECPSs) are infinite-state machines~\cite{Henzinger95}. In particular, the safety verification of ECPS is undecidable, except in very specific cases as in systems that can be represented by timed automata and rectangular automata~\cite{Alur11}. An alternative to ensure that ECPS trajectories will not pass through unsafe states is the use of barrier certificates~\cite{Prajna07,Prajna04}. An example of barrier certificate is stability, which ensures the convergence of states to an equilibrium point and consequently that there exists a region from where any trajectory remains inside this region. Stability can be ensured based on Lyapunov theory (for a wide class of model abstractions)~\cite{tabuada2009verification} or linear system stability theory for discrete simulations~\cite{Bessa17}. 
+}
+
+Generally, properties that must hold for ECPSs are related to safety/reachability and liveness, and the earliest studies on HS and ECPS proposed approaches based on computational tree logic and linear temporal logic~\cite{Alur93}, in order to specify properties and verify those systems. In the last decade, signal temporal logic~\cite{Maler04,Donze12} was proposed and have been used since then for this purpose, thus providing more suitable operators for dynamic systems and signal processing. Therefore, model-checking procedures have been employed to verify those properties, even under undecidability conditions via approximations, {\it e.g.}, bounding the number of steps from initial states, which leads to bounded model checking (BMC)~\cite{Veanes09}. 
+
+Along with CPS modeling and verification techniques purely based on HA, one can also highlight logic-based approaches~\cite{Phan15} that may still use HA, but which are not based on a algebraic description of states and transitions. Some examples of logic-based verification are theorem proving techniques, {\it e.g.} deductive verification (i.e., interactive theorem proving)~\cite{Nipkow02} and automatic theorem proving~\cite{Platzer07}, and reduction-based techniques, among which BMC stands out~\cite{handbook09}.
+
+
+%Much of the work related to the formal verification of ECPS seeks to ensure the safety, robustness, and reachability properties of an HA. 
+Recently, some studies have addressed ECPS formal verification considering discretization, switching, and quantization effects.  Dugirala and Viswanathan~\cite{Duggirala2015} verified embedded control software considering real time issues, {\it e.g.}, delayed responses and possible loss of real time deadlines. Anta {\it et al.}~\cite{Anta10} presented a tool called Costan, which finds errors in mathematical-model implementations and verifies whether error is tolerated, considering quantization effects and fixed-point implementation, while focusing on quantization error effects over system stability. Similarly, Ismail {\it et al.}~\cite{dsv_spin2015} preseted DSVerifier, a BMC tool for digital systems that employs SMT/SAT solvers as back-ends, in order to provide support for digital system design and verification considering FWL effects. In particular, DSVerifier checks if a designed digital controller and/or closed-loop ECPS presents the desired performance, when it is implemented with a given FWL format~\cite{Bessa16,Bessa17}.
+
+Finally, it is worth mentioning that there are other alternatives for ECPS modeling and analysis, which are not based on verification, but instead on simulators~\cite{Phan2014,Nakajima12,Junjie12}. Although such approaches generally fail in ensuring that some properties hold, they present good scalability, which is ideal for large scale and complex systems that are hardly modeled through automata- or logig-based approaches. Modelica~\cite{Junjie12} and Simulink/MATLAB~\cite{Nakajima12} are important examples of widely used simulators for ECPSs. In order to achieve a balanced trade-off between ECPS-simulation scalability and correctness of verification methods, statistical model checking have been employed to formally verify ECPSs~\cite{Clarke11}.
+
+
+In addition, Shoukry {\it et al.} \cite{Shoukry} tackled another important problem related to ECPSs: security. Indeed, the essence of ECPSs claims for sophisticated interfacing ({\it e.g.}, sensors and network connections), which normally leads to security issues~\cite{cpsattack}, given that wrong control actions can be generated through corrupted measurements. The mentioned authors proposed a methodology for estimating physical-system state, through formal methods, even if sensor inputs are contaminated with erroneous or intentionally corrupted data, in order to still be able to execute suitable control commands. Cyber-security is also a concern of Fiore {\it et al.}, who aim to ensure secure-state estimation of UAV systems under sparse attacks~\cite{Fiore17}. Indeed, many situations can be regarded as satisfiability problems and solved, for instance, with approaches based on Satisfiability Modulo Theories (SMT)~\cite{ARAUJO2017,TrindadeDAES2016,Rahman13}, which indicate many links with other research areas and might lead to a unified approach regarding system verification, security enforcement, and interaction handling.
+
+%--------------------------------------
+\subsection{Control Synthesis of Cyber-physical Systems}
+\label{ssec:synthesis}
+%--------------------------------------
+
+Control synthesis for ECPSs consists in finding a controller or an invariant control law $\mathcal{C}$, such that a closed-loop system composed of $(\mathcal{C},\Omega)$ satisfies every property $\mathcal{L}\in \Phi$. 
+
+An possible approach to synthesize reliable ECPSs is Counterexample Guided Inductive Synthesis (CEGIS)~\cite{DBLP:conf/asplos/Solar-LezamaTBSS06}. Its key idea is the definition (by a user) of a set of safe states, {\it i.e.}, the specification of $\Phi$, as well as a generic template for a control system that must satisfy such a specification. Then, a CEGIS engine computes values for the unknown symbols of the chosen template, which hold $\Phi$~\cite{RienerKFB16}. Abate~{\it et al.}~\cite{Abate17,abatecav2017} presented a method for synthesizing stable controllers that are suitable to continuous plants given as transfer functions~\cite{Abate17} and state-space representations~\cite{abatecav2017}, which exploits bit-accurate verification of software implemented in digital microcontrollers~\cite{Bessa16,Bessa17,dsv_spin2015}, and the resulting systems must ensure non-fragile stability~\cite{Abate17} and safety~\cite{abatecav2017}. Ravanbakhsh and Sankaranarayanan~\cite{Ravanbakhsh15,Ravanbakhsh16} also employed CEGIS based on the Lyapunov's function to ensure the robust reach-while-stay property ({\it i.e.}, a safety specification)~\cite{Ravanbakhsh16} and non-zeno behavior~\cite{Ravanbakhsh15}. CEGIS was also employed to synthesize model predictive controllers for a wide varieties of applications, {\it e.g.}, heating ventilation and air conditioning systems, autonomous vehicles control, and aircraft electric power system~\cite{Ghosh05,Rahman13}.
+
+CEGIS is an important, but not the unique, example of symbolic control synthesis for ECPSs. The main advantage of using symbolic synthesis techniques ({\it e.g.}, SMT- and SAT-based) is the possibility of encoding (via logic formulae) reachability/safety specifications on original concrete systems. Indeed, there are many studies~\cite{Rungger13,AydinGol14,Holub16,Tabuada08,Zamani17,Zamani14,Zamani13,Zamani12,Alkhatib17,Lesser15,Girard13} on symbolic control synthesis for ECPS, available in the literature.
+
+A common procedure for controller synthesis for ECPS is based on finite-state approximations of infinite-states systems, {\it i.e.}, the HA. Such an approach allows the fully automated synthesis of ECPS control systems, which ensure complex specifications realization; however, the main weakness of this approach is that it often produces complex controllers with high implementation cost. In order to avoid that problem, refined controllers have been proposed, which aim to provide some invariant properties for close-loop systems, {\it e.g.}, safety~\cite{Dallal17,Dallal13,Girard13}, reachability~\cite{Alkhatib17,Habets06}, stability~\cite{Zamani12,Tabuada08}, and safety/reachability properties, considering quantization effects~\cite{Reissig17}.
+
+
+% The mentioned authors developed a tool called DSSynth, which is able to synthesize digital controllers that are algorithmically and numerically sound, w.r.t. stability. DSSynth marks the first use of counterexample-guided inductive synthesis~\cite{sketch} to synthesize digital controllers, considering physical plants with uncertain models and FWL effects; however, low-level implementation errors ({\it e.g.}, limit cycles) are not further investigated.
+
+%--------------------------------------
+\section{SAT- and SMT-based Verification and Synthesis Techniques}
+\label{Preliminaries}
+%--------------------------------------
+
+%The amount of software embedded in CPS is increasing, partly due to increased design complexity, but also as a result of shift toward software-centric implementations, which designers prefer because software allows them to flexibly and efficiently implement new features. Synthesis is one of the key automation techniques for improving productivity and developing efficient implementations for a design specification.
+
+\textcolor{blue}{Due to the advent of sophisticated SMT solvers built over efficient SAT solvers, an increasingly number of software verifiers as well as synthesizers have emerged in the literature, in order to verify design correctness and produce reliable implementations for ECPS, which was later reinforced by the introduction of knowledge regarding their behavior. Here, we describe some achievements in symbolic model checking of software, including BMC, \textit{k}-induction, ``property-based reachability'' (or IC3), and Craig interpolation, which are currently used to the safety verification of ECPS. This section also overviews software synthesis techniques that are applicable to write correct-by-construction implementations of ECPS.}
+
+%--------------------------------------
+\subsection{Bounded Model Checking (BMC)}
+\label{BMC}
+%--------------------------------------
+
+Bounded Model Checking (BMC) based on SAT was originally proposed to verify hardware designs~\cite{Biere99,handbook09}. Indeed, Biere {\it et al.} were able to successfully verify large digital circuits with approximately $9510$ latches and $9499$ inputs, leading to BMC formulae with $4 \times 10^6$ variables and $1.2 \times 10^7$ clauses to be checked by standard SAT solvers. BMC based on SMT~\cite{BarrettSST09}, in turn, was originally proposed to deal with increasing software verification complexity~\cite{Armando2009}. 
+%
+In general, BMC techniques aim to check the violation of a given (safety) property at a given system depth, as shown in Figure~\ref{bounded-model-checking}. 
+%
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{figure2.jpg}
+	\caption{Bounded Model Checking.}
+	\label{bounded-model-checking}
+\end{figure}
+
+Indeed, given a transition system \textit{M}, which is derived from the control-flow graph of a program, a property $\phi$, which represents program correctness and/or a system's behavior, and an iteration bound \textit{k}, which limits loop unrolling, data structures, and context-switches, BMC techniques thus unfold a system \textit{k} times, in order to convert it into a verification condition $\psi$, which is expressed in propositional logic or in a decidable-fragment of first-order logic, such that $\psi$ is \textit{satisfiable} if and only if $\phi$ has a counterexample of depth less than or equal to \textit{k}. The propositional problem associated with SAT-based BMC is formulated by constructing the following equation~\cite{Biere99}:
+%
+\begin{equation}
+\label{bounded-model-checking-biere}
+\psi_{k} = I\left(s_{0}\right) \wedge \bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right) \wedge \neg \phi_{k}
+\end{equation}
+
+\noindent Here, $\phi_{k}$ represents a safety property $\phi$ in step $k$, $I$ is the set of initial states of $M$, $R\left(s_{i},s_{i+1}\right)$ is the transition relation of $M$ at time steps $i$ and $i+1$. Hence, the equation $\bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right)$ represents the set of all executions of $M$ of length $k$ and $\neg \phi_{k}$ means the condition that $\phi$ is violated in state $k$, which is reached by a bounded execution of $M$ of length $k$. Finally, the resulting (bit-vector) equation is translated to conjunctive normal form in linear time and passed to a SAT solver for checking satisfiability. Eq.~(\ref{bounded-model-checking-biere}) can be used to check safety properties~\cite{PrasadBG05}. Liveness properties ({\it e.g.}, starvation, deadlock) that contain the Linear-time Temporal Logic (LTL) operator $F$ are checked by encoding $\neg \phi_{k}$ in a loop within a bounded execution of length at most $k$, such that $\phi$ is violated on each state in the loop~\cite{JMorse15}. In that case, Eq.~\ref{bounded-model-checking-biere} can be rewritten as:
+
+%
+\begin{equation}
+\psi_{k} = I\left(s_{0}\right) \wedge \bigwedge^{k-1}_{i=0} R\left(s_{i},s_{i+1}\right) \wedge \left(\bigvee^{k}_{i=0} \neg \phi_{i}\right)
+\end{equation}
+
+\noindent where $\phi_{i}$ is the propositional variable $\phi$ at time step $i$. Thus, this equation can be satisfied if and only if for some $i$ ($i \leq k$) there exists a reachable state at time step $i$ in which $\phi$ is violated. 
+
+One may notice that BMC analyzes only bounded program runs, but generates verification conditions (VCs) that reflect the exact path in which a statement is executed, the context in which a given function is called, and the bit-accurate representation of expressions. A verification condition is a logical formula (constructed from the bounded program and desired correctness properties) whose validity implies that the program's behaviour agrees with its specification~\cite{Bradley07}. Correctness properties in programs can be specified by the user via \textit{assert} statements or automatically generated from a specification language~\cite{Thomas01}. If all of a bounded program's VCs are valid, then a program is in compliance with its specification up to the given bound.
+
+As an example, consider a simple C program (slightly modified from~\cite{Strichman08}) with an exponential number of paths, as shown in Figure~\ref{figure:verification-condition}(a); the corresponding C program, in single static assignment (SSA) form~\cite{Appel97}, is shown in Figure~\ref{figure:verification-condition}(b). The SSA form is an intermediate representation, which is used by compilers to facilitate optimizations and transformations of source code. The common property in SSA form is that every variable state has only one definition in the program text. This is achieved by introducing a fresh variable from the original name ({\it e.g.}, with a subscript), such that every assignment has a unique left-hand side, as shown in Figure~\ref{figure:verification-condition}(b).
+%
+\begin{figure}[ht]
+	\centering
+	\begin{minipage}{\columnwidth}
+		\begin{lstlisting}[basicstyle=\footnotesize]
+		#include <assert.h>
+		int x[N], a;
+		...
+		int main(void) {
+		a=N;
+		for(int i=0; i<N; i++)
+		if (x[i]>1)
+		a--;
+		assert(a<=N);
+		return 0;
+		}
+		\end{lstlisting}
+	\end{minipage}
+	\begin{center}
+		(a)
+	\end{center}
+	\centering
+	\begin{minipage}{0.4\textwidth}
+		\begin{lstlisting}[basicstyle=\footnotesize]
+		a1 = N
+		a2 = (x[0] > 1) ? a1 - 1 : a1
+		a3 = (x[1] > 1) ? a2 - 1 : a2
+		a4 = (x[2] > 1) ? a3 - 1 : a3
+		...
+		an+1 = (x[N-1] > 1) ? an - 1 : an 
+		\end{lstlisting}
+	\end{minipage}
+	\begin{center}
+		(b)
+	\end{center}
+	\caption{(a) A simple C program with a loop \textit{for}. (b) The corresponding unwound C program of (a) converted into SSA form.} 
+	\label{figure:verification-condition}
+\end{figure}
+
+Apart from that, this program has an exponential number of paths, since each element of $x$ can be either greater than one or less than or equal to one. Despite the large number of paths through that program, BMC unwinds it up to a bound $k$ and translates it into a VC $\psi$, such that $\psi$ is satisfiable if and only if the assertion $a<=N$ fails. One may also notice that BMC still encodes program stages with a size that grows linearly with $N$. More precisely, the program in Figure~\ref{figure:verification-condition}(a) is converted into $\psi$ using a decidable fragment of first-order logic, as follows~\cite{Bradley07}:
+%
+\begin{equation}              
+\label{verification-condition-example}
+\psi := \left [ \begin{array}{ll} 
+a_{1} = N  \\
+\wedge \, \, a_{2} = ite\left(x[0] > 1, a_{1} - 1, a_{1}\right) \\ 
+\wedge \, \, a_{3} = ite\left(x[1] > 1, a_{2} - 1, a_{2}\right) \\
+\wedge \, \, a_{4} = ite\left(x[2] > 1, a_{3} - 1, a_{3}\right) \\
+\wedge \ldots \\
+\wedge \, \, a_{N+1} = ite\left(x[N-1] > 1, a_{N} - 1 , a_{N}\right) \\
+\wedge \neg \left(a_{N+1} \leq N\right) \\
+\end{array} \right ].  \\
+\\           
+\end{equation}
+
+The ternary operator $f \: \: ? \: \: t_1 : t_2$, shown in Figure~\ref{figure:verification-condition}(b), is converted into the conditional expression $\mathit{ite}(f, t_1, t_2)$ that takes as its first argument the Boolean formula $f$ and, depending on its value, selects either the second (i.e., $t_1$) or the third argument (i.e., $t_2$). In order to verify that the assertion $a<=N$ holds, its negation is added to $\psi$ and it is checked whether the entire formula is satisfiable, through an off-the-self SMT solver. Formula (\ref{verification-condition-example}) can be represented simply as a Boolean logic circuit, which can be further transformed into a (equisatisfiable) conjunctive-normal-form formula over propositional variables, by Tseitin's transform~\cite{Tseitin83} in linear time and by introducing at most a linear number of fresh variables; however, checking the validity of a first-order logic formula, in a given background theory, is an ${\mathcal{NP}}$-complete problem~\cite{PatarinG97}.
+
+From the practical point of view, SAT- or SMT-based BMC procedures have been successfully applied to verify a large number of hardware and software systems, including digital circuits and single- and multi-threaded programs. Those BMC techniques were able to find subtle bugs in real digital and embedded software systems, as reported in the available literature~\cite{Clarke04,MerzFS12,CordeiroF11,Ivancic05,Cordeiro12}. Nonetheless, the main criticism with respect to BMC techniques relies on completeness, since they are able to prove system correctness only if an upper bound \textit{k} is known, {\it i.e.}, a bound that unfolds all loops and recursive functions to their maximum possible depth. 
+
+Due to that limitation, BMC tools are typically susceptible to exhaustion of time or memory limits, when checking complex circuit-implementations or programs with loops, whose bounds are too large or cannot be statically determined. Indeed, such an issue has pushed researchers to overcome the depth limitation and propose extensions capable of proving global correctness. \textcolor{blue}{In particular, we can adopt two possible strategies to prove properties using BMC: \textit{(i)} compute the \textit{completeness threshold}, which can be smaller than or equal to the maximum number of loop-iterations occurring in the program or \textit{(ii)} determine the high-level worst-case execution time (WCET), which also gives a bound on the maximum number of loop-iterations~\cite{handbook09,ckso04,Ganai08}. However, in practice, complex software systems involve large data-paths and complex expressions. Therefore, the verification conditions that arise from BMC of programs become harder to solve and require substantial amounts of memory to build. Finally, another strategy is to use a complementary technique, with the potential to fill the gap between the adopted depth and all subsequent ones, such as induction, which is explained below~\cite{EenS03,Sheera00}.}
+
+%--------------------------------------
+\subsection{Induction-based Verification of C Programs}
+%--------------------------------------
+
+One promising approach to achieve completeness, in BMC techniques, is to prove that an invariant (assertion) is \textit{k}-inductive~\cite{EenS03,Sheera00}; however, the main challenge regarding such an approach relies on computing and strengthening inductive invariants from programs. In particular, loop invariants, which are computed from programs under verification, must be inductive (and not just invariant), in order to check the corresponding VCs, {\it i.e.}, induction cannot determine invariance of a non-inductive assertion~\cite{Bradley07}. 
+
+For instance, consider the C-code fragment shown in Figure~\ref{figure:inductive-invariant}, \textcolor{blue}{where the star-notation indicates nondeterminism. Suppose that one wants to prove that $P : x > 0$ is invariant and, in order to do that, induction can be applied:}
+
+\begin{itemize} 
+	\item \textcolor{blue}{It holds initially because}
+\end{itemize}
+
+\begin{equation}
+\underbrace{x = 2}_{\text{initial condition}} \implies \underbrace{x > 0}_{\text{P}}. \nonumber
+\end{equation}
+
+\begin{itemize} 
+	\item \textcolor{blue}{Whenever $P$ holds for $k$ loop unwindings, it also holds for $k + 1$ steps, given that}
+\end{itemize}
+
+\begin{equation}
+\underbrace{x > 0}_{\text{P}} \wedge \underbrace{x = 2 \wedge x' = 2*x - 1}_{\text{transition relation}} \implies \underbrace{x' > 0}_{\text{P'}}. \nonumber
+\end{equation}
+
+\textcolor{blue}{If we consider the IEEE floating-point standard (IEEE 754)~\cite{4610935,Goldberg91whatevery}, then  the invariant $x>0$ holds initially and after each iteration and $x$ tends to infinity after $128$ iterations. Nonetheless, this invariant is not inductive, given that $x>0$ before an initial iteration does not ensure that $x>0$ after each iteration. In particular, if we initially assign $x=0.9$, then $x<0$ after the fourth iteration.} As a consequence, even if invariant generation procedures successfully compute such assertions, which are indeed invariant, those must be inductive, so that \textit{k}-induction verifiers can automatically prove correctness. In that specific example, an inductive invariant would be $x>1$, given that if $x>1$ before the initial iteration, then also $x>1$ after \textit{k} iterations.
+%
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.35\textwidth}
+		\begin{lstlisting}[basicstyle=\footnotesize]
+		#include <assert.h>
+		int main(void) {
+		float x=2;
+		while (*) {
+		x = ((2*x) - 1);
+		}
+		return 0;
+		}
+		\end{lstlisting}
+	\end{minipage}
+	\caption{Motivating example for inductive invariants.}
+	\label{figure:inductive-invariant}
+\end{figure}
+
+
+There are several invariant-generation algorithms that discover linear and polynomial relations among integer and real variables, in order to provide loop invariants and also discover the memory ``shape'', in programming languages with pointers~\cite{pips:2013,Henry:2012}. The current literature also reports successful applications of \textit{k}-induction based verification algorithms for hardware and software systems, using invariant generation and strengthening, mostly based on interval analysis~\cite{Beyer15}. 
+
+Novel verification algorithms for proving correctness of (a large set of) C programs, by mathematical induction and in a completely automatic way ({\it i.e.}, users do not need to provide loop invariants), were recently proposed~\cite{Gadelha15,Beyer15,Brain15,Kinductor,Rocha17}. Additionally, \textit{k}-induction based verification was also applied to ensure that (restricted) C programs (1) do not contain violations related to data races~\cite{Donaldson10}, considering the Cell BE processor, and (2) do respect time constraints, which are specified during system design phases~\cite{EenS03}. Apart from that, \textit{k}-induction is also a well-established technique in hardware verification, where it is easily applied, due to the monolithic transition relation present in such designs~\cite{EenS03,Sheera00,GrosseLD09}.
+
+It is worth noticing that \textit{k}-induction with invariants has the potential to be directly integrated into existing BMC approaches, given that the induction algorithm itself can be seen as an extension after \textit{k} unwindings and it is possible to generate program invariants with other software modules, which are then translated and instrumented into an input program \cite{Rocha17}.
+
+Nonetheless, there is~little evidence, in the available literature, that model checking hardware and software systems through \textit{k}-induction (and invariants) can be efficiently exploited in ECPS verification and synhesis. That happens due to the distinctive characteristics mentioned earlier, which influence ECPS development and also verification processes. Additionally, there is still a lack of studies for software verifiers to exploit the combination and configuration of different invariant generation and strengthening algorithms, including analysis to discover linear inequalities, polynomial equalities and inequalities, and invariants related to memory and variable aliasing~\cite{Bradley07}.
+
+%--------------------------------------
+\subsection{Property-based Reachability (or IC3)}
+%--------------------------------------
+
+\textcolor{blue}{Bradley {\it et al.} introduced  the ``property-based reachability'' (or IC$3$) procedure for the safety verification of systems~\cite{Bradley12,Bradley13} and have shown that IC$3$ can scale on certain benchmarks, where \textit{k}-induction fails to succeed. In particular, the success of IC3 over \textit{k}-induction procedures is due to the ability of the former to guide the search for inductive instances with counterexamples for the inductiveness (CTIs) of a given property~\cite{Bradley18}. Consider again the C-code fragment shown in Figure~\ref{figure:inductive-invariant}, where $P : x > 0$ is an invariant.}
+
+\begin{equation}
+\underbrace{x > 0}_{\text{P}} \wedge \underbrace{x = * \wedge x' = 2*x - 1}_{\text{transition relation}} \centernot\implies \underbrace{x > 0}_{\text{P'}}. \nonumber
+\end{equation}
+
+\textcolor{blue}{In this specific example, a CTI returned by an SMT solver is $x=0$. If this state is not eliminated, then the invariant $P$ cannot be established. The generated inductive assertion should establish that the CTI $x=0$  is unreachable. If no such inductive assertion exists, then other CTIs can be examined instead ({\it e.g.}, $0.1$, $0.2$, $\dots$, $0.9$). As a result, the lemmas should be strong enough that consecutively revisiting a finite set of CTIs will eventually end up in an assertion, which is inductive relative to them, thus eliminating the CTI. In this example, the instance $x > 1$ ($a=1$, $b=0$) is inductive and eliminates all possible CTIs.}
+
+\textcolor{blue}{Jovanovi\'{c} {\it et al.}~\cite{Jovanovic:2016:PK:3077629.3077648} presented a reformulation of IC3, by separating reachability checking from inductive reasoning. They further replace the regular induction algorithm by the \textit{k}-induction one and show that it provides more concise invariants. Those authors implemented the mentioned algorithm in the SALLY model checker using Yices2, in order to perform a forward search, and MathSAT5, which executes a backward search. They showed that the new algorithm is able to solve a number of real-world benchmarks, at least as fast as other approaches.}
+
+%------------------------------------------------------
+\subsection{Craig Interpolation}
+\label{sec:CraigInterpolationInModelChecking}
+%------------------------------------------------------
+
+\textcolor{blue}{Another feasible alternative to prove properties in BMC is to compute Craig interpolants for inconsistent pairs (or more generally, sets) of formulae~\cite{McMillan03,McMillan05}. This alternative approach exploits the SAT/SMT solvers' ability to produce refutations, {\it i.e.}, proofs regarding the nonexistence of counterexamples of depth less than or equal to $k$. Those proofs do not ensure whether a given property holds in the model, but they contain information about reachable states of a model.}
+
+%\begin{prf}
+	\begin{definition}\label{interpolants}
+		\textit{\textcolor{blue}{Given a pair of formulae $\left(A,B\right)$, such that $A \wedge B$ is inconsistent, and a proof by resolution for $\left(A,B\right)$, an \textit{interpolant} for $\left(A,B\right)$ is a formula $F$ with the following properties}~\cite{McMillan03,McMillan05}: }
+		
+		\begin{itemize}
+			\item $A \Rightarrow F$;
+			\item $F \wedge B$ \textit{is unsatisfiable};
+			\item $F$ \textit{expressed only over the common variables (nonlogical symbols) of $A$ and $B$}.
+		\end{itemize}
+	\end{definition}
+%\end{prf}
+
+\textcolor{blue}{As an example, consider $A = \left(x_1 \wedge x_2\right)$ and $B = \left(\neg x_2 \wedge x_3\right)$. Given that $\left(x_1 \wedge x_2\right)$ must imply $F$ (or simply that $\neg x_1 \vee \neg x_2 \vee F$ hold) and $F \wedge \neg x_2 \wedge x_3$ must be unsatisfiable, one possible interpolant for the given pair of formulae $\left(A,B\right)$ is $F = x_2$, since $x_2$ is a common part of both $A$ and $B$.}
+
+\textcolor{blue}{The use of interpolants allows us to define a complete method for finite-state reachability analysis based on SAT and SMT solvers.}
+%
+\textcolor{blue}{In order to show how BMC and interpolation can be combined, we refer to Section~\ref{Preliminaries}, where we define Eq.~(\ref{bounded-model-checking-biere}) and the terms $I$, $R$, and $\phi$. Now, suppose that $Q=I$ and Eq.~(\ref{bounded-model-checking-biere}) is partitioned, so that the set of initial states $I$ and the first instance of the transition relation $R$ are in set $A$, while the remaining instances of $R$ and the property $\phi$ are in set $B$, as shown in Figure~\ref{figure:computing-image-by-interpolation} (note that $k$ is unknown).}
+%
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\columnwidth]{interpolants}
+	\caption{Computing image by interpolation~\cite{McMillan03}.}
+	\label{figure:computing-image-by-interpolation}
+\end{figure}
+
+\textcolor{blue}{Suppose that we use an SMT solver to prove that the $A \wedge B$ is unsatisfiable, {\it i.e.}, we use an SMT solver to conclude that there is no satisfying assignment to $A \wedge B$.\footnote{Note that if at any stage we can satisfy the property $\phi$ within $k$ steps from the initial state, then we have found a counterexample.} The internal steps performed by SMT solvers for reaching this conclusion can be used to construct a proof of unsatisfiability $\Pi$, from which we can derive an interpolant $F$ for the pair of formulae $\left(A,B\right)$, i.e., $F = interpolant\left(\Pi, A, B\right)$. According to Definition~\ref{interpolants}, $A$ must imply $F$ and since we defined $A$ to be the set of initial states and the first instance of $R$ (i.e., from Figure~\ref{figure:computing-image-by-interpolation}, $A=s_{0} \wedge s_{1}$), it follows that $F$ is \textit{true} in every state reachable from the initial state in one step. In other words, we can say that $F$ is an over-approximation of the forward image of $I$~\cite{McMillan03,McMillan05}. Also according to Definition~\ref{interpolants}, the formula $F \wedge B$ must be unsatisfiable (from Figure~\ref{figure:computing-image-by-interpolation}, $B=s_{2} \wedge s_{3} \wedge \ldots \wedge s_{k}$), which means that there is no state satisfying $F$ that can reach a final state $s_k$. After computing $F$, we then check whether $F$ implies $Q$. If $F$ implies $Q$, then no reachable state can satisfy the property $\phi$ and we can thus conclude that the property holds; however, since $F$ is an approximation, we can falsely conclude that the final state is reachable. In this case, we update $Q = F \vee Q$ and $A = F \wedge R_{0}$, increase the value of $k+1$ and check whether $A \wedge B$ is unsatisfiable. If $A \wedge B$ is satisfiable, we have found a valid counter-example (i.e., a path from the initial state to the final one); otherwise, we compute the interpolant $F = interpolant\left(\Pi, A, B\right)$ again and check whether $F$ implies $Q$. This procedure is stopped when we have found a valid counterexample or proved that the final state is not reachable (i.e., the property holds). The details of the algorithm and further information about the use of interpolants in model checking can be found in~\cite{McMillan03,McMillan05}}. 
+
+%--------------------------------------
+\subsection{Program Synthesis via Counter-Example \\ Guided Inductive Synthesis (CEGIS)}
+%--------------------------------------
+
+The basic idea of program synthesis is to automatically construct a program $P$ that satisfies a correctness specification $\sigma$. In particular, program synthesis is automatically performed by engines that use a correctness specification $\sigma$, as starting point, and then incrementally produce a sequence of candidate solutions that satisfy $\sigma$~\cite{David15,Abate17}. As a result, a given candidate program $p$ is iteratively refined, in order to match the specification $\sigma$ more closely. Counter-Example Guided Inductive Synthesis (CEGIS) represents one of the most popular approaches to program synthesis that are currently used in practice~\cite{David15}. Figure~\ref{Counter-Example-Guided-Inductive-Synthesis} shows the basic architecture of the CEGIS approach, which has close connections to algorithmic debugging using counterexamples and abstraction refinement~\cite{Alur13}. 
+
+The correctness specification $\sigma$ provided to the program synthesizer is of the form $\exists \vec{F} .  \forall \vec{x}.  \sigma(\vec{x}, \vec{F})$, where $\vec{F}$ ranges over functions, $\vec{x}$ ranges over ground terms, and $\sigma$ is a quantifier-free formula typically supported by SMT solvers. The ground terms are interpreted over some finite domain $\mathcal{D}$, where $\mathcal{D}$ can be encoded using the SMT's bit-vectors part. The phases {\sc Synthesize} and {\sc Verify} interact via a finite set of test vectors {\sc inputs} that is incrementally updated. Given the correctness specification $\sigma$, the {\sc Synthesize} procedure tries to find an existential witness $\vec{F}$ satisfying the specification $\sigma(\vec{x}, \vec{F})$, for all $\vec{x}$ in {\sc inputs} (as opposed to all $\vec{x} \in \mathcal{D}$). If {\sc synthesize} succeeds in finding a witness~$\vec{F}$, this witness is a candidate solution to the full synthesis formula, which is passed to the phase {\sc verify}, in order to check whether it is a proper solution ({\it i.e.}, $\vec{F}$ satisfies the specification $\sigma(\vec{x}, \vec{F})$ for all $\vec{x}\in\mathcal{D}$). If this is the case, then the algorithm terminates; otherwise, additional information is provided to the phase {\sc synthesize}, in the form of a new counterexample that is added to the {\sc inputs} set and the loop iterates again. 
+%
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\columnwidth]{figure3.jpg}
+	\caption{CounterExample Guided Inductive Synthesis (CEGIS).}
+	\label{Counter-Example-Guided-Inductive-Synthesis}
+\end{figure}
+
+One may notice that each iteration of the CEGIS loop adds a new input to the finite set $\text{\sc inputs}$ that is used for synthesis.  Given that the full set of inputs $\mathcal{D}$ is finite, this means that the refinement loop can only iterate over a finite number of times; however, $\mathcal{D}$ can represent a large number of elements for the finite set $\text{\sc inputs}$. In order to avoid exploring all possible values, machine learning techniques can be used in the phase {\sc Synthesize}, with the goal of learning from experience (input-output samples), {\it i.e.}, learning from counterexamples provided by a verification oracle~\cite{Alur13}.
+
+Nowadays, program synthesis engines that implement the CEGIS approach~\cite{sketch} can automatically produce solutions for a large variety of specifications, due to the combination of automated testing, genetic algorithms, and SMT-based automated reasoning~\cite{Sharma14}.
+
+
+%---------------------------------------------------
+\subsubsection{CEGIS for Embedded \& CPS}
+\label{sec:CEGISforECPS}
+%---------------------------------------------------
+
+\textcolor{blue}{A typical synthesizer for Embedded \& CPS iterates between two main phases, 
+	an inductive synthesis phase, that is, {\sc synthesise}, and a validation one, that is, {\sc verify}~\cite{AbateBCCCDKKP17}.  
+	The two phases interact via a finite set of test vectors, which is updated
+	incrementally.  Given a specification of a ECPS ({\it e.g.}, stability and safety), the inductive
+	synthesis procedure tries to find a candidate solution satisfying that
+	specification, for the given set of test inputs.}
+%
+\textcolor{blue}{If the synthesis phase succeeds in finding a witness, then the latter is a
+	candidate solution for the full synthesis formula. This candidate is passed to the validation phase, which checks whether it is a proper solution
+	({\it i.e.}, it satisfies the specification for all possible inputs).  If this is the
+	case, then the algorithm terminates; otherwise, additional information is
+	provided to the inductive synthesis phase, in the form of a new
+	counterexample, C-ex, which is added to the set of test inputs, and the loop
+	iterates again.}
+
+\textcolor{blue}{One possible architecture for a synthesiser is 
+	presented in Fig.~\ref{fig:CEGIS-precision-increment}, considering the 
+	stability and safety specification. It starts by devising a digital controller that 
+	stabilizes the physical model, while remaining safe for a pre-selected time 
+	horizon ($k$) and a single initial state. Then, it employs a multi-staged verification 
+	process as follows: (i)~The first verification stage ({\sc safety}) checks if the candidate
+	solution, which we synthesized to be safe for at least one initial
+	state, is safe for \emph{all} possible initial states, {\it i.e.}, it does not reach
+	an unsafe state within $k$ steps.
+	(ii)~The second verification stage ({\sc precision})
+	restores soundness with respect to plant precision,
+	by using interval arithmetic~\cite{moore1966interval} to validate the 
+	operations performed by the previous stage. 
+	(iii)~The third verification stage ({\sc complete}) checks if the current
+	$k$ is large enough to ensure safety for any $k'{>}k$. Here, we compute the
+	completeness threshold $\overline{k}$ for the current candidate controller 
+	$K$~\cite{abatecav2017}, {\it i.e.}, the number of
+	iterations required to sufficiently unwind the closed-loop state-space
+	model, such that the boundaries are not violated for any larger number of
+	iterations, and check if $k{\geq}\overline{k}$}.
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htb]
+	{\scriptsize
+		\centering
+		\resizebox{\columnwidth}{!}
+		{
+			\begin{tikzpicture}[scale=0.3,->,>=stealth',shorten >=.2pt,auto, semithick, initial text=, ampersand replacement=\&,]
+			\matrix[nodes={draw, fill=none, shape=rectangle, minimum height=.2cm, minimum width=.2cm, align=center
+			},
+			row sep=.6cm, column sep=.9cm] {
+				\coordinate (aux1);
+				\& \coordinate (aux2);
+				\&;\\
+				\coordinate (aux3);
+				\& \coordinate (aux4);
+				\&;\\
+				\coordinate (aux5);
+				\& \coordinate (aux6);
+				\&;\\
+				\node[minimum width=1.5cm, minimum height=0.6cm, fill=gray!20] (synth) {{\sc Synthesize}};
+				\&
+				complexnode/.pic={ 
+					\node[rectangle,draw,dotted,
+					minimum width=6cm,
+					minimum height=1cm,
+					pattern=north west lines, pattern color=gray!20,
+					label={\sc ~~~~~~~~~~~~Verify},] (verif) {};
+					\node[minimum width=1cm, minimum height=0.6cm, fill=gray!20] (verif1) at ([xshift=-2cm]verif.center) {{\sc 1.Safety}};
+					\node[minimum width=1cm, minimum height=0.6cm, fill=gray!20] (verif2) at ([xshift=0cm]verif.center) {{\sc 2.Precision}};
+					\node[minimum width=1cm, minimum height=0.6cm, fill=gray!20] (verif3) at ([xshift=2cm]verif.center) {{\sc 3.Complete}};
+					%\node[minimum width=1cm, minimum height=0.6cm, fill=gray!20] (verif4) at ([xshift=3.1cm]verif.center) {{\sc 5.Sampling}};
+				} 
+				\& \node[ellipse, fill=gray!20] (done) {{\sc Done}};\\
+				\& \\
+				\node[minimum height=0cm] (gp) {\sf Program Search};
+				\&
+				complexnode/.pic={ 
+					\coordinate (aux);
+					\node (bmc) at ([xshift=-2cm]aux.center) {\sf BMC-based \\ \sf Verifier};
+					\node (fp)  at ([xshift=0cm]aux.center) {\sf Fixed-point \\ \sf Arithmetic\\ \sf Verifier};
+					\node (sv)  at ([xshift=2cm]aux.center) {\sf Completeness\\ \sf Verifier};
+					%\node (cv)  at ([xshift=3.1cm]aux.center) {\sf Sampling\\Verifier};
+				}   
+				\\
+			};
+			
+			\path
+			([yshift=2em]synth.east) edge node[xshift=-0.5em,align=center] {K} ([yshift=2em]verif1.west)
+			([yshift=-2em]verif1.west) edge node {C-ex} ([yshift=-2em]synth.east)
+			([xshift=-5em]fp.north) edge node[align=center]  {} ([xshift=-5em]verif2.south)
+			([xshift=-5em]sv.north) edge node[align=center]  {} ([xshift=-5em]verif3.south)
+			%([xshift=-5em]cv.north) edge node[align=center]  {T/F} ([xshift=-5em]verif4.south)
+			([xshift=5em]verif1.south) edge node[align=center] {} ([xshift=5em]bmc.north)
+			([xshift=5em]verif2.south) edge node[align=center] {} ([xshift=5em]fp.north)
+			([xshift=5em]verif3.south) edge node[align=center] {} ([xshift=5em]sv.north)
+			%([xshift=5em]verif4.south) edge node[align=center] {$K$} ([xshift=5em]cv.north)
+			([xshift=-5em]bmc.north) edge node[align=center]  {} ([xshift=-5em]verif1.south)
+			(verif) edge node {PASS} (done)
+			([xshift=5em]synth.south) edge node[align=center] {} ([xshift=5em]gp.north)
+			([xshift=-5em]gp.north) edge node[align=center] {} ([xshift=-5em]synth.south)
+			(aux3) edge (synth.north);
+			\path[-]
+			(verif2.north) edge node[align=center] {} ([xshift=0cm]aux6)
+			([xshift=0cm]aux6) edge node[align=center] {Increase Precision} (aux5)
+			(verif3.north) edge node[align=center] {} ([xshift=6.7cm]aux4)
+			([xshift=6.7cm]aux4) edge node[align=center] {Increase Unfolding Bound} (aux3);
+			%(verif4.north) edge node[align=center] {} ([xshift=10.5cm]aux2)
+			%([xshift=10.5cm]aux2) edge node[align=center] {Increase Sampling Rate} (aux1);
+			
+			\end{tikzpicture}
+	}}
+	\caption{\textcolor{blue}{CEGIS with multi-staged verification for ECPS.}}
+	\label{fig:CEGIS-precision-increment}
+\end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%--------------------------------------
+\subsection{Incorporating System Models to Automated \\ Verification and Synthesis Procedures}
+%--------------------------------------
+
+Currently, SMT-based BMC approaches check code properties in real programs, which basically address programing-language issues and general correctness, without taking into account target applications or system behavior. Such a statement is important, since, as already mentioned, many system features are being moved to software domain, which then requires schemes that do not only check if source code is correctly written, but also if it will properly respond in real environments or under external problems or corrupted data. For instance, the anti-lock braking system software of a vehicle model can be bug free, but it may not work correctly if a sensor is damaged or even intentionally tampered \cite{Shoukry}.
+
+Indeed, research in software verification is now incorporating such considerations, during checking processes, and some schemes already use knowledge about the system to be verified and the underlying hardware. Recently, a verification tool for digital systems was proposed, which is called digital system verifier (DSVerifier)~\cite{dsv_spin2015} and is able to aid engineers to check overflow, limit cycle, output error, timing, stability, and minimum phase, considering FWL effects. Additionally, DSVerifier checks closed-loop systems with uncertain models considering FWL effects, which are typically represented as hybrid systems, {\it i.e.}, the controller is digital but the controlled agent (plant) is a physical and continuous system~\cite{Bessa17}. That ultimately leads to the use of analog-to-digital (A/D) converters, which are one of the most important aspects to be considered, given that data loss (quantization) is inevitable. As a consequence, verification procedures have to consider the interaction between a continuous plant and a digital (and sampled) controller with FWL effects, which can be connected using different control system configurations. Additionally, the latter may present a different behavior, regarding what was specified in analog domain, due to the inherent discret-time operation. 
+
+
+In summary, DSVerifier is a useful test tool, which takes into account different representations ({\it e.g.}, transfer-function and state-space), realization forms ({\it e.g.}, direct, delta, and transposed forms), and other implementation restrictions, in order to explore the design space. Finally, if a system's requirements are not met with a given configuration, an analysis of the provided error report may suggest another setup, which can even be incorporated into a given system development procedure, by providing both system verification and model refinement. 
+
+In this respect, DSVerifier has been extended to automatically synthesize digital stabilizing controllers for continuous plants represented as transfer functions or state-space equations~\cite{Abate17,abatecav2017}. In particular, a CEGIS-based approach, implemented in a tool called digital system synthesizer (DSSynth), uses inductive synthesis in conjunction with the DSVerifier's algorithm for verifying robust closed-loop stability that addresses plant variations as interval sets, as well as FWL uncertainties in digital controllers. DSSynth is able to successfully synthesize stable digital controllers for a set of intricate plant models, taken from the control literature, within minutes. Nonetheless, system correction is of paramount importance and, even with such a synthesizing tool, a final verification procedure should be executed, with the goal of ensuring that the generated solution still complies with the provided specs and other issues, which may have not been initial tackled and have the potential to compromise system reliability, are not present.
+
+Apart from the control system domain, Scratch is another example software model-checking tool, which uses knowledge about the system to be verified and the underlying hardware, with the goal of detecting races related to direct memory access (DMA), in the Cell BE processor~\cite{Donaldson10}. That tool also uses BMC, in order to detect DMA races, and BMC with \textit{k}-induction, which aims to prove the absence of races. If support to other DMA operations were added, Scratch could be adapted to different architectures, {\it i.e.}, the same techniques would be employed, but with a different system behavior/knowledge.
+
+One may also notice that such a paradigm, {\it i.e.}, verification and synthesis based on an expected system behavior, is not restricted to digital filters and controllers or DMA races, but it can also be applied to possibly any real system, as long as the desired behavior can be expressed as properties in BMC frameworks. For instance, regarding self-driving cars, an important property could be the detection of pedestrians, animals, bicycles, or any obstacle present on urban and rural roads. Indeed, bicycles are considered one of the most difficult problems, due to the myriad of possible shape and colors \cite{selfcar}. In addition, the mentioned problem is closely related to machine learning, from which refinement strategies can be devised, incorporated to BMC approaches \cite{BMCml}, and directly applied to ECPS verification.
+
+In summary, current approaches already tackle ECPS characteristics ({\it e.g.}, interaction with real world entities and digital processing), which are included in verification and synthesis methodologies. Finally, the final complement may come from ML techniques, which have the potential to fill gaps ({\it e.g.}, lack of complete models including nondeterminism), bridge tools and models ({\it e.g.}, analog and digital domains in ECPSs and verification schemes), and provide model and methodology evolution.  
+
+
+%--------------------------------------
+\section{Verification and Synthesis \\ Challenges for Embedded \& Cyber-physical Systems}
+\label{Verification-Challenges} 
+%--------------------------------------
+
+Generally, state-of-the-art verification methodologies for embedded systems (including ECPSs) generate test vectors (with constraints) and use some assertion-based verification and high-level processor models, during simulation~\cite{Behrend15,Lettnin09}, as shown in Figure~\ref{verification-methodologies}. 
+%
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\columnwidth]{figure4.jpg}
+	\caption{Verification methodologies for embedded systems.}
+	\label{verification-methodologies}
+\end{figure}
+
+
+In particular, the main challenges regarding verification of embedded systems lie on improving coverage, where more system functions are verified, reducing verification time, {\it i.e.}, pruning state-space exploration during verification, providing completeness, {\it i.e.},  if all possible states can be reached and evaluated, and incorporating system models, which allows specific checks regarding system behavior and not only code correctness. Additionally, embedded-system verification raises additional challenges, such as:
+%
+\begin{enumerate}
+	\item Time and energy constraints;
+	\item Handling of concurrent software;
+	\item Platform restrictions;
+	\item Verification of code pieces or modules that rely on larger structures;
+	\item Legacy designs; %, which are usually developed with low-level languages.
+	\item Support to different programming languages, frameworks, and interfaces;
+	\item Correct code instrumentation;
+	\item Handling of non-linear and non-convex optimization problems;
+	\item Incorporation of new and adapted checks, due to system or environment change;
+	\item \textcolor{blue}{Provision of a form of system evolution, in such a way that a version more adapted to a given scenario is obtained.}
+\end{enumerate}
+
+Indeed, the first two aspects are of extreme relevance in micro-grids and cyber-physical systems, in order to ensure reliability, which is a key issue for (smart) cities, industries, and consumers, and the third one is essential in systems that implement device models, such as digital filters and controllers, which present a behavior that is highly dependent on signal inputs and outputs and whose deployment may be heavily affected by hardware restrictions. 
+
+The fourth aspect deals with code that relies on existing infrastructures and must be compliant with those, such as Linux kernel modules. The fifth aspect, in turn, is inherent to a large number of embedded systems from  telecommunications, control systems, and medical devices, including ECPSs. In particular, software developed for those types of embedded system has been extensively tested and verified, and also optimized for efficiency over years of development. Therefore, when a new product is derived from a given platform, a lot of legacy code is usually reused for improving development time and code quality. 
+
+The sixth aspect is related to evolving development processes and technologies, which may delay the application of suitable verification and synthesis approaches, if verifiers and synthesizers do not support different programming languages and interfaces. The seventh aspect highlights a subjective task in verification: where one must insert an evaluation point or assertion, in order to correctly address a property. The eighth one is related to the widespread use of embedded systems in autonomous-vehicle navigation systems~\cite{Adouane16}, which demands optimization solving during their execution for a wide range of functions, including non-linear and non-convex problems using fixed- and floating-point arithmetic. 
+
+The ninth aspect is a consequence of changes in environment or different applications and scenarios, which may present new problems to embedded systems that did not exist or were not tackled during their development. Such a challenge is also closely related to ML techniques, given that they may be integrated into commercial systems and have the potential to devise new and refined control strategies, which must then be identified, checked, and validated. For instance, a diagnostic system may employ techniques that make it able to learn new tumor patterns and them warn their presence on patients' bodies, but a wrong updated model may compromise earlier traditional assessments and erroneously perform new ones, which should be verified and validated. Finally, the latter also raises another question: an embedded system must be checked only when it is developed/created or also during its life cycle, in order to ensure that improved models and actions are sound and reliable? That is an issue that will probably concern researchers, when ML becomes mature and widely spread in software verification.
+
+\textcolor{blue}{The tenth aspect is related to the current development and test strategies adopted for embedded systems, which aim at simply providing robust structures, instead of antifragile ones \cite{antifragile}. In summary, it is not feasible to account for every error or faulty scenario and then it would be more beneficial to provide a module, architecture, or methodology capable of thriving on problems and getting stronger. Such an aspect shares some similarity with the ninth one and may also be achieved through ML techniques. Indeed, this kind of scheme consists in a completely different approach, which would profoundly change the way we design embedded systems.}
+
+Those ten challenges place additional difficulties for developing reliable synthesizers for embedded systems, especially for cyber-physical systems and micro-grids, where controlled objects ({\it e.g.}, physical plants) typically exhibit continuous behavior (which may eventually change), whereas controllers (usually implemented by real-time computer systems) operate in discrete time and over a quantized domain. In particular, synthesizers for those systems need to consider the effects of quantizers (A/D and D/A converters), when a digital equivalent of the controlled object is considered, {\it i.e.}, a model of their physical environment (cf. intelligent product in Figure~\ref{intelligent-product}). Additionally,  finite-precision arithmetic and their related rounding errors need to be considered, when correct-by-construction code is generated for ECPS.
+
+%--------------------------------------
+\section{Current Achievements and \\ Future Trends}
+\label{achievements}
+%--------------------------------------
+
+\textcolor{blue}{In the preceding sections, we identified and discussed many aspects regarding ECPSs, which included design, synthesis, behavior, verification, and bottlenecks. Nonetheless, from the point of view of computer-aided verification and synthesis for ECPS, it is possible to highlight seven major problems, which are tackled here and can be regarded as (partially) open in current published research.}
+
+\textbf{(RP1)} provision of suitable encoding into SMT \cite{BarrettSST09}, which may extend background theories typically supported by SMT solvers, with the goal of reasoning accurately and effectively about realistic ECPS.
+
+\textbf{(RP2)} exploitation of SMT techniques to leverage (bounded) model checking of multi-threaded software, in order to mitigate the state-explosion problem due to thread interleaving.
+
+\textbf{(RP3)} proof of correctness and timeliness of ECPS, by taking into account stringent constraints imposed by hardware platforms.
+
+\textbf{(RP4)} incorporation knowledge about system purpose and associated features, which aims to detect system-level and behavior failures.
+
+\textbf{(RP5)} provision of tools and approaches capable of addressing different programming languages and application interfaces, with the goal of reducing the time needed to adapt current verification techniques to new developments and technologies.
+
+\textbf{(RP6)} development of automated synthesis approaches that are algorithmically and numerically sound, in order to handle (control) software that is tightly coupled with physical environments, by considering uncertain models and FWL effects.
+
+\textbf{(RP7)} provision of a unified framework, which is able to tackle high and low level properties, as well as system behavior, with the potential to lead to another degree of completeness, in such a way that every implementation aspect of ECPS is addressed and evaluated.
+
+\textcolor{blue}{Due to the fact that the mentioned research problems are the some of the main issues found in the technology area addressed in this article, many works tackled them and other researchers still perform experiments and suggest new methodologies and schemes for mitigating or solving their consequences. As a result, we can cite the following contributions toward them, which already provide some answers or at least present promissing approaches.}
+
+\textbf{(RP1)} Cordeiro {\it et al.} proposed the first SMT-based BMC for full C programs, called Efficient SMT-Based Context-Bounded Model Checker (ESBMC)~\cite{Cordeiro12}, which was later extended to support C++98 programs~\cite{ECBS13}, CUDA programs~\cite{cudalucas,Pereira17}, and Qt-based consumer electronics applications~\cite{Sousa15}. This approach was also able to find undiscovered bugs related to arithmetic overflow, buffer overflow, and invalid pointer, in standard benchmarks, which were later confirmed by the benchmarks' creators ({\it e.g.}, NOKIA, NEC, NXP, and VERISEC)~\cite{CordeiroF11,Cordeiro12}. Other SMT-based BMC approaches have also been proposed and implemented~\cite{MerzFS12}, but the coverage and verification time of all existing ones are still limited to specific program classes, especially for those that contain intensive floating-point arithmetic and dynamic memory allocation~\cite{Beyer14,BeyerSVCOMP15}. One possible research direction is to bridge the gap between BMC tools and SMT solvers, propose background theories, and develop more efficient decision procedures, in order to handle specific program classes. In this particular research direction, the European Project SC$^2$ (Satisfiability Checking and Symbolic Computation: uniting two communities to solve real problems) aims to further extend background theories supported by SMT solvers, in order to solve problems related to security and safety of computer systems (or large mathematical problems), through the development of radically improved software tools~\cite{DBLP:journals/cca/AbrahamA0BBBCDE16}.
+
+\textbf{(RP2)} The SMT-based BMC approach proposed by Cordeiro {\it et al.} was further developed to verify correct lock acquisition ordering and absence of deadlocks, data races, and atomicity violations in multi-threaded software based on POSIX and CUDA libraries~\cite{CordeiroF11,Pereira17}, considering monotonic partial-order reduction~\cite{KahlonWG09} and state-hashing techniques, in order to prune state-space exploration~\cite{morse15}. Recent advances for verifying multi-threaded C programs have been proposed to speed up verification times, which significantly prune state-space exploration~\cite{Inverso14,civl15}, and also extensions to verify the Debian GNU/Linux distribution, based on a context- and thread-sensitive abstract interpretation framework~\cite{DBLP:conf/kbse/KroeningPSW16}, were made available; however, the set of concurrent-program classes ({\it e.g.}, CUDA, OpenCL, and MPI) that can be verified is still very limited. One possible research direction is to further extend BMC of multi-threaded C programs via Lazy Sequentialization~\cite{Inverso14}, in order to analyze unsatisfiability cores~\cite{Grumberg05}, with the goal of removing redundant behaviour or analyzing interpolants~\cite{McMillan11} and then prove non-interference of context switches.
+
+\textbf{(RP3)} Novel approaches to model check embedded software using \textit{k}-induction and invariants were proposed and evaluated in literature, which demonstrate its effectiveness in some real-life embedded-system applications~\cite{Gadelha15,Brain15,Rocha17,Donaldson10}; however, the main challenge remains still open, {\it i.e.}, to compute and strengthen loop invariants for proving program correctness and timeliness in a more efficient and effective way, in order to be competitive with other model-checking approaches. In particular, invariant-generation algorithms have substantially evolved over the last years, with the goal of discovering inductive invariants of programs~\cite{pips:2013,Henry:2012} or continuously refine them during verification~\cite{Beyer15}; however, there is still a lack of studies for exploiting the combination of different invariant-generation algorithms ({\it e.g.}, interval analysis, linear inequalities, polynomial equalities and inequalities) and how to strengthen them during verification, in order to ensure system robustness w.r.t. implementation aspects. Finally, optimal configurations for invariant generators are still of paramount importance, given that applications with code based on different aspects may benefit from different setups.
+
+\textbf{(RP4)} State-of-the-art SMT-based context-BMC approaches were extended to verify overflow, limit cycle, time constraints, stability, and minimum phase, in digital systems. Indeed, digital filters and controllers~\cite{dsv_spin2015,esbmc_controller,esbmc_filter} were tackled, in order to specify system-level properties of those systems, using linear-time temporal logic~\cite{JMorse15}. In particular, a specific UAV application was tackled, with the goal of verifying its attitude controllers~\cite{Bessa16,Chaves17}. More recently, other implementation aspects were added to the existing verification framework, including magnitude, phase, poles, and zeros, which provide deeper analysis regarding digital systems, by tackling frequency-domain parameters, permissible deviation, and associated natural response \cite{sbrtdaniel}. In general, however, there is still a lack of studies to verify system-level properties related to ECPS; emphasis should be given to micro-grids~\cite{xu15}, which require high-dependability requirements for computation, control, and communication. Additionally, the application of automated fault detection, localization, and correction techniques to digital systems represents an important research direction to make BMC tools useful for ECPS engineers~\cite{Alves15}.
+
+{\textbf{(RP5)} Although ESBMC \cite{Cordeiro12} was extended to support C/C++ and some variants, new application interfaces and programming languages are often developed, which require suitable software verification tools. Indeed, it would be interesting if a new programming language model could be loaded, which along with a BMC core could check different programs. Some work towards that was already presented by Sousa {\it et al.}~\cite{Garcia16}, which employed operational models for checking Qt-based programs from consumer electronics. In summary, the BMC core (in that case, ESBMC) is not changed (it is still C/C++ code), but instead an operational model, which implements the behavior and features of Qt libraries, is used to provide the new code structure to be checked. This approach could adopt the clang compiler~\cite{Lopes:2014:GSL:2692607}, which is already widely used in industry~\cite{clang-usage}, in order to produce an Abstract Syntax Tree (AST) for a given programming language ({\it e.g.}, C/C++/ObjectiveC/ObjectiveC++). This AST can then be converted either to an intermediate representation (IR) of the underlying verifier or to LLVM bitcode that is already produced by clang. Obviously, a completely new language may present new structures and resources; however, if different inputs are parsed and converted into a form that preserves every aspect of their structure, that can then be analyzed and verified in an unified way. Such research problem is closely related to the first one \textbf{(RP1)} and has the potential to devise a new paradigm in ECPS verification.
+	
+	{\textbf{(RP6)} State-of-the-art synthesis approaches for embedded (control) systems typically disregard the platform in which the embedded system software operates and restrict themselves to generate code that do not take into account FWL effects. The synthesized system, however, must include the physical plant to avoid serious system's malfunctioning (or even a catastrophe), due to the embedded (control) software, {\it e.g.}, the Mars Polar Lander did not account for leg compressions prior to landing~\cite{Jackson16}. Research in this direction has made some progress to design, implement, and evaluate an automated approach for generating correct-by-construction digital controllers that is based on state-of-the-art inductive synthesis techniques~\cite{Abate17,abatecav2017}. Nonetheless, there is still little evidence whether that approach can scale for larger systems modeled by other types of representation ({\it e.g.}, Multiple-Input Multiple-Output). In addition to that, another research direction for synthesizers is to generate code for UAV trajectory and mission planning by taking into account system's dynamics and nonholonomic constraints~\cite{ARAUJO2017}. As a consequence, verifiers and synthesizers need to handle a wide range of functions, including non-linear and non-convex optimization problems based on both fixed- and floating-point arithmetic.
+		
+		\textbf{(RP7)} Embedded systems are typically implemented in low- and medium-level programming languages ({\it e.g.}, ANSI-C/C++/Java). Given the availability of different programming languages for writing code for ECPS, the provision of a unified framework able to tackle low- and high-level properties, as well as system behavior, is needed to achieve code coverage in real applications. The clang compiler~\cite{Lopes:2014:GSL:2692607} seems to offer a simple and strong approach to lead software verification to another degree of completeness so that every implementation aspect of an ECPS can be addressed and evaluated. In particular, by using the clang compiler as front-end for a software verification tool, we avoid the need for maintaining a proprietary front-end (a real challenge nowadays, given that the C and C++ standards are rapidly evolving), and then focus on the main objective: formal program verification in ECPS. Here, we provide only operation models to tackle low- and high-level system properties via an abstract representation of the associated libraries, which conservatively approximates their semantics. The clang compiler offers an industrial quality analyzer and an application programming interface to access and traverse its internal AST, which can then be used by software verifiers to generate their IR or alternatively analyze the LLVM bitcode produced by clang. 
+		
+		Lastly, yet importantly, BMC tools like CBMC~\cite{Clarke04}, ESBMC~\cite{MorseCNF13,MorseRCN014}, SMACK~\cite{Haran15}, and LLBMC~\cite{MerzFS12} represent the most prominent approaches for verifying C programs, as observed in the Intl. Competition on Software Verification~\cite{Beyer14,BeyerSVCOMP15,Beyer16}, where verifiable (correctness and violation) witnesses are of extreme importance for evaluating software verifiers~\cite{BeyerW15,RochaIFM12}. The increasing number of verification tasks being added every year to this competition allows developers to further improve their verifiers by implementing new types of abstraction and simplification techniques. As a consequence, the continuous development and improvement of verifiers can leverage more efficient synthesizers and further increase the reliability of verified ECPS.
+		
+		%----------------------------------------------------------------------------
+		\section{New Applications: Beyond Code Correctness}
+		\label{Newapp}
+		%----------------------------------------------------------------------------
+		
+		As already mentioned in section \ref{sec:model}, problems that are not directly related to code correctness may be tackled with formal methods, as long as they are conveniently modeled. Ara\'ujo {\it et al.} \cite{ARAUJO2017} employed SMT for handling non-convex optimization problems, with the goal of ensuring optimal solutions. Indeed, it is possible to recursively re-constrains a model checking procedure, by using the current counterexample as a seed for the next run, until a global minimum is achieved. Nonetheless, elapsed execution times are still a bottleneck for some applications, such as changes in UAV trajectories, but that can be improved, through the use of simplification techniques and problem constraints.
+		
+		In the same fashion, other problems may benefit from the recursive-refinement approach provided by SMT-based verification schemes. For instance, de Jesus {\it et. al} \cite{antennasbrt} developed a simplified methodology for antenna alignment that makes use of many modules already available in satellite TV receivers, along with a suitable structure for performing position correction. In summary, a reference signal is evaluated, until an (approximately) error-free reception is acquired, which can be measured through a simple transport stream (TS) error-indication interface and further refined with other parameters, such as carrier-to-noise ratio and signal level. This way, by using an SMT-based verification method, one may map the TS error indication and other performance figures as properties and then recursively perform realignment procedures, until a counterexample is not output. It is worth noticing that associated timing requirements are more relaxed than what was mentioned in the work developed by Ara\'ujo {\it et al.}~\cite{ARAUJO2017}, which can be seen as an advantage for such an implementation.
+		
+		Regarding behavior correctness, many other applications can be tackled, such as the ones related to automatic classification. Amoedo {\it et al.} \cite{amoedo} proposed a modulation classification methodology, with the goal of spectrum sensing for opportunistic transmissions. Besides a correct software implementation, {\it i.e.}, correct source code, which is already covered by formal methods already available in literature \cite{esbmc_filter,Cordeiro12,Clarke04}, one may argue if the proposed methodology is able to recognize modulations under some reception condition, such as severe analog interference. This way, it would be interesting to develop a verification module for transmission and reception software, which could be capable of creating inputs related to sampled radio frequency signals, under a variety of conditions, and then unifying source code and behavior verification. In addition, that kind of implementation usually employs digital filters with specific parameters, which could also be addressed. Indeed, communication aspects of ECPSs could be tackled, as properties in system verification procedures.
+		
+		ML techniques are already being used in the software verification area \cite{mlswverif,nguyen,bridge,babic07}. For instance, Hamel~\cite{mlswverif} proposed to induce a theory, through ML, that fits a test set for a program, in such a way that it implements the respective test set. Phuc \cite{nguyen}, in turn, applied decision tree C4.5 and multilayer perceptron to annotated programs (metrics related to structure and semantics) and tackled the generation of test sets satisfying desired constraints. Bridge, Holden, and Paulson \cite{} studied the automation of heuristic selection based on features, regarding first-order logic theorem proving, and Hutter {\it et. al} \cite{babic07} showed that ML can be used for improving SAT solvers regarding huge verification tasks, when applied to parameter tuning~\cite{babic07}. Seshia {\it et al.}~\cite{Seshia17}, in turn, showed that control syntheses based on ML is also a trend, since it has been applied to different applications and model classes~\cite{Jha10,Sadigh14}. Finally, ML can also be used for invariant computation and strengthening, which is a major bottleneck in \textit{k}-induction verification based on invariant algorithms. As a consequence of what was presented, it seems worthwhile to pursue integration of ML into BMC-based checkers, given that it has the potential to tackle many open problems or at least enhance existing solutions.
+		
+		\textcolor{blue}{In addition, another aspect closely related to ML techniques, as mentioned in Section \ref{Verification-Challenges}, is system fragility. Currently, most design strategies try to produce robust systems, which are able to deal with a number of errors that happen when they are operating. Nonetheless, that is effective only if problems foreseen during design phases happen; otherwise, operation may be severely compromised and even cause loss of lives.}  
+		
+		\textcolor{blue}{Indeed, depending on the employed point of view, fragility and robustness may be regarded as the same property. A system that is more robust is less fragile, but it is still prone to problems, which depends on operating scenarios, use cases, and uncertainties. Keel and Bhatactacharyya~\cite{bhattacharyya} showed that robust and optimal control system can still be fragile with respect to the implementation issues.  
+			In summary, if the chosen model does not tackle every possible problem or error that might occur in a given environment, system-failure events are still possible, which is true even for the Ariane 5's failure \cite{antifragile}.} 
+		
+		\textcolor{blue}{As a result, it may be more interesting to develop methodologies that are not simply robust, regarding predetermined conditions, but instead thrive on problems and grow stronger (as the human body, which gets stronger when exposed to germs), which leads to antifragile systems. In engineering, we are only beginning to develop solutions that can be classified as antifragile, that can be achieved via analytical or physical redundancy to achieve performance enhancement~\cite{spectrum2013}. For example, multiple-input/multiple-output (MIMO) systems, which use multiple signal copies together with multipath signal copies would initially result in a destructive effect; however, with the use of a methodology that takes advantage on them, the net result is performance improvement.}
+		
+		\textcolor{blue}{Systems that could greatly benefit from being antifragile are the cyber-physical ones, which interact with other external elements and use their internal representations to interpret physical properties. As faults occur, which may be treated with some sort of system elasticity, and external environments are normally dynamic, given that it naturally changes with time, variations in operating conditions happen and should be tolerated, in order to keep behavior quality \cite{antifragile}. Besides, when discussing the fundamentals of antifragility, it is difficult not to tackle machine learning \cite{antifragile}, which has the potential to provide some wisdom regarding correct behavior and internal representations, in order to keep a system working in a volatile environment.}
+		
+		\textcolor{blue}{For instance, we could think of a system including an antifragility module composed by two elements: a machine learning engine, capable of capturing current behaviors and identifying different trends, and a SMT-based verification method, capable of recursively performing retuning procedures, which could test new parameters estimated from the data provided by the machine learning module and then test new behaviors based on them, through counterexamples. In addition, there could also be a measurement module, which would also judge some metrics regarding the new behavior ({e.g.}, signal-to-noise-error). As a consequence, we would be able to design systems with the potential of being antifragile, given that they would learn from new challenges and then modify its behavior model, in order to account for new errors and threats and even benefit from them.}
+		
+		%--------------------------------------
+		\section{Conclusions}
+		\label{conclusions}
+		%--------------------------------------
+		
+		This paper presented the main challenges related to the verification of design correctness, in ECPS, and also raised some important side considerations about synthesis. In particular, it emphasizes that stringent constraints imposed by the underlying hardware ({\it e.g.}, real-time, memory allocation, interrupts, and concurrency), along with system behavior models, must be considered during verification and synthesis. Additionally, there is little evidence that model checking ECPS using \textit{k}-induction (and invariants), which extends BMC-based approaches from falsification to verification, can be applied to formally verify correctness and timeliness of ECPS. 
+		
+		Given that software complexity has significantly increased in ECPS, there are still some (recent) advances to stress and exhaustively cover system state space, in order to verify low-level properties that have to meet the application's deadline, access memory regions, handle concurrency, and control hardware registers. There is a trend towards incorporating knowledge about the system to be verified, which may take software verification and synthesis one step further, where not only code correctness will be addressed, but also full system reliability. In addition, it seems interesting to provide behavioral models when new application interfaces or programming language features are used, in order to extend capabilities of current verification tools, without changing the core BMC module. Finally, there are some bottlenecks in software verification that are possible to be handled with machine learning, given some initial studies carried out in the current literature, which may represent another step towards a unified and complete approach that combines code verification, behavior correctness, environment adaptation, and system evolution.
+		
+		As future work, the main goal of this research is to extend BMC as a design, verification, and synthesis tool for achieving correct-by-construction ECPS implementations. Special attention will be given to modern micro-grids, considering small-scale versions of a distributed system, so that reliability and other system-level properties ({\it e.g.}, carbon emission reduction in smart cities) are amenable to automated verification and synthesis, probably through behavior models. Additionally, ML techniques will be incorporated to BMC frameworks, in order to provide flexibility and specific-problem tuning, or even allow system adaptation and behavior tuning.
+
+%\section{Acknowledgments}
+%
+%Shan Cheng is indebted to the China Scholarship Council (CSC)
+%for its financial support as a visiting scholar at the University of
+%Technology, Sydney. This work was partially supported by the
+%National Science Foundation of China (Grant no. 10972129), the
+%Innovation Program of Shanghai Municipal Education Commission (Grant
+%no. 10ZZ61), the Shanghai Leading Academic Discipline Project (Project no.
+%S30106), and the Graduate Innovation Foundation of Shanghai
+%University (Project no. SHUCX 101080).
+
+%\begin{thebibliography}{99}
+%
+%\bibitem{1}
+%Vicsek T., Czir\'{o}k A., Ben-Jacob E., Cohen I.: `Novel type of phase transition in a system of self-driven particles', \textit{Phys. Rev. Lett.}, 1995, \textbf{75}, pp.~1226--1229
+%
+%\bibitem{2}
+%Jadbabaie A., Lin J., Morse A.S.: `Coordination of groups of
+%mobile autonomous agents using nearest neighbor rules', \textit{IEEE
+%Trans. Autom. Control}, 2003, \textbf{48}, pp.~988--1001
+%
+%\bibitem{3}
+%Olfati-Saber R., Murray R.M.: `Consensus problems in networks
+%of agents with switching topology and time-delays', \textit{IEEE Trans.
+%Autom. Control}, 2004, \textbf{49}, pp.~1520--1533
+%
+%\bibitem{4}
+%Ren W., Atkins E.: `Distributed multi-vehicle coordinated
+%control via local information exchange', \textit{Int. J. Robust
+%Nonlinear Control}, 2007, \textbf{17}, pp.~1002--1033
+%
+%\bibitem{5}
+%Ren W.: `On consensus algorithms for double-integrator dynamics',
+%\textit{IEEE Trans. Autom. Control}, 2008, \textbf{53}, pp.~1503--1509
+%
+%\bibitem{6}
+%Xie G., Wang L.: `Consensus control for a class of networks of
+%dynamic agents', \textit{Int. J. Robust Nonlinear Control}, 2007,
+%\textbf{17}, \hbox{pp.~941--959}
+%
+%\bibitem{7}
+%Gao Y., Wang L.: `Consensus of multiple dynamic agents with sampled information', \textit{IET Control
+%Theory Appl.}, 2010, \textbf{4}, pp.~945--956
+%
+%\bibitem{8}
+%Tanner H.G., Jadbabaie A., Pappas G.J.: `Flocking in fixed
+%and switching networks', \textit{IEEE Trans. Autom. Control}, 2007,
+%\textbf{52}, \hbox{pp.~863--868}
+%
+%\bibitem{9}
+%Lee D.J., Spong M.W.: `Stable flocking of multiple inertial
+%agents on balanced graphs', \textit{IEEE Trans. Autom. Control}, 2007,
+%\textbf{52}, \hbox{pp.~1469--1475}
+%
+%\bibitem{10}
+%Hu J., Lin Y.S.: `Consensus control for multi-agent systems with double-integrator dynamics and time delays', \textit{IET Control
+%Theory Appl.}, 2010, \textbf{4}, pp.~109--118
+%
+%\bibitem{11}
+%Lin P., Jia Y.: `Further results on decentralised coordination
+%in networks of agents with second-order dynamics', \textit{IET Control
+%Theory Appl.}, 2009, \textbf{3}, pp.~957--970
+%
+%\bibitem{12}
+%Lin P., Jia Y.: `Robust $H_{\infty}$ consensus analysis of a class of second-order multi-agent systems with uncertainty', \textit{IET Control
+%Theory Appl.}, 2010, \textbf{4}, pp.~487--498
+%
+%\bibitem{13}
+%He W., Cao J.: `Consensus control for high-order multi-agent
+%systems', \textit{IET Control Theory Appl.}, 2011, \textbf{1}, pp.~231--238
+%
+%\bibitem{14}
+%Hui Q., Haddad W.M.: `Distributed nonlinear control algorithms
+%for network consensus', \textit{Automatica}, 2008, \textbf{44}, pp.~2375--2381
+%
+%\bibitem{15}
+%Liu X., Chen T., Lu W.: `Consensus problem in directed
+%networks of multi-agents via nonlinear protocols', \textit{Phys. Lett.
+%A}, 2009, \textbf{373}, pp.~3122--3127
+%
+%\bibitem{16}
+%Zheng Y., Zhu Y., Wang L.: `Consensus of heterogeneous multi-agent systems', \textit{IET Control
+%Theory Appl.}, 2011, \textbf{5}, pp.~1881--1888
+%
+%\bibitem{17}
+%Zhang W., Zeng D., Qu S.: `Dynamic feedback consensus control of a class of high-order multi-agent systems',
+%\textit{IET Control Theory Appl.}, 2010, \textbf{4}, pp.~2219--2222
+%
+%\bibitem{18}
+%Su H.S., Wang X.F., Lin Z.L.: `Flocking of multi-agents with
+%a virtual leader', \textit{IEEE Trans. Autom. Control}, 2009,
+%\textbf{54}, pp.~293--307
+%
+%\bibitem{19}
+%Song Q., Cao J., Yu W.: `Second-order leader-following
+%consensus of nonlinear multi-agent system via pinning control', \textit{Syst. Control Lett.}, 2010, \textbf{59}, pp.~553--562
+%
+%\bibitem{20}
+%Hong Y.G., Chen G.R., Bushnell L.D.: `Distributed observers
+%design for leader-following control of multi-agent networks', \textit{Automatica}, 2008, \textbf{44}, pp.~846--850
+%
+%\bibitem{21}
+%Hu J., Hong Y.: `Leader-following coordination of multi-agent
+%systems with coupling time delays', \textit{Physica A}, 2007,
+%\textbf{374}, pp.~853--863
+%
+%\bibitem{22}
+%Ren W.: `Consensus strategies for cooperative control of vehicle
+%formations', \textit{IET Control Theory Appl.}, 2007, \textbf{1}, pp.~505--512
+%
+%\bibitem{23}
+%Khalil H.K.: `Nonlinear systems' (Prentice-Hall, New
+%Jersey,  2002, 3rd edn.)
+%
+%\end{thebibliography}
+
+
+\bibliographystyle{iet}
+
+\bibliography{refs}
+
+\end{document}

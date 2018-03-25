@@ -1,0 +1,1129 @@
+\begin{thebibliography}{100}
+
+\bibitem{Kopetz11}
+Kopetz, H.: `Real-Time Systems: Design Principles for Distributed Embedded
+  Applications'.
+\newblock Real-Time Systems Series. (Springer US,  2011)
+
+\bibitem{xu15}
+Xu, X., Jia, H., Wang, D., Yu, D.C., Chiang, H.D.: `Hierarchical energy
+  management system for multi-source multi-product microgrids', \emph{Renewable
+  Energy},  2015, \textbf{78}, pp.~621 -- 630
+
+\bibitem{leeCPS}
+Lee, E.A.
+\newblock `Cyber physical systems: Design challenges'.
+\newblock In: 11th IEEE International Symposium on Object Oriented Real-Time
+  Distributed Computing. (,  2008. pp.~ 363--369
+
+\bibitem{leeCPS2}
+Lee, E.A.: `The past, present and future of cyber-physical systems: A focus on
+  models', \emph{Sensors},  2015, \textbf{3}, (15), pp.~4837--4869
+
+\bibitem{groza2015formal}
+Groza, A., Letia, I.A., Goron, A., Zaporojan, S.
+\newblock `A formal approach for identifying assurance deficits in unmanned
+  aerial vehicle software'.
+\newblock In: Progress in Systems Engineering. (Springer,  2015. pp.~ 233--239
+
+\bibitem{Cordeiro09}
+Cordeiro, L., Fischer, B., Chen, H., Marques.Silva, J.
+\newblock `Semiformal verification of embedded software in medical devices
+  considering stringent hardware constraints'.
+\newblock In: International Conference on Embedded Software and Systems. (,
+  2009. pp.~ 396--403
+
+\bibitem{munir}
+Munir, S., Stankovic, J.A., Liang, C.J.M., Lin, S.
+\newblock `Cyber physical system challenges for human-in-the-loop control'.
+\newblock In: 8th International Workshop on Feedback Computing. (San Jose, CA:
+  {USENIX},  2013.
+
+\bibitem{Abate17}
+Abate, A., Bessa, I., Cattaruzza, D., Lucas, C., David, C., Kesseli, P., et~al.
+\newblock `Sound and automated synthesis of digital stabilizing controllers for
+  continuous plants'.
+\newblock In: 20th ACM International Conference on Hybrid Systems: Computation
+  and Control (HSCC). (,  2017. pp.~ 197--206
+
+\bibitem{ldd}
+Witkowski, T., Blanc, N., Kroening, D., Weissenbacher, G.
+\newblock `Model checking concurrent linux device drivers'.
+\newblock In: 22nd IEEE/ACM International Conference on Automated Software
+  Engineering. ASE '07. (New York, NY, USA: ACM,  2007. pp.~ 501--504
+
+\bibitem{mlembe}
+Virtanen, S., Virtanen, S.: `Advancing Embedded Systems and Real-Time
+  Communications with Emerging Technologies'.
+\newblock 1st ed. (Hershey, PA, USA: IGI Global,  2014)
+
+\bibitem{DBLP:conf/cav/HuangKWW17}
+Huang, X., Kwiatkowska, M., Wang, S., Wu, M.
+\newblock `Safety verification of deep neural networks'.
+\newblock In: {CAV}. vol. 10426 of \emph{LNCS}. (,  2017. pp.~ 3--29
+
+\bibitem{DBLP:conf/cav/KatzBDJK17}
+Katz, G., Barrett, C.W., Dill, D.L., Julian, K., Kochenderfer, M.J.
+\newblock `Reluplex: An efficient {SMT} solver for verifying deep neural
+  networks'.
+\newblock In: {CAV}. vol. 10426 of \emph{LNCS}. (,  2017. pp.~ 97--117
+
+\bibitem{BUCCAFURRI199957}
+Buccafurri, F., Eiter, T., Gottlob, G., Leone, N.: `Enhancing model checking in
+  verification by ai techniques', \emph{Artificial Intelligence},  1999,
+  \textbf{112}, (1), pp.~57 -- 104
+
+\bibitem{Bortolussi2015323}
+Bortolussi, L., Milios, D., Sanguinetti, G.: `Machine learning methods in
+  statistical model checking and system design -- tutorial', \emph{Lecture
+  Notes in Computer Science (including subseries Lecture Notes in Artificial
+  Intelligence and Lecture Notes in Bioinformatics)},  2015, \textbf{9333},
+  pp.~323--341
+
+\bibitem{Braazdil201498}
+Bra{\'a}zdil, T., Chatterjee, K., Chmel{\'i}k, M., Forejt, V.,
+  K\v{r}et{\'i}nsk{\'y}y, J., Kwiatkowska, M., et~al.: `Verification of markov
+  decision processes using learning algorithms', \emph{Lecture Notes in
+  Computer Science (including subseries Lecture Notes in Artificial
+  Intelligence and Lecture Notes in Bioinformatics)},  2014, \textbf{8837},
+  pp.~98--114
+
+\bibitem{Jha2017693}
+Jha, S., Seshia, S.A.: `A theory of formal synthesis via inductive learning',
+  \emph{Acta Informatica},  2017, \textbf{54}, (7), pp.~693--726
+
+\bibitem{Kroening15}
+Kroening, D., Liang, L., Melham, T., Schrammel, P., Tautschnig, M.
+\newblock `Effective verification of low-level software with nested
+  interrupts'.
+\newblock In: Design, Automation \& Test in Europe Conference \& Exhibition.
+  DATE '15. (San Jose, CA, USA: EDA Consortium,  2015. pp.~ 229--234
+
+\bibitem{cudalucas}
+Monteiro, F.R., Alves, E., Silva, I., Ismail, H., Cordeiro, L., Filho, E.L.:
+  `Esbmc-gpu a context-bounded model checking tool to verify cuda programs',
+  \emph{Science of Computer Programming},  2017, \textbf{xx}, (y)
+
+\bibitem{Nilsson16}
+Nilsson, P., Hussien, O., Balkan, A., Chen, Y., Ames, A.D., Grizzle, J.W.,
+  et~al.: `Correct-by-construction adaptive cruise control: Two approaches',
+  \emph{IEEE Transactions on Control Systems Technology},  2016, \textbf{24},
+  (4), pp.~1294--1307
+
+\bibitem{Prabhakar17}
+Prabhakar, P., Garc\'{\i}a.Soto, M.
+\newblock `Formal synthesis of stabilizing controllers for switched systems'.
+\newblock In: Proceedings of the 20th International Conference on Hybrid
+  Systems: Computation and Control. HSCC '17. (,  2017. pp.~ 111--120
+
+\bibitem{EsmaeilZadehSoudjani17}
+Esmaeil.Zadeh.Soudjani, S., Majumdar, R.
+\newblock `Controller synthesis for reward collecting markov processes in
+  continuous space'.
+\newblock In: Proceedings of the 20th International Conference on Hybrid
+  Systems: Computation and Control. HSCC '17. (,  2017. pp.~ 45--54
+
+\bibitem{Ames17}
+Ames, A.D., Tabuada, P., Jones, A., Ma, W.L., Rungger, M., Schürmann, B.,
+  et~al.: `First steps toward formal controller synthesis for bipedal robots
+  with experimental implementation', \emph{Nonlinear Analysis: Hybrid Systems},
+   2017, \textbf{25}, pp.~155 -- 173
+
+\bibitem{tabuada2009verification}
+Tabuada, P.: `Verification and Control of Hybrid Systems: A Symbolic Approach'.
+\newblock (Springer US,  2009)
+
+\bibitem{Hasuo17}
+Hasuo, I.: `Metamathematics for systems design', \emph{New Generation
+  Computing},  2017, \textbf{35}, (3), pp.~271--305
+
+\bibitem{Zamani15}
+Zamani, M., Abate, A., Girard, A.: `Symbolic models for stochastic switched
+  systems: A discretization and a discretization-free approach',
+  \emph{Automatica},  2015, \textbf{55}, pp.~183 -- 196
+
+\bibitem{Clarke11}
+Clarke, E.M., Zuliani, P.
+\newblock `Statistical model checking for cyber-physical systems'.
+\newblock In: Proceedings of the 9th International Conference on Automated
+  Technology for Verification and Analysis. ATVA'11. (,  2011. pp.~ 1--12
+
+\bibitem{Aerts17}
+`Model-based testing of cyber-physical systems'.
+\newblock In: Song, H., Rawat, D.B., Jeschke, S., Brecher, C., editors.
+  Cyber-Physical Systems. Intelligent Data-Centric Systems. (Boston: Academic
+  Press,  2017. pp.~ 287 -- 304
+
+\bibitem{Zhang14}
+Zhang, Y., Dong, Y., Xie, F.
+\newblock `Bounded model checking of hybrid automata pushdown system'.
+\newblock In: 2014 14th International Conference on Quality Software, Allen,
+  TX, USA, October 2-3, 2014. (https://doi.org/10.1109/QSIC.2014.36: {IEEE},
+  2014. pp.~ 190--195
+
+\bibitem{Simko14}
+Simko, G., Jackson, E.K.
+\newblock `A bounded model checking tool for periodic sample-hold systems'.
+\newblock In: Proceedings of the 17th International Conference on Hybrid
+  Systems: Computation and Control. HSCC '14. (,  2014. pp.~ 157--162
+
+\bibitem{Sanwal13}
+Sanwal, M.U., Hasan, O.
+\newblock `Formal verification of cyber-physical systems: Coping with
+  continuous elements'.
+\newblock In: Proceedings of the 13th International Conference on Computational
+  Science and Its Applications - Volume 1. vol. 7971 of \emph{ICCSA'13}.
+  (Springer,  2013. pp.~ 358--371
+
+\bibitem{Lee13}
+Lee, H.Y.
+\newblock `Towards model checking of simulation models for embedded system
+  development'.
+\newblock In: International Conference on Parallel and Distributed Systems. (,
+  2013. pp.~ 452--453
+
+\bibitem{Li14}
+Li, T., Tan, F., Wang, Q., Bu, L., Cao, J.N., Liu, X.: `From offline toward
+  real time: A hybrid systems model checking and cps codesign approach for
+  medical device plug-and-play collaborations', \emph{IEEE Transactions on
+  Parallel and Distributed Systems},  2014, \textbf{25}, (3), pp.~642--652
+
+\bibitem{Jhala:2009:SMC:1592434.1592438}
+Jhala, R., Majumdar, R.: `Software model checking', \emph{ACM Comput Surv},
+  2009, \textbf{41}, (4), pp.~21:1--21:54
+
+\bibitem{Rungger16}
+Rungger, M., Tabuada, P.: `A notion of robustness for cyber-physical systems',
+  \emph{IEEE Transactions on Automatic Control},  2016, \textbf{61}, (8),
+  pp.~2108--2123
+
+\bibitem{Alur00}
+Alur, R., Henzinger, T.A., Lafferriere, G., Pappas, G.J.: `Discrete
+  abstractions of hybrid systems', \emph{Proceedings of the IEEE},  2000,
+  \textbf{88}, (7), pp.~971--984
+
+\bibitem{Girard11}
+Girard, A., Pappas, G.J.: `Approximate bisimulation: A bridge between computer
+  science and control theory', \emph{European Journal of Control},  2011,
+  \textbf{17}, (5), pp.~568 -- 578
+
+\bibitem{lunze_lamnabhi-lagarrigue_2009}
+Lunze, J., Lamnabhi.Lagarrigue, F.: `Handbook of Hybrid Systems Control:
+  Theory, Tools, Applications'.
+\newblock (Cambridge University Press,  2009)
+
+\bibitem{stochmodel}
+Bargmann, H.: `The role of stochastic modelling in engineering science',
+  \emph{Acta Mechanica},  1997, \textbf{125}, (1), pp.~63--71
+
+\bibitem{Alur94}
+Alur, R., Dill, D.L.: `A theory of timed automata', \emph{Theor Comput Sci},
+  1994, \textbf{126}, (2), pp.~183--235
+
+\bibitem{Alur93}
+Alur, R., Courcoubetis, C., Henzinger, T.A., Ho, P.H.
+\newblock `Hybrid automata: An algorithmic approach to the specification and
+  verification of hybrid systems'.
+\newblock In: Hybrid Systems. (London, UK, UK: Springer-Verlag,  1993. pp.~
+  209--229
+
+\bibitem{Henzinger95}
+Henzinger, T.A., Kopke, P.W., Puri, A., Varaiya, P.
+\newblock `What's decidable about hybrid automata?'.
+\newblock In: 27th Annual ACM Symposium on Theory of Computing. STOC '95. (New
+  York, NY, USA: ACM,  1995. pp.~ 373--382
+
+\bibitem{Julius09}
+Julius, A.A., Pappas, G.J.: `Approximations of stochastic hybrid systems',
+  \emph{IEEE Transactions on Automatic Control},  2009, \textbf{54}, (6),
+  pp.~1193--1203
+
+\bibitem{Ghosh05}
+Ghosh, M.K., Bagchi, A.
+\newblock In: Cagnol, J., Zol{\'e}sio, J.P., editors. `Modeling stochastic
+  hybrid systems'. (Boston, MA: Springer US,  2005. pp.~ 269--280
+
+\bibitem{Pola03}
+Pola, G., Bujorianu, M.L., Lygeros, J., Benedetto, M.D.D.: `Stochastic hybrid
+  models: An overview', \emph{IFAC Proceedings Volumes},  2003, \textbf{36},
+  (6), pp.~45 -- 50.
+\newblock iFAC Conference on Analysis and Design of Hybrid Systems
+
+\bibitem{Lafferriere99}
+Lafferriere, G., Pappas, G.J., Yovine, S.
+\newblock `A new class of decidable hybrid systems'.
+\newblock In: Hybrid Systems: Computation and Control. HSCC '99. (London, UK,
+  UK: Springer-Verlag,  1999. pp.~ 137--151
+
+\bibitem{Puri94}
+Puri, A., Varaiya, P.
+\newblock `Decidability of hybrid systems with rectangular differential
+  inclusion'.
+\newblock In: Computer Aided Verification. CAV '94. (London, UK, UK:
+  Springer-Verlag,  1994. pp.~ 95--104
+
+\bibitem{Henzinger95NL}
+Henzinger, T.A., Ho, P.H.
+\newblock `Algorithmic analysis of nonlinear hybrid systems'.
+\newblock In: Computer Aided Verification. (London, UK, UK: Springer-Verlag,
+  1995. pp.~ 225--238
+
+\bibitem{Broucke1997}
+Broucke, M., Varaiya, P.
+\newblock In: Antsaklis, P., Kohn, W., Nerode, A., Sastry, S., editors.
+  `Decidability of hybrid systems with linear and nonlinear differential
+  inclusions'. (Berlin, Heidelberg: Springer Berlin Heidelberg,  1997. pp.~
+  77--92
+
+\bibitem{Kesten1993}
+Kesten, Y., Pnueli, A., Sifakis, J., Yovine, S.
+\newblock In: Grossman, R.L., Nerode, A., Ravn, A.P., Rischel, H., editors.
+  `Integration graphs: A class of decidable hybrid systems'. (Berlin,
+  Heidelberg: Springer Berlin Heidelberg,  1993. pp.~ 179--208
+
+\bibitem{Tabuada14}
+Tabuada, P., Caliskan, S.Y., Rungger, M., Majumdar, R.: `Towards robustness for
+  cyber-physical systems', \emph{IEEE Transactions on Automatic Control},
+  2014, \textbf{59}, (12), pp.~3151--3163
+
+\bibitem{Rungger13}
+Rungger, M., Mazo, M. Jr., Tabuada, P.
+\newblock `Specification-guided controller synthesis for linear systems and
+  safe linear-time temporal logic'.
+\newblock In: Proceedings of the 16th International Conference on Hybrid
+  Systems: Computation and Control. HSCC '13. (ACM,  2013. pp.~ 333--342
+
+\bibitem{Li16}
+Li, Y., Liu, J.
+\newblock `An interval analysis approach to invariance control synthesis for
+  discrete-time switched systems'.
+\newblock In: 55th Conference on Decision and Control (CDC). (,  2016. pp.~
+  6388--6394
+
+\bibitem{Tabuada07}
+Tabuada, P.: `Symbolic models for control systems', \emph{Acta Informatica},
+  2007, \textbf{43}, (7), pp.~477--500
+
+\bibitem{Keel01}
+Keel, L.H., Bhattacharyya, S.P.
+\newblock In: Istepanian, R.S.H., Whidborne, J.F., editors. `Stability margins
+  and digital implementation of controllers'. (London: Springer London,  2001.
+  pp.~ 13--24
+
+\bibitem{bhattacharyya}
+Keel, L.H., Bhattacharyya, S.P.: `Robust, fragile, or optimal?', \emph{IEEE
+  Transactions on Automatic Control},  1997, \textbf{42}, (8), pp.~1098--1105
+
+\bibitem{Bicchi02}
+Bicchi, A., Marigo, A., Piccoli, B.: `On the reachability of quantized control
+  systems', \emph{IEEE Transactions on Automatic Control},  2002, \textbf{47},
+  (4), pp.~546--563
+
+\bibitem{Petreczky10}
+Petreczky, M., van Schuppen, J.H.: `Realization theory for linear hybrid
+  systems', \emph{IEEE Transactions on Automatic Control},  2010, \textbf{55},
+  (10), pp.~2282--2297
+
+\bibitem{Petreczky07}
+Petreczky, M.: `Realization theory for linear switched systems: Formal power
+  series approach', \emph{Systems \& Control Letters},  2007, \textbf{56}, (9),
+  pp.~588 -- 595
+
+\bibitem{Ye98}
+Ye, H., Michel, A.N., Hou, L.: `Stability theory for hybrid dynamical systems',
+  \emph{IEEE Transactions on Automatic Control},  1998, \textbf{43}, (4),
+  pp.~461--474
+
+\bibitem{BenSassi12}
+Ben.Sassi, M.A., Girard, A.: `Computation of polytopic invariants for
+  polynomial dynamical systems using linear programming', \emph{Automatica},
+  2012, \textbf{48}, (12), pp.~3114--3121
+
+\bibitem{Paul14}
+Paul, T., Kimball, J.W., Zawodniok, M., Roth, T.P., McMillin, B., Chellappan,
+  S.: `Unified invariants for cyber-physical switched system stability',
+  \emph{IEEE Transactions on Smart Grid},  2014, \textbf{5}, (1), pp.~112--120
+
+\bibitem{Li16_2}
+Li, Y., Liu, J.
+\newblock `Computing maximal invariant sets for switched nonlinear systems'.
+\newblock In: Conference on Computer Aided Control System Design (CACSD). (,
+  2016. pp.~ 862--867
+
+\bibitem{Fisher2014}
+Fisher, A., Jacobson, C.A., Lee, E.A., Murray, R.M., Sangiovanni.Vincentelli,
+  A., Scholte, E.
+\newblock `Industrial cyber-physical systems -- icyphy'.
+\newblock In: Complex Systems Design {\&} Management. (,  2014. pp.~ 21--37
+
+\bibitem{Alur11}
+Alur, R.
+\newblock `Formal verification of hybrid systems'.
+\newblock In: Proceedings of the 9th ACM International Conference on Embedded
+  Software. EMSOFT '11. (,  2011. pp.~ 273--278
+
+\bibitem{Prajna07}
+Prajna, S., Jadbabaie, A., Pappas, G.J.: `A framework for worst-case and
+  stochastic safety verification using barrier certificates', \emph{IEEE
+  Transactions on Automatic Control},  2007, \textbf{52}, (8), pp.~1415--1428
+
+\bibitem{Prajna04}
+Prajna, S., Jadbabaie, A.
+\newblock In: Alur, R., Pappas, G.J., editors. `Safety verification of hybrid
+  systems using barrier certificates'. (Berlin, Heidelberg: Springer Berlin
+  Heidelberg,  2004. pp.~ 477--492
+
+\bibitem{Bessa17}
+Bessa, I., Ismail, H., Palhares, R., Cordeiro, L., Filho, J.E.C.: `Formal
+  non-fragile stability verification of digital control systems with
+  uncertainty', \emph{{IEEE} Transactions on Computers},  2017, \textbf{66},
+  (3)
+
+\bibitem{Maler04}
+Maler, O., Nickovic, D.
+\newblock In: Lakhnech, Y., Yovine, S., editors. `Monitoring temporal
+  properties of continuous signals'. (Berlin, Heidelberg: Springer Berlin
+  Heidelberg,  2004. pp.~ 152--166
+
+\bibitem{Donze12}
+Donz{\'e}, A., Maler, O., Bartocci, E., Nickovic, D., Grosu, R., Smolka, S.
+\newblock `On temporal logic and signal processing'.
+\newblock In: Proceedings of the 10th International Conference on Automated
+  Technology for Verification and Analysis. ATVA'12. (,  2012. pp.~ 92--106
+
+\bibitem{Veanes09}
+Veanes, M., Bjorner, N., Gurevich, Y., Schulte, W.: `Symbolic bounded model
+  checking of abstract state machines', \emph{Int J Software Informatics},
+  2009, \textbf{3/2-3}, pp.~149--170
+
+\bibitem{Phan15}
+Phan, A.D.
+\newblock `Modelling and Analysis for Cyber-Physical Systems: An SMT-based
+  approach'.
+\newblock Technical University of Denmark (DTU,  2015
+
+\bibitem{Nipkow02}
+Nipkow, T., Wenzel, M., Paulson, L.C.: `{Isabelle/HOL}: A Proof Assistant for
+  Higher-order Logic'.
+\newblock (Berlin, Heidelberg: Springer-Verlag,  2002)
+
+\bibitem{Platzer07}
+Platzer, A.
+\newblock `Differential dynamic logic for verifying parametric hybrid systems'.
+\newblock In: Proceedings of the 16th International Conference on Automated
+  Reasoning with Analytic Tableaux and Related Methods. TABLEAUX '07. (,  2007.
+  pp.~ 216--232
+
+\bibitem{handbook09}
+Biere, A.
+\newblock `Bounded model checking'.
+\newblock In: Handbook of Satisfiability. (IOS Press,  2009. pp.~ 457--481
+
+\bibitem{Duggirala2015}
+Duggirala, P.S., Viswanathan, M.
+\newblock `Analyzing real time linear control systems using software
+  verification'.
+\newblock In: IEEE Real-Time Systems Symposium. (,  2015. pp.~ 216--226
+
+\bibitem{Anta10}
+Anta, A., Majumdar, R., Saha, I., Tabuada, P.
+\newblock `Automatic verification of control system implementations'.
+\newblock In: Proceedings of the Tenth ACM International Conference on Embedded
+  Software. EMSOFT '10. (,  2010. pp.~ 9--18
+
+\bibitem{dsv_spin2015}
+Ismail, H., Cordeiro, I.B.L., Filho, E.B.L., ao~Edgar.Chaves.Filho, J.
+\newblock `{DSV}erifier: A bounded model checking tool for digital systems'.
+\newblock In: SPIN. vol. 9232 of \emph{LNCS}. (Stellenbosch, South Africa:
+  Springer,  2015. pp.~ 126--131
+
+\bibitem{Bessa16}
+Bessa, I.V., Ismail, H.I., Cordeiro, L.C., Filho, J.E.C.: `Verification of
+  fixed-point digital controllers using direct and delta forms realizations',
+  \emph{Design Autom for Emb Sys},  2016, \textbf{20}, (2), pp.~95--126
+
+\bibitem{Phan2014}
+Phan, A.D., Hansen, M.R., Madsen, J.
+\newblock In: Iida, S., Meseguer, J., Ogata, K., editors. `{EHRA:}
+  specification and analysis of energy-harvesting wireless sensor networks'.
+  (Berlin, Heidelberg: Springer Berlin Heidelberg,  2014. pp.~ 520--540
+
+\bibitem{Nakajima12}
+Nakajima, S., Furukawa, S., Ueda, Y.
+\newblock `Co-analysis of sysml and simulink models for cyber-physical systems
+  design'.
+\newblock In: International Conference on Embedded and Real-Time Computing
+  Systems and Applications. (,  2012. pp.~ 473--478
+
+\bibitem{Junjie12}
+Junjie, T., Jianjun, Z., Jianwan, D., Liping, C., Gang, X., Bin, G., et~al.
+\newblock `Cyber-physical systems modeling method based on modelica'.
+\newblock In: 6th International Conference on Software Security and Reliability
+  Companion. (,  2012. pp.~ 188--191
+
+\bibitem{Shoukry}
+Shoukry, Y., Nuzzo, P., Puggelli, A., Sangiovanni.Vincentelli, A.L., Seshia,
+  S.A., Tabuada, P.: `Secure state estimation for cyber physical systems under
+  sensor attacks: A satisfiability modulo theory approach', \emph{IEEE
+  Transactions on Automatic Control},  2017, \textbf{PP}, (99), pp.~1--1
+
+\bibitem{cpsattack}
+Liu, Y., Ning, P., Reiter, M.K.
+\newblock `False data injection attacks against state estimation in electric
+  power grids'.
+\newblock In: 16th ACM Conference on Computer and Communications Security. CCS
+  '09. (New York, NY, USA: ACM,  2009. pp.~ 21--32.
+\newblock Available from: \url{http://doi.acm.org/10.1145/1653662.1653666}
+
+\bibitem{Fiore17}
+Fiore, G., Chang, Y.H., Hu, Q., Benedetto, M.D.D., Tomlin, C.J.
+\newblock `Secure state estimation for cyber physical systems with sparse
+  malicious packet drops'.
+\newblock In: American Control Conference (ACC). (,  2017. pp.~ 1898--1903
+
+\bibitem{ARAUJO2017}
+Araújo, R.F., Albuquerque, H.F., de~Bessa, I.V., Cordeiro, L.C., Filho,
+  J.E.C.: `Counterexample guided inductive optimization based on satisfiability
+  modulo theories', \emph{Science of Computer Programming},  2017,
+
+\bibitem{TrindadeDAES2016}
+Trindade, A.B., Cordeiro, L.C.: `Applying {SMT}-based verification to
+  hardware/software partitioning in embedded systems', \emph{DES AUTOM EMBED
+  SYST},  2016, \textbf{20}, (1), pp.~1--19
+
+\bibitem{Rahman13}
+Rahman, M.A., Duan, Q., Al.Shaer, E.
+\newblock `Energy efficient navigation management for hybrid electric vehicles
+  on highways'.
+\newblock In: International Conference on Cyber-Physical Systems (ICCPS). (,
+  2013. pp.~ 21--30
+
+\bibitem{DBLP:conf/asplos/Solar-LezamaTBSS06}
+Solar{-}Lezama, A., Tancau, L., Bod{\'{\i}}k, R., Seshia, S.A., Saraswat, V.A.
+\newblock `Combinatorial sketching for finite programs'.
+\newblock In: ASPLOS. (,  2006. pp.~ 404--415
+
+\bibitem{RienerKFB16}
+Riener, H., K{\"{o}}nighofer, R., Fey, G., Bloem, R.
+\newblock `Smt-based {CPS} parameter synthesis'.
+\newblock In: ARCH@CPSWeek 2016, 3rd International Workshop on Applied
+  Verification for Continuous and Hybrid Systems, Vienna, Austria. (,  2016.
+  pp.~ 126--133
+
+\bibitem{abatecav2017}
+{Abate}, A., {Bessa}, I., {Cattaruzza}, D., {Cordeiro}, L., {David}, C.,
+  {Kesseli}, P., et~al.
+\newblock `{Automated Formal Synthesis of Digital Controllers for State-Space
+  Physical Plants}'.
+\newblock In: CAV. vol. 10426 of \emph{LNCS}. (,  2017. pp.~ 462--–482
+
+\bibitem{Ravanbakhsh15}
+Ravanbakhsh, H., Sankaranarayanan, S.
+\newblock `Counterexample-guided stabilization of switched systems using
+  control lyapunov functions'.
+\newblock In: Proceedings of the 18th International Conference on Hybrid
+  Systems: Computation and Control. HSCC '15. (,  2015. pp.~ 297--298
+
+\bibitem{Ravanbakhsh16}
+Ravanbakhsh, H., Sankaranarayanan, S.
+\newblock `Robust controller synthesis of switched systems using counterexample
+  guided framework'.
+\newblock In: Proceedings of the 13th International Conference on Embedded
+  Software. EMSOFT '16. (,  2016. pp.~ 8:1--8:10
+
+\bibitem{AydinGol14}
+Gol, E.A., Lazar, M., Belta, C.: `Language-guided controller synthesis for
+  linear systems', \emph{IEEE Transactions on Automatic Control},  2014,
+  \textbf{59}, (5), pp.~1163--1176
+
+\bibitem{Holub16}
+Holub, O., Zamani, M., Abate, A.
+\newblock `Efficient hvac controls: A symbolic approach'.
+\newblock In: 2016 European Control Conference (ECC). (,  2016. pp.~ 1159--1164
+
+\bibitem{Tabuada08}
+Tabuada, P.: `An approximate simulation approach to symbolic control',
+  \emph{IEEE Transactions on Automatic Control},  2008, \textbf{53}, (6),
+  pp.~1406--1418
+
+\bibitem{Zamani17}
+Zamani, M., Arcak, M.: `Compositional abstraction for networks of control
+  systems: A dissipativity approach', \emph{IEEE Transactions on Control of
+  Network Systems},  2017, \textbf{PP}, (99), pp.~1--1
+
+\bibitem{Zamani14}
+Zamani, M., Abate, A.: `Approximately bisimilar symbolic models for randomly
+  switched stochastic systems', \emph{Systems \& Control Letters},  2014,
+  \textbf{69}, pp.~38 -- 46
+
+\bibitem{Zamani13}
+Zamani, M., van~de Wouw, N., Majumdar, R.: `Backstepping controller synthesis
+  and characterizations of incremental stability', \emph{Systems \& Control
+  Letters},  2013, \textbf{62}, (10), pp.~949 -- 962
+
+\bibitem{Zamani12}
+Zamani, M., Pola, G., Mazo, M., Tabuada, P.: `Symbolic models for nonlinear
+  control systems without stability assumptions', \emph{IEEE Transactions on
+  Automatic Control},  2012, \textbf{57}, (7), pp.~1804--1809
+
+\bibitem{Alkhatib17}
+Khatib, M.A., Girard, A., Dang, T.: `Stability verification and timing contract
+  synthesis for linear impulsive systems using reachability analysis',
+  \emph{Nonlinear Analysis: Hybrid Systems},  2017, \textbf{25}, pp.~211 -- 226
+
+\bibitem{Lesser15}
+Lesser, K., Abate, A.: `Controller synthesis for probabilistic safety
+  specifications using observers**this work is supported in part by the
+  european commission iapp project ambi 324432, and by the john fell oxford
+  university press(oup) research fund.', \emph{IFAC-PapersOnLine},  2015,
+  \textbf{48}, (27), pp.~329 -- 334.
+\newblock analysis and Design of Hybrid Systems ADHS
+
+\bibitem{Girard13}
+: `Low-complexity quantized switching controllers using approximate
+  bisimulation', \emph{Nonlinear Analysis: Hybrid Systems},  2013, \textbf{10},
+  pp.~34 -- 44.
+\newblock special Issue related to IFAC Conference on Analysis and Design of
+  Hybrid Systems (ADHS 12)
+
+\bibitem{Dallal17}
+Dallal, E., Colombo, A., Del.Vecchio, D., Lafortune, S.: `Supervisory control
+  for collision avoidance in vehicular networks using discrete event
+  abstractions', \emph{Discrete Event Dynamic Systems},  2017, \textbf{27},
+  (1), pp.~1--44
+
+\bibitem{Dallal13}
+Dallal, E., Colombo, A., Vecchio, D.D., Lafortune, S.
+\newblock `Supervisory control for collision avoidance in vehicular networks
+  with imperfect measurements'.
+\newblock In: 52nd IEEE Conference on Decision and Control. (,  2013. pp.~
+  6298--6303
+
+\bibitem{Habets06}
+Habets, L.C.G.J.M., Collins, P.J., van Schuppen, J.H.: `Reachability and
+  control synthesis for piecewise-affine hybrid systems on simplices',
+  \emph{IEEE Transactions on Automatic Control},  2006, \textbf{51}, (6),
+  pp.~938--948
+
+\bibitem{Reissig17}
+Reissig, G., Weber, A., Rungger, M.: `Feedback refinement relations for the
+  synthesis of symbolic controllers', \emph{IEEE Transactions on Automatic
+  Control},  2017, \textbf{62}, (4), pp.~1781--1796
+
+\bibitem{Biere99}
+Biere, A., Cimatti, A., Clarke, E.M., Zhu, Y.
+\newblock `Symbolic model checking without bdds'.
+\newblock In: 5th International Conference on Tools and Algorithms for
+  Construction and Analysis of Systems. TACAS '99. (London, UK:
+  Springer-Verlag,  1999. pp.~ 193--207
+
+\bibitem{BarrettSST09}
+Barrett, C.W., Sebastiani, R., Seshia, S.A., Tinelli, C.
+\newblock `Satisfiability modulo theories'.
+\newblock In: Handbook of Satisfiability. (IOS Press,  2009. p. 825–885
+
+\bibitem{Armando2009}
+Armando, A., Mantovani, J., Platania, L.: `Bounded model checking of software
+  using {SMT} solvers instead of {SAT} solvers', \emph{International Journal on
+  Software Tools for Technology Transfer},  2009, \textbf{11}, (1), pp.~69--83
+
+\bibitem{PrasadBG05}
+Prasad, M.R., Biere, A., Gupta, A.: `A survey of recent advances in {SAT}-based
+  formal verification', \emph{STTT},  2005, \textbf{7}, (2), pp.~156--173
+
+\bibitem{JMorse15}
+Morse, J., Cordeiro, L., Nicole, D., Fischer, B.: `Model checking ltl
+  properties over ansi-c programs with bounded traces', \emph{Softw Syst
+  Model},  2015, \textbf{14}, (1), pp.~65--81
+
+\bibitem{Bradley07}
+Bradley, A.R., Manna, Z.: `The Calculus of Computation: Decision Procedures
+  with Applications to Verification'.
+\newblock (Secaucus, NJ, USA: Springer-Verlag New York, Inc.,  2007)
+
+\bibitem{Thomas01}
+Ball, T., Rajamani, S.
+\newblock `Slic: A specification language for interface checking (of c)'.
+\newblock (,  2002.
+\newblock Available from:
+  \url{https://www.microsoft.com/en-us/research/publication/slic-a-specification-language-for-interface-checking-of-c/}
+
+\bibitem{Strichman08}
+Kroening, D., Strichman, O.: `Decision Procedures: An Algorithmic Point of
+  View'.
+\newblock 1st ed. (Springer Publishing Company, Incorporated,  2008)
+
+\bibitem{Appel97}
+Appel, A.W.: `Modern Compiler Implementation in C: Basic Techniques'.
+\newblock (New York, NY, USA: Cambridge University Press,  1997)
+
+\bibitem{Tseitin83}
+Tseitin, G.S.
+\newblock In: Siekmann, J.H., Wrightson, G., editors. `On the complexity of
+  derivation in propositional calculus'. (Berlin, Heidelberg: Springer Berlin
+  Heidelberg,  1983. pp.~ 466--483
+
+\bibitem{PatarinG97}
+Patarin, J., Goubin, L.
+\newblock In: Han, Y., Okamoto, T., Qing, S., editors. `Trapdoor one-way
+  permutations and multivariate polynomials'. (Berlin, Heidelberg: Springer
+  Berlin Heidelberg,  1997. pp.~ 356--368
+
+\bibitem{Clarke04}
+Clarke, E., Kroening, D., Lerda, F.
+\newblock In: Jensen, K., Podelski, A., editors. `A tool for checking {ANSI-C}
+  programs'. (Berlin, Heidelberg: Springer Berlin Heidelberg,  2004. pp.~
+  168--176
+
+\bibitem{MerzFS12}
+Merz, F., Falke, S., Sinz, C.
+\newblock `{LLBMC:} bounded model checking of {C} and {C++} programs using a
+  compiler {IR}'.
+\newblock In: International Conference on Verified Software: Theories, Tools,
+  Experiments. vol. 7152 of \emph{LNCS}. (,  2012. pp.~ 146--161
+
+\bibitem{CordeiroF11}
+Cordeiro, L., Fischer, B.
+\newblock `Verifying multi-threaded software using {SMT}-based context-bounded
+  model checking'.
+\newblock In: 33rd International Conference on Software Engineering. (,  2011.
+  pp.~ 331--340
+
+\bibitem{Ivancic05}
+Ivan\v{c}i\'{c}, F., Shlyakhter, I., Gupta, A., Ganai, M.K.
+\newblock `Model checking c programs using {F-SOFT}'.
+\newblock In: International Conference on Computer Design. ICCD '05.
+  (Washington, DC, USA: IEEE Computer Society,  2005. pp.~ 297--308
+
+\bibitem{Cordeiro12}
+Cordeiro, L., Fischer, B., Marques.Silva, J.: `{SMT}-based bounded model
+  checking for embedded {ANSI-C} software', \emph{{IEEE} Trans Software Eng},
+  2012, \textbf{38}, (4), pp.~957--974
+
+\bibitem{ckso04}
+Clarke, E., Kroening, D., Strichman, O., Ouaknine, J.
+\newblock `Completeness and complexity of bounded model checking'.
+\newblock In: VMCAI. vol. 2937 of \emph{LNCS}. (,  2004. pp.~ 85--96
+
+\bibitem{Ganai08}
+Ganai, M.K., Gupta, A.
+\newblock `Completeness in {SMT}-based {BMC} for software programs'.
+\newblock In: DATE. (,  2008. pp.~ 831--836
+
+\bibitem{EenS03}
+E{\'e}n, N., S{\"o}rensson, N.: `Temporal induction by incremental sat
+  solving', \emph{Electronic Notes in Theoretical Computer Science},  2003,
+  \textbf{89}, (4), pp.~543--560
+
+\bibitem{Sheera00}
+Sheeran, M., Singh, S., St{\aa}lmarck, G.
+\newblock `Checking safety properties using induction and a sat-solver'.
+\newblock In: Proceedings of the Third International Conference on Formal
+  Methods in Computer-Aided Design. FMCAD '00. (London, UK, UK:
+  Springer-Verlag,  2000. pp.~ 108--125
+
+\bibitem{4610935}
+: `{IEEE} standard for floating-point arithmetic', \emph{{IEEE} Std 754-2008},
+  2008, pp.~ 1--70
+
+\bibitem{Goldberg91whatevery}
+Goldberg, D.: `What every computer scientist should know about floating-point
+  arithmetic', \emph{ACM Comput Surv},  1991, \textbf{23}, (1), pp.~5--48
+
+\bibitem{pips:2013}
+`{PIPS}: Automatic parallelizer and code transformation framework'. (, .
+\newblock accessed 21 February 2016.
+\newblock \url{https://pips4u.org/}
+
+\bibitem{Henry:2012}
+Henry, J., Monniaux, D., Moy, M.: `{PAGAI}: A path sensitive static analyser',
+  \emph{Electron Notes Theor Comput Sci},  2012, \textbf{289}, pp.~15--25
+
+\bibitem{Beyer15}
+Beyer, D., Dangl, M., Wendler, P.
+\newblock In: Kroening, D., P{\u{a}}s{\u{a}}reanu, C.S., editors. `Boosting
+  k-induction with continuously-refined invariants'. (Cham: Springer
+  International Publishing,  2015. pp.~ 622--640
+
+\bibitem{Gadelha15}
+Gadelha, M.Y.R., Ismail, H.I., Cordeiro, L.C.: `Handling loops in bounded model
+  checking of c programs via k-induction', \emph{International Journal on
+  Software Tools for Technology Transfer},  2017, \textbf{19}, (1), pp.~97--114
+
+\bibitem{Brain15}
+Brain, M., Joshi, S., Kroening, D., Schrammel, P.
+\newblock In: Blazy, S., Jensen, T., editors. `Safety verification and
+  refutation by k-invariants and k-induction'. (Berlin, Heidelberg: Springer
+  Berlin Heidelberg,  2015. pp.~ 145--161
+
+\bibitem{Kinductor}
+Donaldson, A.F., Haller, L., Kroening, D., R{\"u}mmer, P.
+\newblock In: Yahav, E., editor. `Software verification using k-induction'.
+  (Berlin, Heidelberg: Springer Berlin Heidelberg,  2011. pp.~ 351--368
+
+\bibitem{Rocha17}
+Rocha, W., Rocha, H., Ismail, H., Cordeiro, L.C., Fischer, B.
+\newblock `Depthk: {A} k-induction verifier based on invariant inference for
+  {C} programs - (competition contribution)'.
+\newblock In: Tools and Algorithms for the Construction and Analysis of Systems
+  - 23rd International Conference, {TACAS} 2017, Held as Part of the European
+  Joint Conferences on Theory and Practice of Software, {ETAPS} 2017, Uppsala,
+  Sweden, April 22-29, 2017, Proceedings, Part {II}. vol. 10206 of \emph{LNCS}.
+  (Springer,  2017. pp.~ 360--364
+
+\bibitem{Donaldson10}
+Donaldson, A.F., Kroening, D., Ruemmer, P.
+\newblock `{SCRATCH}: A tool for automatic analysis of {DMA} races'.
+\newblock In: 16th ACM Symposium on Principles and Practice of Parallel
+  Programming. PPoPP '11. (New York, NY, USA: ACM,  2011. pp.~ 311--312
+
+\bibitem{GrosseLD09}
+Grosse, D., Le, H.M., Drechsler, R.
+\newblock `Induction-based formal verification of {SystemC TLM} designs'.
+\newblock In: 10th International Workshop on Microprocessor Test and
+  Verification. (,  2009. pp.~ 101--106
+
+\bibitem{Bradley12}
+Bradley, A.
+\newblock `{IC3} and beyond: Incremental, inductive verification'.
+\newblock In: Computer Aided Verification. vol. 7358 of \emph{Lecture Notes in
+  Computer Science}. (Springer Berlin Heidelberg,  2012. pp.~ 4--4
+
+\bibitem{Bradley13}
+Hassan, Z., Bradley, A.R., Somenzi, F.
+\newblock `Better generalization in {IC3}'.
+\newblock In: Formal Methods in Computer-Aided Design, {FMCAD} 2013, Portland,
+  OR, USA, October 20-23, 2013. (,  2013. pp.~ 157--164
+
+\bibitem{Bradley18}
+Bradley, A.R.: `Understanding IC3'.
+\newblock (Technical Report. Accessed on February 23rd 2018: ECEE Department,
+  University of Colorado at Boulder, )
+
+\bibitem{Jovanovic:2016:PK:3077629.3077648}
+Jovanovi\'{c}, D., Dutertre, B.
+\newblock `Property-directed k-induction'.
+\newblock In: FMCAD. (,  2016. pp.~ 85--92
+
+\bibitem{McMillan03}
+McMillan, K.L.
+\newblock `Interpolation and sat-based model checking'.
+\newblock In: CAV. vol. 2725 of \emph{LNCS}. (,  2003. pp.~ 1--13
+
+\bibitem{McMillan05}
+McMillan, K.L.
+\newblock `Applications of craig interpolants in model checking'.
+\newblock In: TACAS. vol. 3440 of \emph{LNCS}. (,  2005. pp.~ 1--12
+
+\bibitem{David15}
+David, C., Kroening, D., Lewis, M.
+\newblock `Using program synthesis for program analysis'.
+\newblock In: 20th International Conference on Logic for Programming,
+  Artificial Intelligence, and Reasoning. LPAR-20 2015. (New York, NY, USA:
+  Springer-Verlag New York, Inc.,  2015. pp.~ 483--498
+
+\bibitem{Alur13}
+Alur, R., Bodik, R., Juniwal, G., Martin, M.M.K., Raghothaman, M., Seshia,
+  S.A., et~al.
+\newblock `Syntax-guided synthesis'.
+\newblock In: Formal Methods in Computer-Aided Design. (,  2013. pp.~ 1--8
+
+\bibitem{sketch}
+Solar.Lezama, A.: `Program sketching', \emph{International Journal on Software
+  Tools for Technology Transfer},  2013, \textbf{15}, (5), pp.~475--495
+
+\bibitem{Sharma14}
+Sharma, R., Aiken, A.
+\newblock `From invariant checking to invariant inference using randomized
+  search'.
+\newblock In: Computer Aided Verification. (New York, NY, USA: Springer-Verlag
+  New York, Inc.,  2014. pp.~ 88--105
+
+\bibitem{AbateBCCCDKKP17}
+Abate, A., Bessa, I., Cattaruzza, D., Chaves, L., Cordeiro, L.C., David, C.,
+  et~al.
+\newblock `Dssynth: an automated digital controller synthesis tool for physical
+  plants'.
+\newblock In: Proceedings of the 32nd {IEEE/ACM} International Conference on
+  Automated Software Engineering, {ASE} 2017, Urbana, IL, USA, October 30 -
+  November 03, 2017. (,  2017. pp.~ 919--924
+
+\bibitem{moore1966interval}
+Moore, R.E.: `Interval analysis'. vol.~4.
+\newblock (Prentice-Hall,  1966)
+
+\bibitem{selfcar}
+Fairley, P.: `Self-driving cars have a bicycle problem [news]', \emph{IEEE
+  Spectrum},  2017, \textbf{54}, (3), pp.~12--13
+
+\bibitem{BMCml}
+Bortolussi, L., Milios, D., Sanguinetti, G.: `Smoothed model checking for
+  uncertain continuous-time markov chains', \emph{Information and Computation},
+   2016, \textbf{247}, (C), pp.~235--253
+
+\bibitem{Behrend15}
+Behrend, J., Lettnin, D., Gr\"{u}nhage, A., Ruf, J., Kropf, T., Rosenstiel, W.:
+  `Scalable and optimized hybrid verification of embedded software', \emph{J
+  Electron Test},  2015, \textbf{31}, (2), pp.~151--166
+
+\bibitem{Lettnin09}
+Lettnin, D., Nalla, P.K., Behrend, J., Ruf, J., Gerlach, J., Kropf, T., et~al.
+\newblock `Semiformal verification of temporal properties in automotive
+  hardware dependent software'.
+\newblock In: Design, Automation Test in Europe Conference Exhibition. (,
+  2009. pp.~ 1214--1217
+
+\bibitem{Adouane16}
+Vilca, J., Adouane, L., Mezouar, Y.: `Optimal multi-criteria waypoint selection
+  for autonomous vehicle navigation in structured environment', \emph{Journal
+  of Intelligent {\&} Robotic Systems},  2016, \textbf{82}, (2), pp.~301--324
+
+\bibitem{antifragile}
+De.Florio, V.
+\newblock `Antifragility = elasticity + resilience + machine learning'.
+\newblock In: Proceedings of the 1st International Workshop “From Dependable
+  to Resilient, from Resilient to Antifragile Ambients and Systems”. Procedia
+  Computer Science. (Elsevier,  2014. pp.~ 834--841
+
+\bibitem{ECBS13}
+Ramalho, M., Freitas, M., Sousa, F., Marques, H., Cordeiro, L., Fischer, B.
+\newblock `{SMT}-based bounded model checking of c++ programs'.
+\newblock In: 20th International Conference and Workshops on the Engineering of
+  Computer Based Systems. ECBS '13. (Washington, DC, USA: IEEE Computer
+  Society,  2013. pp.~ 147--156
+
+\bibitem{Pereira17}
+Pereira, P., Albuquerque, H., da~Silva, I., Marques, H., Monteiro, F.,
+  Ferreira, R., et~al.: `Smt-based context-bounded model checking for cuda
+  programs', \emph{Concurrency and Computation: Practice and Experience},
+  2016, cpe.3934
+
+\bibitem{Sousa15}
+Monteiro, F.R., Cordeiro, L.C., de~Lima.Filho, E.B.
+\newblock `{Bounded Model Checking of C++ Programs Based on the Qt Framework}'.
+\newblock In: Global Conference on Consumer Electronics. (IEEE,  2015. pp.~
+  179--180
+
+\bibitem{Beyer14}
+Beyer, D.
+\newblock `Status report on software verification'.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. vol. 8413 of \emph{LNCS}. (Springer Berlin Heidelberg,  2014. pp.~
+  373--388
+
+\bibitem{BeyerSVCOMP15}
+Beyer, D.
+\newblock `Software verification and verifiable witnesses'.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. vol. 9035 of \emph{LNCS}. (Springer Berlin Heidelberg,  2015. pp.~
+  401--416
+
+\bibitem{DBLP:journals/cca/AbrahamA0BBBCDE16}
+{\'{A}}brah{\'{a}}m, E., Abbott, J., Becker, B., Bigatti, A.M., Brain, M.,
+  Buchberger, B., et~al.: `Satisfiability checking and symbolic computation',
+  \emph{{ACM} Comm Computer Algebra},  2016, \textbf{50}, (4), pp.~145--147.
+\newblock Available from: \url{http://doi.acm.org/10.1145/3055282.3055285}
+
+\bibitem{KahlonWG09}
+Kahlon, V., Wang, C., Gupta, A.
+\newblock In: Bouajjani, A., Maler, O., editors. `Monotonic partial order
+  reduction: An optimal symbolic partial order reduction technique'. (Berlin,
+  Heidelberg: Springer Berlin Heidelberg,  2009. pp.~ 398--413
+
+\bibitem{morse15}
+Morse, J.
+\newblock `Expressive and Efficient Bounded Model Checking of Concurrent
+  Software'.
+\newblock University of Southampton,  2015
+
+\bibitem{Inverso14}
+Inverso, O., Tomasco, E., Fischer, B., La.Torre, S., Parlato, G.
+\newblock `Bounded model checking of multi-threaded c programs via lazy
+  sequentialization'.
+\newblock In: Computer Aided Verification. (New York, NY, USA: Springer-Verlag
+  New York, Inc.,  2014. pp.~ 585--602
+
+\bibitem{civl15}
+Zheng, M., Rogers, M.S., Luo, Z., Dwyer, M.B., Siegel, S.F.
+\newblock `{CIVL:} formal verification of parallel programs'.
+\newblock In: 30th {IEEE/ACM} International Conference on Automated Software
+  Engineering, {ASE} 2015, Lincoln, NE, USA, November 9-13, 2015. ({IEEE/ACM}:
+  {IEEE} Computer Society,  2015. pp.~ 830--835.
+\newblock Available from: \url{https://doi.org/10.1109/ASE.2015.99}
+
+\bibitem{DBLP:conf/kbse/KroeningPSW16}
+Kroening, D., Poetzl, D., Schrammel, P., Wachter, B.
+\newblock `Sound static deadlock analysis for c/pthreads'.
+\newblock In: {ASE}. (,  2016. pp.~ 379--390
+
+\bibitem{Grumberg05}
+Grumberg, O., Lerda, F., Strichman, O., Theobald, M.
+\newblock `Proof-guided underapproximation-widening for multi-process systems'.
+\newblock In: 32nd Symposium on Principles of Programming Languages. POPL '05.
+  (New York, NY, USA: ACM,  2005. pp.~ 122--131
+
+\bibitem{McMillan11}
+McMillan, K.L.
+\newblock `Widening and interpolation'.
+\newblock In: 18th International Symposium on Static Analysis. SAS'11. (Berlin,
+  Heidelberg: Springer-Verlag,  2011. pp.~ 1--1
+
+\bibitem{esbmc_controller}
+Bessa, I., Abreu, R., Filho, J.E., Cordeiro, L.
+\newblock `Smt-based bounded model checking of fixed-point digital
+  controllers'.
+\newblock In: IECON 2014 - 40th Annual Conference of the IEEE Industrial
+  Electronics Society. (,  2014. pp.~ 295--301
+
+\bibitem{esbmc_filter}
+Abreu, R.B., Cordeiro, L.C., Filho, E.B.L.
+\newblock `{Verifying Fixed-Point Digital Filters using SMT-Based Bounded Model
+  Checking}'.
+\newblock In: SBrT. (,  2013.
+
+\bibitem{Chaves17}
+Chaves, L., Bessa, I., Cordeiro, L.
+\newblock `Dsvalidator: An automated counterexample reproducibility tool for
+  digital systems'.
+\newblock (arXiv Document,  2016.
+
+\bibitem{sbrtdaniel}
+Mello, D.P.M., Freitas, M.L., Cordeiro, L., Silva.J\'unior, W.S., Bessa, I.V.,
+  Lima.Filho, E.B., et~al.
+\newblock `Verification of magnitude and phase responses in fixed-point digital
+  filters'.
+\newblock In: Brazilian Symposium on Telecommunications and Signal Processing
+  (to appear). (,  2017. pp.~ 1--5
+
+\bibitem{Alves15}
+d.~S..Alves, E.H., Cordeiro, L.C., d.~L..Filho, E.B.
+\newblock `Fault localization in multi-threaded c programs using bounded model
+  checking'.
+\newblock In: Brazilian Symposium on Computing Systems Engineering. (,  2015.
+  pp.~ 96--101
+
+\bibitem{Garcia16}
+Garcia, M., Monteiro, F., Cordeiro, L., de~Lima.Filho, E.
+\newblock In: Bo{\v{s}}na{\v{c}}ki, D., Wijs, A., editors. `Esbmc{$ ^{QtOM}$}:
+  A bounded model checking tool to verify qt applications'. (Cham: Springer
+  International Publishing,  2016. pp.~ 97--103
+
+\bibitem{Lopes:2014:GSL:2692607}
+Lopes, B.C., Auler, R.: `Getting Started with LLVM Core Libraries'.
+\newblock (Packt Publishing,  2014)
+
+\bibitem{clang-usage}
+`Why {A}pple's swift language will instantly remake computer programming'. (, .
+\newblock accessed 21 February 2016.
+\newblock \url{http://www.wired.com/2014/07/apple-swift/}
+
+\bibitem{Jackson16}
+Jackson, D., Vaziri, M.
+\newblock `Correct or usable? the limits of traditional verification (impact
+  paper award)'.
+\newblock In: 24th {ACM SIGSOFT} International Symposium on Foundations of
+  Software Engineering. FSE 2016. (New York, NY, USA: ACM,  2016. pp.~ 11--11
+
+\bibitem{MorseCNF13}
+Morse, J., Cordeiro, L., Nicole, D., Fischer, B.
+\newblock `{Handling Unbounded Loops with ESBMC 1.20 - (Competition
+  Contribution)}'.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. LNCS. (,  2013. pp.~ 619--622
+
+\bibitem{MorseRCN014}
+Morse, J., Ramalho, M., Cordeiro, L.C., Nicole, D., Fischer, B.
+\newblock `{ESBMC} 1.22 - (competition contribution)'.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. vol. 8413 of \emph{LNCS}. (,  2014. pp.~ 405--407
+
+\bibitem{Haran15}
+Haran, A., Carter, M., Emmi, M., Lal, A., Qadeer, S., Rakamari\'{c}, Z.
+\newblock `{SMACK+Corral}: A modular verifier'.
+\newblock In: Tools and Algorithms for the Construction and Analysis of
+  Systems. (New York, NY, USA: Springer-Verlag New York, Inc.,  2015. pp.~
+  451--454
+
+\bibitem{Beyer16}
+Beyer, D.: `Reliable and reproducible competition results with benchexec and
+  witnesses (report on {SV-COMP} 2016)', \emph{LNCS},  2016, \textbf{9636},
+  pp.~887--904
+
+\bibitem{BeyerW15}
+Beyer, D., Dangl, M., Dietsch, D., Heizmann, M., Stahlbauer, A.
+\newblock `Witness validation and stepwise testification across software
+  verifiers'.
+\newblock In: {ESEC/SIGSOFT} Foundations of Software Engineering. ESEC/FSE
+  2015. (New York, NY, USA: ACM,  2015. pp.~ 721--733
+
+\bibitem{RochaIFM12}
+Rocha, H., Barreto, R., Cordeiro, L., Neto, A.D.
+\newblock `Understanding programming bugs in ansi-c software using bounded
+  model checking counter-examples'.
+\newblock In: 9th International Conference on Integrated Formal Methods.
+  IFM'12. (Berlin, Heidelberg: Springer-Verlag,  2012. pp.~ 128--142
+
+\bibitem{antennasbrt}
+Jesus, A.S., Rodrigues, R.N., Ferreira, A.N.G., Melo, W.C., Lima.Filho, E.B.,
+  Silva.J\'unior, W.S.
+\newblock `Automatic antenna alignment system for satellite receivers operating
+  in c and ku bands'.
+\newblock In: Brazilian Symposium on Telecommunications and Signal Processing
+  (to appear, in Portuguese). (,  2017. pp.~ 1--5
+
+\bibitem{amoedo}
+Amoedo, D.A., da~Silva.Júnior, W.S., de~Lima.Filho, E.B.
+\newblock `Parameter selection for {SVM} in automatic modulation classification
+  of analog and digital signals'.
+\newblock In: International Telecommunications Symposium. (,  2014. pp.~ 1--5
+
+\bibitem{mlswverif}
+Hamel, L.
+\newblock `On the use of machine learning in formal software verification'.
+\newblock (Dept. of Computer Science and Statistics, University of Rhode
+  Island,  2003.
+\newblock technical Report TR03-294
+
+\bibitem{nguyen}
+Phuc, N.V.
+\newblock `The Application of Machine Learning Methods in Software Verification
+  and Validation'.
+\newblock University of Texas at Austin,  2010
+
+\bibitem{bridge}
+Bridge, J.P., Holden, S.B., Paulson, L.C.: `Machine learning for first-order
+  theorem proving', \emph{Journal of Automated Reasoning},  2014, \textbf{53},
+  (2), pp.~141--172
+
+\bibitem{babic07}
+Hutter, F., Babic, D., Hoos, H.H., Hu, A.J.
+\newblock `Boosting verification by automatic tuning of decision procedures'.
+\newblock In: Formal Methods in Computer Aided Design. FMCAD '07. (Washington,
+  DC, USA: IEEE Computer Society,  2007. pp.~ 27--34
+
+\bibitem{Seshia17}
+Seshia, S.A., Hu, S., Li, W., Zhu, Q.: `Design automation of cyber-physical
+  systems: Challenges, advances, and opportunities', \emph{IEEE Transactions on
+  Computer-Aided Design of Integrated Circuits and Systems},  2017,
+  \textbf{PP}, (99), pp.~1--1
+
+\bibitem{Jha10}
+Jha, S., Gulwani, S., Seshia, S.A., Tiwari, A.
+\newblock `Synthesizing switching logic for safety and dwell-time
+  requirements'.
+\newblock In: Proceedings of the 1st ACM/IEEE International Conference on
+  Cyber-Physical Systems. ICCPS '10. (,  2010. pp.~ 22--31
+
+\bibitem{Sadigh14}
+Sadigh, D., Kim, E.S., Coogan, S., Sastry, S.S., Seshia, S.A.
+\newblock `A learning based approach to control synthesis of markov decision
+  processes for linear temporal logic specifications'.
+\newblock In: 53rd IEEE Conference on Decision and Control. ({IEEE},  2014.
+  pp.~ 1091--1096
+
+\bibitem{spectrum2013}
+Lucky, R.W.. `{Antifragile Systems}'. (,  2013.
+\newblock (accessed 13 December 2017).
+\newblock https://spectrum.ieee.org/telecom/ wireless/antifragile-systems
+
+\end{thebibliography}

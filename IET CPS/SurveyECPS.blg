@@ -1,0 +1,44 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: SurveyECPS.aux
+The style file: iet.bst
+Database file #1: refs.bib
+Warning--I'm ignoring Sanwal13's extra "series" field
+--line 266 of file refs.bib
+Warning--I didn't find a database entry for ""
+Warning--empty pages in munir
+Warning--empty author in Aerts17
+Warning--empty chapter in Ghosh05
+Warning--empty chapter in Broucke1997
+Warning--empty chapter in Kesten1993
+Warning--empty chapter in Keel01
+Warning--empty chapter in Prajna04
+Warning--empty chapter in Maler04
+You can't pop an empty literal stack for entry Phan15
+while executing---line 1838 of file iet.bst
+Warning--empty chapter in Phan2014
+Warning--empty author in Girard13
+Warning--empty chapter in Tseitin83
+Warning--empty chapter in PatarinG97
+Warning--empty chapter in Clarke04
+Warning--empty author in 4610935
+Warning--empty author in pips:2013
+Warning--empty author and editor in pips:2013
+Warning--missing publisher in pips:2013
+Warning--there's a month but no year in pips:2013
+Warning--empty chapter in Beyer15
+Warning--empty chapter in Brain15
+Warning--empty chapter in Kinductor
+Warning--there's a month but no year in Bradley18
+Warning--empty chapter in KahlonWG09
+You can't pop an empty literal stack for entry morse15
+while executing---line 1838 of file iet.bst
+Warning--empty pages in esbmc_filter
+Warning--empty chapter in Garcia16
+Warning--empty author in clang-usage
+Warning--empty author and editor in clang-usage
+Warning--missing publisher in clang-usage
+Warning--there's a month but no year in clang-usage
+You can't pop an empty literal stack for entry nguyen
+while executing---line 1838 of file iet.bst
+Warning--empty author and editor in spectrum2013
+Warning--missing publisher in spectrum2013
+(There were 3 error messages)
